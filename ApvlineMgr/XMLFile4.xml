@@ -1,0 +1,24 @@
+﻿"<division divisiontype=\"send\" name=\"발신\" oucode=\"ISU_STISU_ST011\" ouname=\"정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀\">
+  <taskinfo status=\"inactive\" result=\"inactive\" kind=\"send\" datereceived=\"2015-04-15 11:08:38\"/>
+  <step unittype=\"person\" routetype=\"approve\" name=\"기안자\">
+    <ou code=\"ISU_STISU_ST011\" name=\"정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀\">
+      <person code=\"ISU_ST12001\" name=\"박선우;Park Sun-woo;박선우;朴仙又\" position=\"ISU_STA135;사원;Staff;사원;社員\" title=\"ISU_ST10150;팀원;(영)팀원;J팀원;C팀원\" level=\"ISU_STA330;4급갑;;;\" oucode=\"ISU_STISU_ST011\" ouname=\"정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀\" sipaddress=\"\">
+        <taskinfo status=\"inactive\" result=\"inactive\" kind=\"charge\" datereceived=\"2015-04-15 11:08:38\" customattribute1=\"\"/>
+      </person>
+    </ou>
+  </step>
+  <step unittype=\"person\" routetype=\"approve\" name=\"일반결재\">
+    <ou code=\"ISU_STISU_ST011\" name=\"정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀\" company=\"이수시스템(주)\">
+      <person code=\"ISU_ST12002\" name=\"오유승;Oh Yoo-Seung;오유승;吳有陞\" position=\"ISU_STA135;사원;Staff;JAP 사원;社員\" title=\"ISU_ST10150;팀원;(영)팀원;J팀원;C팀원\" level=\"ISU_STA330;4급갑;;;\" oucode=\"ISU_STISU_ST011\" ouname=\"정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀\" sipaddress=\"\" stampRights=\"N\">
+        <taskinfo status=\"inactive\" result=\"inactive\" kind=\"normal\"/>
+      </person>
+    </ou>
+  </step>
+  <step unittype=\"person\" routetype=\"approve\" name=\"일반결재\">
+    <ou code=\"ISU_STISU_ST011\" name=\"정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀\" company=\"이수시스템(주)\">
+      <person code=\"ISU_ST01004\" name=\"이한일;LEEHAN-IL;이한일;李漢日\" position=\"ISU_STA115;차장;Deputy General Manager;じちょう;次長\" title=\"ISU_ST10150;팀원;(영)팀원;J팀원;C팀원\" level=\"ISU_STA315;1급을;1급을;;\" oucode=\"ISU_STISU_ST011\" ouname=\"정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀\" sipaddress=\"\" stampRights=\"N\">
+        <taskinfo status=\"inactive\" result=\"inactive\" kind=\"normal\"/>
+      </person>
+    </ou>
+  </step>
+</division>"

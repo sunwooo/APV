@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"  encoding="utf-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql" 
+	sql:xsl="wf_approvalcount.xsl"
+>
+	<sql:header>
+		<sql:param name='USER_ID'>200303</sql:param>		
+	</sql:header>
+	<sql:query>
+		exec sp_wf_approvalcount @USER_ID
+	</sql:query>
+</ROOT>
+       

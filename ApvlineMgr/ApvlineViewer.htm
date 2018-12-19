@@ -1,0 +1,327 @@
+﻿<html>
+	<head>
+		<title>결재선 관리</title>
+		<meta http-equiv="Content-Language" content="ko">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="/GWImages/groupware/CoviWeb/app_org_css_style.css" rel="stylesheet" type="text/css">
+			<script language="JavaScript">
+	//결재자 선택 관련 종료
+	function overM(){
+		var teTR = event.srcElement;
+		while(teTR.tagName != "TR") {
+			teTR = teTR.parentElement;
+		}
+		teTR.style.backgroundColor = "#EEF7F9";
+		return true;
+	}
+
+	function outM(){
+		var teTR = event.srcElement;
+		while(teTR.tagName != "TR") {
+			teTR = teTR.parentElement;
+		}
+		teTR.style.backgroundColor = "#FFFFFF";
+		return true;
+	}
+	function selectCCRow(id){
+		var oRow;
+		//if(id==null){
+			oRow=event.srcElement;
+		//}else{
+		//	oRow=document.all[id];
+		//}
+		if(oRow!=null){
+			switchSelectedRow(oRow);
+		}else{
+			m_selectedCCRow=null;
+			m_selectedCCRowId=null;
+		}
+
+	}
+	function switchSelectedRow(oRow){
+		while(oRow!=null&&oRow.tagName!="TR"){
+			oRow=oRow.parentNode;
+		}
+		if(oRow!=null){
+			if(m_selectedCCRow!=null)m_selectedCCRow.style.backgroundColor="#FFFFFF";
+			oRow.style.backgroundColor="#EEF7F9";
+			m_selectedCCRow=oRow;
+			m_selectedCCRowId=oRow.id;
+		}
+	}
+	function getSelectedRow(){return m_selectedCCRow;}
+
+	//결재선 관리 
+	var m_oApvList;
+	var m_oCCList;
+	var m_sApvMode;
+	var m_oXSLProcessor;
+	var m_oHTMLProcessor;
+	var m_oInfoSrc;
+	var m_oFormMenu;
+	var m_oFormEditor;
+	var m_xmlHTTP=new ActiveXObject("MSXML2.XMLHTTP");
+	var m_oCurrentOUNode;
+	var m_bCC;
+	var l_bGroup;//그룹참조여부
+	var m_sNAuthTL1 = '000'; //보직없음
+	var m_sNAuthTL2 = '31'; 
+	var m_modeless = null;
+
+	function initialize(){
+		//m_oInfoSrc --> [object]
+		m_oInfoSrc = top.opener;	
+		
+		if(m_oInfoSrc==null){
+			m_oInfoSrc = parent.monitorList;
+			if(m_oInfoSrc==null){
+				if(parent.iworklist.location.href.toUpperCase().indexOf("LISTITEMS.ASPX") > 0) {m_oInfoSrc = parent.iworklist;}
+				else{m_oInfoSrc = parent.iworklist.ifrDL;}
+			}
+			m_sApvMode = getInfo("mode");
+			if(m_sApvMode=="READ"){trButton.style.display="none";}
+		}else{
+			if (top.opener.g_dicFormInfo!=null){	
+				//m_sApvMode --> APVLINE
+				m_sApvMode = getInfo("mode");		    
+			}else{
+				m_oInfoSrc = top.opener.parent;
+				m_sApvMode = getInfo("mode");
+			}
+		}
+		m_oFormMenu = m_oInfoSrc.menu;
+		m_oFormEditor = m_oInfoSrc.editor;
+		
+		try{
+			m_oXSLProcessor = makeProcessor("ApvlineGen.xsl");
+			//m_oHTMLProcessor = makeProcessor("ApvlineDisplay.xsl");
+			m_oHTMLProcessor = makeProcessor("ApvlineDisplay_xsl.aspx");			
+		}catch(e){alert(e.description);return false;}
+
+		m_oApvList = new ActiveXObject("MSXML2.DOMDocument");
+		m_oCCList = new ActiveXObject("MSXML2.DOMDocument");
+		m_oCCList.loadXML("<?xml version='1.0' encoding='utf-8'?><cc/>");
+		
+		if(!m_oApvList.loadXML("<?xml version='1.0' encoding='utf-8'?>"+m_oFormMenu.APVLIST.value)){
+			alertParseError(m_oApvList.parseError);			
+		}else{		
+			initiateCC();
+			refreshList();
+			refreshCC(true);
+		}		
+		return true;
+	}
+	function initiateCC(){	
+		var ccList = m_oApvList.selectNodes("steps/ccinfo");
+		
+		if(ccList.length>0){
+			var elm = ccList.nextNode();
+			while(elm!=null){
+				m_oCCList.documentElement.appendChild(elm.cloneNode(true));
+				elm = ccList.nextNode();
+			}
+		}
+	}
+
+	function initServerValues(){	
+		if(m_xmlHTTP.readyState==4){	
+			
+			m_xmlHTTP.onreadystatechange=event_noop;
+			if(m_xmlHTTP.responseText.charAt(0)=="\r"){
+				//alert(m_xmlHTTP.responseText);			
+			}else{			
+				var errorNode=m_xmlHTTP.responseXML.selectSingleNode("error");
+				if(errorNode!=null){
+					alert("오류가 발생했습니다. at initServerValues in ApvlineMgr.js\nError Desc:" + errorNode.text);
+				}else{
+					m_oFormMenu.APVLIST.value = m_xmlHTTP.responseXML.xml;
+					m_oApvList.loadXML(m_xmlHTTP.responseXML.xml);
+					initiateCC();
+					refreshList();
+					refreshCC(true);
+				}
+			}
+		}
+	}
+	function event_noop(){return(false);}
+	function makeProcessor(urlXsl){
+		// XSL 문서를 DOM 객체로 로딩
+		var oXslDom = new ActiveXObject("MSXML2.FreeThreadedDOMDocument");
+		oXslDom.async = false;
+		if(!oXslDom.load(urlXsl)){
+			alertParseError(oXslDom.parseError);
+			throw new Error(-1,"couldn't make TemplateProcessor with ["+urlXsl+"].");
+		}
+		// XML 문서와 XSL 문서를 병합하여 결과를 저장할 XSLTemplate 객체 생성 
+		var oXSLTemplate = new ActiveXObject("MSXML2.XSLTemplate");
+		oXSLTemplate.stylesheet = oXslDom;
+		// XSLTemplate 프로세서 생성
+		return oXSLTemplate.createProcessor();
+	}
+	function getInfo(sKey){try{return m_oInfoSrc.g_dicFormInfo.item(sKey);}catch(e){alert("양식정보에 없는 키값["+sKey+"]입니다.");}}
+	function alertParseError(err){
+		alert("오류가 발생했습니다. in ApvlineMgr.js\ndesc:"+err.reason+"\nsrcurl:"+err.url+"\nsrctxt:"+err.srcText+"\nline:"+err.line+"\tcolumn:"+err.linepos);
+	}
+	function refreshList(selectedRowId){
+		Apvlist.clearSelection();
+		Apvlist.document.body.innerHTML = "";
+		try { 
+			m_oHTMLProcessor.input = m_oApvList; 
+			m_oHTMLProcessor.addParameter("viewtype", "read");
+			m_oHTMLProcessor.transform();
+			
+			Apvlist.document.body.innerHTML = m_oHTMLProcessor.output;
+		}catch(e){
+			alert("오류가 발생했습니다. at refreshList in ApvlineMgr.js\nError Desc:" + e.description);
+		}
+	}
+	function refreshCC(bAll){
+		var sPath = "";
+		bAll = true;
+		if(bAll==null || bAll==false)sPath="[@belongto='" + m_sSelectedAllotType + "']";
+		var ccInfos = m_oApvList.selectNodes("steps/ccinfo"+sPath);
+		var otblccinfo = document.all["tblccinfo"];
+		var tbllength = otblccinfo.rows.length;
+		//Table 지우기
+		for(var i=0;i<tbllength-2;i++){
+			otblccinfo.deleteRow();
+		}
+		var eTR, eTD;
+		for(var i=0;i<ccInfos.length;i++){
+			var sList = "";
+			var ccInfo = ccInfos[i];
+			var sBelongTo = ccInfo.getAttribute("belongto");
+			var ccList = ccInfo.childNodes;
+			for(var j=0 ; j < ccList.length; j++){
+				var cc = ccList.nextNode();
+				if(cc.hasChildNodes())cc=cc.firstChild;
+
+				eTR = tblccinfo.insertRow();
+
+				if(cc.nodeName == "person"){
+					eTR.setAttribute("id","ccinfo["+i+"]/*["+j+"]/(person|role)[0]");
+					eTR.attachEvent("onmouseover",overM);
+					eTR.attachEvent("onmouseout",outM);
+					eTR.align= "center";
+					eTD = eTR.insertCell(); eTD.innerHTML = cc.getAttribute("name"); eTD.height=20;
+					eTD = eTR.insertCell(); eTD.innerHTML = getSplitted(cc.getAttribute("title"),";",1);
+					eTD = eTR.insertCell(); eTD.innerHTML = getSplitted(cc.getAttribute("level"),";",1);
+					eTD = eTR.insertCell(); eTD.innerHTML = (sBelongTo=="sender")?"발신":((sBelongTo=="global")?"전역":"수신");
+					eTD = eTR.insertCell(); eTD.innerHTML = cc.getAttribute("ouname");
+				}else if(cc.nodeName == "ou"){
+				    eTR.setAttribute("id","ccinfo["+i+"]/*["+j+"]");
+					eTR.attachEvent("onmouseover",overM);
+					eTR.attachEvent("onmouseout",outM);
+					eTR.align= "center";
+					eTD = eTR.insertCell(); eTD.innerHTML = "&nbsp;"; eTD.height=20;
+					eTD = eTR.insertCell(); eTD.innerHTML = "&nbsp;";
+					eTD = eTR.insertCell(); eTD.innerHTML = "&nbsp;";
+					eTD = eTR.insertCell(); eTD.innerHTML = (sBelongTo=="sender")?"발신":((sBelongTo=="global")?"전역":"수신");
+					eTD = eTR.insertCell(); eTD.innerHTML = cc.getAttribute("name");
+				}
+
+				eTR = tblccinfo.insertRow();
+				eTD = eTR.insertCell();			eTD.height =1;			eTD.colSpan = 5;			eTD.className = "table_line";
+
+			}
+		}
+	}
+	function getSplitted(src,delim,idx){var aSrc = src.split(delim);return (aSrc.length>idx?aSrc[idx]:"");}
+	function viewComment(idx){
+		var rgParams = null;
+		rgParams = new Array();
+		rgParams["objMessage"] = Apvlist.getComment(idx);
+		var nWidth = 400;
+		var nHeight = 410;
+		var vRetval = window.showModelessDialog("comment.htm", rgParams, "dialogHeight:"+nHeight+"px;dialogWidth:"+nWidth+"px;status:no;resizable:yes;scrolling:no;help:no;");
+	}
+
+			</script>
+	</head>
+	<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+		<input type="hidden" id="chk" name="chk">
+		<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td height="3" colspan="2" align="center" valign="middle" class="table_topline"></td>
+			</tr>
+			<tr class="table_green" id="trButton" name="trButton">
+				<td width="24%" height="40" align="left" valign="middle">&nbsp;&nbsp;&nbsp;<img src="/COVINet/images/icon/icon_pop.gif" width="27" height="18" align="absmiddle">
+					<span class="text-blue2">결재선 조회 </span></td>
+				<td align="right" valign="middle" class="right10px">&nbsp; <img src="/COVINet/images/button/btn_close.gif" width="52" height="21" align="absmiddle"
+						id="btExit" onclick="window.close()" style="cursor:hand"></td>
+			</tr>
+			<tr>
+				<td height="1" colspan="2" align="center" valign="middle" class="pop_line"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center" valign="top" class="pop_bg">
+					<br>
+					<table width="99%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="100%" valign="top" class="pop_bg">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr class="table_green2">
+										<td width="21%" height="23" align="left" class="left10px">
+										    <span class="text-green">
+										    <img src="/COVINet/images/icon/icon_list.gif" width="11" height="13" align="absmiddle"> 결재리스트
+										    </span>
+										</td>
+										<td width="40%"></td>
+										<td width="39%" align="right"></td>
+									</tr>
+								</table>
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td width="81" height="3" align="center" valign="middle" class="tab_popline"></td>
+									</tr>
+								</table>
+								<table width="100%" height="225" border="0" cellpadding="3" cellspacing="0" class="pop_gray">
+									<tr>
+										<td valign="top">
+											<IFRAME ID="Apvlist" style="HEIGHT:100%;WIDTH:100%" SRC="Apvlist.htm" FRAMEBORDER="0">
+											</IFRAME>
+										</td>
+									</tr>
+								</table>
+								<br>
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr class="table_green2">
+										<td width="86%" height="23" align="left" class="left10px"><span class="text-green"><img src="/COVINet/images/icon/icon_list.gif" width="11" height="13" align="absmiddle"> 참조리스트</span></td>
+										<td width="14%" align="right"></td>
+									</tr>
+								</table>
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td width="81" height="3" align="center" valign="middle" class="tab_popline"></td>
+									</tr>
+								</table>
+								<table width="100%" border="0" cellpadding="3" cellspacing="0" class="pop_gray">
+									<tr>
+										<td height="233" valign="top">
+											<table id="tblccinfo" name="tblccinfo" width="100%" border="0" cellspacing="0" cellpadding="0">
+												<tr>
+													<td width="15%" height="20" align="center" valign="middle" class="table_mgraybg">이름</td>
+													<td width="14%" align="center" valign="middle" class="table_mgraybg">직책</td>
+													<td width="13%" align="center" valign="middle" class="table_mgraybg">직급</td>
+													<td width="28%" align="center" valign="middle" class="table_mgraybg">종류</td>
+													<td width="30%" align="center" valign="middle" class="table_mgraybg">부서</td>
+												</tr>
+												<tr>
+													<td height="1" colspan="5" align="center" class="table_line"></td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+					<!-- <img src="/COVINet/images/button/btn_close.gif" width="52" height="21" align="absmiddle" id="btExit" onclick="window.close()"> -->
+				</td>
+			</tr>
+			<tr>
+				<td height="3" colspan="2" align="center" valign="middle" class="table_topline"></td>
+			</tr>
+		</table>
+	</body>
+</html>

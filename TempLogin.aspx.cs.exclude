@@ -1,0 +1,277 @@
+﻿#region 저작권 및 프로그램 정보
+//
+// 이 프로그램에 대한 저작권을 포함한 지적재산권은 (주)보광에 있으며,
+// (주)보광이 명시적으로 허용하지 않은 사용, 복사, 변경, 제3자에의 공개, 배포는 엄격히 금지되며,
+// (주)보광의 지적재산권 침해에 해당됩니다.
+// (Copyright ⓒ 2006 Bokwang Co., Ltd. All Rights Reserved)
+//
+// You are strictly prohibited to copy, disclose, distribute, modify, or use  this program in part or
+// as a whole without the prior written consent of Bokwang Co., Ltd. Bokwang Co., Ltd.,
+// owns the intellectual property rights in and to this program.
+// (Copyright ⓒ 2007 Bokwang Co., Ltd. All Rights Reserved)
+//
+// Program Information:
+//
+// 저작자 ........... 황선희
+// 프로젝트 ......... 보광 통합 그룹웨어
+// 제목 ............. 임시로그인
+// 기능 설명 ........ 포탈구현이 되어 있지 않아 임시로 로그인 페이지를 만듬
+//
+// Revision History:
+// 
+// Jun  14, 2007 : v1.0.0  - 황선희, 프로그램 최초 작성
+//
+#endregion
+#region 참조
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+
+using Feelanet.Dev2005.Server;
+using Feelanet.Dev2005.Common;
+using System.Data.SqlClient;
+
+#endregion
+
+public partial class Approval_TempLogin : PageBase
+{ 
+    #region 멤버 변수 정의
+    private DataSet initDataSet = null;
+    #endregion
+
+    #region Page_Load - 페이지 로드시 발생하는 이벤트
+    /// <summary>
+    /// 페이지 로드시 발생하는 이벤트
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        String LoginID = "draken";
+        if (Request.QueryString["loginid"] != null)
+        {
+            LoginID = Request.QueryString["loginid"].ToString();
+        }
+
+        String LinkURL = "http://localhost:1269/CoviWeb/Approval/default.aspx"; 
+        if (Request.QueryString["linkurl"] !=null){
+            LinkURL = Request.QueryString["linkurl"].ToString();
+        }
+
+        GetUserInfo_Data(LoginID);
+        Response.Redirect(LinkURL);
+
+    }
+    #endregion
+
+    private void GetUserInfo_Data(string userIDs)
+    {
+
+
+
+        string strQuery = "exec dbo.TMP_USERINFO_SELECT '" + userIDs + "'";
+
+        //string strConnectionString =  ConfigurationManager.ConnectionStrings.ToString();
+        string strConnectionString = "Initial Catalog=COVI_GROUPWARE;Data Source=gwtestdb;User id=gwdbadmin;password=gwdbadmin;";
+
+        SqlConnection sqlcon = new SqlConnection(strConnectionString);
+        SqlCommand sqlcom = new SqlCommand();
+        sqlcom.Connection = sqlcon;
+        sqlcom.CommandType = CommandType.Text;
+        sqlcom.CommandText = strQuery;
+
+        DataSet ds = new DataSet();
+        SqlDataAdapter sqlda = new SqlDataAdapter(sqlcom);
+
+        sqlda.Fill(ds);
+
+        DataTable dt = ds.Tables[0];
+
+        if (dt != null)
+        {
+            if (dt.Rows[0]["PERSON_CODE"].ToString() != "" || dt.Rows[0]["PERSON_CODE"].ToString() != null)
+            {
+                Session["user_language"] = "ko-KR";
+                Session["user_code"] = dt.Rows[0]["PERSON_CODE"].ToString();
+                Session["user_id"] = dt.Rows[0]["PERSON_ID"].ToString();
+                Session["user_name"] = dt.Rows[0]["PERSON_NAME"].ToString();
+                Session["sabun"] = dt.Rows[0]["SABUN"].ToString();
+
+                Session["user_type_comm"] = "";
+                Session["user_type"] = "";
+                Session["user_type_portal"] = "";
+
+                if (dt.Rows[0]["admin"].ToString() == null)
+                {
+                    Session["user_type_portal"] = ";" + dt.Rows[0]["admin"].ToString();
+                }
+
+                if (Session["user_type_portal"].ToString().IndexOf("1") > 0 || Session["user_type_portal"].ToString().IndexOf("5") > 0)
+                {
+                    Session["user_type_comm"] = "ADMIN";
+                }
+
+                if (Session["user_type_portal"].ToString().IndexOf("1") > 0 || Session["user_type_portal"].ToString().IndexOf("4") > 0)
+                {
+                    Session["user_type"] = "ADMIN";
+                }
+            }
+
+            Session["user_dept_short_name"] = dt.Rows[0]["SHORT_NAME"].ToString();   //부서약명
+            Session["user_email"] = dt.Rows[0]["EMAIL"].ToString();                                   //이메일주소	
+            Session["user_tel"] = dt.Rows[0]["OFFICE_TEL"].ToString();                             //전화번호
+            Session["user_fax"] = dt.Rows[0]["OFFICE_FAX"].ToString();                            //fax번호
+            Session["user_ent_name"] = dt.Rows[0]["ENT_NAME"].ToString();                          //회사명
+            Session["user_additionaljob_no"] = dt.Rows[0]["additionaljob_no"].ToString();
+            
+            
+            //겸직자 부서코드
+
+            Session["user_ent_code"] = dt.Rows[0]["ENT_CODE"].ToString();
+            
+            //회사코드
+
+            //Response.Write("Ent_Code:[" + Session["ent_code"] + "]");
+            //Response.End();
+
+            if (dt.Rows[0]["jobposition"].ToString() == "")
+            {
+                Session["user_jobposition_code"] = "";                                          //직책코드
+                Session["user_jobposition_name"] = "";                                         //직책명
+            }
+            else
+            {
+                //Session["user_jobposition_code"] = Split(dt.Rows[0]["jobposition"].ToString(), "&")(1);
+                //Session["user_jobposition_name"] = Split(dt.Rows[0]["jobposition"].ToString(), "&")(0);
+                Session["user_jobposition_code"] = dt.Rows[0]["jobposition"].ToString().Split('&')[1];
+                Session["user_jobposition_name"] = dt.Rows[0]["jobposition"].ToString().Split('&')[0];
+            }
+
+            if (dt.Rows[0]["jobtitle"].ToString() == "")
+            {
+                Session["user_jobtitle_code"] = "";                                               //직위코드
+                Session["user_jobtitle_name"] = "";                                              //직위명
+            }
+            else
+            {
+                Session["user_jobtitle_code"] = dt.Rows[0]["jobtitle"].ToString().Split('&')[1];
+                Session["user_jobtitle_name"] = dt.Rows[0]["jobtitle"].ToString().Split('&')[0];
+            }
+
+            if (dt.Rows[0]["joblevel"].ToString() == "")
+            {
+                Session["user_joblevel_code"] = "";                                              //직급코드
+                Session["user_joblevel_name"] = "";                                             //직급명
+            }
+            else
+            {
+                Session["user_joblevel_code"] = dt.Rows[0]["joblevel"].ToString().Split('&')[1];
+                Session["user_joblevel_name"] = dt.Rows[0]["joblevel"].ToString().Split('&')[0];
+            }
+
+            Session["user_dept_id"] = "";                    //부서id
+            Session["user_dept_code"] = "";               //부서코드
+            Session["user_dept_name"] = "";              //부서명
+            Session["user_dept_fullcode"] = "";           //부서경로코드
+            Session["user_dept_fullname"] = "";          //부서경로명
+            Session["user_dept_receivable"] = "";       //부서수신함존재여부
+            Session["user_dept_approvable"] = "";     //부서품의함존재여부
+            Session["user_parent_dept_code"] = "";   //품의함부서코드@부서명 
+
+            if (dt.Rows[0]["unit_id"].ToString() != "")
+            {
+                Session["user_dept_id"] = dt.Rows[0]["UNIT_ID"].ToString();
+                Session["user_dept_code"] = dt.Rows[0]["UNIT_CODE"].ToString();
+                Session["user_dept_name"] = dt.Rows[0]["UNIT_NAME"].ToString();
+                Session["user_dept_fullcode"] = dt.Rows[0]["UNIT_FULL_CODE"].ToString();      //부서경로코드
+                Session["user_dept_fullname"] = dt.Rows[0]["UNIT_FULL_NAME"].ToString();     //부서경로명
+                Session["user_dept_receivable"] = dt.Rows[0]["RECEIVABLE"].ToString();           //부서수신함존재여부
+                Session["user_dept_approvable"] = dt.Rows[0]["APPROVABLE"].ToString();        //부서품의함존재여부
+                Session["user_parent_dept_code"] = dt.Rows[0]["APPUNIT"].ToString();            //품의함부서코드@부서명
+            }
+
+            //Response.Write("Deptid:" + Session["user_dept_name"]);
+            //Response.End();
+            if (dt.Rows[0]["MANAGER_PERSON_CODE"] == dt.Rows[0]["PERSON_CODE"].ToString())
+            {
+                Session["ismanager"] = true;
+            }
+            else
+            {
+                Session["ismanager"] = false;
+            }
+
+
+
+            //---> 사용자의 파견정보는 다음과 같이 구성된다.
+            //	  unit_id;unit_code;unit_name;jobposition_code;jobposition_name;jobtitle_code;jobtitle_name@...
+            if (dt.Rows[0]["dispatchedjob_no"] != null && dt.Rows[0]["dispatchedjob_no"].ToString() != "")
+            {
+                if (int.Parse(dt.Rows[0]["dispatchedjob_no"].ToString()) > 0)
+                {
+                    DataRowCollection drc = ds.Tables[1].Rows;
+
+                    foreach (DataRow dr in drc)
+                    {
+                        Session["user_dispatched_job_info"] = dr["unit_id"].ToString();
+                        Session["user_dispatched_job_info"] += ";" + dr["unit_code"].ToString();
+                        Session["user_dispatched_job_info"] += ";" + dr["unit_name"].ToString();
+                        Session["user_dispatched_job_info"] += ";" + dr["position_code"].ToString();
+                        Session["user_dispatched_job_info"] += ";" + dr["position_name"].ToString();
+                        Session["user_dispatched_job_info"] += ";" + dr["title_code"].ToString();
+                        Session["user_dispatched_job_info"] += ";" + dr["title_name"].ToString() + "@" + Session["user_dispatched_job_info"];
+                    }
+                }
+            }
+
+            ////---> 사용자의 겸직정보는 다음과 같이 구성된다.
+            ////	  unit_id;unit_code;unit_name;jobposition_code;jobposition_name;jobtitle_code;jobtitle_name@...
+            if (dt.Rows[0]["additionaljob_no"] != null && dt.Rows[0]["additionaljob_no"].ToString() != "")
+            {
+                if (int.Parse(dt.Rows[0]["additionaljob_no"].ToString()) > 0)
+                {
+                    DataTable Table = ds.Tables[2];
+                    DataRowCollection drc = Table.Rows;
+                    //Response.Write(Table.Rows.Count);
+                    //Response.Write(Table.Columns.Count);
+                    //Response.End();
+                    System.Text.StringBuilder sbJob = null;
+
+                    foreach (DataRow dr in drc)
+                    {
+                        sbJob = new System.Text.StringBuilder();
+
+                        //for (int i=0; i<Table.Columns.Count; i++)
+                        //{
+                        //        Response.Write(dr[i] + "<br>");
+                        //Session["user_dispatched_job_info"] += dr[i] + ";";
+                        //}
+
+                        sbJob.Append(dr["unit_id"].ToString() + ";");
+                        sbJob.Append(dr["unit_code"].ToString() + ";");
+                        sbJob.Append(dr["unit_name"].ToString() + ";");
+                        sbJob.Append(dr["position_code"].ToString() + ";");
+                        sbJob.Append(dr["position_name"].ToString() + ";");
+                        sbJob.Append(dr["title_code"].ToString() + ";");
+                        sbJob.Append(dr["title_name"].ToString() + "@");
+
+                        Session["user_dispatched_job_info"] += sbJob.ToString();
+                        sbJob = null;
+                    }
+                }
+            }
+            ds.Dispose();
+        }
+
+        Session["TopGroupCode"] = "";// System.Configuration.ConfigurationManager.AppSettings["TopGroupCode"].ToString();        //최상위부서코드
+        Session["TopGroupName"] = "";//System.Configuration.ConfigurationManager.AppSettings["TopGroupName"].ToString();       //최상위부서명
+    }
+
+}

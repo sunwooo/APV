@@ -1,0 +1,15 @@
+<?xml version="1.0"  encoding="euc-kr" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	sql:xsl="org_jfmemberquery01.xsl" >
+	<sql:header>
+		<sql:param name='PERSON_CODE'>200207</sql:param>
+		<sql:param name='JF_CODE'>Receptionist</sql:param>
+	</sql:header>
+	<sql:query>
+		SELECT [JFM_ID], [JF_ID], [SORT_KEY], [JF_CODE], [WEIGHT], [PERSON_ID], [PERSON_CODE] 
+		FROM [ORG_JOBFUNCTION_MEMBER]
+		WHERE 	UPPER(JF_CODE) = UPPER(@JF_CODE)
+		AND	PERSON_CODE = @PERSON_CODE
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

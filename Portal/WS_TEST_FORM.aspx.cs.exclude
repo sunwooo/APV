@@ -1,0 +1,31 @@
+﻿using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+
+
+public partial class Approval_Portal_WS_TEST_FORM : PageBase
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        string rtn;
+        FormWS oFormWS= new FormWS();
+
+        //key : 상태 update를 위한 erp key값
+        //subject : 제목 (varchar - 200)
+        //bodycontext : 본문
+        //apvline : 결재선 A@사번;C@사번    결재구분@사번;결재구분@사번  결재구분 ( SA: 발신결재, SC: 발신병렬합의, RA:수신결재, RC:수신병렬합의)
+        //empno : 사번
+        //fmpf : 양식 key
+        //etc : 기타 필드
+
+        rtn = oFormWS.WSDraftForm("key", "11", "<BODY_CONTEXT><tbContentElement><![CDATA[<HTML>\r\n<HEAD>\r\n<META http-equiv=Content-Type content=\"text/html; charset=euc-kr\">\r\n<META content=\"TAGFREE Active Designer v2.5\" name=GENERATOR>\r\n</HEAD>\r\n<BODY style=\"FONT-SIZE: 10pt; FONT-FAMILY: 굴림\">\r\n<P style=\"FONT-SIZE: 10pt; FONT-FAMILY: 굴림; TEXT-ALIGN: center\" align=center>11&nbsp;</P></BODY></HTML>]]></tbContentElement><DOCLINKS></DOCLINKS><SEL_ENTPART>PP</SEL_ENTPART><SEL_ENTPART_TEXT>휘닉스파크</SEL_ENTPART_TEXT><WORKREQUEST_ID>31</WORKREQUEST_ID><WORKREQUEST_NAME>그냥title</WORKREQUEST_NAME><mSUBJECT>11</mSUBJECT></BODY_CONTEXT>", "<steps initiatorcode=\"tack\" initiatoroucode=\"43000\" status=\"active\" datecreated=\"2007-08-24 오후 3:05:16\"><division divisiontype=\"send\" name=\"발신\" oucode=\"43000\" ouname=\"정보지원팀\"><taskinfo status=\"pending\" result=\"pending\" kind=\"send\" datereceived=\"2007-08-24 오후 3:14:40\" /><step unittype=\"person\" routetype=\"approve\" name=\"기안자\"><ou code=\"43000\" name=\"정보지원팀\"><person code=\"tack\" name=\"신택상\" position=\"001;차장\" title=\"001;팀장\" level=\"A001;회장\" oucode=\"43000\" ouname=\"정보지원팀\"><taskinfo status=\"completed\" result=\"completed\" kind=\"charge\" datereceived=\"2007-08-24 오후 3:05:16\" datecompleted=\"2007-08-24 오후 3:05:16\" wiid=\"{FBADE67014774C47BC0595A76AB12697}\" /></person></ou></step><step unittype=\"person\" routetype=\"approve\" name=\"일반결재\"><ou code=\"42200\" name=\"재무팀\" company=\"&#xD;&#xA;휘닉스파크&#xD;&#xA;\"><person code=\"tack\" name=\"신택상\" position=\"001;차장\" title=\"001;팀장\" level=\"A001;\" oucode=\"42200\" ouname=\"재무팀\"><taskinfo status=\"pending\" result=\"pending\" kind=\"normal\" datereceived=\"2007-08-24 오후 3:05:21\" /></person></ou></step></division></steps>", "PP", "tack", "WF_FORM_DRAFT", "");
+        Response.Write(rtn);
+    }
+}

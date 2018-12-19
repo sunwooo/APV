@@ -1,0 +1,107 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+	<HEAD>
+		<TITLE>문서정보관리(요약전)</TITLE>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" type="text/css" href="/GWImages/covi/app_css_style.css" />
+		<style type="text/css">
+		<!--
+		    SELECT {WIDTH:98%;}
+		    INPUT {WIDTH:98%;}
+		    .grid {font-family: "굴림체";	font-size: 12px;	text-align:left;height: 25px;}
+		    .gap{margin-right:6px;}
+		-->
+		</style>
+		<script language="javascript" src="/CoviWeb/common/script/COVIFlowNet/openWindow.js"></script>
+		<script LANGUAGE="javascript">
+	<!--
+		function window.onload(){
+			doc_summary.value = opener.DOC_SUMMARY.value;
+			if ( opener.getInfo("mode") == "DRAFT" || opener.getInfo("mode") == "TEMPSAVE" ) cbok.style.display = "";
+		}
+		function OK(){
+			opener.DOC_SUMMARY.value	= doc_summary.value ;
+			window.close();
+		}
+		
+		//-->
+					</script>
+					<SCRIPT FOR="cbBTN" EVENT="onmousedown()">this.className = 'Over';</SCRIPT>
+					<SCRIPT FOR="cbBTN" EVENT="onmouseover()">this.className = 'Over';</SCRIPT>
+					<SCRIPT FOR="cbBTN" EVENT="onmouseout()">this.className = 'Out';</SCRIPT>
+	</HEAD>
+	<BODY topmargin="0" leftmargin="0" scroll="no">
+		<!--전체 페이지 아웃라인 테이블-->
+		<table width="100%" height="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+					<!--제목이미지 들어가는 부분 테이블 시작-->
+					<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+						<tr>
+							<td class="pop_title_text" width="200"><img src="/COVINet/images/title_pop_doc.gif"></td>
+							<td width="25px"><img src="/COVINet/images/pop_middle.gif"></td>
+							<td align="right" background="/COVINet/images/background_pop_title2.gif"><img src="/COVINet/images/pop_logo.gif"></td>
+						</tr>
+						<tr>
+							<td height="15" colspan="3"></td>
+						</tr>
+					</table>
+					<!--제목이미지 들어가는 부분 테이블 끝-->
+				</td>
+			</tr>
+			<tr height="100%">
+				<td height="100%">
+					<!--제목을 제외한 나머지 내용부분 들어가는 전체 아웃라인 테이블 시작-->
+					<table width="95%" height="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+						<tr>
+							<td bgcolor="#8e8e8e">
+								<img src="/COVINet/images/bar_color_start.gif" width="52" height="2"></td>
+						</tr>
+						<tr>
+							<td height="10"></td>
+						</tr>
+						<tr height="100%">
+							<td height="100%">
+								<!--내용의 외곽의 회색 테두리 테이블 시작-->
+								<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#c5c5c5">
+									<tr>
+										<td bgcolor="#FFFFFF">
+											<!-- 실제 내용부분시작-->
+											<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+												<tr>
+													<td width="100%" height="100%">
+														<TEXTAREA ID="doc_summary" NAME="doc_summary" style="width:100%;height:100%"></TEXTAREA>
+													</td>
+												</tr>
+											</table>
+											<!--실제 내용부분 끝-->
+										</td>
+									</tr>
+								</table>
+								<!--내용의 외곽의 회색 테두리 테이블 끝-->
+							</td>
+						</tr>
+						<tr>
+							<td height="10"></td>
+						</tr>
+						<tr>
+							<td bgcolor="#8e8e8e">
+								<img src="/COVINet/images/bar_color_start.gif"></td>
+						</tr>
+						<tr>
+							<td height="35" align="center"> <!--확인,취소 버튼-->
+								<img src="/COVINet/images/bt_ok.gif" name="cbok" id="cbBTN" onclick="OK()" class="Out"
+									align="absmiddle" border="0" style="display:none;"> <img src="/COVINet/images/bt_exit.gif" name="cbclose" id="cbBTN" OnClick="window.close()"
+									class="Out" align="absmiddle" border="0">
+							</td>
+						</tr>
+					</table>
+					<!--제목을 제외한 나머지 내용부분 들어가는 전체 아웃라인 테이블 끝-->
+				</td>
+			</tr>
+		</table>
+		<!--전체 페이지 아웃라인 테이블 끝-->
+	</BODY>
+</HTML>

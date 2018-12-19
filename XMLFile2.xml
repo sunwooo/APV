@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<string xmlns="http://tempuri.org/">
+  <MON_ApprovaDetail>
+    <Subject>파일첨부</Subject>
+    <ReturnDesc>Success</ReturnDesc>
+    <ReturnCode>0</ReturnCode>
+    <ApprSystemID>13</ApprSystemID>
+    <ApprDocID>3e04aeea-f3be-4693-b89e-e46d76889edf</ApprDocID>
+    <ApprRequestEmpNo>yu2mi</ApprRequestEmpNo>
+    <ApprRequestEmpName>Yu-Mi Yu</ApprRequestEmpName>
+    <ApprRequestEmpDept>프로세스팀</ApprRequestEmpDept>
+    <ApprRequestEmpTitle>Chief</ApprRequestEmpTitle>
+    <ApprRequestEmpEmail>yu2mi@workplace2.com</ApprRequestEmpEmail>
+    <ApprRequestEmpOffice>+82 (2) 2107-8970</ApprRequestEmpOffice>
+    <ApprRequestEmpMobile>011-9946-9757</ApprRequestEmpMobile>
+    <ApprRequestDate>20101210104922</ApprRequestDate>
+    <ApprSummary>&lt;BODY_CONTEXT&gt;&lt;tbContentElement&gt;&lt;![CDATA[&lt;HTML&gt; &lt;HEAD&gt; &lt;META content="text/html; charset=euc-kr" http-equiv=Content-Type&gt; &lt;META name=GENERATOR content="TAGFREE Active Designer v3.0"&gt; &lt;LINK rel=stylesheet href="http://www.workplace2.com/GWImages/common/TagFree/tagfree.css"&gt; &lt;/HEAD&gt; &lt;BODY style="FONT-FAMILY: 굴림; FONT-SIZE: 10pt"&gt;파일첨부 &lt;P style="FONT-FAMILY: 굴림; FONT-SIZE: 10pt"&gt;&lt;/P&gt; &lt;/BODY&gt; &lt;/HTML&gt;]]&gt;&lt;/tbContentElement&gt;&lt;DOC_LEVEL_NAME&gt;&lt;/DOC_LEVEL_NAME&gt;&lt;DOCLINKS&gt;a4e84672-66ef-4d39-a928-4d35400af518@@@&amp;lt;ClientAppInfo&amp;gt;&amp;lt;App name='FormInfo'&amp;gt;&amp;lt;forminfos&amp;gt;&amp;lt;forminfo prefix='WF_FORM_COORDINATE' revision='0' instanceid='357F82C5-1577-49B0-9E81-1CE9C8153451' id='20b3ab58-aa7b-49e3-8fdf-5b631eb0519b' name='업무협조전' schemaid='230a0363-9ab6-47f1-9793-9f630c6695ee' index='0' filename='WF_FORM_COORDINATE_V0' subject='감사함 확인(발신부서, 수신부서)' secure_doc='0' req_response='' isfile='0' /&amp;gt;&amp;lt;/forminfos&amp;gt;&amp;lt;/App&amp;gt;&amp;lt;/ClientAppInfo&amp;gt;;9586a85f-534f-45cd-bae0-72ca091b0608;02_01_01@@@감사함 확인(발신부서, 수신부서) ^de86bb63-c980-45ca-b8bd-3cc429029ce9@@@&amp;lt;ClientAppInfo&amp;gt;&amp;lt;App name='FormInfo'&amp;gt;&amp;lt;forminfos&amp;gt;&amp;lt;forminfo prefix='WF_FORM_DRAFT' revision='0' instanceid='2525A22D-5644-41BD-BB92-DEF023E6B4A4' id='60d25cd0-7f06-4860-b063-d2ee84198f4f' name='기안지' schemaid='b99bbbb2-d29a-49de-870f-b51b0efce167' index='0' filename='WF_FORM_DRAFT_V0' subject='회람/참조 TEST001 참조' secure_doc='0' req_response='' isfile='0' /&amp;gt;&amp;lt;/forminfos&amp;gt;&amp;lt;/App&amp;gt;&amp;lt;/ClientAppInfo&amp;gt;;eed4b188-dd51-435d-9540-54f2e8a34c1b;02_01_01@@@회람/참조 TEST001 참조 &lt;/DOCLINKS&gt;&lt;REJECTDOCLINKS&gt;&lt;/REJECTDOCLINKS&gt;&lt;PMLINKS&gt;&lt;/PMLINKS&gt;&lt;SEL_ENTPART&gt;GENERAL01&lt;/SEL_ENTPART&gt;&lt;SEL_ENTPART_TEXT&gt;4층&lt;/SEL_ENTPART_TEXT&gt;&lt;WORKREQUEST_ID&gt;&lt;/WORKREQUEST_ID&gt;&lt;WORKREQUEST_NAME&gt;&lt;/WORKREQUEST_NAME&gt;&lt;mSUBJECT&gt;파일첨부&lt;/mSUBJECT&gt;&lt;/BODY_CONTEXT&gt;</ApprSummary>
+    <ApproverEmpList>
+      <ApprApproveEmpNo>yu2mi</ApprApproveEmpNo>
+      <ApprApproveEmpName>Yu-Mi Yu</ApprApproveEmpName>
+      <ApprApproveOrder>1</ApprApproveOrder>
+      <ApprApproveEmpDept>PT</ApprApproveEmpDept>
+      <ApprApproveEmpTitle>Chief</ApprApproveEmpTitle>
+      <ApprApproveEmpEmail>yu2mi@workplace2.com</ApprApproveEmpEmail>
+      <ApprApproveEmpOffice>+82 (2) 2107-8970</ApprApproveEmpOffice>
+      <ApprApproveEmpMobile>011-9946-9757</ApprApproveEmpMobile>
+      <ApprApproveDate>20101210104919</ApprApproveDate>
+      <ApprApproveType>01</ApprApproveType>
+      <ApprType>01</ApprType>
+      <ApprComment />
+    </ApproverEmpList>
+    <ApproverEmpList>
+      <ApprApproveEmpNo>yu2mi</ApprApproveEmpNo>
+      <ApprApproveEmpName>Yu-Mi Yu</ApprApproveEmpName>
+      <ApprApproveOrder>2</ApprApproveOrder>
+      <ApprApproveEmpDept>PT</ApprApproveEmpDept>
+      <ApprApproveEmpTitle>Chief</ApprApproveEmpTitle>
+      <ApprApproveEmpEmail>yu2mi@workplace2.com</ApprApproveEmpEmail>
+      <ApprApproveEmpOffice>+82 (2) 2107-8970</ApprApproveEmpOffice>
+      <ApprApproveEmpMobile>011-9946-9757</ApprApproveEmpMobile>
+      <ApprApproveDate></ApprApproveDate>
+      <ApprApproveType>05</ApprApproveType>
+      <ApprType>01</ApprType>
+      <ApprComment />
+    </ApproverEmpList>
+    <ApproverEmpList>
+      <ApprApproveEmpNo>sunnyhwang</ApprApproveEmpNo>
+      <ApprApproveEmpName>Sun-Hee Hwang</ApprApproveEmpName>
+      <ApprApproveOrder>3</ApprApproveOrder>
+      <ApprApproveEmpDept>PT</ApprApproveEmpDept>
+      <ApprApproveEmpTitle></ApprApproveEmpTitle>
+      <ApprApproveEmpEmail>sunnyhwang@workplace2.com</ApprApproveEmpEmail>
+      <ApprApproveEmpOffice>+82 (2) 2107-8969</ApprApproveEmpOffice>
+      <ApprApproveEmpMobile>010-2743-7974</ApprApproveEmpMobile>
+      <ApprApproveDate></ApprApproveDate>
+      <ApprApproveType>00</ApprApproveType>
+      <ApprType>03</ApprType>
+      <ApprComment />
+    </ApproverEmpList>
+    <ApproverEmpList>
+      <ApprApproveEmpNo>whiteym</ApprApproveEmpNo>
+      <ApprApproveEmpName>Jong-Ki Baek</ApprApproveEmpName>
+      <ApprApproveOrder>4</ApprApproveOrder>
+      <ApprApproveEmpDept>PT</ApprApproveEmpDept>
+      <ApprApproveEmpTitle></ApprApproveEmpTitle>
+      <ApprApproveEmpEmail>whiteym@workplace2.com</ApprApproveEmpEmail>
+      <ApprApproveEmpOffice>+82 (2) 2107-8970</ApprApproveEmpOffice>
+      <ApprApproveEmpMobile>010-6825-0606</ApprApproveEmpMobile>
+      <ApprApproveDate></ApprApproveDate>
+      <ApprApproveType>00</ApprApproveType>
+      <ApprType>01</ApprType>
+      <ApprComment />
+    </ApproverEmpList>
+    <ApproverEmpList>
+      <ApprApproveEmpNo>ssuby</ApprApproveEmpNo>
+      <ApprApproveEmpName>Hyun-Sub Lim</ApprApproveEmpName>
+      <ApprApproveOrder>5</ApprApproveOrder>
+      <ApprApproveEmpDept>PT</ApprApproveEmpDept>
+      <ApprApproveEmpTitle>Chief</ApprApproveEmpTitle>
+      <ApprApproveEmpEmail>ssuby@workplace2.com</ApprApproveEmpEmail>
+      <ApprApproveEmpOffice>+82 (2) 2107-8970</ApprApproveEmpOffice>
+      <ApprApproveEmpMobile>010-3714-2509</ApprApproveEmpMobile>
+      <ApprApproveDate></ApprApproveDate>
+      <ApprApproveType>00</ApprApproveType>
+      <ApprType>03</ApprType>
+      <ApprComment />
+    </ApproverEmpList>
+    <ApproverEmpList>
+      <ApprApproveEmpNo>leesh</ApprApproveEmpNo>
+      <ApprApproveEmpName>Seong-Hwan Lee</ApprApproveEmpName>
+      <ApprApproveOrder>5</ApprApproveOrder>
+      <ApprApproveEmpDept>PT</ApprApproveEmpDept>
+      <ApprApproveEmpTitle></ApprApproveEmpTitle>
+      <ApprApproveEmpEmail>leesh@workplace2.com</ApprApproveEmpEmail>
+      <ApprApproveEmpOffice></ApprApproveEmpOffice>
+      <ApprApproveEmpMobile></ApprApproveEmpMobile>
+      <ApprApproveDate></ApprApproveDate>
+      <ApprApproveType>00</ApprApproveType>
+      <ApprType>03</ApprType>
+      <ApprComment />
+    </ApproverEmpList>
+    <ApproverEmpList>
+      <ApprApproveEmpNo>sckang</ApprApproveEmpNo>
+      <ApprApproveEmpName>Seong-Chae Kang</ApprApproveEmpName>
+      <ApprApproveOrder>6</ApprApproveOrder>
+      <ApprApproveEmpDept>PT</ApprApproveEmpDept>
+      <ApprApproveEmpTitle></ApprApproveEmpTitle>
+      <ApprApproveEmpEmail>sckang@workplace2.com</ApprApproveEmpEmail>
+      <ApprApproveEmpOffice>+82 (2) 2107-8970</ApprApproveEmpOffice>
+      <ApprApproveEmpMobile>010-3661-9548</ApprApproveEmpMobile>
+      <ApprApproveDate></ApprApproveDate>
+      <ApprApproveType>00</ApprApproveType>
+      <ApprType>01</ApprType>
+      <ApprComment />
+    </ApproverEmpList>
+    <Attachments>
+      <FileID>25_WF_DEV_CB.txt</FileID>
+      <FileName>WF_DEV_CB.txt</FileName>
+      <IsEdms></IsEdms>
+      <FileSize>0</FileSize>
+      <FileUrl>http://www.workplace2.com/GWStorage/e-sign/Approval/ATTACH/0/25_WF_DEV_CB.txt</FileUrl>
+    </Attachments>
+    <Attachments>
+      <FileID>26_사용전 필독!!!.jpg</FileID>
+      <FileName>사용전 필독!!!.jpg</FileName>
+      <IsEdms></IsEdms>
+      <FileSize>56612</FileSize>
+      <FileUrl>http://www.workplace2.com/GWStorage/e-sign/Approval/ATTACH/0/26_사용전 필독!!!.jpg</FileUrl>
+    </Attachments>
+    <ApprLinkDocs>
+      <ApprLinkDocName>감사함 확인(발신부서, 수신부서) </ApprLinkDocName>
+      <ApprLinkDocUrl>http://www.workplace2.com/COVIWeb/Approval/Forms/Form.aspx?mode=COMPLETE&amp;piid=9586a85f-534f-45cd-bae0-72ca091b0608&amp;wiid=a4e84672-66ef-4d39-a928-4d35400af518&amp;fmpf=WF_FORM_COORDINATE&amp;fmrv=0&amp;fiid=357F82C5-1577-49B0-9E81-1CE9C8153451&amp;fmid=20b3ab58-aa7b-49e3-8fdf-5b631eb0519b&amp;scid=230a0363-9ab6-47f1-9793-9f630c6695ee</ApprLinkDocUrl>
+    </ApprLinkDocs>
+    <ApprLinkDocs>
+      <ApprLinkDocName>회람/참조 TEST001 참조 </ApprLinkDocName>
+      <ApprLinkDocUrl>http://www.workplace2.com/COVIWeb/Approval/Forms/Form.aspx?mode=COMPLETE&amp;piid=eed4b188-dd51-435d-9540-54f2e8a34c1b&amp;wiid=de86bb63-c980-45ca-b8bd-3cc429029ce9&amp;fmpf=WF_FORM_DRAFT&amp;fmrv=0&amp;fiid=2525A22D-5644-41BD-BB92-DEF023E6B4A4&amp;fmid=60d25cd0-7f06-4860-b063-d2ee84198f4f&amp;scid=b99bbbb2-d29a-49de-870f-b51b0efce167</ApprLinkDocUrl>
+    </ApprLinkDocs>
+  </MON_ApprovaDetail>
+</string>

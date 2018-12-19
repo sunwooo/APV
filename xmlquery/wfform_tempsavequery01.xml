@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql">
+	<sql:header>
+		<sql:param name='USER_ID'></sql:param>
+		<sql:param name='SUBJECT'></sql:param>
+		<sql:param name='PAGENUM'></sql:param>
+		<sql:param name='PAGECNT'></sql:param>
+		<sql:param name='QUERYSIZE'>15</sql:param>
+		<sql:param name='GROUP_KIND'></sql:param>
+		<sql:param name='TITLE'></sql:param>
+		<sql:param name='ORDERFILED'></sql:param>
+		<sql:param name='ORDERDESC'></sql:param>
+	</sql:header>
+	<sql:query>
+        exec sp_wfform_tempsavequery01 @USER_ID, @SUBJECT, @PAGENUM, @PAGECNT, @QUERYSIZE, @GROUP_KIND, @TITLE, @ORDERFILED, @ORDERDESC
+	</sql:query>
+</ROOT>

@@ -1,0 +1,76 @@
+TD.TabUnSel
+{
+    BACKGROUND-COLOR: "#DBDBDB";/*threedface;*/
+    BEHAVIOR: url(tab.htc);
+    COLOR: gray;
+    CURSOR: hand;
+    FONT-FAMILY: '굴림';
+    FONT-SIZE: 12px;
+    FONT-WEIGHT: bolder;
+	HEIGHT: 20;
+	border-top: 1px solid #7C97B8;border-right: 1px solid #7C97B8;border-bottom: 1px solid #7C97B8;border-left: 1px solid #7C97B8;
+}
+TD.TabSel
+{
+    BACKGROUND-COLOR:#BDCFE5;/*#7B9CDA;#BDCFE5*/
+    BEHAVIOR: url(tab.htc);
+	COLOR: navy;
+    CURSOR: hand;
+    FONT-FAMILY: '굴림';
+    FONT-SIZE: 12px;
+    FONT-WEIGHT: bolder;
+	HEIGHT: 20;
+	border-top: 1px solid #7C97B8;border-right: 1px solid #7C97B8;border-bottom: 1px solid #7C97B8;border-left: 1px solid #7C97B8;
+}
+DIV.TabUnSel
+{
+    /*BACKGROUND-COLOR: "#DBDBDB";threedface;*/
+    BORDER-BOTTOM: #66551C 1px solid;
+    BORDER-LEFT: #66551C 1px solid;
+    BORDER-RIGHT: #66551C 1px solid;
+    BORDER-TOP: #66551C 1px solid;
+	CURSOR: hand;
+    DISPLAY: none;
+    HEIGHT: 0%;
+    PADDING-BOTTOM: 1px;
+    PADDING-LEFT: 1px;
+    PADDING-RIGHT: 1px;
+    PADDING-TOP: 1px
+}
+DIV.TabSel
+{
+    /*BACKGROUND-COLOR: "#DBDBDB";threedface;*/
+    BORDER-BOTTOM: #66551C 1px solid;
+    BORDER-LEFT: #66551C 1px solid;
+    BORDER-RIGHT: #66551C 1px solid;
+    BORDER-TOP: #66551C 1px solid;
+	CURSOR: hand;
+    DISPLAY: block;
+    HEIGHT: 100%;
+    PADDING-BOTTOM: 1px;
+    PADDING-LEFT: 1px;
+    PADDING-RIGHT: 1px;
+    PADDING-TOP: 1px
+}
+BODY
+{
+    /*BACKGROUND-COLOR: "#FAFAFA";threedface;
+    BORDER-BOTTOM: 1px outset;
+    BORDER-LEFT: 1px outset;
+    BORDER-RIGHT: 1px outset;
+    BORDER-TOP: 1px outset;*/
+    BACKGROUND-COLOR: #F7F7F7;
+	OVERFLOW: hidden
+}
+SPAN.tooltip
+{
+    BACKGROUND-COLOR: lightyellow;
+    BORDER-BOTTOM: 1px solid;
+    BORDER-LEFT: 1px solid;
+    BORDER-RIGHT: 1px solid;
+    BORDER-TOP: 1px solid;
+    DISPLAY: none;
+    POSITION: absolute
+}
+.border_color
+{border-top: 0px;border-right: 1px solid #7C97B8;border-bottom: 1px solid #7C97B8;border-left: 1px solid #7C97B8;background-color:#BDCFE5;padding:5px}

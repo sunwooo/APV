@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql">
+	<sql:header>
+		<sql:param name='PERSON_CODE'>200207</sql:param>
+	</sql:header>
+	<sql:query>
+		SELECT [JFM_ID], [JF_ID], [JF_CODE], [SORT_KEY], [WEIGHT] 
+		FROM [ORG_JOBFUNCTION_MEMBER]
+		WHERE PERSON_CODE = @PERSON_CODE
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

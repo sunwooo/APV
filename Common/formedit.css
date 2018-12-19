@@ -1,0 +1,119 @@
+<STYLE>
+BODY
+{
+    FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+    FONT-SIZE: 9pt;
+    BACKGROUND-COLOR: #FFFFFF;
+    OVERFLOW: auto;
+    BORDER-BOTTOM: 1px outset;
+    BORDER-LEFT: 1px outset;
+    BORDER-RIGHT: 1px outset;
+    BORDER-TOP: 1px outset;
+}
+TABLE
+{
+	WIDTH: 100%;
+	HEIGHT: 100%
+}
+TD
+{
+    FONT-SIZE: 9pt;
+    MARGIN-TOP: 0px;
+    TEXT-ALIGN: center;
+}
+INPUT
+{
+    FONT-SIZE: 9pt;
+    MARGIN-TOP: 0px;
+    TEXT-ALIGN: left
+}
+SELECT
+{
+    BACKGROUND-COLOR: #EDEDED;
+	WIDTH: 100%;
+	HEIGHT: 100%
+}
+TEXTAREA
+{
+	WIDTH: 100%;
+	HEIGHT: 100%
+}
+
+A:link 
+{
+	TEXT-DECORATION: none;
+	color:blue;
+}
+
+A:visited 
+{
+	TEXT-DECORATION: none;
+	color:blue;
+}
+
+A:active 
+{
+	TEXT-DECORATION: none;
+	color:red;
+}
+
+A:over 
+{
+	TEXT-DECORATION: none;
+	color:red;
+}
+
+A:hover 
+{
+	TEXT-DECORATION: none;
+	color:red;
+}
+
+.Field
+{
+    FONT-SIZE: 9pt;
+    MARGIN-TOP: 0px;
+    FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	BORDER-STYLE: solid;
+	BORDER-WIDTH: 1;
+	WIDTH: 100%;
+	HEIGHT: 100%;
+}
+.Readonlyfield
+{
+    FONT-SIZE: 9pt;
+    FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	BORDER-WIDTH: 0;
+	WIDTH: 100%;
+	HEIGHT: 100%
+}
+.headname
+{
+    FONT-FAMILY: '궁서';
+    FONT-SIZE: 20pt;
+	FONT-WEIGHT: bolder
+}
+.lblField
+{
+    BACKGROUND-COLOR: #EDEDED;
+    FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+    FONT-SIZE: 9pt;
+	COLOR: gray;
+    MARGIN-TOP: 0px;
+    FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+}
+.nodisp
+{
+	DISPLAY: none;
+}
+.valuefield
+{
+	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	FONT-SIZE: 9pt;
+	VALIGN: middle;
+	BORDER-WIDTH: 1;
+	WIDTH:99%;
+	HEIGHT: 20;
+}
+
+</STYLE>

@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" Transaction="Required" AutoEventWireup="true" CodeFile="switchWI2Cancel.aspx.cs" Inherits="Approval_InstMgr_switchWI2Cancel" %>

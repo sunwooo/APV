@@ -1,0 +1,68 @@
+BODY 
+{
+	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	FONT-SIZE: 10pt;
+	BORDER-BOTTOM: 1px outset;
+	BORDER-LEFT: 1px outset;
+	BORDER-RIGHT: 1px outset;
+	BORDER-TOP: 1px outset;
+}
+UL.toc 
+{
+	cursor:hand
+}
+UL.toc LI 
+{
+	list-style-image:url(collapse.gif);
+	margin-left: -25px
+}
+UL.toc LI.open 
+{
+	list-style-image:url(leaf.gif)
+}
+UL.toc UL LI 
+{
+	list-style: none
+}		
+UL.toc LI.exe 
+{
+	list-style-image:url(text_doc.gif)
+}
+UL.toc UL 
+{
+	display:none
+}
+UL.toc UL.expanded 
+{
+	display:block;
+	list-style-image:url(text_doc.gif)
+}
+UL.toc LI A 
+{
+	text-decoration:none; 
+	color:black;
+}
+UL.toc LI UL A 
+{
+	color:blue
+} 
+UL.toc A:active
+{
+	color:navy;
+	font-weight:bold
+}
+UL.toc A.select
+{
+	color:navy;
+	font-weight:bold
+}
+UL.toc .over 
+{
+	color:red
+}  
+UL.toc UL P 
+{
+	margin-top:0; 
+	margin-bottom:0
+}
+contextual(classes.toc.UL, tags.UL).display = "block";

@@ -1,0 +1,240 @@
+﻿<html>
+	<head>
+		<title>결재선 관리</title>
+		<meta http-equiv="Content-Language" content="ko">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="/COVINet/css/covi.css" rel="stylesheet" type="text/css">
+			<SCRIPT LANGUAGE="javascript">
+			var m_evalXML = new ActiveXObject("MSXML2.DOMDocument");
+			var m_xmlHTTP = new ActiveXObject("MSXML2.XMLHTTP");
+			if( ((top.opener.bState=="add") && (top.opener.Apvline.m_id != "")) && (!confirm("선택된 결재선을 템플릿으로 사용하시겠습니까?"))){
+				top.opener.menu.APVLIST.value = "";
+			}else if ((top.opener.bState=="add") && (top.opener.Apvline.m_id == "")) {
+				top.opener.menu.APVLIST.value = "";
+			}else{
+				//top.opener.menu.APVLIST.value = top.opener.m_xmlHTTP.responseXML.selectSingleNode("response/item[id='"+top.opener.Apvline.m_id+"']/signinform/steps").xml; 			
+				queryGetData();
+			}
+
+			function queryGetData() 
+			{
+				var szURL = "/xmlwf/query/wf_privatedomaindata02.xml?PDD_ID="+top.opener.Apvline.m_id;
+				requestHTTP("GET",szURL,true,"text/xml",receiveHTTPStep,null);
+			}
+
+			function requestHTTP(sMethod,sUrl,bAsync,sCType,pCallback,vBody){
+				m_xmlHTTP.open(sMethod,sUrl,bAsync);
+				m_xmlHTTP.setRequestHeader("Accept-Language","ko");
+				m_xmlHTTP.setRequestHeader( "Content-type", sCType);
+				if(pCallback!=null)m_xmlHTTP.onreadystatechange = pCallback;
+				(vBody!=null)?m_xmlHTTP.send(vBody):m_xmlHTTP.send();
+			}
+			function receiveHTTPStep(){
+				if(m_xmlHTTP.readyState==4){
+					m_xmlHTTP.onreadystatechange=event_noop;
+					if(m_xmlHTTP.responseText.charAt(0)=='\r'){
+						alert(m_xmlHTTP.responseText);
+					}else{
+						var errorNode=m_xmlHTTP.responseXML.selectSingleNode("response/error");
+						if(errorNode!=null){
+							alert("Desc: " + errorNode.text);
+						}else{
+							top.opener.menu.APVLIST.value = m_xmlHTTP.responseXML.selectSingleNode("response/item[id='"+top.opener.Apvline.m_id+"']/signinform/steps").xml; 			
+						}
+					}
+				}
+			}
+
+			function doButtonAction(){				
+				switch(event.srcElement.id){
+					case "btOK":
+						if ( title.value.length == 0 ){alert('제목을 입력하세요');title.focus();return false;}
+						var elmRoot = ApvlineViewer.m_oApvList.documentElement;	
+						if (elmRoot.childNodes.length < 1){alert('결재선을 지정하세요');return false;}
+						if (top.opener.bState=="change"){
+							setchangeApvlineList();
+						}
+						else{
+							setApvlineList();
+						}
+						break;						
+					case "btExit":	window.close();break;
+				}
+			}
+			function setchangeApvlineList(){				
+				var elmRoot = ApvlineViewer.m_oApvList.documentElement;	
+				
+				if (chkConsultAppLine(elmRoot)){				
+					var sText = "<request><type>change</type><id>"+top.opener.Apvline.m_id+"</id><userid>"+top.opener.UserID+"</userid><title><![CDATA["+title.value+"]]></title><dscr><![CDATA["+description.value+"]]></dscr>"+elmRoot.xml+"</request>";
+					
+					evalXML(sText);
+
+					m_xmlHTTP.open("POST","SetApvlist.aspx",true);
+					m_xmlHTTP.setRequestHeader("Accept-Language","ko");
+					m_xmlHTTP.setRequestHeader("Content-type", "text/xml");
+					m_xmlHTTP.onreadystatechange=receiveHTTP;
+					m_xmlHTTP.send(sText);
+				}else{
+					return false;
+				}
+			}
+			function setApvlineList(){				
+				var elmRoot = ApvlineViewer.m_oApvList.documentElement;	
+				
+				if (chkConsultAppLine(elmRoot)){
+					var sText = "<request><type>add</type><id>"+top.opener.Apvline.m_id+"</id><userid>"+top.opener.UserID+"</userid><title><![CDATA["+title.value+"]]></title><dscr><![CDATA["+description.value+"]]></dscr>"+elmRoot.xml+"</request>";
+					evalXML(sText);
+
+					m_xmlHTTP.open("POST","SetApvlist.aspx",true);
+					m_xmlHTTP.setRequestHeader("Accept-Language","ko");
+					m_xmlHTTP.setRequestHeader("Content-type", "text/xml");
+					m_xmlHTTP.onreadystatechange=receiveHTTP;
+					m_xmlHTTP.send(sText);
+				}else{
+					return false;
+				}
+				
+			}
+			function receiveHTTP(){
+				if(m_xmlHTTP.readyState==4){
+					m_xmlHTTP.onreadystatechange=event_noop;
+					if(m_xmlHTTP.responseText.charAt(0)=="\r"){
+						alert(m_xmlHTTP.responseText);
+					}else{
+						var errorNode=m_xmlHTTP.responseXML.selectSingleNode("response/error");
+						if(errorNode!=null){
+							alert("Desc: " + errorNode.text);
+						}else{
+							window.close();
+							top.opener.location.reload();				
+						}
+					}
+				}
+			}
+			function event_noop(){return(false);}
+			function evalXML(sXML){
+				if(!m_evalXML.loadXML(sXML)){
+					var err = m_evalXML.parseError;
+					throw new Error(err.errorCode,"desc:"+err.reason+"\nsrctxt:"+err.srcText+"\nline:"+err.line+"\tcolumn:"+err.linepos);
+				}
+			}
+			
+			function chkConsultAppLine(elmRoot){
+				var emlSteps = elmRoot.selectNodes("step");
+				var emlStep;
+				var elmList = elmRoot.selectNodes("step[@unittype='person' and @routetype='approve']/ou/person");	// 2004.10.26 update
+				var elm, elmTaskInfo;	// 2004.10.26 update
+				var HasApprover = false;
+				var HasConsult = false;
+				var HadReviewer = false;	// 2004.10.26 update
+				var PreConsult = false ;	// 2004.10.26 update
+				var EndReviewer = false ;	// 2004.10.26 update
+				var CurConsult = false ;	// 2004.10.26 update
+
+				for(var i=0; i< emlSteps.length;i++){
+					emlStep=emlSteps.nextNode();
+					if (emlStep.getAttribute("routetype") == "consult" || emlStep.getAttribute("routetype") == "assist" )	HasConsult = true;
+					if (i==emlSteps.length-2 && emlStep.getAttribute("routetype") == "consult")	PreConsult = true ;	// 2004.10.26 update
+					if (i==emlSteps.length-1 && emlStep.getAttribute("routetype") == "consult")	CurConsult = true ;	// 2004.10.26 update
+				}
+				// 2004.10.26 update 
+				for (var j=0; j<elmList.length;j++) {
+					elm = elmList.nextNode();
+					elmTaskInfo = elm.selectSingleNode("taskinfo");
+					if (j==elmList.length-1 && elmTaskInfo.getAttribute("kind") == "review")	EndReviewer = true ;	// 2004.10.26 update
+				}
+				//
+
+				if ( HasConsult ){
+					if (emlStep.getAttribute("routetype") == "approve" && elmTaskInfo.getAttribute("kind") != "review") HasApprover = true;	// 2004.10.26 update
+				}
+				if ( HasConsult ){
+					if ( HasApprover == true ) {
+						return true;
+					}else{
+						// 2004.10.26 update 
+						if (PreConsult && EndReviewer){
+							alert("최종결재자가 후결인 경우에 전 결재자는 합의일 수 없습니다.");return false;
+						}else{
+							if (CurConsult){				
+								alert("결재선에서 합의는 최종결재자 전에 위치해야 합니다.\n현 합의를 결재자 아래로 내려주십시요.");return false;
+							}else{return true;}
+						}
+						//
+					}
+				}else{
+					return true;
+				}
+			}
+			</SCRIPT>
+			<SCRIPT FOR="cbBTN" EVENT="onclick()">doButtonAction();</SCRIPT>
+	</head>
+	<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" style="MARGIN: 0px;    OVERFLOW: hidden">
+		<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td height="3" colspan="2" align="center" valign="middle" class="table_topline"></td>
+			</tr>
+			<tr class="table_green">
+				<td width="24%" height="40" align="left" valign="middle">
+					&nbsp;&nbsp;&nbsp; <img src="/COVINet/images/icon/icon_pop.gif" width="27" height="18" align="absMiddle">
+					<span class="text-blue2">결재선 관리</span></td>
+				<td align="right" valign="middle" class="right10px">
+					<img src="/COVINet/images/button/btn_save.gif" width="52" height="21" align="absMiddle"
+						id="btOK" name="cbBTN" style="CURSOR:hand"> <img src="/COVINet/images/button/btn_close.gif" width="52" height="21" align="absMiddle"
+						id="btExit" name="cbBTN" style="CURSOR:hand">
+				</td>
+			</tr>
+			<tr>
+				<td height="1" colspan="2" align="center" valign="middle" class="pop_line"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center" valign="top" class="pop_bg">
+					<br>
+					<br>
+					<table width="98%" border="0" cellpadding="3" cellspacing="0" class="pop_green">
+						<tr>
+							<td valign="top">
+								<table width="100%" border="0" cellpadding="2" cellspacing="1" class="table_jingray">
+									<tr>
+										<td width="26%" height="26" align="center" class="table_yungreen "><span class="text-green">결재선 이름</span>
+										</td>
+										<td width="74%" height="26" class="table_white"><input type="text" id="title" name="title" style="WIDTH: 100%" class='input4' maxlength="20"></td>
+									</tr>
+									<tr>
+										<td height="26" align="center" class="table_yungreen "><span class="text-green"> 결재선 설명 </span></td>
+										<td height="26" class="table_white"><input type="text" id="description" name="description" maxlength="50" style="WIDTH: 100%"
+												class='input4'></td>
+									</tr>
+									<tr>
+										<td height="26" align="center" class="table_yungreen "><span class="text-green"></span></td>
+										<td height="26" class="table_white"><font color="blue">주결재선지정:이름 맨앞에 <font color='red'>*</font>
+												를 붙임</font></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+					<br>
+					<br>
+					<table width="98%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="4" background="/COVINet/images/groupware/community_line.gif"></td>
+						</tr>
+					</table>
+					<br>
+					<br>
+					<IFRAME ID="ApvlineViewer" FrameBorder="0" style="WIDTH:100%;HEIGHT:100%" SRC="../ApvlineMgr/ApvlinePrivate.htm"></IFRAME>
+				</td>
+			</tr>
+			<tr>
+				<td height="3" colspan="2" align="center" valign="middle" class="table_topline"></td>
+			</tr>
+		</table>
+		<script language="javascript">
+			if( top.opener.bState=="change"){
+				title.value = top.opener.Apvline.m_title;
+				description.value = top.opener.Apvline.m_dscr;
+			}
+		</script>
+	</body>
+</html>

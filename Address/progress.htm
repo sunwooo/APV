@@ -1,0 +1,35 @@
+﻿<HTML>
+	<HEAD>
+		<TITLE>검색중..</TITLE>
+		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+	</HEAD>
+	<BODY bgcolor="buttonface" style="font-family:'굴림';font-size:10pt">
+		<div id="content">검색중...</div>
+	</BODY>
+	<SCRIPT LANGUAGE="javascript">
+<!--
+var m_oIndic = dialogArguments["indicator"];
+document.title = dialogArguments["title"];
+content.innerHTML = dialogArguments["content"];
+setTimeout(goonprocessing,300);
+
+function goonprocessing()
+{
+    m_oIndic.onreadystatechange = beforeclose;
+	var szPostContent = dialogArguments["postContent"];
+	if(szPostContent!=null){
+		m_oIndic.send(szPostContent);
+	}else{
+		m_oIndic.send();
+	}
+}
+function beforeclose()
+{
+	if(m_oIndic.readyState == 4){
+		window.onbeforeunload = dialogArguments["handler"];
+		window.close();
+	}
+}
+//-->
+	</SCRIPT>
+</HTML>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0"  encoding="utf-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql">
+	<sql:header>
+		<sql:param name='USER_ID'>200208</sql:param>
+		<sql:param name='UNIT_ID'>2210</sql:param>
+	</sql:header>
+	<sql:query>
+		SELECT COUNT(PF_PERFORMER_ID) AS APPROVAL
+		FROM WF_WORKITEM_LIST
+		WHERE PF_PERFORMER_ID = @USER_ID
+		AND PI_STATE = '288'
+		AND WI_STATE = '288'
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

@@ -1,0 +1,272 @@
+﻿<HTML>
+	<HEAD>
+		<meta http-equiv="Content-Language" content="ko">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="/COVINet/css/covi.css">
+		<script language="javascript">
+		var m_xmlHTTP=new ActiveXObject("MSXML2.XMLHTTP");
+		var aSign;
+		var aStamp;
+		var smode="sign";
+
+		function window.onload(){
+			var szURL = "GetApvImage.aspx";
+			requestHTTP("GET",szURL,true,"text/xml",receiveHTTP,null);
+		}
+		function requestHTTP(sMethod,sUrl,bAsync,sCType,pCallback,vBody){
+			m_xmlHTTP.open(sMethod,sUrl,bAsync);
+			m_xmlHTTP.setRequestHeader("Accept-Language","ko");
+			m_xmlHTTP.setRequestHeader( "Content-type", sCType);
+			if(pCallback!=null)m_xmlHTTP.onreadystatechange = pCallback;
+			(vBody!=null)?m_xmlHTTP.send(vBody):m_xmlHTTP.send();
+		}
+		function receiveHTTP(){
+			if(m_xmlHTTP.readyState==4){			
+				m_xmlHTTP.onreadystatechange=event_noop;
+				if(m_xmlHTTP.responseText.charAt(0)=='\r'){
+					alert(m_xmlHTTP.responseText);
+				}else{
+					var errorNode=m_xmlHTTP.responseXML.selectSingleNode("response/error");
+					if(errorNode!=null){
+						if(errorNode.text.indexOf("결재암호") > -1){
+							alert("결재암호가 틀립니다");
+								iptPassword.value="";
+						}else{
+							alert("Desc: " + errorNode.text);
+						}
+					}else{
+						if (smode == "sign"){
+                            //테스트용 주석
+                            //추후 삽입 할것
+                            //인장 이미지 가져 오는 부분						
+//							var sImage = m_xmlHTTP.responseXML.selectSingleNode("response/item").text
+//							var aImage = sImage.split('@');
+//							aStamp = aImage[0].split(';');
+//							aSign = aImage[1].split(';');
+							var sImage ="";
+							var aImage ="";
+							//임원인 경우 서명이미지 선택을 기본으로 한다, 그외는 이름을 기본으로 한다.
+							if (m_oFormMenu.getInfo("uslc") == "01" || m_oFormMenu.getInfo("uslc") == "02" ){
+								make_select('sign');
+							}else{
+								make_select('usnm');
+							}
+						}else if(smode=="password"){
+							if ( m_xmlHTTP.responseXML.selectSingleNode("response").text == "ok"){
+								parent.close();
+								if ( m_oFormMenu.getInfo("mode") == "REDRAFT" && m_oFormMenu.getInfo("loct") == "REDRAFT" ){
+									m_oFormMenu.requestProcess("RECREATE");
+								}else{
+									m_oFormMenu.requestProcess("APPROVE");
+								}
+							}else{
+								alert(m_xmlHTTP.responseXML.selectSingleNode("response").text);
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		function event_noop(){return(false);}
+
+		function makeNode(str){
+			var oOption = document.createElement("OPTION");	
+			selImage.options.add(oOption);
+			oOption.text=str;
+			oOption.value=str;	
+			return;	
+		}
+		function make_select(sMode){
+			if ( sMode == 'usnm'){
+				var intCount = self.selImage.options.length;
+				for (var i=intCount;i!=0;i--){
+					self.selImage.options.remove(i-1);			
+				}	
+				selectImage.src = "/COVINet/images/blank.gif";
+			}else{
+				(sMode== 'stamp')?make_selImage(aStamp):make_selImage(aSign);
+			}
+		}
+		function make_selImage(aImage){
+			var intCount = self.selImage.options.length;
+			for (var i=intCount;i!=0;i--){
+				self.selImage.options.remove(i-1);			
+			}	
+			for(var i=0;i<aImage.length;i++){
+				makeNode(aImage[i]);
+			}
+			if ( aImage.length > 0 ){ self.selImage.options[0].selected = true;setImage();}
+			return;
+		}
+		function setImage(){
+			var sName = selImage.value;
+			var sUPUrl = "/covinet/BackStorage/e-sign/ApprovalSign/";
+			selectImage.src = sUPUrl + sName;
+		}
+		</script>
+	</HEAD>
+<body leftmargin="0" topmargin="0" marginheight="0"  marginwidth="0" style="OVERFLOW: hidden;    MARGIN: 0px;">
+	<CENTER>
+	<table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td align="center" valign="top" class="pop_bg">
+				<table width="98%"   height="100%"  border="0" cellpadding="3" cellspacing="0" class="pop_green">
+					<tr>
+						<td width="49%" valign="top"  height="100%" >
+							<table width="100%"  border="0" cellpadding="2" cellspacing="1" class="table_jingray">
+								<tr>
+									<td width="26%" height="26" align="center" class="table_yungreen "><span class="text-green">결재 종류</span> </td>
+									<td width="74%" height="26" class="table_white"><input checked type="radio" value="approve" name="radAction" id="radAction" style="WIDTH:31px;">결재	<span id="spanReject"><input type="radio" value="reject" name="radAction" id="radAction" style="WIDTH:31px;">반려	</span><input type="radio" value="reserve" name="radAction" id="radAction" style="WIDTH:31px;">보류</td>
+								</tr>
+								<tr>
+									<td height="26" align="center" class="table_yungreen "><span class="text-green"> 결재 인증 </span></td>
+									<td height="26" class="table_white">&nbsp;&nbsp;<input type="password" id="iptPassword" onKeyPress="if (event.keyCode==13) fn_approval();" style="WIDTH: 30%;" class='input4'>&nbsp;&nbsp;<img src="/COVINet/images/button/btn_approve.gif" width="52" height="21" align="absmiddle" id="btnprocess" onclick="fn_approval();" style="cursor:hand;"></td>
+								</tr>
+								<tr>
+									<td height="26" align="center" class="table_yungreen "><span class="text-green">서명 종류  </span></td>
+									<td height="26" class="table_white">									
+										<input type="radio" value="stamp" name="radSign" id="radSign" style="WIDTH:28px;" onclick="make_select('stamp')">인장							
+										<input type="radio" value="sign" name="radSign" id="radSign" style="WIDTH:26px;" onclick="make_select('sign')">서명 				
+										<input checked type="radio" value="usnm" name="radSign" id="radSign" style="WIDTH:28px;" onclick="make_select('usnm')">이름 </td>
+								</tr>
+								<tr>
+									<td height="30" align="center" class="table_white"><img SRC="" Name="selectImage" ID="selectImage" border="0" style="width:30px;height:30px" align="absmiddle"></td>
+									<td height="30" class="table_white">
+										<SELECT NAME="selImage" ID="selImage" SIZE="3"  class="input" onChange="setImage();" style="width:100%;">
+										</SELECT>
+									</td>
+								</tr>
+							</table>
+						</td>
+						<td width="51%" valign="top"  height="100%" >
+							<table width="100%"  height="100%"  border="0" cellpadding="2" cellspacing="1" class="table_jingray">
+								<tr>
+									<td width="12%" height="25" align="center" class="table_yungreen "><span class="text-green">의견</span> </td>
+									<td width="88%" height="25" class="table_white"><TEXTAREA onblur="checkCommentLength();" onmouseout="checkCommentLength();" onkeydown="checkCommentLength();" id="txtComment"  maxlength="249" class="input" style="width:100%;height:100%" NAME="txtComment"></TEXTAREA></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	</CENTER>
+</BODY>
+</HTML>
+<SCRIPT LANGUAGE="javascript">
+//iptPassword.focus();
+var m_oFormMenu = parent.opener;
+var m_oFormEditor = parent.opener.parent.editor;
+
+switch(m_oFormMenu.getInfo("mode")){
+	case "AUDIT":
+		radAction[0].nextSibling.nodeValue="결재";
+		radAction[1].nextSibling.nodeValue="반려";
+		radAction[2].nextSibling.nodeValue="보류";
+		break;
+	case "PCONSULT":
+		radAction[0].nextSibling.nodeValue="합의";
+		spanReject.style.display="none";
+//		radAction[1].nextSibling.nodeValue="반송";
+//		radAction[2].nextSibling.nodeValue="보류";
+		break;
+	case "APPROVAL":
+		radAction[0].nextSibling.nodeValue="결재";
+		radAction[1].nextSibling.nodeValue="반려";
+		radAction[2].nextSibling.nodeValue="보류";
+		break;
+	case "CHARGE":
+		radAction[0].nextSibling.nodeValue="접수";
+		radAction[1].nextSibling.nodeValue="반려";
+		radAction[2].nextSibling.nodeValue="보류";
+		break;
+}
+
+function checkCommentLength(){
+	if(txtComment.value.length>201){
+		txtComment.innerText=txtComment.value.substring(0,201);
+		return false;
+	}else
+		return true;
+}
+
+function fn_approval() {	
+	var i,choice,comment, blastapprove,signimagetype; 		
+
+	// 종류 선택 찾기(결재, 보류, 반려인지 확인해서 index 에 값 저장
+	for(i=0;i<radAction.length;i++){if(radAction[i].checked){choice=radAction[i].value;break;}}
+	if(choice=="reserve" && !(fn_checkrereserve())){
+		return;
+	}
+	if (choice!="approve" && txtComment.value==""){
+		alert("의견을 입력하십시요.");
+		return;
+	}	
+	// 직인 이미지 
+	for(i=0;i<radSign.length;i++){if(radSign[i].checked){signimagetype=radSign[i].value;break;}}
+	if ( signimagetype !='usnm' && selImage.value == ''){
+		alert('인장 혹은 서명 이미지를 선택하십시요.');
+		return;
+	}else{signimagetype = (signimagetype=='usnm')?"":selImage.value;}
+	
+	var chkrtn = parent.processlist.evaluateApvList();
+	if ( chkrtn == false) return;
+		
+	var elmRoot = parent.processlist.m_oApvList.documentElement;
+	var elmOu = elmRoot.selectNodes("step[@routetype='receive']/ou");
+	if (elmOu.length > 0){
+		if(m_oFormMenu.getInfo("scDRecLimit")==1 && m_oFormMenu.getInfo("scDRecLimitV")!='' && elmOu.length > parseInt(m_oFormMenu.getInfo("scDRecLimitV"))){
+			alert("결재선에서 수신부서 수는 " + m_oFormMenu.getInfo("scDRecLimitV") + "을 초과할 수 없습니다"); 
+			return false;
+		}
+	}
+
+	m_oFormMenu.field["APVLIST"].value = parent.processlist.m_oApvList.documentElement.xml;	
+	m_oFormMenu.field["PASSWORD"].value = iptPassword.value;
+	m_oFormMenu.field["ACTIONINDEX"].value = choice;
+	/*
+	alert("첨언크기 :"+txtComment.value.length);
+	if(txtComment.value.length > 100)
+		alert("Text화일로 저장해야 겠소!!");
+	else
+		alert("그냥 저장해도 되거쏘이다!~");
+	*/
+	m_oFormMenu.field["ACTIONCOMMENT"].value = txtComment.value;
+	m_oFormMenu.field["SIGNIMAGETYPE"].value = signimagetype;
+	blastapprove =  fn_lastapproval();
+	m_oFormMenu.field["bLASTAPPROVER"].value = blastapprove;
+	var sTargetURL = "getProcessBizData.aspx";
+	var sAddage = m_oFormMenu.makeNode("usid") + m_oFormMenu.makeNode("actpwd",m_oFormMenu.field["PASSWORD"].value,null,true)
+	var sText = "<request>"+sAddage+"</request>";
+
+	m_oFormMenu.evalXML(sText);
+	smode="password";
+	requestHTTP("POST",sTargetURL,false,"text/xml",receiveHTTP,sText);
+
+	/*
+	parent.close();
+	m_oFormMenu.requestProcess("APPROVE");
+	*/
+}
+function fn_lastapproval(){
+	var oPendingSteps = parent.processlist.m_oApvList.documentElement.selectNodes("step[.//taskinfo/@kind!='review' and .//taskinfo/@kind!='bypass'  and .//taskinfo/@kind!='skip' and (.//taskinfo/@status='pending' or .//taskinfo/@status='reserved')]");
+	var oinActiveSteps = parent.processlist.m_oApvList.documentElement.selectNodes("step[@routetype!='receive' and .//taskinfo/@kind!='review' and .//taskinfo/@kind!='bypass' and .//taskinfo/@kind!='skip'  and .//taskinfo/@status='inactive']");
+	//alert(oPendingSteps.length + "---"+ oinActiveSteps.length);
+	if (( oPendingSteps.length == 1 ) && (oinActiveSteps.length == 0)){
+		return "true";
+	}else{
+		return "false";
+	}
+}
+function fn_checkrereserve(){
+	var oApprovedSteps = parent.processlist.m_oApvList.documentElement.selectNodes("step[@routetype='approve' or @routetype='consult']/ou/person[taskinfo/@status='reserved']");	
+	if (oApprovedSteps.length > 0){
+		alert("결재 보류는 단 1회만 가능합니다.");
+		return false;
+	}else{
+		return true;
+	}
+}
+</SCRIPT>

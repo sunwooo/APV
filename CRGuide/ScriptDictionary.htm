@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Script Dictioary</title>    <script type="text/javascript" language="javascript" src="Dictionary.js"></script>    <script type="text/javascript" language="javascript" >        //IE        //var dicFileInfo = new ActiveXObject("Scripting.Dictionary");
+        //var dicFileInfoSize = new ActiveXObject("Scripting.Dictionary");
+        //아래로 변경
+        var dicFileInfo = new Dictionary();
+        var dicFileInfoSize = new Dictionary();
+        
+        function addDictionary(strKey, fileInfo, filesize, filestate, username, deptname){
+	        key = strKey;
+	        if (dicFileInfo.Exists(key) == false) {	
+	            dicFileInfo.Add(key, fileInfo); 
+	        }
+        }        function getListVal(href){
+	        var aryTemp = new Array();
+	        var aryKey = new Array();
+	        var strItem = new String();
+	        var strListVal="";
+	        //aryTemp = (new VBArray(dicFileInfo.Items())).toArray();
+	        //aryKey = (new VBArray(dicFileInfo.Keys())).toArray();
+	        aryTemp = dicFileInfo.Items();
+	        aryKey = dicFileInfo.Keys();
+	        for(i = 0;i <= aryTemp.length-1;i++) {
+		        var temp = aryTemp[i].split(";");
+		        strItem = "<input type=checkbox id='chkFile' name='_" + aryKey[i] + "' value='" + aryKey[i] + "'>" 		
+		        if(temp.length < 2)
+		        {		    
+		            strItem += "<a href=\""+temp[0].replace("+","%2B")+ "\" target = \"_blank\" >" + aryKey[i] + "</a>";
+		        }
+		        else
+		        {		 
+		            strItem += "<a href=\""+temp[2].replace("+","%2B")+ "\" target = \"_blank\" >" + aryKey[i] + "</a>";
+		        }
+		        strListVal = strListVal + ", " + strItem;
+	        }
+        	
+	        if(strListVal == null || strListVal == "")
+		        return "";
+	        else
+		        return strListVal.substring(1)+"&nbsp;&nbsp;&nbsp;<a href='#' onclick='parent.menu.deleteitem();'><font color='#009900'><b>"+gLabel_file_delete+"<b></font></a>";
+        }
+        function getListXML(){
+	        var aryTemp = new Array();
+	        var aryKey = new Array();
+        	
+	        var strItem = new String();
+	        var strListVal;
+	        strListVal = "";
+	        //var ofileinfo= new ActiveXObject("MSXML2.DOMDocument");
+	        //ofileinfo.loadXML("<fileinfo></fileinfo>");
+        	
+        	
+	        aryTemp = (new VBArray(dicFileInfo.Items())).toArray();
+	        aryKey = (new VBArray(dicFileInfo.Keys())).toArray();
+	        for(i = 0;i <= aryTemp.length-1;i++) {	    
+	            var strtemp = aryTemp[i]; //.replace(/'/g,"&apos;");	    
+	            strListVal += "<file name='" + aryKey[i] + "'" + " location='" + strtemp + "' size='" + arrSize[i] + "' state='" + arrState[i] + "'></file>";
+        		
+		        //var ofile = ofileinfo.createElement("file");
+
+		        //ofile.setAttribute("name", aryKey[i]);
+		        //ofile.setAttribute("location", strtemp);
+		        //ofile.setAttribute("size",arrSize[i]);		
+		        //if(arrState[i] != null){
+		        //    ofile.setAttribute("state",arrState[i]);
+		        //}else{
+		        //    ofile.setAttribute("state","OLD");
+		        //}
+		        //ofile.setAttribute("user_name",arrUserName[i]);
+		        //ofile.setAttribute("dept_name",arrDeptName[i]);
+        		
+		        //ofileinfo.documentElement.appendChild(ofile);
+	        }
+	        if (strListVal == null || strListVal == "") {
+	            return "";
+	        } else {
+	            //if (m_oFormEditor.ATTACH_FILE_INFO.value.indexOf("</fileinfos>") < 0) {
+	            //    return ofileinfo.xml;
+	            //} else {
+	            //    return "<fileinfos>" + ofileinfo.xml + "</fileinfos>";
+	            //}
+	            return strListVal;
+	        }    
+        }
+
+        function deleteitem(){
+	        var deletemark = DeleteMarked();	
+	        var aryTemp = new Array();
+	        var aryKey = new Array();
+	        var position, delKey, delItem;	
+        	
+	        if(deletemark != ""){
+		        aryKey = (new VBArray(dicFileInfo.Keys())).toArray();
+		        aryTemp = (new VBArray(dicFileInfo.Items())).toArray();
+		        try{
+			        delKey = ""; delItem = "";
+			        for(i=aryKey.length-1;i>-1;i--){			
+				        position = deletemark.indexOf(aryKey[i]);
+				        if(position >= 0) {
+					        delKey = delKey + aryKey[i] +"|";
+					        delItem = delItem + aryTemp[i] +"|";
+				        }
+			        }
+			        deleteDictionary();
+		        }catch(e){
+			        alert(e.description);
+		        }
+	        }
+        }	
+        function DeleteMarked(){  
+	        var tmp="" ;
+	        var elementName="" ;
+
+	        return tmp;
+        }
+
+        function deleteDictionary()
+        {
+	        var deletemark = DeleteMarked();	
+	        var aryTemp = new Array() ;
+	        var aryKey = new Array() ;
+	        var position ;
+	        var deleteFiles=""
+	        if (deletemark != "") {
+		        aryKey = dicFileInfo.Keys();
+		        aryTemp = dicFileInfo.Items();	
+		        try{
+			        for(i=aryKey.length-1;i>-1;i--){
+				        position = deletemark.indexOf(aryKey[i]) ;
+				        var temp = aryTemp[i].split(";");
+				        if (position >= 0) {
+					        dicFileInfo.Remove(aryKey[i]) ;
+					        deleteFiles += aryTemp[i]+";";		
+				        }	
+			        }
+			        fileDelete(deleteFiles);
+		        }catch(e){
+			        alert(e.description);
+		        }
+	        }
+        }          function testADD(){            dicFileInfo.Add(document.getElementById("txtKey").value, document.getElementById("txtValue").value);            dicFileInfoSize.Add(document.getElementById("txtKey").value+"fsize", document.getElementById("txtValue").value+"fsize");            showDictionary();        }        function showDictionary(){	        var aryTemp = new Array() ;
+	        var aryKey = new Array() ;
+	        aryKey = dicFileInfo.Keys();
+	        aryTemp = dicFileInfo.Items();
+	        for(var i=0; i < aryKey.length ; i++){
+	            alert(aryKey[i] +"--" + aryTemp[i]);
+	        }
+	        
+	        var aryTempSize = new Array() ;
+	        var aryKeySize = new Array() ;
+	        aryKeySize = dicFileInfoSize.Keys();
+	        aryTempSize = dicFileInfoSize.Items();
+	        for(var i=0; i < aryKeySize.length ; i++){
+	            alert(aryKeySize[i] +"--" + aryTempSize[i]);
+	        }
+        }        function testDEL(){            dicFileInfo.Remove(document.getElementById("txtKey").value);            showDictionary();        }            </script>
+</head>
+<body>
+    <div style="width: 100px; height: 100px">
+        Key : <input id="txtKey" type="text" /> <br />
+        Value :     <input id="txtValue" type="text" /> <br />
+        <input id="Button1" type="button" value="ADD" onclick="testADD()" />
+        <hr />
+        <input id="Button2" type="button" value="REMOVE" onclick="testDEL()" />
+        
+    </div>
+
+</body>
+</html>

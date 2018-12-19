@@ -1,0 +1,84 @@
+BODY
+{
+    BACKGROUND-COLOR: white;
+    BACKGROUND-IMAGE: none;
+    BACKGROUND-REPEAT: repeat;
+    COLOR: black;
+    FONT-FAMILY: '굴림';
+    FONT-SIZE: 9pt;
+    MARGIN: 0px;
+    PADDING-BOTTOM: 10px;
+    PADDING-LEFT: 10px;
+    PADDING-RIGHT: 10px;
+    PADDING-TOP: 10px
+}
+UL.toc
+{
+    CURSOR: hand
+}
+UL.toc LI
+{
+    LIST-STYLE: url(plus.gif);
+    MARGIN-LEFT: -25px
+}
+UL.toc LI.open
+{
+    LIST-STYLE: url(minus.gif)
+}
+UL.toc UL LI
+{
+    LIST-STYLE: none
+}
+UL.toc LI.exe
+{
+    LIST-STYLE: url(dot.gif)
+}
+UL.toc UL
+{
+    DISPLAY: none
+}
+UL.toc UL.expanded
+{
+    DISPLAY: block;
+    LIST-STYLE: url(minus.gif)
+}
+UL.toc LI A
+{
+    COLOR: black;
+    TEXT-DECORATION: none
+	LIST-STYLE: url(plus.gif)
+}
+UL.toc LI UL A
+{
+    COLOR: black
+	LIST-STYLE: url(minus.gif)
+}
+UL.toc A:active
+{
+    COLOR: navy;
+    FONT-WEIGHT: bold
+}
+UL.toc A.select
+{
+    COLOR: navy;
+    FONT-WEIGHT: bold
+}
+UL.toc .over
+{
+    COLOR: red
+}
+UL.toc UL P
+{
+    MARGIN-BOTTOM: 0px;
+    MARGIN-TOP: 0px
+}
+SPAN.tooltip
+{
+    BACKGROUND-COLOR: lightyellow;
+    BORDER-BOTTOM: 1px solid;
+    BORDER-LEFT: 1px solid;
+    BORDER-RIGHT: 1px solid;
+    BORDER-TOP: 1px solid;
+    DISPLAY: none;
+    POSITION: absolute
+}

@@ -1,0 +1,23 @@
+﻿<division divisiontype="receive" name="수신" oucode="ISU_STISU_ST005" ouname="ERP사업팀;EPR BUSINESS TEAM;ERP사업팀;ERP사업팀">
+  <taskinfo kind="receive" status="pending" result="pending" datereceived="2014-03-11 15:11:38"/>
+  <step unittype="person" routetype="approve" name="담당부서">
+    <ou code="ISU_STISU_ST005" name="ERP사업팀;EPR BUSINESS TEAM;ERP사업팀;ERP사업팀">
+      <person code="ISU_ST96001" name="김득환;KIMDEUK-HWAN;김득환;金得煥" position="ISU_STA110;부장;General Manager;;" title="ISU_ST10150;팀원;(영)팀원;J팀원;C팀원" level="ISU_STA310;1급갑;;;" oucode="ISU_STISU_ST005" ouname="ERP사업팀;EPR BUSINESS TEAM;ERP사업팀;ERP사업팀" sipaddress="">
+        <taskinfo status="completed" result="completed" kind="charge" datereceived="2014-03-11 15:11:44" datecompleted="2014-03-11 16:27:52" customattribute1="sign_ISU_ST96001_0.gif" wiid="258666D8-59D3-4DA6-B2BF-430905210B97">
+          <comment relatedresult="completed" datecommented="2014-03-11 16:27:52"><![CDATA[zzz]]></comment>
+          <comment relatedresult="rejectedto" datecommented="2014-03-11 15:14:48">반송</comment>
+        </taskinfo>
+      </person>
+    </ou>
+  </step>
+  <step unittype="person" routetype="approve" name="일반결재">
+    <ou code="ISU_STISU_ST005" name="ERP사업팀;EPR BUSINESS TEAM;ERP사업팀;ERP사업팀" company="이수시스템(주)">
+      <person code="ISU_ST96001" name="김득환;KIMDEUK-HWAN;김득환;金得煥" position="ISU_STA110;부장;General Manager;;" title="ISU_ST10150;팀원;(영)팀원;J팀원;C팀원" level="ISU_STA310;1급갑;;;" oucode="ISU_STISU_ST005" ouname="ERP사업팀;EPR BUSINESS TEAM;ERP사업팀;ERP사업팀" sipaddress="" stampRights="N">
+        <taskinfo status="pending" result="pending" kind="normal" datereceived="2014-03-11 16:28:01"/>
+      </person>
+    </ou>
+  </step>
+  <person code="ISU_ST96001" name="김득환;KIMDEUK-HWAN;김득환;金得煥" position="ISU_STA110;부장;General Manager;;" title="ISU_ST10150;팀원;(영)팀원;J팀원;C팀원" level="ISU_STA310;1급갑;;;" oucode="ISU_STISU_ST005" ouname="ERP사업팀;EPR BUSINESS TEAM;ERP사업팀;ERP사업팀" sipaddress="">
+    <taskinfo status="pending" result="pending" kind="charge" datereceived="2014-03-11 16:27:12"/>
+  </person>
+</division>

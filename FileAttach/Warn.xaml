@@ -1,0 +1,280 @@
+﻿<Canvas
+	xmlns="http://schemas.microsoft.com/client/2007"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Width="600"
+	Height="340"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	Opacity="0.5"
+	Loaded="fnCOPMSlvWarnLoaded"
+>
+	<Canvas.Triggers>
+		<EventTrigger RoutedEvent="Canvas.Loaded">
+			<BeginStoryboard>
+				<Storyboard
+					x:Name="sbdProgress0"
+					BeginTime="0:0:0"
+					
+				>
+					<DoubleAnimation
+					  Storyboard.TargetName="pth0"
+					  Storyboard.TargetProperty="Opacity"
+					  From="0"
+					  To="1"
+					  BeginTime="0:0:0"
+					  Duration="0:0:0.1"
+					/>
+					<DoubleAnimation
+					  Storyboard.TargetName="pth4"
+					  Storyboard.TargetProperty="Opacity"
+					  From="0"
+					  To="1"
+					  BeginTime="0:0:0"
+					  Duration="0:0:0.1"
+					/>
+					<DoubleAnimation
+					  Storyboard.TargetName="pth1"
+					  Storyboard.TargetProperty="Opacity"
+					  From="0"
+					  To="1"
+					  BeginTime="0:0:0.1"
+					  Duration="0:0:0.1"
+					/>
+					<DoubleAnimation
+					  Storyboard.TargetName="pth5"
+					  Storyboard.TargetProperty="Opacity"
+					  From="0"
+					  To="1"
+					  BeginTime="0:0:0.1"
+					  Duration="0:0:0.1"
+					/>
+					<DoubleAnimation
+					  Storyboard.TargetName="pth2"
+					  Storyboard.TargetProperty="Opacity"
+					  From="0"
+					  To="1"
+					  BeginTime="0:0:0.2"
+					  Duration="0:0:0.1"
+					/>
+					<DoubleAnimation
+					  Storyboard.TargetName="pth6"
+					  Storyboard.TargetProperty="Opacity"
+					  From="0"
+					  To="1"
+					  BeginTime="0:0:0.2"
+					  Duration="0:0:0.1"
+					/>
+					<DoubleAnimation
+					  Storyboard.TargetName="pth3"
+					  Storyboard.TargetProperty="Opacity"
+					  From="0"
+					  To="1"
+					  BeginTime="0:0:0.3"
+					  Duration="0:0:0.1"
+					/>
+					<DoubleAnimation
+					  Storyboard.TargetName="pth7"
+					  Storyboard.TargetProperty="Opacity"
+					  From="0"
+					  To="1"
+					  BeginTime="0:0:0.3"
+					  Duration="0:0:0.1"
+					/>
+				</Storyboard>
+			</BeginStoryboard>
+		</EventTrigger>
+	</Canvas.Triggers>
+	<Path
+		x:Name="pth0"
+		Canvas.Left="1"
+		Canvas.Top="34"
+		Data="M0,5 L0,0 0,32.5 4.8333333,32.5 793.33333,32.5 798.83333,27.5 798.33333,-4.0449599E-60 792.33333,6 z"
+		Stroke="#000000"
+		StrokeThickness="0"
+		Fill="#FF000000"
+		Opacity="0" Height="37" Width="798.5" RenderTransformOrigin="0,0"
+	>
+		<Path.RenderTransform>
+			<TransformGroup>
+				<ScaleTransform x:Name="scl0" ScaleX="1" ScaleY="-1"/>
+				<SkewTransform AngleX="0" AngleY="0"/>
+				<RotateTransform Angle="0"/>
+				<TranslateTransform X="0" Y="0"/>
+			</TransformGroup>
+		</Path.RenderTransform>
+	</Path>
+	<Path
+		x:Name="pth1"
+		Canvas.Left="1"
+		Canvas.Top="34"
+		Data="M0,5 L0,0 0,32.5 4.8333333,32.5 793.33333,32.5 798.83333,27.5 798.33333,-4.0449599E-60 792.33333,6 z"
+		Stroke="#FFFFFF"
+		StrokeThickness="0"
+		Fill="#FFFFFFFF"
+		Opacity="0" Height="37" Width="798.5" RenderTransformOrigin="0,0"
+	>
+		<Path.RenderTransform>
+			<TransformGroup>
+				<ScaleTransform
+					x:Name="scl1"
+					ScaleX="1"
+					ScaleY="-1"
+				/>
+				<SkewTransform AngleX="0" AngleY="0"/>
+				<RotateTransform Angle="0"/>
+				<TranslateTransform X="0" Y="0"/>
+			</TransformGroup>
+		</Path.RenderTransform>
+	</Path>
+	<Path
+		x:Name="pth2"
+		Canvas.Left="1"
+		Canvas.Top="34"
+		Data="M0,5 L0,0 0,32.5 4.8333333,32.5 793.33333,32.5 798.83333,27.5 798.33333,-4.0449599E-60 792.33333,6 z"
+		Stroke="#000000"
+		StrokeThickness="0"
+		Fill="#FF000000"
+		Opacity="0" Height="37" Width="798.5" RenderTransformOrigin="0,0"
+	>
+		<Path.RenderTransform>
+			<TransformGroup>
+				<ScaleTransform
+					x:Name="scl2"
+					ScaleX="1"
+					ScaleY="-1"
+				/>
+				<SkewTransform AngleX="0" AngleY="0"/>
+				<RotateTransform Angle="0"/>
+				<TranslateTransform X="0" Y="0"/>
+			</TransformGroup>
+		</Path.RenderTransform>
+	</Path>
+	<Path
+		x:Name="pth3"
+		Canvas.Left="1"
+		Canvas.Top="34"
+		Data="M0,5 L0,0 0,32.5 4.8333333,32.5 793.33333,32.5 798.83333,27.5 798.33333,-4.0449599E-60 792.33333,6 z"
+		Stroke="#FFFFFF"
+		StrokeThickness="0"
+		Fill="#FFFFFFFF"
+		Opacity="0" Height="37" Width="798.5" RenderTransformOrigin="0,0"
+	>
+		<Path.RenderTransform>
+			<TransformGroup>
+				<ScaleTransform x:Name="scl3" ScaleX="1" ScaleY="-1"/>
+				<SkewTransform AngleX="0" AngleY="0"/>
+				<RotateTransform Angle="0"/>
+				<TranslateTransform X="0" Y="0"/>
+			</TransformGroup>
+		</Path.RenderTransform>
+	</Path>
+	<Path
+		x:Name="pth4"
+		Canvas.Left="1"
+		Canvas.Top="388"
+		Data="M0,5 L0,0 0,32.5 4.8333333,32.5 793.33333,32.5 798.83333,27.5 798.33333,-4.0449599E-60 792.33333,6 z"
+		Stroke="#000000"
+		StrokeThickness="0"
+		Fill="#FF000000"
+		Opacity="0" Height="37" Width="798.5" RenderTransformOrigin="0,0"
+	>
+		<Path.RenderTransform>
+			<TransformGroup>
+				<ScaleTransform x:Name="scl4" ScaleX="1" ScaleY="1"/>
+				<SkewTransform AngleX="0" AngleY="0"/>
+				<RotateTransform Angle="0"/>
+				<TranslateTransform X="0" Y="0"/>
+			</TransformGroup>
+		</Path.RenderTransform>
+	</Path>
+	<Path
+		x:Name="pth5"
+		Canvas.Left="1"
+		Canvas.Top="388"
+		Data="M0,5 L0,0 0,32.5 4.8333333,32.5 793.33333,32.5 798.83333,27.5 798.33333,-4.0449599E-60 792.33333,6 z"
+		Stroke="#FFFFFF"
+		StrokeThickness="0"
+		Fill="#FFFFFFFF"
+		Opacity="0" Height="37" Width="798.5" RenderTransformOrigin="0,0"
+	>
+		<Path.RenderTransform>
+			<TransformGroup>
+				<ScaleTransform x:Name="scl5" ScaleX="1" ScaleY="1"/>
+				<SkewTransform AngleX="0" AngleY="0"/>
+				<RotateTransform Angle="0"/>
+				<TranslateTransform X="0" Y="0"/>
+			</TransformGroup>
+		</Path.RenderTransform>
+	</Path>
+	<Path
+		x:Name="pth6"
+		Canvas.Left="1"
+		Canvas.Top="388"
+		Data="M0,5 L0,0 0,32.5 4.8333333,32.5 793.33333,32.5 798.83333,27.5 798.33333,-4.0449599E-60 792.33333,6 z"
+		Stroke="#000000"
+		StrokeThickness="0"
+		Fill="#FF000000"
+		Opacity="0" Height="37" Width="798.5" RenderTransformOrigin="0,0"
+	>
+		<Path.RenderTransform>
+			<TransformGroup>
+				<ScaleTransform x:Name="scl6" ScaleX="1" ScaleY="1"/>
+				<SkewTransform AngleX="0" AngleY="0"/>
+				<RotateTransform Angle="0"/>
+				<TranslateTransform X="0" Y="0"/>
+			</TransformGroup>
+		</Path.RenderTransform>
+	</Path>
+	<Path
+		x:Name="pth7"
+		Canvas.Left="1"
+		Canvas.Top="388"
+		Data="M0,5 L0,0 0,32.5 4.8333333,32.5 793.33333,32.5 798.83333,27.5 798.33333,-4.0449599E-60 792.33333,6 z"
+		Stroke="#FFFFFF"
+		StrokeThickness="0"
+		Fill="#FFFFFFFF"
+		Opacity="0" Height="37" Width="798.5" RenderTransformOrigin="0,0"
+	>
+		<Path.RenderTransform>
+			<TransformGroup>
+				<ScaleTransform x:Name="scl7" ScaleX="1" ScaleY="1"/>
+				<SkewTransform AngleX="0" AngleY="0"/>
+				<RotateTransform Angle="0"/>
+				<TranslateTransform X="0" Y="0"/>
+			</TransformGroup>
+		</Path.RenderTransform>
+	</Path>
+</Canvas>
+<!--
+
+	<Path
+		x:Name="pth4"
+		Canvas.Left="1"
+		Canvas.Top="1"
+		Data="M0.5,0 L0,32.5 4.5,37 793,37 798.5,32 798,0 z"
+		Stroke="#000000"
+		StrokeThickness="0"
+		Fill="#00000000"
+		Opacity="0" Height="37" Width="798.5" RenderTransformOrigin="0,0"
+	>
+		<Path.RenderTransform>
+			<TransformGroup>
+				<ScaleTransform x:Name="scl4" ScaleX="1" ScaleY="1"/>
+				<SkewTransform AngleX="0" AngleY="0"/>
+				<RotateTransform Angle="0"/>
+				<TranslateTransform X="0" Y="0"/>
+			</TransformGroup>
+		</Path.RenderTransform>
+	</Path>
+
+				<Storyboard x:Name="sbanimation" Storyboard.TargetProperty="(Canvas.Left)" AutoReverse="true" >
+					<DoubleAnimation Storyboard.TargetName="Hello" From="-110" To="300" Duration="0:0:10"  />
+				</Storyboard>
+				
+<Canvas
+	xmlns="http://schemas.microsoft.com/client/2007"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Width="800"
+	Height="38"
+-->

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0"  encoding="utf-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql" >
+	<sql:header>
+		<sql:param name='USER_ID'>200208</sql:param>
+		<sql:param name='WI_STATE'>528</sql:param>
+		<sql:param name='PI_STATE'>288</sql:param>
+		<sql:param name='MODE'>APPROVAL</sql:param>
+		<sql:param name='PI_NAME'></sql:param>
+		<sql:param name='PI_INITIATOR_NAME'></sql:param>
+		<sql:param name='PI_ETC'></sql:param>
+	</sql:header>
+	<sql:query>
+        SELECT
+			'' AS FORM_ID, 
+			'' AS FORM_NAME, 
+			PI_SUBJECT, 
+			PI_NAME, 
+		isnull(PI_DSCR, '') PI_DSCR,
+            PI_INITIATOR_NAME, 
+			PI_INITIATOR_ID, 
+            PI_ID, 
+			PI_STATE, 
+            PI_PPI_ID, 
+			PI_PI_ID,
+			CONVERT(VARCHAR(16),PI_STARTED,120) AS PI_STARTED, 
+			CONVERT(VARCHAR(16),PI_FINISHED,120) AS PI_FINISHED, 
+			CONVERT(VARCHAR(16),PI_DELETED,120) AS PI_DELETED, 
+		PI_PRIORITY,
+			PF_ID,
+			PF_SUB_KIND,
+			PF_PERFORMER_ID,
+			PF_PERFORMER_NAME,
+            WI_PERFORMER_ID, 
+			WI_PERFORMER_NAME, 
+            WI_DEPUTY_ID, 
+			WI_DEPUTY_NAME, 
+            WI_STATE, 
+			CONVERT(VARCHAR(16),WI_CREATED,120) AS WI_CREATED, 
+			CONVERT(VARCHAR(16),WI_FINISHED,120) AS WI_FINISHED, 
+			CONVERT(VARCHAR(16),WI_DELETED,120) AS WI_DELETED, 
+            WI_ID,
+			WI_NAME,  
+            isnull(PI_INITIATOR_UNIT_ID, '') PI_INITIATOR_UNIT_ID, 
+			isnull(PI_INITIATOR_UNIT_NAME, '') PI_INITIATOR_UNIT_NAME,
+			PI_BUSINESS_STATE, 
+            isnull(PI_BUSINESS_DATA1, '') PI_BUSINESS_DATA1,
+            isnull(PI_BUSINESS_DATA2, '') PI_BUSINESS_DATA2,
+			'APPROVAL' AS MODE,
+			CONVERT(VARCHAR(16),WI_CREATED,120) AS WORKDT
+
+        FROM    WF_WORKITEM_LIST (NOLOCK) 
+		WHERE	PF_PERFORMER_ID ='EDMSAdministrator'
+			AND WI_STATE = '288'
+			AND	PI_STATE = '288'
+			AND PF_STATE = '1'
+			AND	PI_DELETED IS NULL
+			AND	PF_SUB_KIND='EDMSERROR'
+		ORDER BY WI_CREATED DESC
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

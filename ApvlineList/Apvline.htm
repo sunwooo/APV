@@ -1,0 +1,74 @@
+﻿<HTML>
+	<HEAD>
+		<meta http-equiv="Content-Language" content="ko">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="/COVINet/css/covi.css">
+			<TITLE></TITLE>
+	</HEAD>
+	<BODY topmargin="0" leftmargin="0" onselectstart="return false;" scroll="no">
+	</BODY>
+	<SCRIPT>
+var m_id="";
+var m_title="";
+var m_dscr="";
+function window.onload(){
+	window.parent.document.onreadystatechange = initialize;
+	return;	
+}
+function initialize(){
+	if(window.parent.document.readyState == "complete"){
+		window.parent.document.onreadystatechange = noop;
+		window.parent.initialize();
+	}
+}
+function noop(){return;}
+function changerChk(){
+	if (rChk.length==null){
+		m_id = rChk.id;
+		m_title = rChk.title;
+		m_dscr = rChk.dscr;
+//		setApvlist();
+		selectRow(rChk.id);
+	}
+	else{
+		for(i=0;i<rChk.length;i++){
+			if (rChk[i].checked) {
+				m_id = rChk[i].id;
+				m_title = rChk[i].title;
+				m_dscr = rChk[i].dscr;
+//				setApvlist();
+				selectRow(rChk[i].id);
+			}
+		}
+	}
+}
+function setApvlist(){
+	window.parent.menu.APVLIST.value = window.parent.m_xmlHTTP.responseXML.selectSingleNode("response/item[id='"+m_id+"']/signinform/steps").xml;
+}
+
+var m_selectedRow=null;
+var m_selectedRowId=null;
+function selectRow(id){
+	var oRow;
+	oRow=event.srcElement.parentElement.parentElement;
+
+	if(oRow!=null){
+		switchSelectedRow(oRow);
+	}else{
+		m_selectedRow=null;
+		m_selectedRowId=null;
+	}
+}
+function switchSelectedRow(oRow){
+	while(oRow!=null&&oRow.tagName!="TR"){
+		oRow=oRow.parentNode;
+	}
+	if(oRow!=null){
+		if(m_selectedRow!=null)m_selectedRow.className="";
+		oRow.className="rowselected";
+		m_selectedRow=oRow;
+		m_selectedRowId=oRow.id;
+	}
+}
+	</SCRIPT>
+</HTML>

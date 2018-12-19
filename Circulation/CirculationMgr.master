@@ -1,0 +1,470 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="CirculationMgr.master.cs" Inherits="COVIFlowNet_Circulation_CirculationMgr" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+   <title>회람지정</title>
+	<script language="javascript" type="text/javascript" src="../../common/script/COVIFlowNet/openWindow.js"></script>	    
+    <script language="javascript" type="text/javascript" src="../../SiteReference/js/utility.js"></script>
+	<script language="javascript" type="text/javascript" src="CirculationMgr.js" ></script>
+</head>
+<body>
+<input type="hidden" id="chk" name="chk" />
+<textarea id="circulationinfotxt" name="circulationinfotxt" style="display:none;"></textarea>
+<textarea id="circulationinfotxt_ccrec" name="circulationinfotxt_ccrec" style="display:none;"><%=_circulationInfo_ccrec%></textarea>
+<textarea id="circulationinfotxt_ref" name="circulationinfotxt_ref" style="display:none;"><%=_circulationInfo_ref%></textarea>
+<textarea id="circulationinfoExttxt" name="circulationinfoExttxt" style="display:none;"><%=_circulationInfoExt%></textarea>		
+<!-- 헤더 -->		
+<asp:contentplaceholder id="ContentHeader" runat="server">
+</asp:contentplaceholder>
+<!-- 왼쪽 div 시작 -->
+<div class="popup_left">
+  <!-- 탭 div 시작 -->
+  <div class="tab01 small">
+    <ul>
+      <li class="current" id="divtSearch" name="divtSearch"><a href="#" onclick="javascript:changeTab(this.name)" id="tSearch" name="tSearch"><span><%= Resources.Approval.lbl_search %></span></a></li>
+      <li id="divtGroup" name="divtGroup"><a href="#" onclick="javascript:changeTab(this.name)" id="tGroup" name="tGroup"><span><%= Resources.Approval.lbl_org %></span></a></li>
+      <li id="divtCirculationLine" name="divtCirculationLine" style="display:none"><a href="#" onclick="javascript:changeTab(this.name)" id="tCirculationLine" name="tCirculationLine"><span><%= Resources.Approval.lbl_Circulationline%></span></a></li>
+    </ul>
+  </div>
+  <!-- 탭 div 끝 -->
+  <!-- 컬러 라인 시작 -->  
+  <div class="popup_line BTable_bg01"></div>
+  <!-- 컬러 라인 끝 -->
+  <div class="iframe_border">
+	<div id="spantSearch" name="tSearch">
+		<iframe id="iSearch" name="iSearch" width="100%" height="180px" frameborder="0" src="../Address/search.aspx?Ent=<%=Session["user_ent_code"].ToString()%>"
+			datasrc="../Address/search.aspx" style='PADDING-RIGHT:0px; PADDING-LEFT:0px; PADDING-BOTTOM:0px; MARGIN:0px; PADDING-TOP:0px; scroll:auto'></iframe>
+	</div>
+	<div id="spantGroup" name="tGroup" style='DISPLAY:none'><!--style="DISPLAY:none" -->
+		<iframe id="iGroup" name="iGroup" width="100%" height="180px" frameborder="0" src='../ApvLineMgr/OrgTree.aspx?Ent=<%=Session["user_ent_code"].ToString()%>'
+			datasrc="../ApvLineMgr/OrgTree.aspx" style='PADDING-RIGHT:0px; PADDING-LEFT:0px; PADDING-BOTTOM:0px; MARGIN:0px; PADDING-TOP:0px; scroll:auto'></iframe>
+	</div>
+	<div id="spantCirculationLine" name="spantCirculationLine" style='DISPLAY:none'><!--style="DISPLAY:none" -->
+		<iframe id="iCirculationLine" name="iCirculationLine" width="100%" height="180px" frameborder="0" src='../CirculationlineList/CPrivateLineList.aspx'
+			datasrc="../CirculationlineList/CPrivateLineList.aspx" style='PADDING-RIGHT:0px; PADDING-LEFT:0px; PADDING-BOTTOM:0px; MARGIN:0px; PADDING-TOP:0px; scroll:auto'></iframe>
+	</div>
+  </div>
+  <!-- 컬러 라인 시작 -->  
+  <div class="popup_line BTable_bg01"></div>
+  <!-- 컬러 라인 끝 -->
+  <div class="iframe_border">
+	<!-- 2.검색 결과 영역 시작-->
+	<iframe id="ListItems" name="ListItems" width="100%" height="180px" frameborder="0" src='../Address/listitems.aspx'
+		style='PADDING-RIGHT:0px; PADDING-LEFT:0px; PADDING-BOTTOM:0px; MARGIN:0px; PADDING-TOP:0px;scroll:auto'></iframe>
+	<!-- 검색 결과 영역 끝-->
+  </div>
+</div>
+<!-- 왼쪽 div 끝 -->
+
+<!-- 가운데 div 시작 -->
+<div class="popup_center" style="display:table; height:400px; *position:relative;">
+  <div class="Btn" style="display:table-cell; vertical-align:middle; text-align:center; *display:inline-block; *position:absolute; *top:50%; *left:50%;">
+    <ul>
+      <li id="tblReceive" style="display:none;"><a href="#" class="Btn06" id="btReceive" name="cbBTN" onclick="doButtonAction(btReceive);" ><span><%=Resources.Approval.lbl_receiver %></span></a></li>
+      <li id="tblReference" style="display:none;"><a href="#" class="Btn06" id="btReference" name="cbBTN" onclick="doButtonAction(this);" ><span><%=Resources.Approval.lbl_ref %><%--참조자--%></span></a></li>
+      <li id="tblCirculation"><a href="#" class="Btn06"  id="btCirculation" name="cbBTN" onclick="doButtonAction(this);" ><span><%=Resources.Approval.lbl_Distributer %><%--회람자--%></span></a></li>
+      <li id="tblCirculationDept" style="display:none;"><a href="#" class="Btn06"  id="btCirculationDept" name="cbBTN" onclick="doButtonAction(this);" ><span><%=Resources.Approval.lbl_DistributeDept %><%--회람부서--%></span></a></li>
+      <li id="tblCirculationLine" style="display:none;"><a href="#" class="Btn06"  id="btCirculationLine" name="cbBTN" onclick="doButtonAction(this);" ><span><%=Resources.Approval.btn_circulation_group %><%--회람그룹--%></span></a></li>
+    </ul>
+  </div>
+</div>
+<!-- 가운데 div 끝 -->
+<!-- 오른쪽 div 시작 -->
+<div class="popup_right">
+    <div id="divrecccinfomain" name="divrecccinfomain" style="display:none;">
+     <!-- 타이틀 & 버튼 div 시작 -->
+      <div class="title">
+        <div class="text">
+          <h3><%= Resources.Approval.lbl_recieveRef%><%--수신/참조자--%></h3>
+        </div>
+        <div class="Btn">
+          <ul>
+            <li><a href="#" class="Btn05" id="btDeleteccrec" name="cbBTN"  onclick="doButtonAction(this);"><span><%= Resources.Approval.btn_delete  %></span></a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- 타이틀 & 버튼 div 끝 -->
+      <!-- 컬러 라인 시작 -->
+      <div class="popup_line BTable_bg01"></div>
+      <!-- 컬러 라인 끝 -->
+        <div id="divccrecinfo" name="divccrecinfo" style="OVERFLOW:auto;WIDTH:100%;HEIGHT:100%">
+          <table  width="100%" border="0" cellspacing="0" cellpadding="0" class="BTable">
+	        <tr class="BTable_bg02" style="height:25px">
+		        <th style=" padding-left:10px"  width="8%" ><input id="chkAllccrec" name="cbBTN" onclick="doButtonAction(this);" type="checkbox" ></th>
+		        <th width="23%"><%=Resources.Approval.lbl_receiver%><!--수신/참조자--></th>
+                <th width="23%"><%=Resources.Approval.lbl_ent %></th>
+		        <th width="23%"><%=Resources.Approval.lbl_dept %></th>
+		        <th width="23%"><%=Resources.Approval.lbl_gubun%></th>														    
+	        </tr>
+<%--	        <tr>
+		        <td height="1" colspan="5" class="BTable_bg03"></td>
+	        </tr>--%>
+	        <tr>
+	            <td  colspan="5" style="" >
+                    <div style="OVERFLOW:auto;WIDTH:100%;HEIGHT:338px">
+				        <table id="tblccrecinfo" name="tblccrecinfo" width="100%" border="0" cellspacing="0" cellpadding="0">
+				        </table>
+				    </div>
+ 	            </td>
+	        </tr>
+            <!--tr>
+                <td height="1" colspan="5" class="BTable_bg03"></td>
+              </tr>
+              <tr>
+                <td height="2" colspan="5" class="BTable_bg04"></td>
+              </tr-->	    
+        </table>
+        </div>
+    </div>
+    <div id="divccinfomain" name="divccinfomain" ><!--style="display:none;" -->
+      <!-- 타이틀 & 버튼 div 시작 -->
+      <div class="title">
+        <div class="text">
+          <h3><%= Resources.Approval.lbl_circulation_list %><!--회람목록--></h3>
+        </div>
+        <div class="Btn">
+          <ul>
+            <li><a href="#" class="Btn05" id="btDeleteref" name="cbBTN"  onclick="doButtonAction(this);"><span><%= Resources.Approval.btn_delete  %></span></a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- 타이틀 & 버튼 div 끝 -->
+          <!-- 컬러 라인 시작 -->
+      <div class="popup_line BTable_bg01"></div>
+      <!-- 컬러 라인 끝 -->
+      <div id="divrefinfo" name="divrefinfo"  class="iframe_border">
+        <table  width="100%" border="0" cellspacing="0" cellpadding="0" class="BTable">
+	        <tr class="BTable_bg02" style="height:25px">
+		        <th style=" padding-left:10px" width="8%"><input id="chkAllref" name="cbBTN" onclick="doButtonAction(this);" type="checkbox" style="display:none"></th>
+		        <th width="23%"><%=Resources.Approval.lbl_dept %></th>
+				<th width="23%"><%=Resources.Approval.lbl_Name %><!--수신자--></th>
+		        <th width="23%"><%=Resources.Approval.lbl_SenderName  %><!--발신자--></th>
+		        <th width="23%"><%=Resources.Approval.lbl_senddate %><!--발신일자--></th>														    
+	        </tr>
+<%--	        <tr>
+		        <td height="1" colspan="5" class="BTable_bg03"></td>
+	        </tr>--%>
+	        <tr>
+	            <td  colspan="5" style="" >
+                    <div style="OVERFLOW:auto;WIDTH:100%;HEIGHT:338px">
+                        <!-- 배포리스트 -->
+	                    <table id="tblrefinfo" name="tblrefinfo"  width="100%" border="0" cellspacing="0" cellpadding="0" class="BTable">
+	                    </table>
+                    </div>
+	            </td>
+	        </tr>
+            <!--tr>
+                <td height="1" colspan="5" class="BTable_bg03"></td>
+              </tr>
+              <tr>
+                <td height="2" colspan="5" class="BTable_bg04"></td>
+              </tr-->	    
+        </table>
+      </div>
+    </div>
+</div>
+<!-- 오른쪽 div 끝 -->
+<div style="padding-left: 5px; padding-right: 5px;">
+  <!-- 등록 div 시작 -->
+  <div class="write">
+  <!-- 일반 div 시작 -->
+    <div style="padding-left:5px; padding-right:5px;">
+		<!-- 배포의견 시작 -->						
+		 <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td colspan="2" class="line"></td>
+            </tr>
+            <tr>
+                <td class="title"><%=Resources.Approval.lbl_comment %></td>
+	            <td valign="top">
+	        	<textarea id="ideas" name="ideas" rows="5" cols="10" class="type-text" style="WIDTH:99%;HEIGHT:100%"></textarea>
+	        	</td>
+	        </tr>
+            <tr>
+              <td colspan="2" class="line"></td>
+            </tr>
+		</table>						
+		<!-- 배포의견 끝 -->
+    </div>
+ </div>
+</div>
+<asp:contentplaceholder id="ContentBottom" runat="server">
+</asp:contentplaceholder>
+    <script type="text/javascript"  language="javascript">
+	var selTab = "tSearch";
+	//결재선선택
+	var m_oParent, m_oUserList;
+	var m_selectedCCRow=null;
+	var m_selectedCCRowId=null;
+	//document.getElementById("tblCirculationDept").style.display = "";  //20170710 회람부서 숨김 주석
+	function changeTab(selObject) {
+		if (selObject != selTab) {
+            document.getElementById("div"+selTab.replace("_","")).className = "" ;
+            document.getElementById("div"+selObject.replace("_","")).className = "current" ;           
+            document.getElementById("span"+selTab).style.display = "none" ;			
+            document.getElementById("span"+selObject).style.display ="" ;
+			selTab = selObject;
+			//검색결과 창 지우기
+			ListItems.clearContents();
+			
+		}
+// 2007.07 배포그룹지정 작업
+        
+		if (selObject =="tCirculationLine")
+		{
+		    document.getElementById("tblCirculation").style.display="none";
+		    document.getElementById("tblCirculationDept").style.display="none";
+		    document.getElementById("tblCirculationLine").style.display="";
+		}else
+		{
+		    document.getElementById("tblCirculation").style.display="";
+		    //document.getElementById("tblCirculationDept").style.display="";  //HIW
+		    document.getElementById("tblCirculationLine").style.display="none";
+		}
+	}
+
+	function getDetailInfo(strAlias){	
+	}
+
+	//user/group 선택 관련 시작
+	function switchParentNode(iType){
+		var m_XMLDOM = CreateXmlDocument();
+		m_XMLDOM.loadXML("<selected><to></to><cc></cc><bcc></bcc><user></user><group></group><role></role></selected>");
+		if(!m_XMLDOM.parsed){
+		}
+		var sElm = "selected/user";
+		switch(iType){
+			case 0: m_oParent = m_XMLDOM.selectSingleNode("selected/to");	sElm = 	"selected/to";	break;
+			case 1: m_oParent = m_XMLDOM.selectSingleNode("selected/cc");	sElm = 	"selected/cc";	break;
+			case 2: m_oParent = m_XMLDOM.selectSingleNode("selected/bcc");	sElm = 	"selected/bcc";	break;
+			case 3: m_oParent = m_XMLDOM.selectSingleNode("selected/user");	sElm = 	"selected/user";	break;
+			case 4:	m_oParent = m_XMLDOM.selectSingleNode("selected/group");sElm = 	"selected/group";	break;
+			case 5:	m_oParent = m_XMLDOM.selectSingleNode("selected/group");sElm = 	"selected/group";	break;
+		}
+		switch(selTab){
+			case "tSearch":
+				m_oUserList = (window.addEventListener)?document.getElementById("ListItems"):window.frames["ListItems"] ;
+				if (iType==3 || iType == 4){
+					selectListItmes(iType);
+				}
+				break;
+			case "tGroup":
+				if(iType == 4 ){
+					m_oUserList = (window.addEventListener)?document.getElementById("iGroup"):window.frames["iGroup"];
+					addClicked();
+				    }else if (iType== 3){
+					m_oUserList =  (window.addEventListener)?document.getElementById("ListItems"):window.frames["ListItems"];
+					selectListItmes(iType);
+				}
+				break;
+			case "tApvLine":
+				break;
+		}
+
+		return m_XMLDOM.selectSingleNode(sElm);
+	}
+	function addClicked(){
+		var oSelNode = ((window.addEventListener)?m_oUserList.contentWindow:m_oUserList).getCurrentNode();
+		if(oSelNode != null){
+			if(m_oParent.selectSingleNode("item[AN = '" + oSelNode.selectSingleNode("AN").text + "']") == null){
+				addListItem(oSelNode.cloneNode(true));
+			}
+		}	
+	}
+
+	function addListItem(oNode){
+		try{
+			m_oParent.appendChild(oNode);
+		}catch(e){
+			alert(e.description);
+		}
+	}
+	function selectListItmes(iType){
+		var sChk = document.getElementById("chk").value ;
+		var busechk = false;
+		if(window.addEventListener){
+		    busechk = iSearch.document.getElementById("buse").checked;
+		}else{
+		   busechk =  iSearch.buse.checked;
+		}		
+		try{
+			if ((selTab == 'tSearch' && ((iType==3 && !busechk) || (iType==4 && busechk))) || selTab == 'tGroup'){
+				if (sChk == "1"){
+                    var sel_row = (window.addEventListener)?m_oUserList.contentDocument.getElementsByName('chkRowSelect'):m_oUserList.document.getElementsByName('chkRowSelect');
+                    var chk_count = sel_row.length;
+                    if (chk_count > 0) {
+                        for (var i = (chk_count - 1); i >= 0; i--) {
+                            if (sel_row[i].checked) {
+                                var eTR = sel_row[i].parentNode;
+                                while (eTR.tagName != "TR") { eTR = eTR.parentNode; }
+
+					            ListItems.g_eCurrentRow = eTR;
+					            ListItems.processSelectedRow();  
+                                addClicked();
+                                sel_row[i].checked = false; 
+                            }
+                        }
+                    }            
+				
+//					var chk_count = m_oUserList.chkRowSelect.length;
+//					if(typeof(chk_count) == "undefined"){
+//						var eTR = m_oUserList.chkRowSelect.parentNode;
+//						while(eTR.tagName != "TR") {	eTR = eTR.parentNode;}
+//						ListItems.g_eCurrentRow = eTR;
+//						ListItems.processSelectedRow();   
+//						addClicked();
+//					}else if(chk_count > 1){
+//						for(var i=(chk_count-1);i>=0 ;i--) {//2006.10 by sunny for cuckoo
+//							if ( m_oUserList.chkRowSelect[i].checked ){
+//								var eTR = m_oUserList.chkRowSelect[i].parentNode;
+//								while(eTR.tagName != "TR") {	eTR = eTR.parentNode;}
+//								ListItems.g_eCurrentRow = eTR;
+//								ListItems.processSelectedRow();   
+//								addClicked();
+//            					m_oUserList.chkRowSelect[i].checked = false; //2006.09 by sunny for cuckoo
+//							}
+//						}
+//					}
+				}else {
+						addClicked();
+				}
+			}
+		}catch(e){
+		}
+		document.getElementById("chk").value = 1 ;
+
+	}
+	//결재자 선택 관련 종료
+	function overM(e){
+        var evt=(window.event)?window.event: e;
+		var teTR = (evt.srcElement) ? evt.srcElement : evt.originalTarget;	
+		while(teTR.tagName != "TR") {
+			teTR = teTR.parentNode;
+		}
+		teTR.style.backgroundColor = "#EEF7F9";
+		return true;
+	}
+
+	function outM(e){
+        var evt=(window.event)?window.event: e;
+		var teTR = (evt.srcElement) ? evt.srcElement : evt.originalTarget;	
+		while(teTR.tagName != "TR") {
+			teTR = teTR.parentNode;
+		}
+		teTR.style.backgroundColor = "#FFFFFF";
+		return true;
+	}
+	function selectCCRow(e){
+        var evt=(window.event)?window.event: e;
+		var oRow;
+//		if(id==null){
+			oRow=(evt.srcElement) ? evt.srcElement : evt.target;		
+//		}else{
+//			oRow=document.getElementById(id);
+//		}
+		if(oRow!=null){
+			switchSelectedRow(oRow);
+		}else{
+			m_selectedCCRow=null;
+			m_selectedCCRowId=null;
+		}
+
+	}
+	function switchSelectedRow(oRow){
+		while(oRow!=null&&oRow.tagName!="TR"){
+			oRow=oRow.parentNode;
+		}
+		if(oRow!=null){
+			if(m_selectedCCRow!=null)m_selectedCCRow.style.backgroundColor="#FFFFFF";
+			oRow.style.backgroundColor="#EEF7F9";
+			m_selectedCCRow=oRow;
+			m_selectedCCRowId=oRow.id;
+		}
+	}
+	function getSelectedRow(){return m_selectedCCRow;}
+
+	var	m_selectedDistRow=null;
+	var	m_selectedDistRowId=null;
+	function selectDistRow(e){
+        var evt=(window.event)?window.event: e;
+		var oRow;
+//		if(id==null){
+			oRow=(evt.srcElement) ? evt.srcElement : evt.target;
+//		}else{
+//			oRow=document.getElementById(id);
+//		}
+		if(oRow!=null){
+			switchDistSelectedRow(oRow);
+		}else{
+			m_selectedDistRow=null;
+			m_selectedDistRowId=null;
+		}
+
+	}
+	function switchDistSelectedRow(oRow){
+		while(oRow!=null&&oRow.tagName!="TR"){
+			oRow=oRow.parentNode;
+		}
+		if(oRow!=null){
+			if(m_selectedDistRow!=null)m_selectedDistRow.style.backgroundColor="#FFFFFF";
+			oRow.style.backgroundColor="#EEF7F9";
+			m_selectedDistRow=oRow;
+			m_selectedDistRowId=oRow.id;
+		}
+	}
+	function getSelectedDistRow(){return m_selectedDistRow;}
+function makeProcessor(urlXsl){
+    if ("ActiveXObject" in window) {
+        var oXslDom = new ActiveXObject("MSXML2.FreeThreadedDOMDocument");
+        oXslDom.async = false;
+        if(!oXslDom.load(urlXsl)){
+	        alertParseError(oXslDom.parseError);
+	        throw new Error(-1,"couldn't make TemplateProcessor with ["+urlXsl+"].");
+        }
+        var oXSLTemplate = new ActiveXObject("MSXML2.XSLTemplate");
+        oXSLTemplate.stylesheet = oXslDom;
+        return oXSLTemplate.createProcessor();
+    }else{
+          var oXSL = "";
+          var oXslDom = CreateXmlDocument();
+			oXMLHttp.open("GET",urlXsl,false);
+			oXMLHttp.send();
+			//시간 늘리기
+			delay(600);
+			if ( oXMLHttp.status == 200){
+			   var parser = new DOMParser();
+			   oXslDom = parser.parseFromString(oXMLHttp.responseText,"text/xml");
+			}
+        var oProcessor = new XSLTProcessor();
+        oProcessor.importStylesheet(oXslDom);
+        return oProcessor;
+    }
+}
+    	
+	</script>
+	<script language="javascript" type="text/javascript">
+		var userid = "<%=userid%>";
+		var username = "<%=username%>";
+		var circulationinfo = "";//특수문자 문제로 textarea 사용으로 변경 by sunny
+		var circulationinfo_ccrec = "";//특수문자 문제로 textarea 사용으로 변경 by sunny
+		var circulationinfo_ref = "";//특수문자 문제로 textarea 사용으로 변경 by sunny
+		var g_openType = "<%= strOpenType %>";
+		var getToday = '<%= DateTime.Today.ToString("yyyy-MM-dd") %>';
+		//다국어 지원을 위한 처리
+		var msg_005 = "<%=Resources.Approval.msg_005 %>";
+		var msg_112 = "<%=Resources.Approval.msg_112 %>";
+		var msg_161 = "<%=Resources.Approval.msg_161 %>";
+		var msg_162 = "<%=Resources.Approval.msg_162 %>";
+		var msg_170 = "<%=Resources.Approval.msg_170 %>";
+		var msg_171 = "<%=Resources.Approval.msg_171 %>";
+		var msg_172 = "<%=Resources.Approval.msg_172 %>";
+		var msg_173 = "<%=Resources.Approval.msg_173 %>";
+		var lbl_Circulate = "<%=Resources.Approval.lbl_circulation %>";
+		var lbl_total = "<%=Resources.Approval.lbl_total %>";
+	    var gLngIdx = <%=strLangIndex %>;
+		
+	</script>
+</body>
+</html>

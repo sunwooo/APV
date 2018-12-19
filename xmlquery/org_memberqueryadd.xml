@@ -1,0 +1,32 @@
+<?xml version="1.0"  encoding="euc-kr" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	>
+	<sql:header>
+		<sql:param name='ENT_CODE'>General</sql:param>
+		<sql:param name='UNIT_CODE'>2210</sql:param>
+	</sql:header>
+	<sql:query>
+		SELECT [ORG_PERSON].*, B.PARENT_UNIT_CODE, C.NAME
+		FROM [ORG_PERSON] , [ORG_UNIT] B, [ORG_UNIT] C
+		WHERE 	[ORG_PERSON].ENT_CODE = @ENT_CODE
+		AND  [ORG_PERSON].UNIT_CODE = @UNIT_CODE
+		AND	 [ORG_PERSON].USAGE_STATE = 'A'
+		AND  [ORG_PERSON].UNIT_CODE = B.UNIT_CODE
+		AND  B.PARENT_UNIT_CODE = C.UNIT_CODE
+		AND	 B.USAGE_STATE = 'A'
+		AND	 C.USAGE_STATE = 'A'
+		FOR XML AUTO
+	</sql:query>
+	<sql:query>
+		SELECT [ORG_ADDITIONALJOB].*, B.PARENT_UNIT_CODE, C.NAME, D.*
+		FROM [ORG_ADDITIONALJOB] , [ORG_UNIT] B, [ORG_UNIT] C, [ORG_PERSON] D
+		WHERE [ORG_ADDITIONALJOB].UNIT_CODE = '00002'
+		AND  [ORG_ADDITIONALJOB].UNIT_CODE = B.UNIT_CODE
+		AND   B.PARENT_UNIT_CODE = C.UNIT_CODE
+		AND	 B.USAGE_STATE = 'A'
+		AND	 C.USAGE_STATE = 'A'
+		AND	[ORG_ADDITIONALJOB].PERSON_CODE = D.PERSON_CODE
+		AND D.USAGE_STATE = 'A'
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

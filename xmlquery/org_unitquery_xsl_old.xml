@@ -1,0 +1,9 @@
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	sql:xsl="org_unit.xsl">
+	<sql:header>
+		<sql:param name='PARENT_UNIT_CODE'>99999</sql:param>
+	</sql:header>
+	<sql:xpath-query mapping-schema="org_unit.xml">
+        /ORG_UNIT[PARENT_UNIT_CODE=$PARENT_UNIT_CODE and UNIT_CODE != PARENT_UNIT_CODE and USAGE_STATE='A']
+	</sql:xpath-query>
+</ROOT>

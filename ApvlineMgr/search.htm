@@ -1,0 +1,142 @@
+﻿<HTML>
+	<head>
+		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+		<link href="/GWImages/groupware/CoviWeb/app_org_css_style.css" rel="Stylesheet" type="text/css" />
+	</head>
+	<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" style="OVERFLOW: hidden;    MARGIN: 0px;">
+		<center>
+			<table width="100%" border="0" cellpadding="2" cellspacing="1" class="table_jingray">
+				<tr>
+					<td width="25%" align="center" class="table_gray">이름(<u>N</u>)</td>
+					<td width="25%" class="table_white"><INPUT TYPE='text' id='dataField' NAME="DN" class='input4' ACCESSKEY="N" style="width:100%"></td>
+					<td width="25%" align="center" class="table_gray">부서(<u>D</u>)</td>
+					<td width="25%" class="table_white"><INPUT TYPE="text" id='dataField' NAME="DP" class='input4' ACCESSKEY="D" style="width:100%"></td>
+				</tr>
+				<tr>
+					<!--
+					<td align="center" class="table_gray">사번(<u>A</u>)</td>
+					<td class="table_white"><INPUT TYPE="text" id='dataField' NAME="AN" class='input4' ACCESSKEY="A" style="width:100%"></td>
+					-->
+					<td align="center" class="table_gray">직급(<u>L</u>)</td>
+					<td class="table_white"><INPUT TYPE="text" id='dataField' NAME="LV" class='input4' ACCESSKEY="L" style="width:100%"></td>
+					<td align="center" class="table_gray">직책(<u>T</u>)</td>
+					<td class="table_white"><INPUT TYPE="text" id="Text1" NAME="TL" class='input4' ACCESSKEY="T" style="width:100%"></td>					
+				</tr>
+				<!--
+				<tr>
+					<td align="center" class="table_gray">직책(<u>T</u>)</td>
+					<td class="table_white"><INPUT TYPE="text" id='dataField' NAME="TL" class='input4' ACCESSKEY="T" style="width:100%"></td>
+					<td align="center" class="table_gray">업무(<u>W</u>)</td>
+					<td class="table_white"><INPUT TYPE="text" id='dataField' NAME="WK" class='input4' ACCESSKEY="W" style="width:100%"></td>
+				</tr>
+				-->
+				<tr>
+					<td align="center" class="table_gray">부서검색</td>
+					<td class="table_white" colspan="3"><input type='checkbox' id="buse" name="buse" onclick="m_objResultWin.clearContents();"></td>
+				</tr>
+			</table>
+			<br>
+			<img id="btnFind" src="/COVINet/Images/button/btn_popsearch.gif" width="52" height="21"
+				align="absmiddle" onClick="event_button_find()" ACCESSKEY="S" style="cursor:hand">
+			<img id="btnReset" src="/COVINet/Images/button/btn_popinitial2.gif" width="65" height="21"
+				align="absmiddle" onClick="event_button_reset()" ACCESSKEY="R" style="cursor:hand">
+		</center>
+	</body>
+	<SCRIPT>
+var g_szAcceptLang = "ko";
+var m_szUrlParams = "";
+var m_xmlHTTP;
+var m_objResultWin;
+var m_ENT="General";
+window.document.body.attachEvent("onkeydown", event_window_onkeydown);
+init();
+function init(){
+	//try{
+	//	m_ENT = parent.opener.getInfo("etid");
+	//}catch(e){
+	//	m_ENT = parent.top.opener.getInfo("etid");
+	//}
+	//alert(m_ENT);
+	m_objResultWin = parent.ListItems;
+}
+function event_window_onkeydown(){if(event.keyCode==13)event_button_find();}
+function event_button_find(){
+	m_ENT = parent.iGroup.g_ENT;
+	m_szUrlParams = "";
+	m_objResultWin.clearContents();
+	for (var x=0; x<dataField.length; x++){
+		if (dataField[x].value != ""){
+			fHasData = true;
+			m_szUrlParams += "&" + dataField[x].name + "=" + dataField[x].value;			
+		}    
+	}
+	if (m_szUrlParams.length > 0){
+		queryGetData();
+	}else{
+		alert("하나 이상의 조건을 넣어주세요.");
+		window.document.all['DN'].focus();
+	}  
+	m_objResultWin.enableRecipientButtons(false);
+}
+function queryGetData(){
+	try{		
+		m_xmlHTTP = new ActiveXObject("MSXML2.XMLHTTP");
+		var	szURL = ""; 
+		if(buse.checked){
+			var buse_nm = window.document.all['DP'].value
+			szURL = "/xmlorg/query/org_unitquery01.xml?DP="+ buse_nm+"&ENT_CODE="+m_ENT; 
+		}else{
+			szURL = "/xmlorg/query/org_memberquery03.xml?" + m_szUrlParams.substring(1)+"&ENT_CODE="+m_ENT;
+		}
+		m_xmlHTTP.open("GET",szURL,true); 
+		//2003.03.20 황선희 수정
+		//m_xmlHTTP.open("GET","adsquery.asp?type=search" + m_szUrlParams,true); 
+		if(g_szAcceptLang != "" )m_xmlHTTP.setRequestHeader("Accept-Language",g_szAcceptLang);
+		//m_xmlHTTP.setRequestHeader( "Content-Type", "application/x-www-UTF8-encoded");
+		m_xmlHTTP.setRequestHeader( "Content-Type", "text/xml");
+		m_xmlHTTP.onreadystatechange =event_listen_queryGetData;
+		m_xmlHTTP.send();
+		doProgressIndicator(true);
+	}catch(e){
+		alert("오류가 발생했습니다.\nSource:gueryGetData() in search.htm\nNo:"+e.number+" Desc:"+e.description);
+	}
+}
+function event_noop(){return(false);}    
+function event_listen_queryGetData(){
+	if(m_xmlHTTP.readyState == 4){
+		doProgressIndicator(false);     
+		m_xmlHTTP.onreadystatechange = event_noop;//re-entrant gate
+		if(m_xmlHTTP.responseText.charAt(0)=='\r'){
+			alert("오류가 발생했습니다.\nSource:event_listen_queryGetData() in search.htm\n"+m_xmlHTTP.responseText);
+		}else{
+			var oDOM = m_xmlHTTP.responseXML;
+			var oErr = oDOM.documentElement.selectSingleNode("error");
+			if(oErr==null){
+				m_objResultWin.processXmlData(oDOM);
+			}else{
+				if(oErr.text!="none")alert("오류가 발생했습니다.\nSource:event_listen_queryGetData() in search.htm\n"+oErr.text);
+			}
+		}
+	}
+}
+function doProgressIndicator(fDisplay){
+	if(fDisplay){
+		m_objResultWin.addMessage("검색중...");
+		btnFind.disabled = true;
+		btnReset.disabled = true;
+	}else{
+		m_objResultWin.clearContents();
+		btnFind.disabled = false;
+		btnReset.disabled = false;
+	}    
+}
+function event_button_reset(){
+	m_objResultWin.clearContents();
+	for (var x=0; x < dataField.length; x++){
+		dataField[x].value = "";
+	}
+	m_objResultWin.enableRecipientButtons(false);    
+}
+
+	</SCRIPT>
+</HTML>

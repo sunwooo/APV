@@ -1,0 +1,1087 @@
+.CoviBody, .noteBody, .previewBody
+{
+	BACKGROUND-COLOR:#EDEDED;
+	MARGIN:0;
+	OVERFLOW:hidden;
+	PADDING:0px 0px 0px 0px;
+}
+.caToolbar
+{
+	font-family: "굴림,돋움,arial,helvetica";
+	color: Black;
+	font-size: 9pt;
+	HEIGHT:22px;
+	PADDING:0px;
+	TEXT-ALIGN:left;
+	BACKGROUND-COLOR:#f8f8d5;
+}
+.cgToolbar
+{
+	font-family: "굴림,돋움,arial,helvetica";
+	color: Black;
+	font-size: 9pt;
+	HEIGHT:22px;
+	PADDING:0px;
+	TEXT-ALIGN:left;
+	BACKGROUND-COLOR:#DCDFF2;
+}
+.caIconbar
+{
+   font-family: "굴림,돋움,arial,helvetica";
+	color: Black;
+	font-size: 9pt;
+	HEIGHT:22px;
+	PADDING:0px;
+	TEXT-ALIGN:left;
+	BACKGROUND-COLOR:#EAEAEA;
+	BORDER:1px solid;border-left:0;
+	BORDER-COLOR:threedshadow threedshadow threedshadow threedshadow;
+}
+.ccToolbar
+{
+	font-family: "굴림,돋움,arial,helvetica";
+	color: Black;
+	font-size: 9pt;
+	HEIGHT:22px;
+	PADDING:0px;
+	TEXT-ALIGN:center;
+	FONT-WEIGHT:bold;
+	BACKGROUND-COLOR:#CEDBFF
+
+}
+.cdToolbar
+{
+	font-family: "굴림,돋움,arial,helvetica";
+	color: Black;
+	font-size: 9pt;
+	HEIGHT:22px;
+	PADDING:1px;
+	TEXT-ALIGN:center;
+	BACKGROUND-COLOR:#C2E092
+
+}
+.ceToolbar
+{
+	font-family: "굴림,돋움,arial,helvetica";
+	color: Black;
+	font-size: 10pt;
+	HEIGHT:22px;
+	PADDING:1px;
+	TEXT-ALIGN:center;
+	FONT-WEIGHT:bold;
+	/* BACKGROUND-COLOR:#bbca37 */
+	BACKGROUND-COLOR:#a1aff5
+
+}
+.cfToolbar
+{
+	font-family: "굴림,돋움,arial,helvetica";
+	color: Black;
+	font-size: 10pt;
+	HEIGHT:22px;
+	PADDING:1px;
+	TEXT-ALIGN:center;
+	FONT-WEIGHT:bold;
+	BACKGROUND-COLOR:#dfdfdf;
+
+}
+.THeader
+{
+	background-color:#A2D2D0;
+	width:100%;
+	color:buttontext;
+	FONT-FAMILY:gulim;
+	font-size: 10pt;
+	VERTICAL-ALIGN:middle;
+}
+.btnRecip
+{
+	BACKGROUND-COLOR:#CCDDFF;
+	TEXT-DECORATION:none;
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+	COLOR:buttontext;
+	CURSOR:hand;
+	HEIGHT:13px;
+	PADDING:2px 2px 2px 2px;
+}
+.btnRecipDiv
+{
+	TEXT-ALIGN:left;
+	WIDTH:100%;
+	VERTICAL-ALIGN:middle;
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+	COLOR:buttontext;
+	CURSOR:hand;
+	HEIGHT:13px;
+}
+.mainBody
+{
+	BACKGROUND-COLOR:#ffffff;
+	MARGIN:0;
+	OVERFLOW-Y:hidden;
+}
+.mainBody_board
+{
+	BACKGROUND-COLOR:#f2f4fe;
+	MARGIN:0;
+	OVERFLOW-Y:hidden;
+}
+.mainBody_phone
+{
+	BACKGROUND-COLOR:#fffff4;
+}
+.mainBody_mail
+{
+	BACKGROUND-COLOR:#f2f6f9;
+	MARGIN:0;
+	OVERFLOW-Y:hidden;
+}
+.msgViewer
+{
+	BACKGROUND-COLOR:window;
+	OVERFLOW:auto;
+	POSITION:relative;
+	Z-INDEX:-1;
+}
+.msgPreview
+{
+	MARGIN-TOP:5;
+	PADDING:0;
+}
+.msgPreview, .msgViewer
+{
+	WIDTH:100%;
+}
+.msgHeader
+{
+	BACKGROUND-COLOR:transparent;
+	POSITION:relative;
+	PADDING:0px;
+	WIDTH:100%;
+}
+.msgHdrCN1
+{
+	WIDTH:7.1em;
+}
+.postHdr1
+{
+	WIDTH:10em;
+}
+.msgHdr_Post, .msgHdr_Note, .msgHdr_Appt
+{
+	xTABLE-LAYOUT:fixed;
+}
+.msgHdrP1
+{
+	WIDTH:7.5em;
+
+}
+.msgHdrN1
+{
+	WIDTH:4.5em
+}
+.msgHdrN3
+{
+	text-align:right;
+	WIDTH:3.8em
+}
+.msgHdrP3
+{
+	text-align:right;
+	WIDTH:5em;
+}
+.msgHdrN4, .msgHdrP4
+{
+	VERTICAL-ALIGN:top;
+	WIDTH:13.8em
+}
+.previewHdr
+{
+	BACKGROUND-COLOR:#CFDCEB;
+	WIDTH:100%;
+	HEIGHT:100%;
+	OVERFLOW:hidden;
+	PADDING:0;
+}
+.preHdrN1, .preHdrC1, .preHdrP1, .preHdrR1, .preHdrA1
+{
+	MARGIN-RIGHT:0.3em;
+}
+.preHdrN3, .preHdrC3, .preHdrP3, .preHdrR3, .preHdrA3
+{
+	PADDING-LEFT:0.3em;
+	MARGIN-RIGHT:0.3em;
+	text-align:right;
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+}
+.preHdrN5, .preHdrA5, .preHdrP5
+{
+	PADDING-RIGHT:5px;
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+}
+.fldLabel
+{
+	WIDTH:15%;
+	VERTICAL-ALIGN:top;
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+}
+.fldText
+{
+	WIDTH:100%;
+	HEIGHT:100%;
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+	OVERFLOW:auto;
+}
+.fldTextRecip
+{
+	WIDTH:100%;
+	OVERFLOW:auto;
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+}
+.cbToolbar
+{
+	HEIGHT:25px;
+	WIDTH:100%;
+	PADDING:0px;
+	font-size:9px;
+	BACKGROUND-COLOR:#EAEAEA;
+}
+.tbDivider
+{
+	BORDER-RIGHT:0 groove;
+
+}
+.tbButton, .tbButtonDown, .tbButtonRaise
+{
+	COLOR:buttontext;
+	CURSOR:hand;
+	BORDER:1px solid #EAEAEA;
+	PADDING:1px 1px 1px 1px;
+	TEXT-DECORATION:none;
+	MARGIN-TOP:1;
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+	HEIGHT:25px; 
+}
+.tbButtonOver
+{
+	COLOR:buttontext;
+	CURSOR:hand;
+	BORDER:1px solid #EAEAEA;
+	PADDING:1px 1px 1px 1px;
+	TEXT-DECORATION:none;
+	MARGIN-TOP:1;
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+	HEIGHT:25px; 
+	BORDER-COLOR:THREEDHIGHLIGHT THREEDDARKSHADOW THREEDDARKSHADOW THREEDHIGHLIGHT;
+
+}
+.tbButtonDown
+{
+	BORDER-COLOR:threeddarkshadow threedhighlight threedhighlight threeddarkshadow;
+
+}
+.cbSubmenuItem
+{
+	COLOR:buttontext;
+	CURSOR:hand;
+	BORDER:solid 1 white;
+	PADDING-RIGHT:8px;
+	WIDTH:100%;
+	TEXT-DECORATION:none;
+}
+.tbDisabled
+{
+	FILTER:alpha(opacity=35);
+	CURSOR:hand;
+}
+.fbButton
+{
+	BORDER:1px solid;
+	BORDER-COLOR:#B6E5E7;
+	HEIGHT:22px;
+	WIDTH:22px;
+	CURSOR:hand;
+	MARGIN:0;
+	PADDING:0;
+	MARGIN:0;
+	VERTICAL-ALIGN:top;
+}
+.cbSubmenu
+{
+	BACKGROUND-COLOR:menu;
+	BORDER:outset 2 white;
+	COLOR:menutext;
+	POSITION:absolute;
+	Z-INDEX:10000;
+}
+.cbSubmenuItem
+{
+	BORDER:solid 1 buttonface;
+	CURSOR:default;
+	PADDING-RIGHT:8px;
+	WIDTH:100%;
+}
+.AttachTable
+{
+	BACKGROUND-COLOR:transparent;
+	PADDING:0px;
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+}
+.AttachmentWell
+{
+	BORDER: 0;
+	PADDING-RIGHT:5px;
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+}
+.viewBody
+{
+	BACKGROUND-COLOR:window;
+	OVERFLOW:auto;
+	POSITION:relative;
+	Z-INDEX:-1;
+	WIDTH:100%
+}
+.tblMsgBody
+{
+	BACKGROUND-COLOR:window;
+	OVERFLOW:auto;
+	HEIGHT:100%;
+	BORDER:2 solid;
+	BORDER-COLOR:threeddarkshadow threedshadow threedshadow threeddarkshadow;
+}
+.msgPreviewBody
+{
+	BACKGROUND-COLOR:window;
+	BORDER-TOP: 5 solid buttonface;
+	BORDER-BOTTOM: 5 solid buttonface;
+}
+.txtBody
+{
+	WIDTH:100%;
+	OVERFLOW-Y:scroll;
+	OVERFLOW-X:auto;
+}
+.MSGBODY
+{
+	WIDTH:100%;
+	OVERFLOW-Y:scroll;
+	OVERFLOW-X:auto;
+}
+.MSGBODYFRM
+{
+	BACKGROUND-COLOR:WINDOW;
+	PADDING-LEFT:2px;
+	BORDER:solid 2px;
+	BORDER-COLOR:threeddarkshadow threedshadow threedshadow threeddarkshadow;
+}
+.FORMATBAR
+{
+	BACKGROUND-COLOR:#D1E7E7;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+	HEIGHT:24px;
+	PADDING:0;
+	MARGIN:0;
+	OVERFLOW:visible;
+	POSITION:relative;
+}
+.rnStatusRow
+{
+	PADDING-BOTTOM:6px;
+}
+.rnStatusImg
+{
+	BORDER:none;
+	POSITION:relative;
+	TOP:3px;
+	LEFT:3px;
+	HEIGHT:13px;
+	WIDTH:13px;
+}
+.rnStatusBar, .viewStatusBar, .rnOnlineBar
+{
+	BACKGROUND-COLOR:infobackground;
+	COLOR:infotext;
+}
+.viewStatusBar
+{
+	PADDING-LEFT: 2px;
+}
+.viewStatusImg
+{
+	BORDER:none;
+	HEIGHT:13px;
+	WIDTH:13px;
+}
+.rnOnlineImg
+{
+	BORDER:none;
+	POSITION:relative;
+	TOP:3px;
+	LEFT:3px;
+	HEIGHT:16px;
+	WIDTH:16px;
+}
+.grpLEFT
+{
+	BORDER-LEFT:groove 2 threedhighlight
+}
+.grpRIGHT
+{
+	BORDER-RIGHT:groove 2 threedhighlight;
+	PADDING-RIGHT:4;
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+}
+.grpTop
+{
+	BORDER-TOP:groove 2 threedhighlight;
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+}
+.grpBottom
+{
+	BORDER-BOTTOM:groove 2 threedhighlight;
+	PADDING-BOTTOM:4;
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+}
+.dailyRowContainer
+{
+	BORDER:1px solid #336699;
+	HEIGHT:60px;
+	OVERFLOW:hidden;
+	POSITION:relative;
+	WIDTH:100%;
+	Z-INDEX:-1;
+}
+.dailyRow
+{
+	BACKGROUND-COLOR:#E7F1F1;
+	BORDER-BOTTOM:0px solid #E7F1F1 ;
+	HEIGHT:50%;
+	WIDTH:100%;
+	Z-INDEX:-1;
+}
+.dailyTimeNode
+{
+	BACKGROUND-COLOR:#E7F1F1;
+	BORDER-BOTTOM:1px solid windowframe;
+	BORDER-TOP:1px solid windowframe;
+	HEIGHT:60px;
+	OVERFLOW: hidden;
+	WIDTH:100%;
+	Z-INDEX:-1;
+}
+.dailyTimeCaption
+{
+	COLOR:windowtext;
+	FONT-SIZE:15pt;
+	TEXT-ALIGN:right;
+	HEIGHT:70%;
+	LEFT:-3px;
+	POSITION:absolute;
+	TOP:30%;
+	WIDTH:55%;
+	Z-INDEX:-1;
+}
+.dailyAMPMContainer
+{
+	BORDER-BOTTOM:1px solid activeworkspace;
+	FONT-SIZE:9pt;
+	HEIGHT:40%;
+	TOP:10%;
+	LEFT:50%;
+	POSITION:relative;
+	WIDTH:50%;
+}
+.dailyAMPMNode
+{
+	TOP:15%;
+}
+.AllDayCell
+{
+	HEIGHT:0px;
+	BACKGROUND-COLOR:#FFFFFE;
+}
+.dailyAllDayAppointment
+{
+	BACKGROUND-COLOR:menu;
+	BORDER:1px solid windowframe;
+	POSITION:relative;
+	CURSOR:default;
+	HEIGHT:20px;
+	OVERFLOW:hidden;
+	WIDTH:100%;
+	MARGIN:1px;
+	MARGIN-RIGHT:5px;
+	MARGIN-LEFT:5px;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+}
+.divDailyScrolling
+{
+	POSITION:relative;
+	OVERFLOW:auto;
+	FONT-SIZE:0;
+	HEIGHT:100%;
+	WIDTH:100%;
+}
+.spanDailyTimesBlock
+{
+	BORDER:0px solid windowframe;
+	POSITION:relative;
+	WIDTH:55px;
+	HEIGHT:100%;
+}
+.spanDailyAppointmentsBlock
+{
+	BORDER:0px solid windowframe;
+	POSITION:absolute;
+	LEFT:55px;
+	OVERFLOW:hidden;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+}
+
+.monthlyViewContainer
+{
+	BACKGROUND-COLOR:#E7F1F1;
+	BORDER:0px solid windowframe;
+	FONT-SIZE:0;
+	OVERFLOW:hidden;
+	TOP:0;
+	WIDTH:100%;
+}
+.weeklyViewContainer
+{
+	BACKGROUND-COLOR:#EFFAFA;
+	BORDER:0px solid windowframe;
+	FONT-SIZE:0;
+	OVERFLOW:hidden;
+	WIDTH:100%;
+}
+.dailyAllDayWell
+{
+	BACKGROUND-COLOR:#EFFAFA;
+	BORDER:0px solid windowframe;
+	OVERFLOW:auto;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+}
+.appointment
+{
+	BACKGROUND-COLOR:window;
+	HEIGHT:100%;
+	WIDTH:1000px;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+}
+.dailyAppt
+{
+	BACKGROUND-COLOR:window;
+	OVERFLOW-X:HIDDEN;
+	BORDER:1px solid windowframe;
+	POSITION:absolute;
+	Z-INDEX:2;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+}
+.appointmentGrabBar
+{
+	CURSOR:move;
+	HEIGHT:100%;
+	WIDTH:8px;
+}
+.appointmentTopBar, .appointmentBottomBar
+{
+	FONT-SIZE:1px;
+	HEIGHT:1px;
+}
+.appointmentBody
+{
+	CURSOR:default;
+	HEIGHT:100%;
+	OVERFLOW:hidden;
+	PADDING-LEFT:5px;
+	VERTICAL-ALIGN:TOP;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+}
+.weeklyNodeHeader
+{
+	BACKGROUND-COLOR:#B6E4F5;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+	FONT-WEIGHT:bolder;
+	BORDER:1px solid activeborder;
+	HEIGHT:1em;
+	WIDTH:100%;
+	TEXT-ALIGN:center;
+	Z-INDEX:-1;
+}
+.weeklyNodeHeaderSat
+{
+	BACKGROUND-COLOR:#BED0F9;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+	COLOR: #0049C3;
+	FONT-WEIGHT:bolder;
+	BORDER:1px solid activeborder;
+	HEIGHT:1em;
+	WIDTH:100%;
+	TEXT-ALIGN:center;
+	Z-INDEX:-1;
+}
+.weeklyNodeHeaderSun
+{
+	BACKGROUND-COLOR:#F7DEE7;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+	COLOR: #CC0065;
+	FONT-WEIGHT:bolder;
+	BORDER:1px solid activeborder;
+	HEIGHT:1em;
+	WIDTH:100%;
+	TEXT-ALIGN:center;
+	Z-INDEX:-1;
+}
+.weeklyNodeBody
+{
+	OVERFLOW-Y:auto;
+	OVERFLOW-X:hidden;
+	WIDTH:100%;
+	Z-INDEX:-1;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+}
+.MonthlyAppointment
+{
+	CURSOR:default;
+	WIDTH:100%;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+	HEIGHT:16px;
+}
+.alldayMonthlyAppointment
+{
+	BACKGROUND-COLOR:white;
+	CURSOR:default;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+	HEIGHT:16px;
+	BORDER:1px solid;
+}
+.MonthlyAppointment DIV
+{
+	TOP:2px;
+}
+.alldayMonthlyAppointment DIV
+{
+	TOP:1px;
+}
+.monthlyviewslot
+{
+	OVERFLOW:auto;
+	HEIGHT:1em;
+	WIDTH:100%;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+}
+.monthlyDayHeader
+{
+	BACKGROUND-COLOR:#B6E4F5;
+	TEXT-ALIGN:center;
+	Z-INDEX:-1;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+}
+
+.monthlyDayHeader2
+{
+	BACKGROUND-COLOR:#F6D7E7;
+	TEXT-ALIGN:center;
+	Z-INDEX:-1;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+}
+.calctrlTitle
+{
+	BORDER:1px solid;
+	BORDER-COLOR:threedhighlight threeddarkshadow threeddarkshadow threedhighlight;
+	CURSOR:hand;
+	HEIGHT:100%;
+	TEXT-ALIGN:center;
+}
+.calctrlTable, .calctrlTitle
+{
+	POSITION:relative;
+	BACKGROUND-COLOR:#C6EBE7;
+}
+.calctrlRow
+{
+	BORDER:1px solid windowframe;
+	HEIGHT:0;
+	TEXT-ALIGN:center;
+}
+.calctrlDateCell, .calctrlWeeklyCell, .calctrlTitle
+{
+	PADDING-LEFT:2px;
+	PADDING-RIGHT:2px;
+}
+.calctrlMonthDisplayName, .calctrlRow
+{
+	width:100%;
+}
+.calctrlRightNavButton, .calctrlMonthDisplayName
+{
+	border-bottom:1px solid threeddarkshadow;
+}
+.bdyView
+{
+	BACKGROUND-COLOR:#FFFFFE;
+	BORDER: 0;
+	MARGIN:0;
+	PADDING:0;
+	OVERFLOW:hidden;
+}
+.tdViewContainer, .tblViewContainer, .divCalendarView
+{
+	HEIGHT:100%;
+	WIDTH:100%;
+	BACKGROUND-COLOR:#FFFFFE;
+}
+.divCalViewStatus
+{
+	HEIGHT:15px;
+	TEXT-ALIGN:center;
+	BACKGROUND-COLOR:#FFFFFF;
+	FONT-WEIGHT:bolder;
+	POSITION: relative;
+	TOP: 5px;
+
+}
+.divCalendarRightPane
+{
+	WIDTH:11em;
+	HEIGHT:11em;
+}
+.divCalendarControl
+{
+	MARGIN:2;
+	PADDING:1px;
+	WIDTH:11em;
+	BACKGROUND-COLOR:#dddddd;
+}
+.idCalCtrlStatus
+{
+	TEXT-ALIGN:center;
+	WIDTH:11em;
+}
+.divCalendarView
+{
+	BORDER:1px solid windowframe;
+	OVERFLOW:hidden;
+}
+.tdFolderPath
+{
+	BACKGROUND-COLOR:#AFC2EB;
+	BORDER:1px solid windowframe;
+	FONT-WEIGHT:bolder;
+
+}
+.tdFolderPath A
+{
+	TEXT-DECORATION:none;
+}
+.divCalViewStatus
+{
+	TEXT-ALIGN:center;
+}
+.tabselected
+{
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+	BACKGROUND-COLOR:#ADC9D7;
+	FONT-WEIGHT:bold;
+	BORDER:solid 1 threedhighlight;
+	BORDER-RIGHT:solid 1 threedshadow;
+	BORDER-BOTTOM:none;
+	TEXT-ALIGN:center;
+	CURSOR:default;
+}
+.tabsunselected
+{
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+	BACKGROUND-COLOR:#D2E3EC;
+	FONT-WEIGHT:normal;
+	BORDER:solid 1 threedshadow;
+	BORDER-BOTTOM:solid 1 threedhighlight;
+	BORDER-TOP:solid 1 threedhighlight;
+	TEXT-ALIGN:center;
+	CURSOR:hand;
+}
+.tabsnone
+{
+	BACKGROUND-COLOR:#DBEAF2;
+	WIDTH:100%;
+	BORDER-BOTTOM:solid 1 threedhighlight;
+}
+.tabHeader
+{
+	BACKGROUND-COLOR:#D7ECEB;
+	POSITION:relative;
+	PADDING:0px;
+	BORDER:none;
+	WIDTH:100%;
+	MARGIN-TOP:5px;
+}
+.tabdiv
+{
+	border:solid 1;
+	BORDER-COLOR:threedhighlight threedshadow threedshadow threedhighlight;
+	border-top:none;
+	width:100%;
+}
+.tabdivHide
+{
+	display:none;
+	width:100%;
+}
+.datepicker_date
+{
+	text-align:left;
+}
+.datepicker_time
+{
+	width:8em;
+	text-align:left;
+}
+.apptTdDatePicker
+{
+	border-top:outset 2 highlighttext;
+	border-bottom:inset 2 highlighttext;
+	padding:5px;
+	background-color:#D7ECEB;
+}
+.fldrTitleBar
+{
+	BACKGROUND-COLOR:#79A7CC;
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+	WIDTH:"100%";
+	height:10;
+	cellpadding:;
+}
+.fldrTitleBarControl
+{
+	BACKGROUND-COLOR:#79A7CC;
+	COLOR:white;
+	FONT-SIZE:9pt;
+	FONT-FAMILY:verdana;
+	WIDTH:30px;
+	VERTICAL-ALIGN:baseline;
+	height:20;
+	BORDER-BOTTOM-COLOR:#79A7CC;
+	BORDER-BOTTOM-COLOR: #79A7CC;
+	BORDER-BOTTOM-STYLE: solid;
+	BORDER-LEFT-COLOR: #79A7CC;
+	BORDER-LEFT-STYLE: solid;
+	BORDER-RIGHT-COLOR: #79A7CC;
+	BORDER-RIGHT-STYLE: solid;
+	BORDER-TOP-COLOR: #79A7CC;
+	BORDER-TOP-STYLE: solid;
+}
+.fldrTitleBar A
+{
+	TEXT-DECORATION:none;
+}
+.AttachTable, .cbToolbar, .cbSubmenu, .fldFont, .fldText, .msgHeader, .fldLabel,
+.trButtons, .msgViewer, .appointment, .rnOnlineBar, .viewStatusBar,
+.appointmentBody, .tabHeader, BODY
+{
+	FONT-SIZE:9pt;
+	FONT-FAMILY:gulim;
+	VERTICAL-ALIGN:middle;
+}
+.cbToolbar IMG, .cbSubmenu IMG
+{
+	BORDER:none;
+	MARGIN-RIGHT:1px;
+}
+.cbToolbar TD
+{
+	VERTICAL-ALIGN:middle;
+}
+.FORMATBAR, .cbToolbar, .btnRecip, .tbButtonRaise,
+.tbButton A:hover, .tbButton:hover
+{
+	BORDER:1px solid;
+	BORDER-COLOR:threedshadow threedshadow threedshadow threedhighlight;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+}
+
+.monthlyDayHeader,.monthlyDayHeader2
+{
+	BORDER:1px solid;
+	BORDER-COLOR:threedhighlight threedshadow threedhighlight threedhighlight;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+}
+
+.cbSubmenuItem A:hover, .cbSubmenuItem:hover
+{
+	BACKGROUND-COLOR:highlight;
+	COLOR:highlighttext;
+}
+.cbSubmenuItem SPAN
+{
+	MARGIN:10;
+	PADDING:5px 3px 3px 3px;
+}
+SELECT, INPUT, TEXTAREA, BUTTON, TABLE
+{
+	FONT-SIZE:100%;
+}
+.label
+{
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+ 	background-color:#CCDDFF;
+ 	width:15%;
+}
+.inputtext
+{
+	background-color:#F0F0F0;
+	width:30%;
+	VERTICAL-ALIGN:middle;
+}
+.inputText1
+{
+	font-family: "굴림";
+	font-size: 9pt;
+	background-color: #D7ECEB;
+	width :100%
+}
+.inputText2
+{
+	font-family: "굴림";
+	font-size: 9pt;
+	background-color: #FFFFFF
+	width : 100%
+}
+.btnOver
+{
+    filter:gray;
+	cursor:hand;
+}
+.btnClass, .btnOut
+{
+    filter:none;
+	cursor:hand;
+}
+.btnOrgClass, .btnOrgOut
+{
+	/*border:1px solid #D6DADD;*/
+	cursor:hand;
+}
+.btnOrgWhiteClass, .btnOrgWhiteOut
+{
+	/*border:1px solid white;*/
+	cursor:hand;
+}
+.btnDown 
+{
+    filter:gray;
+	cursor:hand;
+}
+.frmbtnOver
+{
+	POSITION:RELATIVE;
+	TOP:1;
+	LEFT:1;
+	cursor:hand;
+}
+.frmbtnClass, .frmbtnOut
+{
+	POSITION:RELATIVE;
+	TOP:0;
+	LEFT:0;
+	cursor:hand;
+}
+.frmbtnDown 
+{
+	POSITION:RELATIVE;
+	TOP:0;
+	LEFT:0;
+	cursor:hand;
+}
+input.search
+{
+	BORDER-BOTTOM: 1px solid; 
+	BORDER-LEFT: 1px solid; 
+	BORDER-RIGHT: 1px solid; 
+	BORDER-TOP: 1px solid; 
+	POSITION: relative; TOP: -1px; 
+	WIDTH: 90px;
+	ime-mode:active;
+}	
+input.search1
+{
+	BORDER-BOTTOM: 1px solid; 
+	BORDER-LEFT: 1px solid; 
+	BORDER-RIGHT: 1px solid; 
+	BORDER-TOP: 1px solid; 
+	POSITION: relative; TOP: -1px; 
+	WIDTH: 150px;
+	ime-mode:active;
+}	
+input.fldInput{ime-mode:active;}
+table
+{
+	font-family: "굴림";
+	font-size: 9pt
+}
+img.iconOver{
+    filter:gray;
+	/*border:1px outset;*/
+	cursor:hand;
+}
+img.iconOut {
+    filter:none;
+	/*border:1px solid #EAEAEA;*/
+}
+img.iconDown {
+    filter:gray;
+	/*border:1px inset;*/
+	cursor:hand;
+}
+.edit
+{
+	border-style:solid;
+	border-width:1px;
+	background-color:#FFFFFF;
+	width:100%;
+	ime-mode:active;
+}
+.label2
+{
+	border-style:none;
+	FONT-FAMILY:gulim;
+	FONT-SIZE:9pt;
+ 	background-color:#f0f0f0;
+ 	width:100%;
+}

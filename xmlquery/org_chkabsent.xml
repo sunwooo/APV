@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"  encoding="utf-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	sql:xsl="org_chkabsent.xsl">
+	<sql:header>
+		<sql:param name='USER_ID'></sql:param>
+	</sql:header>
+	<sql:query>
+		SELECT [ORG_PERSON].*
+		FROM [ORG_PERSON] 
+		WHERE 	[ORG_PERSON].USAGE_STATE = 'I'
+		AND    CHARINDEX(LTRIM(RTRIM([ORG_PERSON].PERSON_CODE)), @USER_ID,0 ) > 0
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

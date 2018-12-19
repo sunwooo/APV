@@ -1,0 +1,15 @@
+<?xml version="1.0"  encoding="euc-kr" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	sql:xsl="org_groupquery01.xsl" >
+	<sql:header>
+		<sql:param name='DN'></sql:param>
+	</sql:header>
+	<sql:query>
+		SELECT [ORG_GROUP].*
+		FROM [ORG_GROUP]
+		WHERE 	[ORG_GROUP].USAGE_STATE = 'A'
+		AND	( [ORG_GROUP].NAME LIKE @DN+'%' OR @DN is null)
+		ORDER BY SORT_KEY
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

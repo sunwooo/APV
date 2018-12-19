@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="GetOracleXMLQuery.aspx.cs" Inherits="Approval_GetOracleXMLQuery" %>

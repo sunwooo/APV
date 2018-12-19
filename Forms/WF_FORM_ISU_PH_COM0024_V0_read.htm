@@ -1,0 +1,440 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<title></title>			
+	<link rel="stylesheet" href="/GWImages/common/css/approval_form.css" type="text/css" />
+	<link rel="stylesheet" href="/GWImages/common/TagFree/tagfree.css" type="text/css" />
+    <!--필수 양식파일에 쓰이는 js 파일-->
+	<script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Config.js" ></script>
+    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/EmbedObject.js" ></script>
+    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Utility.js" ></script>
+    <script type="text/javascript" language="javascript" src="../../Common/script/COVIFlowNet/openWindow.js" ></script>		
+	<script type="text/javascript" language="javascript" src="../../Common/script/progress.js" ></script>
+	<script type="text/javascript" language="javascript" src="../../common/script/NameControl.js"></script>
+	<script type="text/javascript" language="javascript" src="../../common/script/jquery-1.6.1.min.js"></script>
+	<script type="text/javascript" language="javascript" src="formedit.js" ></script>
+</head>
+<body topmargin="0" leftmargin="0" scroll="auto" >
+	<!-- COMMON FIELDS -->
+	<input type="hidden" id="dField" name="INITIATOR_NAME" datafld="INITIATOR_NAME">
+	<input type="hidden" id="dField" name="INITIATOR_ID" datafld="INITIATOR_ID">
+	<input type="hidden" id="dField" name="INITIATOR_OU_NAME" datafld="INITIATOR_OU_NAME">
+	<input type="hidden" id="dField" name="INITIATOR_OU_ID" datafld="INITIATOR_OU_ID">
+	<input type="hidden" id="cField" name="LAST_MODIFIER_ID">
+	<input type="hidden" id="cField" name="attach">
+	<input type="hidden" id="cField" name="filelocation" datafld="fmfl">
+	<input type="hidden" id="cField" name="ATTACH_FILE" value="">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO" value="" datafld="ATTACH_FILE_INFO">
+	<input type="hidden" id="dField" name="INITIATOR_INFO" value="" datafld="INITIATOR_INFO">
+	<input type="hidden" id="dField" name="APPLIED" datafld="APPLIED">
+	<input type="hidden" id="dField" name="ISPUBLIC" datafld="ISPUBLIC">
+	<input type="hidden" id="dField" name="APPLIED_TERM" datafld="APPLIED_TERM">
+	<input type="hidden" id="dField" name="RECEIVE_NO" datafld="RECEIVE_NO">
+	<input type="hidden" id="dField" name="RECEIVE_NAMES" datafld="RECEIVE_NAMES">
+	<input type="hidden" id="dField" name="RECEIPT_LIST" datafld="RECEIPT_LIST">
+	<input type="hidden" id="dField" name="DOC_LEVEL" datafld="DOC_LEVEL">
+	<input type="hidden" id="dField" name="DOC_CLASS_ID" datafld="DOC_CLASS_ID">
+	<input type="hidden" id="dField" name="DOC_CLASS_NAME" datafld="DOC_CLASS_NAME">
+	<input type="hidden" id="dField" name="SAVE_TERM" datafld="SAVE_TERM">
+	<input type="hidden" id="dField" name="SUBJECT" datafld="SUBJECT">
+	<input type="hidden" id="dField" name="DOC_NO" dataFld="DOC_NO">
+	<input type="hidden" id="dField" name="DOC_OU_NAME" datafld="DOC_OU_NAME">
+	<input type="hidden" id="dField" name="ENT_CODE" datafld="ENT_CODE">
+	<input type="hidden" id="dField" name="ENT_NAME" datafld="ENT_NAME">
+
+	<textarea id="dField" name="DOC_SUMMARY" datafld="DOC_SUMMARY" style="display: none"></textarea>
+	<textarea id="dhtml_body" style="display: none"></textarea>
+	<textarea style="display: none" id="cField" name="xsl"></textarea>
+	<!-- 문서link -->
+    <textarea id="dField" name="DOCLINKS" style="display:none"  dataFld="DOCLINKS"></textarea>
+    <input type="hidden" id="mField" name="WORKREQUEST_ID" />
+    <!-- 반송문서 추가 시작 2007.11-->
+    <textarea id="mField" name="REJECTDOCLINKS" style="display:none"></textarea>
+    <!-- 반송문서 추가 끝 2007.11-->
+    <!-- process 메뉴얼 추가 2008.01 -->
+    <textarea id="mField" name="PMLINKS" style="display:none"></textarea>
+    <!-- process 메뉴얼 추가 2008.01 -->
+	<!-- 양식추가정보 -->
+	<!-- END -->
+	<!-- 양식전체본문 -->
+	<div id="bodytable">
+		<!-- header start -->
+		<div class="approval_form">
+        <div class="draft_tit" style="display:none;"><h4><span id="headname"></span><a href="#"><span class="drop_menu"></span></a></h4></div>
+        <div class="draft_page">
+        <table class="table_2" summary="문서분류" cellpadding="0" cellspacing="0">
+            <tr style="display:none;">
+                <th>보안등급</th>
+                <td id="tField" name="DOC_LEVEL" ></td>	
+                <th>문서번호</th>
+                <td id="tField" name="DOC_NO" dataFld="DOC_NO" width="100px" ></td>	
+                <!--<th id="partdisplay" style="display:;">사업장 분류</th>
+                <td id="SEL_ENTPART_TEXT" ></td>-->		
+            </tr>
+            <tr>
+                <th>文件分类</th><!--문서분류-->
+                <td id="tField" name="DOC_CLASS_NAME" dataFld="DOC_CLASS_NAME" ></td>	
+                <th>保存年限</th><!--보존년한-->
+                <td id="tField" name="SAVE_TERM"  colspan="3"></td>	
+            </tr>
+        </table>
+		<!-- header end -->
+		<!-- bodycontext start -->		
+        <table class="table_3" summary="제목" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>题&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目</th>
+                <td id="tField" name="SUBJECT"  datafld="SUBJECT" ></td>	
+            </tr>
+        </table>
+
+        <div id="divBodyContent">  <!--추가(인쇄용) HIW-->
+            <table id="tblDraftBody" class="table_9" summary="내용" cellpadding="0" cellspacing="0">
+            <!--실 결재양식 내용 부분 시작 -->
+            <!-- 에디터 시작 -->
+                <tr height="100%">
+                    <td width="100%" height="100%"  id="tbContentElement" align="center" valign="top" ></td>
+                </tr>			
+            <!-- 에디터 끝 -->
+            <!--실 결재양식 내용 부분 끝 -->
+		    </table>
+        </div>
+		<!-- bodycontext end -->
+
+		<table class="table_5" summary="참조" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>附件</th><!--첨부파일-->
+                <td id="AttFileInfo"></td>
+            </tr>
+            <tr>
+                <th>关联文件</th><!--연결문서-->
+                <td id="DocLinkInfo"></td>
+            </tr>
+            <tr style="display:none;">
+                <th>원 문 서</th>
+                <td id="RejectDocLinkInfo">-</td>
+            </tr>
+            <tr>
+               <th>参照</th><!--참조-->
+                <td id="CCLine">
+                    <span id="SendCC"></span><span id="RecCC"></span>&nbsp;
+                   <!-- <div id="SendCC"></div>
+                    <div id="RecCC"></div>&nbsp;-->
+                </td>
+            </tr>
+            <tr id="trRecDept" style="display:none;">
+                <th>收信部门</th>  <!--수신부서-->
+                <td id="RecLine" colspan="5" ></td>
+            </tr>
+        </table>
+
+        <!-- 결재선 정보 시작-->
+        <div id="divApprovalLine"> <!--추가(인쇄용) HIW-->
+            <table id="tblDraftApprovalLine" width="100%" cellpadding="0" cellspacing="0">
+                <!-- 일반결재/합의 -->
+                <tr>
+                    <td style="height:7px;"></td>
+                </tr>
+                <tr>
+                    <td id="AppLine" width="100%">
+                        <table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" bordercolordark="white" bordercolorlight="gray">
+                            <tr>
+                            <!-- 발신처 결재란 보이는 부분(왼쪽) -->
+                                <td id="LApvLine" align="left" width="100%"></td>
+                            </tr>
+                            <tr>
+                            <!-- 수신처 결재란 보이는부분 (오른쪽)-->
+                                <td id="RApvLine" align="left" width="100%"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- 협조자 -->
+                <tr>
+                    <td id="AssistLine" width="100%" style="display:none;"></td>
+                </tr>
+                <!--참조자 -- 첨부파일 영역으로 옮김 -->
+                <!--수신자 -->
+                <tr>
+                    <td id="RRLine" width="100%" style="display:none;"></td>
+                </tr>			
+            </table>
+        </div>
+        <!-- 결재선 정보 종료-->
+
+        <div id="divforminfo" style="display:none">
+        <table class="table_6" summary="원문서" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>文件说明</th><!--문서설명-->
+                <td id="tdforminfo"></td>
+            </tr>
+        </table>
+        </div>
+        <!--write_의견입력-->
+        <table border="0" cellpadding="0" cellspacing="0" align="center" width="740"><tr><td height="2"></td></tr></table>
+        <!--의견입력-->
+        <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" id ="tbCommentView">
+        <tr>
+	        <td align="center" id="tdCommentView"  width="100%" style="display:none;">				
+	        </td>
+        </tr>
+        </table>
+        <!-- 의견입력끝 -->
+		</div>
+		<!-- 양식 전체 end -->
+    </div>
+    </div>
+
+<script language="JavaScript" type="text/javascript">
+    window.onload = initOnload;
+    function initOnload() {
+        initialize();
+
+        //협조프로세스인 경우 수신부서(배포처)란 보이게..(HIW)
+        if (m_oFormMenu.gProcessKind == "Cooperate") {  //협조프로세스
+            document.getElementById("trRecDept").style.display = "";
+        }
+    }
+
+    function initialize() {
+        if (window.parent.document.readyState == "complete") {
+            window.parent.document.onreadystatechange = event_noop;
+            initForm();
+            initApvList();
+        } else {
+            window.setTimeout(initialize, 500);
+        }
+    }
+
+
+    function initForm() {
+        initFields();
+        G_displaySpnAttInfo(false);
+    }
+
+    function frmclose() {
+        window.close();
+    }
+    function initFields(szBody) {
+        setFields((!window.ActiveXObject) ? document.getElementById("dField") : dField); //editable field
+        setFields((!window.ActiveXObject) ? document.getElementById("cField") : cField); //readonly field
+        settFields((!window.ActiveXObject) ? document.getElementById("tField") : tField);
+
+        document.getElementsByName("SUBJECT")[0].value = getInfo("SUBJECT");
+        document.getElementById("headname").innerHTML = "<u>" + getInfo("fmnm") + "</u>";
+
+        if (getInfo("mode") == "DRAFT" || getInfo("mode") == "TEMPSAVE") {
+            document.getElementsByName("INITIATOR_INFO")[0].value = getInfo("usdn");
+            document.getElementsByName("APPLIED").value = formatDate(getInfo("svdt"), "D");
+        } else {
+        }
+
+        //본문 내용 
+        if (getInfo("BODY_CONTEXT") != undefined) {
+            setBodyContext(getInfo("BODY_CONTEXT"));
+        } else {
+            if (getInfo("fmbd") != "undefined") {
+                setBodyContext(getInfo("fmbd"));
+            }
+        }
+    }
+
+    function getBodyContext() {
+        return "";
+    }
+
+
+    //  dField
+    function setFields(Fields) {
+        if (!window.ActiveXObject) {
+            var szId = Fields.id;
+            var unFiltered = document.getElementsByTagName('*');
+            for (i = 0; i < unFiltered.length; i++) {
+                if (unFiltered[i].getAttribute('id') == szId) {
+                    var fld = unFiltered[i];
+                    if (fld.getAttribute("dataFld") != null) { (getInfo(fld.getAttribute("name")) != undefined) ? fld.value = getInfo(fld.getAttribute("name")) : (getInfo(fld.getAttribute("dataFld")) != undefined) ? fld.value = getInfo(fld.getAttribute("dataFld")) : fld.value = ''; }
+                    if (fld.getAttribute("name") != null) {
+                        if (fld.getAttribute("name") == 'POSITION' && getInfo(fld.getAttribute("name")) == "") {
+                            fld.value = getInfo(fld.getAttribute("dataFld"));
+                        }
+                    }
+                }
+            }
+        } else {
+            for (var i = 0; i < Fields.length; i++) {
+                var fld = Fields[i];
+
+                if (fld.dataFld != "") { (getInfo(fld.name) != undefined) ? fld.value = getInfo(fld.name) : (getInfo(fld.dataFld) != undefined) ? fld.value = getInfo(fld.dataFld) : fld.value = ''; }
+                /*
+                if(fld.name == "SAVE_TERM"){fld.value = getSaveTerm(getInfo("SAVE_TERM"));}
+                if(fld.name == "DOC_LEVEL"){fld.value = getDocLevel(getInfo("DOC_LEVEL"));}
+                */
+            }
+        }
+    }
+
+    //  tField
+    function settFields(Fields) {
+        //	for(var i=0;i<Fields.length;i++){
+        //		var fld = Fields[i];
+
+        //		if(fld.name == "SAVE_TERM"){fld.innerHTML = getSaveTerm(getInfo("SAVE_TERM"));}
+        //		else if(fld.name == "DOC_LEVEL"){fld.innerHTML = getDocLevel(getInfo("DOC_LEVEL"));}
+        //		else {
+        //    		if(fld.dataFld!="" ){(getInfo(fld.name)!=undefined)? fld.innerHTML=getInfo(fld.name):(getInfo(fld.dataFld)!=undefined)?fld.innerHTML=getInfo(fld.dataFld):fld.innerHTML='';}
+        //		}
+        //	}
+        if (!window.ActiveXObject) {
+            var szId = Fields.id;
+            var unFiltered = document.getElementsByTagName('*');
+            for (i = 0; i < unFiltered.length; i++) {
+                if (unFiltered[i].getAttribute('id') == szId) {
+                    var fld = unFiltered[i];
+                    if (fld.getAttribute("name") == "SAVE_TERM") { fld.innerHTML = getSaveTerm(getInfo("SAVE_TERM")); }
+                    else if (fld.getAttribute("name") == "DOC_LEVEL") { fld.innerHTML = getDocLevel(getInfo("DOC_LEVEL")); }
+                    //else if (fld.getAttribute("name") == "DOC_NO"){fld.innerHTML = getInfo(fld.getAttribute("name")) }                
+                    else {
+                        if (fld.getAttribute("dataFld") != "") {
+                            (getInfo(fld.getAttribute("name")) != undefined) ? fld.innerText = getInfo(fld.getAttribute("name")) : (getInfo(fld.getAttribute("dataFld")) != undefined) ? fld.innerText = getInfo(fld.getAttribute("dataFld")) : fld.innerHTML = '';
+                        }
+                    }
+                }
+            }
+        } else {
+            for (var i = 0; i < Fields.length; i++) {
+                var fld = Fields[i];
+
+                if (fld.name == "SAVE_TERM") { fld.innerHTML = getSaveTerm(getInfo("SAVE_TERM")); }
+                else if (fld.name == "DOC_LEVEL") { fld.innerHTML = getDocLevel(getInfo("DOC_LEVEL")); }
+                else {
+                    if (fld.dataFld != "") { (getInfo(fld.name) != undefined) ? fld.innerText = getInfo(fld.name) : (getInfo(fld.dataFld) != undefined) ? fld.innerText = getInfo(fld.dataFld) : fld.innerText = ''; }
+                }
+            }
+        }
+    }
+
+    function checkForm(bTempSave) {
+        return true;
+    }
+
+    function setBodyContext(sBodyContext) {
+        //본문 채우기
+        //	var m_objXML=new ActiveXObject("MSXML2.DOMDocument");
+        //	var elmList, elm;
+        //	var elmListLan;
+        //	try{
+        //		m_objXML.loadXML("<?xml version='1.0' encoding='utf-8'?>"+sBodyContext);
+        //		elmList = m_objXML.documentElement.childNodes;
+        //		if(elmList.length == 0){
+        //			tbContentElement.innerHTML = sBodyContext; //기존 기안 양식일 경우
+        //		}else{
+        //			for(var i=0; i < elmList.length; i++){
+        //				var elm = elmList.item(i);
+        //				if (elm.nodeName == "WORKREQUEST_ID"){
+        //				    eval(elm.nodeName).value = elm.text;
+        //				}else{
+        //				    innerHtmlData(elm.nodeName, elm.text);
+        //				}
+        //				if(elm.nodeName=="SEL_ENTPART_TEXT"&&elm.text!=""){ partdisplay.style.display = ""; }
+        //			}
+        //		}
+        //	}catch(e){
+        //		alert(e.message);
+        //	}
+        var m_objXML = CreateXmlDocument();
+        var elmList, elm;
+        var elmListLan;
+        try {
+            m_objXML.loadXML("<?xml version='1.0' encoding='utf-8'?>" + sBodyContext);
+            elmList = m_objXML.documentElement.childNodes;
+            if (elmList.length == 0) {
+                tbContentElement.innerHTML = sBodyContext; //기존 기안 양식일 경우
+            } else {
+                for (var i = 0; i < elmList.length; i++) {
+                    var elm = elmList[i];
+                    innerHtmlData(elm.nodeName, elm.text);
+                    //if(elm.nodeName=="RECEDIT"&&elm.text=="Y"){ parent.menu.chk_recedit.checked = true; }
+                }
+            }
+        } catch (e) {
+            alert(e.message);
+            //tbContentElement.innerHTML = sBodyContext; //기존 기안 양식일 경우
+        }
+    }
+    //본문 XML로 구성
+    function makeBodyContext() {
+        var sBodyContext = "";
+        //xml 구성 예제 : <body><item><name></name></item><item><name></name></item></body>
+        //sBodyContext="<body><item><name>첫번째</name></item><item><name>두번째</name></item></body>";
+        return sBodyContext;
+    }
+    /*** form data -> xml ***/
+    function getFields(Fields) {
+        //	var sText = "";
+        //	for(var i=0;i<Fields.length;i++){
+        //		sText += makeNode(Fields[i].name, Fields[i].value);
+        //	}
+        //	return sText;
+
+        if (Fields != null) {
+            var szId = Fields.id;
+            var unFiltered = document.getElementsByTagName('*');
+            for (var i = 0; i < unFiltered.length; i++) {
+                if (unFiltered[i].getAttribute('id') == szId) {
+                    if (unFiltered[i].getAttribute("name").indexOf("SEL_") > -1) {
+                        sText += getSelRadio(unFiltered[i]);
+                    } else {
+                        sText += makeNode(unFiltered[i].getAttribute("name"), unFiltered[i].value);
+                    }
+                }
+            }
+        }
+        return sText;
+    }
+
+    /*** Radio Button 값 가져오기***/
+    function getRadio(radioNm) {
+        var radioVal = "";
+        //alert("이름:"+radioNm+"\n객체여부:"+eval(radioNm)+"\n길이:"+eval(radioNm).length+"\n체크여부:"+eval(radioNm).checked);
+        for (i = 0; i < eval(radioNm).length; i++) {
+            if (eval(radioNm)[i].checked) {
+                radioVal = "<" + radioNm + ">" + eval(radioNm)[i].value + "</" + radioNm + ">";
+            }
+        }
+        return radioVal;
+    }
+
+    /*** Single Radio Button Value 가져오기 ***/
+    function getChkRadio(radioNm) {
+        if (eval(radioNm).checked) {
+            radioVal = "<" + radioNm + ">" + eval(radioNm).value + "</" + radioNm + ">";
+            return radioVal;
+        }
+    }
+
+    /*** 데이터 뿌려주기 ***/
+    function innerHtmlData(nodeNm, nodeVal) {
+        if (document.getElementById(nodeNm) != undefined) {
+            if (nodeNm.indexOf("OPT") != -1) {
+                setRadio(nodeNm, nodeVal);
+            } else if (nodeNm.indexOf("FORM_ATTACH") != -1) {
+                setForm_Attach(nodeVal);
+            } else if (nodeNm.indexOf("tbContentElement") != -1) {
+                tbContentElement.innerHTML = nodeVal;
+            } else if (nodeNm.indexOf("CHK") != -1) {
+                setChk(nodeNm, nodeVal);
+            } else {
+                try {
+                    document.getElementById(nodeNm).innerHTML = nodeVal.replace(/\n/gi, "<br \/>");
+                } catch (e) {
+                    document.getElementById(nodeNm).value = nodeVal;
+                }
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

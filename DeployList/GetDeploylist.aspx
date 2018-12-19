@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="GetDeploylist.aspx.cs" Inherits="DeployList_GetDeploylist" %>

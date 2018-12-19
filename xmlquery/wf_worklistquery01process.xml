@@ -1,0 +1,22 @@
+﻿<?xml version="1.0"  encoding="utf-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql" >
+	<sql:header>
+		<sql:param name='USER_ID'>200208</sql:param>
+		<sql:param name='WI_STATE'>528</sql:param>
+		<sql:param name='PI_STATE'>288</sql:param>
+		<sql:param name='MODE'>APPROVAL</sql:param>
+		<sql:param name='PI_NAME'></sql:param>
+		<sql:param name='PI_INITIATOR_NAME'></sql:param>
+		<sql:param name='PI_ETC'></sql:param>
+		<sql:param name='PAGENUM'></sql:param>
+		<sql:param name='PAGECNT'></sql:param>
+		<sql:param name='QUERYSIZE'></sql:param>
+		<sql:param name='GROUP_KIND'></sql:param>
+		<sql:param name='TITLE'></sql:param>
+		<sql:param name='ORDERFILED'></sql:param>
+		<sql:param name='ORDERDESC'></sql:param>
+	</sql:header>
+	<sql:query>
+       		exec sp_wf_worklistquery01process @USER_ID, @WI_STATE, @PI_STATE, @MODE, @PI_NAME, @PI_INITIATOR_NAME, @PI_ETC, @PAGENUM, @PAGECNT, @QUERYSIZE, @GROUP_KIND, @TITLE, @ORDERFILED, @ORDERDESC
+	</sql:query>
+</ROOT>

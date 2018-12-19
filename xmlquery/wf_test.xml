@@ -1,0 +1,16 @@
+<?xml version="1.0"  encoding="euc-kr" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	sql:xsl="wf_test.xsl">
+	<sql:header>
+		<sql:param name='UID'>2</sql:param>
+
+	</sql:header>
+	<sql:query>
+        	SELECT  UID, 
+			TITLE, 
+			BODYCONTEXT
+                FROM    FILE_TMP (NOLOCK) 
+		WHERE 	UID = @UID
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

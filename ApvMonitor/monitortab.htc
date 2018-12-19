@@ -1,0 +1,29 @@
+<PUBLIC:COMPONENT>
+<PUBLIC:ATTACH EVENT="onclick" ONEVENT="switchTab()" />
+<script language=jscript>
+//AUTHOR: Covision corp.,   ^(oo)^ conan"
+function switchTab(){
+	try{
+		if(m_oSelTab.sourceIndex!=sourceIndex){
+			m_oSelTab.className="TabUnSel";
+			var oNode = self.document.all(m_oSelTab.contentID);
+			oNode.className="TabUnSel";
+			
+			className="TabSel";
+			m_oSelTab=this;
+			
+			oNode = self.document.all(contentID);
+			oNode.className="TabSel";
+			
+			oNode = oNode.firstChild;
+			if(oNode.src==""){
+				oNode.src = oNode.dataSrc;
+			}
+		}
+	}catch(e){
+		alert(e.description);
+	}
+}
+</script>  
+</PUBLIC:COMPONENT>
+<PUBLIC:PROPERTY NAME="contentID" />

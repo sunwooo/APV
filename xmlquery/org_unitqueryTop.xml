@@ -1,0 +1,16 @@
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql">
+	<sql:header>
+		<sql:param name='ENT_CODE'>General</sql:param>
+		<sql:param name='PARENT_UNIT_CODE'>99999</sql:param>
+	</sql:header>
+	<sql:query>
+		SELECT [ORG_UNIT].*
+		FROM [ORG_UNIT]
+		WHERE 	[ORG_UNIT].ENT_CODE = @ENT_CODE
+		AND		[ORG_UNIT].USAGE_STATE = 'A'
+		AND		[ORG_UNIT].PARENT_UNIT_CODE = @PARENT_UNIT_CODE
+		AND		[ORG_UNIT].UNIT_CODE != [ORG_UNIT].PARENT_UNIT_CODE
+		ORDER BY [ORG_UNIT].SORT_KEY
+		FOR XML AUTO
+	</sql:query>	
+</ROOT>

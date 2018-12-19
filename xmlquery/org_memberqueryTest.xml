@@ -1,0 +1,19 @@
+<?xml version="1.0"  encoding="euc-kr" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	sql:xsl="org_memberquery03.xsl">
+	<sql:header>
+		<sql:param name='ENT_CODE'>General</sql:param>
+		<sql:param name='DN'>강경</sql:param>
+		<sql:param name='DP'></sql:param>
+	</sql:header>
+	<sql:query>
+		SELECT [ORG_PERSON].*, B.PARENT_UNIT_CODE, C.NAME
+		FROM [ORG_PERSON] , [ORG_UNIT] B, [ORG_UNIT] C
+		WHERE 	[ORG_PERSON].ENT_CODE = @ENT_CODE
+		AND	[ORG_PERSON].USAGE_STATE = 'A'
+		AND  [ORG_PERSON].UNIT_CODE = B.UNIT_CODE
+		AND  B.PARENT_UNIT_CODE = C.UNIT_CODE
+		AND	( DISPLAY_NAME LIKE @DN+'%' OR @DN is null)
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

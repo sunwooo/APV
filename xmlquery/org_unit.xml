@@ -1,0 +1,47 @@
+<?xml version="1.0"  encoding="euc-kr" ?>
+<Schema xmlns="urn:schemas-microsoft-com:xml-data"
+        xmlns:dt="urn:schemas-microsoft-com:datatypes"
+        xmlns:sql="urn:schemas-microsoft-com:xml-sql">
+
+<ElementType name="UNIT_ID" content="textOnly" />
+<ElementType name="UNIT_CODE"  content="textOnly" />
+<ElementType name="NAME"  content="textOnly" />
+<ElementType name="ENT_CODE" content="textOnly" />
+<ElementType name="PARENT_UNIT_CODE"  content="textOnly" />
+<ElementType name="SORT_KEY"  content="textOnly" />
+<ElementType name="DSCR"  content="textOnly" />
+<ElementType name="USAGE_STATE"  content="textOnly" />
+<ElementType name="RECEIVABLE"  content="textOnly" />
+<ElementType name="APPROVABLE"  content="textOnly" />
+<ElementType name="RESERVED1"  content="textOnly" />
+<ElementType name="RESERVED2"  content="textOnly" />
+
+<ElementType name="ORG_UNIT" >
+    <AttributeType name="UNIT_ID" />
+    <AttributeType name="UNIT_CODE"  />
+    <AttributeType name="NAME"  />
+    <AttributeType name="ENT_CODE"  />
+    <AttributeType name="PARENT_UNIT_CODE" />
+    <AttributeType name="SORT_KEY" />
+    <AttributeType name="USAGE_STATE" />
+    <AttributeType name="DSCR" />
+    <AttributeType name="RECEIVABLE" />
+    <AttributeType name="APPROVABLE" />
+    <AttributeType name="RESERVED1" />
+    <AttributeType name="RESERVED2" />
+
+
+	<element type="UNIT_ID"  />
+	<element type="UNIT_CODE"  />
+	<element type="NAME"  />
+	<element type="ENT_CODE"  />
+	<element type="PARENT_UNIT_CODE"  />
+	<element type="SORT_KEY"  />
+	<element type="USAGE_STATE" />
+	<element type="DSCR"  />
+	<element type="RECEIVABLE" />
+	<element type="APPROVABLE" />
+	<element type="RESERVED1" />
+	<element type="RESERVED2" />
+</ElementType>
+</Schema>

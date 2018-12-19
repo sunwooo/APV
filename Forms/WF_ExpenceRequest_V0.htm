@@ -1,0 +1,581 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title></title>
+	<link rel="stylesheet" href="/GWImages/common/css/approval_form.css" type="text/css" />
+    <!--필수 양식파일에 쓰이는 js 파일-->
+	<script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Config.js" ></script>
+    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/EmbedObject.js" ></script>
+    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Utility.js" ></script>
+    <script type="text/javascript" language="javascript" src="../../Common/script/COVIFlowNet/openWindow.js" ></script>		
+	<script type="text/javascript" language="javascript" src="../../Common/script/progress.js" ></script>
+	<script type="text/javascript" language="javascript" src="../../common/script/NameControl.js"></script>
+	<script type="text/javascript" language="javascript" src="../../common/script/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" language="javascript" src="formedit.js" ></script>
+    <!-- 달력 -->
+    <link rel="stylesheet" type="text/css"  href="calendar/datepickercontrol.css" />
+    <script language="javascript" type="text/javascript" src="calendar/datepickercontrol.js"></script>
+</head>
+<body>
+    <!-- COMMON FIELDS -->
+    <input type="hidden" id="dField" name="INITIATOR_NAME" datafld="usdn" />
+    <input type="hidden" id="dField" name="INITIATOR_ID" datafld="usid" />
+    <input type="hidden" id="dField" name="INITIATOR_OU_NAME" datafld="dpdn_apv" />
+    <input type="hidden" id="dField" name="INITIATOR_OU_ID" datafld="dpid_apv" />
+    <input type="hidden" id="cField" name="LAST_MODIFIER_ID" />
+    <input type="hidden" id="cField" name="attach" />
+    <input type="hidden" id="cField" name="filelocation" datafld="fmfl" />
+    <input type="hidden" id="cField" name="ATTACH_FILE" value="" />
+    <input type="hidden" id="dField" name="ATTACH_FILE_INFO" value="" datafld="ATTACH_FILE_INFO" />
+    <input type="hidden" id="dField" name="INITIATOR_INFO" value="" datafld="INITIATOR_INFO" />
+    <input type="hidden" id="dField" name="APPLIED" datafld="APPLIED" />
+    <input type="hidden" id="dField" name="ISPUBLIC" datafld="ISPUBLIC" />
+    <input type="hidden" id="dField" name="APPLIED_TERM" datafld="APPLIED_TERM" />
+    <input type="hidden" id="dField" name="RECEIVE_NO" datafld="RECEIVE_NO" />
+    <input type="hidden" id="dField" name="RECEIVE_NAMES" datafld="RECEIVE_NAMES" />
+    <input type="hidden" id="dField" name="RECEIPT_LIST" datafld="RECEIPT_LIST" />
+    <!--<input type="hidden" id="dField" name="DOC_LEVEL"  dataFld="DOC_LEVEL"/>
+    <input type="hidden" id="dField" name="SAVE_TERM"  dataFld="SAVE_TERM" />-->
+    <input type="hidden" id="dField" name="DOC_CLASS_ID" datafld="DOC_CLASS_ID" />
+   <!-- <input type="hidden" id="dField" name="SUBJECT" datafld="SUBJECT" />-->
+    <input type="hidden" id="dField" name="DOC_NO" datafld="DOC_NO" />
+    <input type="hidden" id="dField" name="DOC_OU_NAME" datafld="dpdsn" />
+    <input type="hidden" id="dField" name="ENT_CODE" datafld="etid" />
+    <input type="hidden" id="dField" name="ENT_NAME" datafld="etnm" />
+    <input type="hidden" id="mField" name="DOC_LEVEL_NAME" onclick="return mField_onclick()" />
+    <textarea id="dField" name="DOC_SUMMARY" datafld="DOC_SUMMARY" style="display: none"></textarea>
+    <textarea id="dhtml_body" style="display: none"></textarea>
+    <textarea style="display: none" id="cField" name="xsl"></textarea>
+    <!-- 문서link 2006.01 -->
+    <textarea id="dField" name="DOCLINKS" style="display: none" datafld="DOCLINKS"></textarea>
+    <!-- 반송문서 추가 시작 2007.11-->
+    <textarea id="mField" name="REJECTDOCLINKS" style="display: none"></textarea>
+    <!-- 반송문서 추가 끝 2007.11-->
+    <!-- 결재선 관리 UI 변경 2008.01 -->
+    <textarea style="display: none;" id="cField" name="APVLIST"></textarea>
+    <!-- 결재선 관리 UI 변경 끝 2008.01 -->
+    <!-- process 메뉴얼 추가 2008.01 -->
+    <textarea id="mField" name="PMLINKS" style="display: none"></textarea>
+    <!-- process 메뉴얼 추가 2008.01 -->
+    <!-- END -->
+    <!-- 양식전체본문 -->
+    <div id="bodytable">
+    <!-- header start -->
+    <div class="draft_tit"><h4><span id="headname"></span><a href="#"><span class="drop_menu"></span></a></h4></div>
+    <div class="draft_page">
+        <table width="100%" cellpadding="0" cellspacing="0">
+        <!-- 결재선 정보 시작-->
+        <!-- 일반결재/합의 -->
+            <tr>
+                <td id="AppLine" width="100%">
+                    <table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" bordercolordark="white" bordercolorlight="gray">
+                        <tr>
+                        <!-- 발신처 결재란 보이는 부분(왼쪽) -->
+                            <td id="LApvLine" align="left" width="50%"></td>
+                        <!-- 수신처 결재란 보이는부분 (오른쪽)-->
+                            <td id="RApvLine" align="right" width="50%"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- 협조자 -->
+            <tr>
+                <td id="AssistLine" width="100%" style="display:none;"></td>
+            </tr>
+            <!--참조자 -- 첨부파일 영역으로 옮김 -->
+            <!--수신자 -->
+            <tr>
+                <td id="RRLine" width="100%" style="display:none;"></td>
+            </tr>			
+        <!-- 결재선 정보 종료-->
+        </table>
+        <table class="table_2" summary="문서분류" cellpadding="0" cellspacing="0">		    
+            <tr>
+                <th>보안등급</th>
+                <td><select id="dField" name="DOC_LEVEL" onchange="DOC_LEVEL_Change(this);"></select></td>	
+                <th>보존년한</th>
+                <td colspan="3"><select id="dField" name="SAVE_TERM"></select></td>	
+            </tr>
+            <tr>
+                <th>문서분류</th>
+                <td>
+                    <input type="text" id="dField" name="DOC_CLASS_NAME" dataFld="DOC_CLASS_NAME" size="20" readonly="readonly" style="width:70%;height:20px;" />&nbsp;
+                    <img src="/GWImages/Common/btn/btn_organization.gif" name="btn_Process" id="btn_Process" align="absMiddle" border="0" onClick="OpenDocClass();" style="cursor:hand" />
+                </td>	
+                <th>문서번호</th><td></td>	                	
+            </tr>                   
+            <tr id="workrequestdisplay" style="display:;">
+                <th>관련업무의뢰</th>
+                <td colspan="3">
+                    <input type="hidden" id="mField" name="WORKREQUEST_ID" />
+                    <input type="text" id="mField" name="WORKREQUEST_NAME" size="20" readonly="readonly" style="height:20px" />&nbsp;
+                    <a href="#" class="Btn02" onClick="javascript:OpenWorkRequest();"><span>추가</span></a> 
+                    <a href="#" class="Btn02" onClick="javascript:DelWorkRequest();"><span>삭제</span></a>
+                </td>
+            </tr>			
+	    </table>		             
+            <!-- header end -->
+            <!-- bodycontext start -->		
+            <table class="table_3" summary="제목" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목<span class="txt_red">*</span></th>
+                    <td><input id="dField" name="SUBJECT" datafld="SUBJECT" style="width:100%; height:20px;" /></td>	
+                </tr>
+            </table>    	
+          
+			
+		<table class="table_3" summary="내용" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th>용&nbsp;&nbsp;도</th>
+                    <td colspan="3"><input type="text" id="mField" name="t_date_1" style="width:80%;height:20px;"></td>
+				    <th>시행일</th>
+					<td colspan="3">
+						<input type="text" id="mField" name="SDATE" readonly="readonly" style="width:80%;height:20px; text-align:center;" datepicker="true" datepicker_format="YYYY-MM-DD" />	                    
+	                    </td>
+				</tr>
+		</table>	
+									
+
+		<table class="table_3" summary="내용" cellpadding="0" cellspacing="0">
+				<tr>
+				    <th>일&nbsp;&nbsp;금</th>
+				    <td colspan="4"><input type="text" id="mField" name="a_money_1" style="width:80%;height:20px;">&nbsp;원정</td>
+				    <td colspan="3">&nbsp;\&nbsp;<input type="text" id="mField" name="a_money_2"  style="width:80%;height:20px;" readonly="readonly" ></td>
+				</tr>
+					
+			    <tr>
+				    <th colspan="8">내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;역</th>				
+				</tr>
+        </table>
+		<table  class="table_html" cellpadding="0" cellspacing="0" >
+			<tr>
+                <td align="right" style="padding-right: 40px;">
+                    <b>아래 품목을 구입코저 품의하오니 재가하여 주시기 바랍니다.</b>
+                </td>
+                <td align="right">
+                    <a href="#" class="Btn02" onclick="javascript:AddRow(MultiRowTable);"><span>[+]</span></a>
+                    <a href="#" class="Btn02" onclick="javascript:DelRows(MultiRowTable);"><span>[-]</span></a>
+                </td>
+            </tr>
+            
+            
+				
+		</table>
+		<table id="MultiRowTable" class="table_3" summary="내용" cellpadding="0" cellspacing="0">		
+			    <tr>				
+				    <th>No.</th>
+				    <th>계&nbsp;정&nbsp;과&nbsp;목</th>				
+				    <th>세&nbsp;부&nbsp;내&nbsp;용</th>				
+				    <th>금&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;액</th>				
+				    <th>비&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;고</th>				
+				    			
+			    </tr>
+			    <tr>
+				    <td width = "10%"><input type="text" value="1" id="mField" name="a_number_1" style="width:95%; height:20px; text-align:center; " /></td>
+				    <td width = "20%"><input type="text" id="mField" name="a_subject_1" style="width:95%; height:20px; text-align:center;" /></td>
+				    <td width = "30%"><input type="text" id="mField" name="a_content_1"  style="width:95%; height:20px; text-align:center;" /></td>								
+				    <td width = "30%"><input type="text" id="mField" name="a_cost_1" onblur="checkInt(this)";  style="width:95%; height:20px; text-align:right;" /></td>
+				    <td width = "10%"><input type="text" id="mField" name="a_note_1" style="width:95%; height:20px; text-align:center;" /></td>
+			    </tr>
+			</table>
+    	    
+    	    <table class="table_3" summary="내용" cellpadding="0" cellspacing="0">			    
+		        <tr height="27px;">
+                    <th width="30">소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;계</th>
+                    <td width="65"></td>                    
+                    <td width="5">
+                        <input type="text" id="mField" name="sTotal" style="width:95%; height:20px; text-align: right; "value="" readonly="readonly" />
+                    </td>
+                    
+                </tr>        
+		    </table>					
+		    
+			    <!--실 결재양식 내용 부분 끝 -->
+		    
+		    <table class="table_5" summary="참조" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th>참조</th>
+                    <td  id="CCLine">
+                        <div id="SendCC"></div>
+                        <div id="RecCC"></div>&nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <th>첨부파일</th>
+                    <td id="AttFileInfo"></td>
+                </tr>
+                <tr>
+                    <th>연결문서</th>
+                    <td id="DocLinkInfo"></td>
+                </tr>
+                 <tr>
+                    <th>원 문 서</th>
+                    <td id="RejectDocLinkInfo">-</td>
+                </tr>
+            </table>
+            <div id="divforminfo"  style="display:none">
+            <table class="table_6" summary="원문서" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th>문서설명</th>
+                    <td id="tdforminfo"></td>
+                </tr>
+            </table>
+            </div>
+            <!--write_의견입력-->
+            <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%">
+                <tr>
+                    <td align="center" id="tdCommentView"  width="100%" style="display:none;">				
+                    </td>
+                </tr>
+            </table>
+            <!--write_ 의견입력끝 -->	
+        </div>
+        <!-- bodycontext end -->   			
+    </div>
+<!-- 양식 전체 end -->
+<script language="javascript" src="formedit_object.js" type="text/javascript"></script>
+
+<script type="text/javascript" language="javascript">
+window.onload = initOnload;
+function initOnload() {
+    initialize();
+}
+
+function initialize() {
+ 
+	if(window.parent.document.readyState == "complete"){
+		window.parent.document.onreadystatechange = event_noop;			
+		initForm();
+		initApvList();
+	}else{
+		window.setTimeout(initialize,500);
+	}				
+}
+
+function initForm() {
+	initFields();
+	G_displaySpnAttInfo(false);
+}
+
+function initFields(szBody){
+    setFields((!window.ActiveXObject) ? document.getElementById("dField") : dField); //editable field
+    setFields((!window.ActiveXObject) ? document.getElementById("cField") : cField); //readonly field
+    setFields((!window.ActiveXObject) ? document.getElementById("mField") : mField); //form editable field
+    document.getElementById("headname").innerHTML = initheadname(getInfo("fmnm"), true);
+
+    if (getInfo("mode") == "DRAFT" || getInfo("mode") == "TEMPSAVE") {
+        document.getElementsByName("INITIATOR_INFO")[0].value = getInfo("usdn"); //getInfo("dpdn_apv")+" "+getInfo("usdn") + " "+ getInfo("ustn") ;
+        document.getElementsByName("APPLIED").value = formatDate(getInfo("svdt"), "D");
+	}else{
+        document.getElementsByName("SUBJECT")[0].disabled = true;		
+	}
+	//기타 필드 채우기	
+	setSaveTerm(); //보존년한 create	
+	setDocLevel();  // 보안등급 create
+
+	//본문 내용 
+	if (getInfo("BODY_CONTEXT") != undefined){	
+		//본문 입력 함수 호출
+		setBodyContext(getInfo("BODY_CONTEXT")); //Editor를 사용하지 않는 양식
+	}
+	else
+	{
+		if (getInfo("fmbd") != undefined){
+			//본문 입력 함수 호출
+			setBodyContext(getInfo("fmbd"));  //Editor를 사용하지 않는 양식
+		}
+	}	
+}
+
+function getBodyContext() {
+debugger;
+    //본문 내용 및 기타 계산 필드 넘기기, 현재 본문내용만 넘김
+	var sBodyContext = makeBodyContext();
+	return makeNode("BODY_CONTEXT",sBodyContext,null,false);
+}
+
+function setFields(Fields){
+     if(!window.ActiveXObject){
+            var szId = Fields.id;
+	        var unFiltered = document.getElementsByTagName('*');
+	        for (i = 0; i < unFiltered.length; i++){
+	            if (unFiltered[i].getAttribute('id') == szId){
+                    var fld = unFiltered[i];
+		            if(fld.getAttribute("dataFld")!=null){(getInfo(fld.getAttribute("name"))!=undefined)?fld.value=getInfo(fld.getAttribute("name")):(getInfo(fld.getAttribute("dataFld"))!=undefined)?fld.value=getInfo(fld.getAttribute("dataFld")):fld.value='';}
+		            if (fld.getAttribute("name") != null){
+		                if(fld.getAttribute("name") == 'POSITION' && getInfo(fld.getAttribute("name")) == ""){
+			                fld.value = getInfo(fld.getAttribute("dataFld"));
+		                }
+		            }
+	            }
+	        }
+       }else{
+	        for(var i=0;i<Fields.length;i++){
+		        var fld = Fields[i];
+		        if(fld.dataFld!=""){(getInfo(fld.name)!=undefined)? fld.value=getInfo(fld.name):(getInfo(fld.dataFld)!=undefined)?fld.value=getInfo(fld.dataFld):fld.value='';}
+		        if(fld.name == 'POSITION' && getInfo(fld.name) == ""){
+			        fld.value = getInfo(fld.dataFld);
+		        }
+	        }
+	    }
+}
+
+function checkForm(bTempSave){
+
+	if (bTempSave){
+		return true;
+	}else{
+	    if(document.getElementsByName("SUBJECT")[0].value == '' ){
+			alert('제목을 입력하세요.');
+			//SUBJECT.focus();
+			return false;
+		}else if(document.getElementsByName("SAVE_TERM")[0].value == ''){
+			alert('보존년한을 선택하세요.');
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+}
+
+function setBodyContext(sBodyContext){
+    //본문 채우기
+    var m_objXML = CreateXmlDocument();
+    var elmList, elm;
+    var elmListLan;
+
+    m_objXML.loadXML("<?xml version='1.0' encoding='utf-8'?>" + getInfo("BODY_CONTEXT"));
+    try {
+        elmList = m_objXML.documentElement.childNodes;
+        for (var i = 0; i < elmList.length; i++) {
+            var elm = elmList[i];
+            innerHtmlData(elm.nodeName, elm.text);
+        }
+        //본문 채우기
+        //setdField();
+    }
+    catch (e) { }
+}
+
+//본문 XML로 구성
+function makeBodyContext(){
+	var sBodyContext="";	
+	sBodyContext = "<BODY_CONTEXT>" + getFields(document.getElementById("mField"))+ "</BODY_CONTEXT>";
+	return sBodyContext;
+}
+
+/*** form data -> xml ***/
+function getFields(Fields){
+	var sText = "";
+    if(Fields!=null){
+        var szId = Fields.id;
+	    var unFiltered = document.getElementsByTagName('*');
+	    for (var i = 0; i < unFiltered.length; i++){
+	        if (unFiltered[i].getAttribute('id') == szId){
+	            if (unFiltered[i].getAttribute("name").indexOf("SEL_") > -1){
+    		        sText += getSelRadio(unFiltered[i]);
+	            }else{
+    		        sText += makeNode(unFiltered[i].getAttribute("name"), unFiltered[i].value);
+	            }	        
+	        }
+	    }
+    }	
+	return sText;
+
+}	
+
+/*** Radio Button 값 가져오기***/
+function getRadio(radioNm){	
+	var radioVal = "";
+	for(i=0;i<eval(radioNm).length;i++){				
+		if(eval(radioNm)[i].checked){
+			radioVal = makeNode(radioNm, eval(radioNm)[i].value);
+		}
+	}
+	return radioVal;
+}
+
+/*** Single Radio Button Value 가져오기 ***/
+function getChkRadio(radioNm){
+	if(eval(radioNm).checked){
+		radioVal = makeNode(radioNm, eval(radioNm).value);
+		return radioVal;
+	}
+}
+
+/** SELECT BOX VALUE 가져오기 **/
+function getSelRadio(selNm){
+	var radioVal = "";
+	var selNm = obj.getAttribute("name");
+    if ( obj.selectedIndex > -1 ){
+        radioVal += makeNode(selNm, obj.options[obj.selectedIndex].value);
+        radioVal += makeNode(selNm+"_TEXT", obj.options[obj.selectedIndex].text);
+    }else{
+        radioVal += makeNode(selNm, "");
+        radioVal += makeNode(selNm+"_TEXT", "");
+    }
+    return   radioVal;  
+}
+
+/*** 데이터 뿌려주기 ***/
+function innerHtmlData(nodeNm, nodeVal){
+	if (document.all[nodeNm] != undefined) {
+		if (nodeNm.indexOf("FORM_ATTACH") != -1) {
+			setForm_Attach(nodeVal);
+			eval(nodeNm).value = nodeVal;
+		} else if (nodeNm.indexOf("tbContentElement") != -1) {
+			var dom = tbContentElement.getDom();	dom.body.innerHTML= nodeVal.replace(/<BR>/gi,"");
+		} else if(nodeNm.indexOf("OPT") != -1) {
+			setRadio(nodeNm, nodeVal);
+		} else if(nodeNm.indexOf("CHK") != -1) {
+			setChk(nodeNm, nodeVal);
+		} else if(nodeNm.indexOf("JEONKEUL") != -1) {
+		    spnJEONKEUL.innerHTML = nodeVal;
+		} else {
+            if(document.getElementsByName(nodeNm)[0]!=null) document.getElementsByName(nodeNm)[0].value = nodeVal;
+		}
+	}
+}
+     function sumTotal() {
+        var temp = 0;
+        var temp1;
+        var Totalcost = 0;
+        var tbl = document.getElementById("MultiRowTable");
+            for (i = 1; i < tbl.rows.length; i++) {
+            temp1 = CR(document.getElementsByName("a_cost_" + i)[0].value);
+                if (isNaN(parseInt(temp1))) {
+                Totalcost += temp;
+                }
+                else {
+                Totalcost += parseInt(temp1);
+                }
+        }
+        document.getElementsByName("sTotal")[0].value = CnvtComma_1(Totalcost);
+        document.getElementsByName("a_money_2")[0].value = CnvtComma_1(Totalcost);
+   }         
+        /************************************************************************
+    함수명		: CnvtComma
+    작성목적	: 빠져나갈때 포맷주기(123456 => 123,456)
+    *************************************************************************/
+    function CnvtComma_1(num) {
+        try {
+            var ns = num.toString();
+            var dp;
+
+            if (isNaN(ns))
+                return "";
+
+            dp = ns.search(/\./);
+
+            if (dp < 0) dp = ns.length;
+
+            dp -= 3;
+
+            while (dp > 0) {
+                ns = ns.substr(0, dp) + "," + ns.substr(dp);
+                dp -= 3;
+            }
+            return ns;
+        }
+        catch (ex) {
+        }
+    }
+
+    /************************************************************************
+    함수명		: IsNumber
+    작성목적	: 입력시 숫자만 입력되게
+    *************************************************************************/
+    function IsNumber() {
+        try {
+            if ((event.keyCode < 48) || (event.keyCode > 57)) {
+                if (event.keyCode != 13) {
+                    event.returnValue = false;
+                }
+            }
+        }
+        catch (ex) {
+        }
+    }
+
+    /************************************************************************
+    함수명		: CnvtFormat
+    작성목적	: focus 발생시 포맷제거(123,456 => 123456)
+    *************************************************************************/
+    function CnvtFormat(ctrl) {
+        try {
+            var v = document.getElementById(ctrl);
+            v.value = v.value.replace(/^\$|,/g, "");
+            document.getElementById(ctrl).select();
+        }
+        catch (ex) {
+        }
+    }
+
+    // Comma Remove
+    function CR(strSrc) {
+        return (strSrc.replace(/,/g, ""));
+    }
+        
+
+
+    //문자X,숫자만!!
+    function checkInt(i)
+    {
+       
+        if(isNaN(parseInt(i.value))) 
+	    {     
+	        if(i.value == "")
+	        {}
+	        else
+	        {
+		        alert("숫자만 입력해 주세요!");
+		        i.focus();
+		        i.value="";
+		        return;
+		    }
+		    
+	    }
+	    i.value = CnvtComma_1(i.value);
+	    sumTotal();
+    }
+    
+     function AddRow(tbID) {
+
+        var tableIndex = tbID.rows.length;
+        var oNewRow = tbID.insertRow(tbID.rows.length);
+
+        var oNewCell1 = oNewRow.insertCell(oNewRow.cells.length);
+        oNewCell1.innerHTML = '<input type="text" id="mField" name="a_number_' + tableIndex + '" value = "' + tableIndex + '" style="width:95%; height:20px; text-align:center;"  readonly="readonly"/>';
+
+        var oNewCell2 = oNewRow.insertCell(oNewRow.cells.length);
+        oNewCell2.innerHTML = '<input type="text" id="mField" name="a_subject_' + tableIndex + '"  style="width:95%; height:20px; text-align:center;" />';
+
+        var oNewCell3 = oNewRow.insertCell(oNewRow.cells.length);
+        oNewCell3.innerHTML = '<input type="text" id="mField" name="a_content_' + tableIndex + '"  style="width:95%; height:20px; text-align:center;" />';
+
+        var oNewCell4 = oNewRow.insertCell(oNewRow.cells.length);
+        oNewCell4.innerHTML = '<input type="text" id="mField" name="a_cost_' + tableIndex + '" onblur="checkInt(this);" style="width:95%; height:20px; text-align:right;" />';
+
+        var oNewCell5 = oNewRow.insertCell(oNewRow.cells.length);
+        oNewCell5.innerHTML = '<input type="text" id="mField" name="a_note_' + tableIndex + '"  style="width:95%; height:20px; text-align:center;" />';
+               
+    }
+    
+    function DelRows(tbID) {
+        var tr = tbID.rows;         //행
+        var rowcount = tr.length;   //줄길이
+        var lastrow = rowcount;     //수세기
+        if (tbID.rows.length) {
+            if (confirm("삭제하시겠습니까?")) {
+                  tbID.deleteRow(lastrow-1);
+            }
+        }       
+    }
+    
+</script>
+</body>
+</html>

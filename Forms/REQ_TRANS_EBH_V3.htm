@@ -1,0 +1,3569 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	    <meta http-equiv="Cache-Control" content="no-cache" />
+	    <meta http-equiv="Pragma" content="no-cache"/>
+	    <title></title>		
+	    <link rel="stylesheet" href="/GWImages/common/css/css_style.css" type="text/css" />
+        <!--필수 양식파일에 쓰이는 js 파일-->
+	    <script language="javascript" type="text/javascript" src="/CoviWeb/SiteReference/js/Config.js"></script>
+        <script language="javascript" type="text/javascript" src="/CoviWeb/SiteReference/js/EmbedObject.js"></script>
+        <script language="javascript" type="text/javascript" src="/CoviWeb/SiteReference/js/Utility.js"></script>
+        <script language="javascript" type="text/javascript" src="../../Common/script/COVIFlowNet/openWindow.js"></script>		
+	    <script language="javascript" type="text/javascript" src="formedit.js" ></script>
+	    <script language="javascript" type="text/javascript" src="../../Common/script/progress.js"></script>
+	    <script language="javascript" type="text/javascript" src="../../common/script/NameControl.js"></script>
+	    <!-- 안드로이드 계열 mobile 기기에서 결재문서 원문보기 시 결재선 표시가 안됨 -->
+	    <!--<script type="text/javascript" language="javascript" src="../../common/script/jquery-1.3.2.min.js"></script>-->
+	    <!-- 달력 선택 참조  -->
+	    <link type="text/css" rel="stylesheet" href="/CoviWeb/SiteReference/calendar/datepickercontrol.css" />
+        <script language="javascript" type="text/javascript" src="/CoviWeb/SiteReference/calendar/datepickercontrol.js"></script>
+        <style type="text/css">
+            td
+            {
+                font-size:11px;
+            }
+        </style>
+	</head>
+<body topmargin="0" leftmargin="0" scroll="yes">
+	<!-- COMMON FIELDS -->
+	<input type="hidden" id="dField" name="INITIATOR_NAME" datafld="usdn">
+	<input type="hidden" id="dField" name="INITIATOR_ID" datafld="usid">
+	<input type="hidden" id="dField" name="INITIATOR_OU_NAME" datafld="dpdn_apv">
+	<input type="hidden" id="dField" name="INITIATOR_OU_ID" datafld="dpid_apv">
+	<input type="hidden" id="cField" name="LAST_MODIFIER_ID">
+	<input type="hidden" id="cField" name="attach">
+	<input type="hidden" id="cField" name="filelocation" datafld="fmfl">
+	<input type="hidden" id="cField" name="ATTACH_FILE" value="">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO" datafld="ATTACH_FILE_INFO">
+	<!--이은정추가 2011.02.07-->
+	<input type="hidden" id="cField" name="attach3">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO3" dataFld="ATTACH_FILE_INFO3">
+	<input type="hidden" id="cField" name="attach4">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO4" dataFld="ATTACH_FILE_INFO4">
+	<input type="hidden" id="cField" name="attach5">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO5" dataFld="ATTACH_FILE_INFO5">
+	<input type="hidden" id="cField" name="attach6">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO6" dataFld="ATTACH_FILE_INFO6">
+	<input type="hidden" id="cField" name="attach7">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO7" dataFld="ATTACH_FILE_INFO7">
+	<input type="hidden" id="cField" name="attach8">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO8" dataFld="ATTACH_FILE_INFO8">
+	<input type="hidden" id="cField" name="attach9">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO9" dataFld="ATTACH_FILE_INFO9">
+	<input type="hidden" id="cField" name="attach10">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO10" dataFld="ATTACH_FILE_INFO10">
+	<input type="hidden" id="cField" name="attach11">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO11" dataFld="ATTACH_FILE_INFO11">
+	<input type="hidden" id="cField" name="attach12">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO12" dataFld="ATTACH_FILE_INFO12">
+	<input type="hidden" id="cField" name="attach13">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO13" dataFld="ATTACH_FILE_INFO13">
+	<input type="hidden" id="cField" name="attach14">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO14" dataFld="ATTACH_FILE_INFO14">
+	<input type="hidden" id="cField" name="attach15">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO15" dataFld="ATTACH_FILE_INFO15">
+	<input type="hidden" id="cField" name="attach16">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO16" dataFld="ATTACH_FILE_INFO16">
+	<input type="hidden" id="cField" name="attach17">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO17" dataFld="ATTACH_FILE_INFO17">
+	
+	<input type="hidden" id="dField" name="INITIATOR_INFO" value="" datafld="INITIATOR_INFO">
+	<input type="hidden" id="dField" name="APPLIED" datafld="APPLIED">
+	<input type="hidden" id="dField" name="ISPUBLIC" datafld="ISPUBLIC">
+	<input type="hidden" id="dField" name="APPLIED_TERM" datafld="APPLIED_TERM">
+	<input type="hidden" id="dField" name="RECEIVE_NO" datafld="RECEIVE_NO">
+	<input type="hidden" id="dField" name="RECEIVE_NAMES" datafld="RECEIVE_NAMES">
+	<input type="hidden" id="dField" name="RECEIPT_LIST" datafld="RECEIPT_LIST">
+	<input type="hidden" id="dField" name="DOC_LEVEL" datafld="DOC_LEVEL">
+	<input type="hidden" id="dField" name="DOC_CLASS_ID" datafld="DOC_CLASS_ID">
+	<input type="hidden" id="dField" name="DOC_CLASS_NAME" datafld="DOC_CLASS_NAME">
+	<input type="hidden" id="dField" name="SAVE_TERM" datafld="SAVE_TERM">
+	<input type="hidden" id="dField" name="SUBJECT" datafld="SUBJECT">
+	<input type="hidden" id="dField" name="DOC_NO" dataFld="DOC_NO">
+	<input type="hidden" id="dField" name="DOC_OU_NAME" datafld="DOC_OU_NAME">
+	<input type="hidden" id="dField" name="ENT_CODE" datafld="ENT_CODE">
+	<input type="hidden" id="dField" name="ENT_NAME" datafld="ENT_NAME">
+	<input type="hidden" id="dField" name="TELEPHONE" datafld="TELEPHONE">
+	<input type="hidden" id="mField" name="nmSvdate">
+	<input type="hidden" id="mField" name="FileLinkInfo">
+	<input type="hidden" id="dField" name="REAL_DATE" dataFld="REAL_DATE">
+	<input type="hidden" id="dField" name="REDRAFT_DATE" dataFld="REDRAFT_DATE">
+	<input type="hidden" id="dField" name="EBH_DATE" dataFld="EBH_DATE">
+	<input type="hidden" id="mField" name="PreApvLineInfo">
+
+<textarea  id="dField" name="DOC_SUMMARY" dataFld="DOC_SUMMARY" style="display:none"></textarea>
+<textarea id="dhtml_body" style="display:none"></textarea>
+<textarea style="display:none" id="cField" name="xsl"></textarea> 
+<input type="hidden" id="AttFileInfo5" />
+<input type="hidden" id="AttFileInfo6" />
+<input type="hidden" id="AttFileInfo7" />
+<input type="hidden" id="AttFileInfo11" />
+<input type="hidden" id="AttFileInfo12" />
+
+<!-- 문서link 2006.01 -->
+<textarea id="mField" name="DOCLINKS" style="display:none"></textarea>
+	<!-- 양식전체본문 -->
+	<div id="bodytable">
+		<!-- header start -->
+<table id="headtable" border="0" cellpadding="3" cellspacing="0" style="border-collapse: collapse;" align="center" width="740px">	
+	<tr>
+		<td nowrap="t" height="46" width="100%" align="center" >
+			<table border="0" bordercolor="#111111" style="border-collapse: collapse;MARGIN-TOP: 0px; width:100%;height:100%;" >
+				<tr>
+					<td align="center" id="headname" class="Approval_headname"></td>
+				</tr>
+			</table>
+			<table style="height:30px;"><tr><td></td></tr></table>
+		</td>
+	</tr>
+	<tr>
+		<td class="signlocation" id="ApvLine">
+			<table border="0" style="border-collapse: collapse;MARGIN-TOP: 0px; width:100%;height:100%;" align="center">							
+				<!-- 발신처 결재란 보이는 부분(왼쪽) -->
+				<tr>
+					<td id="LApvLine" align="left" width="50%">
+						<table border="1" style="border-collapse: collapse;MARGIN-TOP: 0px;height:100%;">
+							<!--<tr>
+								<td rowspan="4" width="40" align="center">신청<br>부서</td>
+								<td class='deptsignfield'>담당</td>
+								<td class='deptsignfield'>팀장</td>
+								<td class='deptsignfield'>본부장</td>
+							</tr>
+							<tr>
+								<td class='signfield'>&nbsp;</td>
+								<td class='signfield'>&nbsp;</td>
+								<td class='signfield'>&nbsp;</td>
+							</tr>
+							<tr>
+								<td class='approvenamefield'>&nbsp;</td>
+								<td class='approvenamefield'>&nbsp;</td>
+								<td class='approvenamefield'>&nbsp;</td>
+							</tr>
+							<tr>
+								<td class='datefield'>&nbsp;</td>
+								<td class='datefield'>&nbsp;</td>
+								<td class='datefield'>&nbsp;</td>
+							</tr>-->
+						</table>
+					</td>
+					<!-- 수신처 결재란 보이는부분 (오른쪽)-->
+					<td id="RApvLine" align="right" width="50%">
+						<table border="1" style="border-collapse: collapse;MARGIN-TOP: 0px;height:100%;">
+							<!--<tr>
+								<td rowspan='4' width="40" align="center">수신</td>
+								<td class='deptsignfield'>담당</td>
+								<td class='deptsignfield'>팀장</td>								
+							</tr>
+							<tr>
+								<td class='signfield'>&nbsp;</td>
+								<td class='signfield'>&nbsp;</td>								
+							</tr>
+							<tr>
+								<td class='approvenamefield'>&nbsp;</td>
+								<td class='approvenamefield'>&nbsp;</td>								
+							</tr>
+							<tr>
+								<td class='datefield'>&nbsp;</td>
+								<td class='datefield'>&nbsp;</td>								
+							</tr>-->
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" height="10">&nbsp;</td>
+				</tr>
+				<tr>
+					<td id="CmtLineList" width="100%" colspan = "2">
+					</td>
+				</tr>
+				<tr style="display:none;">
+					<td id="AssistLine" width="100%" colspan = "2">
+					</td>
+				</tr>
+				<tr style="display:none;">
+					<td id="AppLine" width="100%" colspan = "2">
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td height="20">&nbsp;</td>
+	</tr>
+</table>
+		<!-- header end -->
+		<!-- bodycontext start -->
+		</table>
+		<!-- header end -->
+		<!-- bodycontext start -->
+		<table id="bodycontext" style="MARGIN-TOP: 0px;WIDTH: 740px;BORDER-COLLAPSE: collapse; padding-left:20px;" align="center" cellpadding="0" cellspacing="0">
+			<tr style="padding-left:20px;">
+				<td>
+					<table border="0" width="740px">
+						<tr>
+							<td width="33%" align="left">1. 거래처 현황</td>
+							<td width="33%" align="center"><u><span id="Gian"></span></u></td>
+							<td width="33%" align="right"><u><span id="Wday"></span></u></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			
+			<tr  style="padding-left:20px;">
+			<td >
+				<table border="1" width="100%" height="100%" style="MARGIN-TOP: 0px;BORDER-COLLAPSE: collapse"   bordercolor="#111111">
+					<tr align="center" height="30px;">
+						<td width="9%" bgColor="#f2f2f2">담당MD명</td>
+						<td width="11%"><input type="text" id="mField" name="nmName" class="valuefield1" style="text-align:center;width:95%;" readonly></td>
+						<td width="11%" bgColor="#f2f2f2">상선위시<br/>방송예정일</td>
+						<td width="11%"  colspan="2">
+						    <input type="text" id="mField" name="nmFDATE" readonly="readonly" style='font-size:9pt; PADDING-LEFT: 3px; width:65%;'  datepicker="true" datepicker_format="YYYY-MM-DD-W"  />
+						</td>
+						<td width="12%" style="text-align:center; padding-left:5px;" bgColor="#f2f2f2">방송예정일</td>
+						<td width="10%" >
+						    <input type="text" id="mField" name="nmWDATE" readonly="readonly" style='font-size:9pt; PADDING-LEFT:3px; width:50%;'  datepicker="true" datepicker_format="YYYY-MM-DD-W"  />
+						</td>
+						<td width="20%" style="text-align:left;padding-left:5px;" >방송시간 :
+						  <select id="mField" name="nmtime1" style="border:1px solid #D1D1D1;width:40px;">
+				             <option value="00">00</option> <option value="01">01</option>  <option value="02">02</option>
+				             <option value="03">03</option> <option value="04">04</option>  <option value="05">05</option>
+				             <option value="06">06</option> <option value="07">07</option>  <option value="08">08</option>
+				             <option value="09">09</option> <option value="10">10</option>  <option value="11">11</option>
+				             <option value="12">12</option> <option value="13">13</option>  <option value="14">14</option>
+				             <option value="15">15</option> <option value="16">16</option>  <option value="17">17</option>
+				             <option value="18">18</option> <option value="19">19</option>  <option value="20">20</option>
+				             <option value="21">21</option> <option value="22">22</option>  <option value="23">23</option>
+				             
+				          </select>시
+				          <input type="text" id="mField" maxlength="2" name="textTime" class="valuefield1" style="text-align:center; width:20%">분
+						</td>
+						<td width="7%" bgColor="#f2f2f2">담당QM명</td>
+						<td width="9%">
+						    <input type="text" id="mField" name="qmName" class="valuefield1" style="text-align:center;width:40%;" onclick="addList('1');" readonly>
+						    <img alt="" src="/GWImages/Common/btn/bt_select_p.gif" name="btnRequest" id="Img4" class="Out" align="absmiddle" border="0" onclick="addList('1');" style="display:"";cursor:hand;">
+						</td>
+					</tr>
+					<TR align="center">
+						<td bgColor="#f2f2f2">협력사명</td>
+						<td ><input type="text" id="mField" class="valuefield1" name="nmCompanyname" style="text-align:center;width:97%;" maxlength="24" ></td>
+						<td style="text-align:center;" bgColor="#f2f2f2">협력사코드</td>
+						<td colspan="2"><input type="text" id="mField"  maxlength="17" style="text-align:center;ime-mode:disabled;width:99%;" onblur="get_float(this);" class="valuefield1" name="nmCompanycode"></td>
+						<td bgColor="#f2f2f2"><a target="go_ksrm" onclick="OpenKSRM();" style="cursor:hand;color:blue">사업자등록번호</a></td>
+						<td  colspan="4"><input type="text" id="mField" maxlength="13"  class="valuefield1" name="nmLicensenum" style="margin-left:-5px; text-align:center;ime-mode:disabled;width:90%;" onkeypress="num_chk();" readonly>&nbsp;<img alt="" src="/GWImages/Common/btn/bt_select_p.gif"  name="btnRequest" id="Img1" class="Out" align="absmiddle" border="0" onClick="addList2();" style="display:"";cursor:hand;"></td>
+					</TR>
+					<TR align="center"> 
+						<td bgColor="#f2f2f2">주&nbsp;&nbsp;&nbsp;소</td>
+						<td  colspan="4"><input type="text" id="mField" class="valuefield1" name="nmAddress" style="text-align:center;width:98%;"></td>
+						<td bgColor="#f2f2f2">대표자성명</td>
+						<td  colspan="4"><input type="text" id="mField" maxlength="10"  class="valuefield1" name="nmCeo" style="text-align:center;WIDTH:98%"></td>
+					</TR>
+                </table>
+                <table border="1" width="100%" height="100%" style="MARGIN-TOP: -1px;BORDER-COLLAPSE: collapse"   bordercolor="#111111">
+					<TR align="center">
+						<td width="9%" bgColor="#f2f2f2">담보내역</td>
+						<td width="11%">
+							<select id="mField" NAME="nmWarrant" style="border:1px solid #D1D1D1;width:93%;">
+								<option value=""></option>
+								<option value="담보해당없음">담보해당없음</option>
+								<option value="부동산담보">부동산담보</option>
+								<option value="보증보험">보증보험</option>
+								<option value="기타">기타</option>
+							</select>
+						</td>
+						<td width="11%" bgColor="#f2f2f2">신상품여부</td>
+						<td width="12%" colspan="2">
+							<select id="mField" NAME="nmNewGoods" style="border:1px solid #D1D1D1;width:93%;">
+								<option value=""></option>
+								<option value="신상품">신상품</option>
+								<option value="변경상품">변경상품</option>
+							</select>
+						</td>
+						<td width="12%" style="text-align:center;" bgColor="#f2f2f2">제조사<BR>(벤더사 표기 포함)</td>
+						<td width="15%" ><input type="text" id="mField" class="valuefield1" name="nmManuCompany" style="text-align:center;width:96%;"></td>
+						<td width="12%" bgColor="#f2f2f2" style="text-align:center;" colspan="2">원산지</td>
+						<td width="18%" colspan="2"><input type="text" id="mField"   class="valuefield1" name="nmOriginPlace" style="text-align:center;width:96%;"></td>
+					</TR>				
+					<tr align="center">
+					    <td bgColor="#f2f2f2">협력사유형</td>
+					    <td >
+						    <select id="mField" NAME="nmEntType" style="border:1px solid #D1D1D1;width:93%;">
+							    <option value=""></option>
+							    <option value="상생협력사">상생협력사</option>
+							    <option value="우수협력사">우수협력사</option>
+							    <option value="일반협력사">일반협력사</option>
+							    <option value="수입업체">수입협력사</option>
+							    <option value="제조사">제조사</option>
+						    </select>
+					    </td>
+					    <td >
+						    <select id="mField" NAME="nmEntAlphabet" style="border:1px solid #D1D1D1;width:93%;">
+							    <option value=""></option>
+							    <option value="S">S</option>
+							    <option value="A">A</option>
+							    <option value="B">B</option>
+							    <option value="C">C</option>
+						    </select>
+					    </td>
+					    <td >
+						    <select id="mField" NAME="nmEntSize" style="border:1px solid #D1D1D1;width:93%;">
+							    <option value=""></option>
+							    <option value="중소기업">중소기업</option>
+							    <option value="대기업">대기업</option>
+						    </select>
+					    </td>
+					    <td bgColor="#f2f2f2" colspan="2">NS신용등급표기</td>
+					    <td >
+						    <select id="mField" NAME="nmNS" style="border:1px solid #D1D1D1;width:93%;">
+							    <option value=""></option>
+							    <option value="A등급">A등급</option>
+							    <option value="B등급">B등급</option>
+							    <option value="C등급">C등급</option>
+							    <option value="D등급">D등급</option>
+							    <option value="E등급">E등급</option>
+							    <option value="S등급">S등급</option>
+						    </select>
+					    </td>
+					    <td style="text-align:center;" align="center" colspan="2" bgColor="#f2f2f2">부가세여부</td>
+					    <td colspan="2">
+						    <select id="mField" NAME="nmTax" style="border:1px solid #D1D1D1;width:93%;">
+							    <option value=""></option>
+							    <option value="면세">면세</option>
+							    <option value="과세">과세</option>
+							    <option value="특소세">특소세</option>
+						    </select>
+					    </td>
+					</tr>				
+				</table>
+			</td>
+			</tr>
+			
+			<tr height="20"><td>&nbsp;</td></tr>
+			<tr style="padding-left:20px;">
+				<td align="left">
+				    <table width="740px;">
+					    <tr>   
+						    <td width="50%">2. 공급상품내역 </td>
+						    <td width="50%" align="right">(금액단위:원)<a class="Btn02" border=0 onclick="ADD(REQ);" style="cursor:hand"><span>[+]</span></a> <a class="Btn02" border=0 onClick="REMOVE('REQ');" style="cursor:hand"><span>[-]</span></a></td>
+					    </tr>
+				    </table>
+				</td>
+			</tr>
+			<tr style="padding-left:20px;">
+				<td>
+					<table border="1" width="740px;" height="100%" style="MARGIN-TOP: 0px;BORDER-COLLAPSE: collapse" id="REQ" bordercolor="#111111">
+						<tr>
+						    <td align="center" rowspan="2"  width="5%" bgColor="#f2f2f2">선택</td>
+							<td align="center" rowspan="2"  width="13%" bgColor="#f2f2f2">상품명</td>
+							<td align="center" rowspan="2"  width="6%" bgColor="#f2f2f2">
+							<table>
+								<tr>
+									<td align="center" class="condition1">광고특약</td>
+								</tr>
+								<tr>
+									<td align="center" class="condition1">유형</td>
+								</tr>
+							</table>
+							</td>
+							<td align="center" rowspan="2" width="8%" bgColor="#f2f2f2">
+							<table>
+                				
+								<tr>
+									<td align="center" class="condition1">방송시간</td>
+								</tr>
+								<tr>
+									<td align="center" class="condition1">가중치</td>
+								</tr>
+							</table>
+							</td>
+							<td align="center" rowspan="2"  width="8%" bgColor="#f2f2f2">
+							<table>
+								<tr>
+									<td align="center" class="condition1">상품</td>
+								</tr>
+								<tr>
+									<td align="center" class="condition1">코드</td>
+								</tr>
+							</table>
+							</td>
+							<td align="center" rowspan="2" width="10%" bgColor="#f2f2f2">
+							<table>
+								<tr>
+									<td align="center" class="condition1">원가</td>
+								</tr>
+								<tr>
+									<td align="center" class="condition1">(VAT포함)</td>
+								</tr>
+							</table>
+							</td>
+							<td align="center" rowspan="2" width="10%" bgColor="#f2f2f2">
+								<table>
+								<tr>
+									<td align="center" class="condition1">판매가</td>
+								</tr>
+								<tr>
+									<td align="center" class="condition1">(VAT포함)</td>
+								</tr>
+							</table>
+							</td>
+							<td align="center" rowspan="2"  width="10%" bgColor="#f2f2f2">
+							<table>
+								<tr>
+									<td align="center" class="condition1">상품</td>
+								</tr>
+								<tr>
+									<td align="center" class="condition1">매출비율</td>
+								</tr>
+							</table>
+							</td>
+							<td align="center" rowspan="2"  width="10%" bgColor="#f2f2f2">
+							<table>
+								<tr>
+									<td align="center" class="condition1">분당</td>
+								</tr>
+								<tr>
+									<td align="center" class="condition1">광고특약수수료</td>
+								</tr>
+							</table>
+							</td>
+							<td align="center" rowspan="2" width="15%" bgColor="#f2f2f2">
+							<table style="background-color:#ffff00;">
+								<tr>
+									<td style="background-color:#ffff00;"align="center" class="condition1">분당 예상공헌이익액</td>
+								</tr>
+								<tr>
+									<td style="background-color:#ffff00;"align="center" class="condition1">(예상공헌이익율)</td>
+								</tr>
+							</table>
+							</td>
+							
+							<td align="center" rowspan="2"  width="%" bgColor="#f2f2f2">무이자<br />개월수</td>
+							<td align="center" colspan="2"  width="14%" bgColor="#f2f2f2">ARS</td>
+						</tr>
+						<tr>
+							<td align="center"  width="7%" bgColor="#f2f2f2">협력사</td>
+							<td align="center"  width="7%" bgColor="#f2f2f2">NS</td>
+						</tr>
+						<tr align="center">
+						    <td class="aligncenter"><input type="radio" class="valuefield1" name="nmREQ_Select" onclick="prod_chk2('REQ',this)"></td>
+							<td class="aligncenter"><input type="text" id="mField" class="valuefield1" name="nmREQ_Pname" style="text-align:center;ime-mode:active;width:97%;" maxlength="15"></td>
+							<td class="aligncenter">
+								<select id="Select1" NAME="nmREQ_Win" style="border:1px solid #D1D1D1;"style="width:65;height:10;">
+									
+									<option value="정률">정률</option>
+									<option value="광고특약">광고특약</option>
+									<option value="지자체홍보비">지자체홍보비</option>
+									<option value="광고홍보비">광고홍보비</option>
+									
+								</select>
+							</td>
+							<td class="aligncenter"><input type="text" id="mField" class="valuefield1" onblur="add_percent4(this);"name="nmREQ_TimeText" style="text-align:center;ime-mode:active;width:97%;" maxlength="4"></td>
+							<td class="aligncenter"><input type="text" id="mField" class="valuefield1" name="nmREQ_Pcode" style="text-align:center;ime-mode:disabled;width:97%;" maxlength="8" onkeypress="num_chk();"  onkeyup="prod_chk(this);"></td>
+							<td class="aligncenter"><input type="text" id="mField" class="valuefield1" name="nmREQ_Cost" style="text-align:right;ime-mode:disabled;width:97%;padding-right:1pt" maxlength="10" onkeypress="num_chk();" onchange="javascript:auto_comma(this,this.value);" onblur="get_float(this); fmwonga();"></td>
+							<td class="aligncenter"><input type="text" id="mField" class="valuefield1" name="nmREQ_SPrice" style="text-align:right;ime-mode:disabled;width:97%;padding-right:1pt" maxlength="10"  onkeypress="num_chk();" onchange="javascript:auto_comma(this,this.value);" onblur="get_float(this); fmMSPrice();" ></td>
+							<td class="aligncenter"><input type="text" id="mField" class="valuefield1" name="nmREQ_SaleRatio" style="text-align:right;ime-mode:disabled;width:97%;padding-right:1pt" maxlength="5" readonly="readonly"></td><!--onblur="add_percent3(this);" -->
+							<td class="aligncenter"><input type="text" id="mField" class="valuefield1" name="nmREQ_TPrice" style="text-align:center;ime-mode:active;width:97%;" onchange="javascript:auto_comma(this,this.value);"maxlength="15"></td>
+							<td class="aligncenter">
+							<input type="text" id="mField" class="valuefield1" name="nmREQ_Margin"  style="text-align:right;ime-mode:disabled;width:97%;padding-right:1pt" onkeypress="num_chk(this);" onchange="javascript:auto_comma(this,this.value);"onblur="fmYSM4();"  maxlength="20" /><!--num_chk();	disabled-->
+                            <!--<input type="text" id="mField" class="valuefield1" name="nmREQ_line"  style="height :3%; background-color:black; width:97%;"/>-->
+                            <input type="text" id="mField" class="valuefield1" name="nmREQ_Profit" style="text-align:right;ime-mode:disabled;width:97%;padding-right:1pt" onkeypress="num_chk(this);" onblur="add_percent3(this); fmProfit(); fmYSM3();" maxlength="20"/><!--num_chk();	disabled-->
+						    </td>
+							<td class="aligncenter"><input type="text" id="mField" class="valuefield1" name="nmREQ_InterMon" style="text-align:center;ime-mode:disabled;" maxlength="2" size="2"></td>
+							<td class="aligncenter"><input type="text" id="mField" class="valuefield1" name="nmREQ_ARS_C" style="text-align:right;ime-mode:disabled;padding-right:1pt" maxlength="6" size="6" onkeypress="num_chk();" onchange="javascript:auto_comma(this,this.value);" onblur="get_float(this);"></td>
+							<td class="aligncenter"><input type="text" id="mField" class="valuefield1" name="nmREQ_ARS_W" style="text-align:right;ime-mode:disabled;padding-right:1pt" maxlength="6" size="6" onkeypress="num_chk();" onchange="javascript:auto_comma(this,this.value);" onblur="get_float(this);"></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			
+			<tr height="20"><td>&nbsp;</td></tr>
+			<tr style="padding-left:20px;">
+				<td align="left">
+				    <table width="740px">
+					    <tr>
+						    <td width="%"id="tdTxtChg0">※ 상선위조건 및 상선위대비 변경사항</td>
+						    <td width="20%">
+							    <select id="mField" NAME="nmCondition" style="border:1px solid #D1D1D1;width:245;"onchange="TransCondition();" >
+								    <option value="상선위 조건">상선위조건</option>
+								    <option value="종전방송조건">종전방송조건</option>
+								    <option value=""></option>
+								    
+								    
+							    </select>
+						    </td>
+						    <td width="25%" align="left"><a class="Btn02" border=0 onclick="ADD('OLD');" style="cursor:hand"><span>[+]</span></a> <a class="Btn02" border=0 onClick="REMOVE('OLD');" style="cursor:hand"><span>[-]</span></a></td>
+						    <td width="20%">※ 거래조건 </td>
+					    </tr>
+				    </table>
+				</td>
+			</tr>
+			<tr style="padding-left:20px;">
+				<td>
+					<table border="1" width="100%" height="100%" style="MARGIN-TOP: 0px;BORDER-COLLAPSE: collapse" id="OLD" bordercolor="#111111">
+						<tr id="oldTr0" >
+							<!--<td align="center"  width="4%">구분</td>-->
+							<td align="center"  width="7%" bgColor="#f2f2f2">구분</td>
+							<td align="center"  width="5%" bgColor="#f2f2f2">광고특약<br>유형</td>
+							<td align="center"  width="11%" bgColor="#f2f2f2">원가<br>(VAT포함)</td>
+							<td align="center"  width="6%" bgColor="#f2f2f2">판매가<br>(VAT포함)</td>
+							<td align="center"  width="7%" bgColor="#f2f2f2">상품<br>매출비율</td>
+							<td align="center"  width="13%" bgColor="#f2f2f2">분당 공헌이익액<br />(공헌이익율)</td>
+							<td align="center"  width="9%" bgColor="#f2f2f2">분당<br>광고특약수수료</td>
+							<td align="center"  width="5%" bgColor="#f2f2f2">무이자<br>개월수</td>
+							<td align="center"  width="7%" bgColor="#f2f2f2">상품<br>코드</td>
+							<td id="tdTxtChg" align="center"  bgColor="#f2f2f2">상선위 회차</td>
+							<td >&nbsp;</td>
+							<td align="center" class="condition1" width="6%" bgColor="#f2f2f2">거래<br>형태</td>
+							<td align="center" class="condition1" width="8%" bgColor="#f2f2f2">배송<br>형태</td>
+							<td align="center" class="condition1" width="8%" bgColor="#f2f2f2">배송<br>기일</td>
+						</tr>
+						<tr id="oldTr1">
+						   <td class="aligncenter" align="center"  width="8%" bgColor="#f2f2f2"name="sangsun"id="tdTxtChg2">상선위조건</td>
+						   <td class="aligncenter">
+								<select id="Select3" NAME="nmOLD_Win1" style="border:1px solid #D1D1D1;"style="width:55;height:10;">
+									<option value="정률">정률</option>
+									<option value="광고특약">광고특약</option>
+									<option value="지자체홍보비">지자체홍보비</option>
+									<option value="광고홍보비">광고홍보비</option>
+								</select>
+							</td>
+                           <td class="aligncenter"><img src="/GWImages/Common/btn/bt_select_p.gif"  name="btnRequest1" id="Img3" class="Out" align="absmiddle" border="0" onClick="getProduct('oldTr1');" style="display:;cursor:hand;">&nbsp;<input type="text" id="mField" class="valuefield1" name="nmOLD_Cost1" style="text-align:right;ime-mode:disabled;width:65%;padding-right:1pt" maxlength="10" size="12" onchange="javascript:auto_comma(this,this.value);" onblur="fmwonga();" ></td>
+                           <td class="aligncenter"><input type="text" id="mField" class="valuefield1" name="nmOLD_SPrice1" style="text-align:right;ime-mode:disabled;padding-right:1pt" maxlength="10" size="8" onkeypress="num_chk();" onchange="javascript:auto_comma(this,this.value);" onblur="get_float(this);fmMSPrice();"></td>
+                           <td class="aligncenter"><input type="text" id="mField" class="valuefield1" name="nmOLD_SaleRatio1" style="text-align:right;ime-mode:disabled;padding-right:1pt" onblur="add_percent3(this);fmSRatio();" maxlength="5" size="5" ></td>
+			               <td class="aligncenter">
+						        <input type="text" id="mField" class="valuefield1" onchange="javascript:auto_comma(this,this.value);"name="nmOLD_TPU1"onblur="fmMargin();" style="text-align:center;width:95%;">
+						        <input type="text" id="mField" class="valuefield1" onblur="add_percent3(this);fmProfit();" name="nmOLD_TPD1" style="text-align:center;width:95%;">
+						   </td>
+						    <td class="aligncenter"><input type="text" id="mField" class="valuefield1" onblur="fmTprice();"onchange="javascript:auto_comma(this,this.value);" name="nmOLD_TPrice1" style="text-align:center;width:95%;"></td>
+							<td class="aligncenter"><input type="text" id="mField" class="valuefield1" name="nmOLD_InterMon1" style="text-align:center;ime-mode:disabled;" maxlength="3" size="3" onblur="fmInterMon();"></td>
+							<td class="aligncenter"><input type="text" id="mField" class="valuefield1" name="nmOLD_Pcode1" style="text-align:center;ime-mode:disabled;" maxlength="8" size="5" onkeypress="num_chk()"></td>
+							<td class="aligncenter"><input type="text" id="mField" class="valuefield1" name="nmOLD_Sang1" style="text-align:center;" maxlength="15" size="12"></td>
+						    <td >&nbsp;</td>
+						    <td class="aligncenter">
+								<select id="mField" NAME="nmOLD_Type1" style="border:1px solid #D1D1D1;"style="width:50;height:10;" >
+									<option value=""></option>
+									<option value="외상매입형">외상매입형</option>
+									<option value="혼합매입형">혼합매입형</option>
+									<option value="소개방송수수료">소개방송수수료</option>
+									<option value="직매입">직매입</option>
+									<option value="주문제조">주문제조</option>
+								</select>
+							</td>
+						    <td class="aligncenter" >
+						          <select id="mField" NAME="nmOLD_Delivery_21" style="border:1px solid #D1D1D1;"style="width:40;height:10;">
+									<option value=""></option>
+									<option value="센터">센터</option>
+									<option value="업체">협력사</option>
+									<option value="지원">지원</option>
+								</select>
+								</td>
+						    <td class="aligncenter" >
+						          <select id="mField" NAME="nmOLD_Delivery_Day1" style="border:1px solid #D1D1D1;"style="width:40;height:10;">
+									<option value="일">일</option>
+									<option value="1일">1일</option>
+									<option value="2일">2일</option>
+									<option value="3일">3일</option>
+									<option value="4일">4일</option>
+									<option value="5일">5일</option>
+									<option value="6일">6일</option>
+									<option value="7일">7일</option>
+								</select>
+								</td>
+						</tr>
+						<tr id="oldTr2">
+		                    <td class="aligncenter"align="center"" bgColor="#f2f2f2"id="tdTxtChg3">상선위대비변경내용</td>
+		                    <td align="center">-</td>
+		                    <td class="aligncenter"><input type="text" id="mField" name="nmOLD_Cost1_S1" class="valuefield1" style="text-align:center;width:95%;" readonly /></td>
+		                    <td align="aligncenter"><input type="text" id="mField" name="nmOLD_SPrice1_S1" class="valuefield1" style="text-align:center;width:95%;"readonly /></td>
+		                    <td class="aligncenter"><input type="text" id="mField" name="nmOLD_SaleRatio1_S1" class="valuefield1" style="text-align:center;width:95%;" readonly /></td>
+		                    <td class="aligncenter"><input type="text" id="mField" name="nmOLD_TPU1_S1" class="valuefield1" style="text-align:center;width:95%;" readonly />
+		                         <input type="text" id="mField" name="nmOLD_TPD1_S1" class="valuefield1" style="text-align:center;width:95%;"onchange="javascript:auto_comma(this,this.value);" readonly /></td>
+		                    <td class="aligncenter"><input type="text" id="mField" name="nmOLD_TPrice1_S1" class="valuefield1" style="text-align:center;width:95%;" onblur="add_percent(this);fmProfit();" readonly /></td>
+		                     <td class="aligncenter"><input type="text" id="mField" name="nmOLD_InterMon1_S1" class="valuefield1" style="text-align:center;width:95%;"  readonly /></td>
+		                    <td align="center">-</td>
+		                    <td align="center">-</td>
+		                    <td>&nbsp;</td>
+		                    <td align="center">-</td>
+		                    <td align="center">-</td>
+		                    <td align="center">-</td>
+		                 </tr>
+		                <tr id="oldTr3">
+		                 <td class="aligncenter"align="center" bgColor="#f2f2f2"id="tdTxtChg4">상선위대비변경사유</td>
+		                 <td colspan="13"><input type="text" id="mField" name="nmOLD_Sangtext1" class="valuefield1" style="text-align:left;width:99%;"></td>
+		                
+		                </tr>
+			         </table>
+				</td>
+			</tr>	
+			<tr height="20"><td>&nbsp;</td></tr>
+			<tr style="padding-left:20px;">
+				<td align="left">
+				    <table width="740px;">
+					    <tr>
+						    <td width="50%">3. 예상실적</td>
+						    <td width="100%" align="right">(금액단위:원)</td>
+						    <td id="BtnConfirm" width="30%" align="right"><a class="Btn02" border=0 onclick="clickConfirm();" style="cursor:hand"><span>예상실적 결과 확정</span></a></td>
+						    <td id="BtnModify" width="30%" align="right" style="display:none;"><a class="Btn02" border=0 onclick="clickModify();" style="cursor:hand"><span>예상실적 결과 수정</span></a></td>
+						    <input type="hidden" id="mField" name="confirm_key" value="NO" />
+					    </tr>
+				    </table>
+				</td>
+			</tr>
+			<tr>
+                <td colspan="11">
+                    <table border="2" id="exp1" style="width:30%; height:70px; border-color:#3300ff; margin-top:0px; border-collapse:collapse; float:left; margin-left:-1px;">
+                        <tr align="center">
+		                    <td style="background-color:#f2f2f2;" align="center">분당 취급고<br />매출액 목표</td>
+			                <td style="background-color:#f2f2f2;" align="center">분당 예상<br />취급고매출액</td>
+					        <td style="background-color:#f2f2f2;" align="center">예상 PGM<br />취급고달성율</td>
+					    </tr>
+						<tr align="center">
+					        <td width="10%"><input type="text" id="mField" name="nmSalePerSec_P1" class="valuefield1" onchange="javascript:auto_comma(this,this.value);" style="text-align:center;width:95%;"></td>
+				            <td width="10%"><input type="text" id="mField" onkeypress="num_chk()"onchange="javascript:auto_comma(this,this.value);"onblur="PGM1(); fmYSM2();" class="valuefield1" name="nmSalePerSec_ys1" style="text-align:center;width:97%;" maxlength="10" ></td>
+				            <td style="display:none;"><input type="text" id="mField" onkeypress="num_chk()" class="valuefield1" name="nmSalePerSec_r" style="text-align:center;width:97%;" maxlength="10"  readonly></td>
+				            <td width="10%"><input type="text" id="mField" name="nmSalePerSec_PGM1" class="valuefield1" style="text-align:center;width:95%;"readonly></td>
+					    </tr>
+				    </table> 
+				    <table border="2" id="exp2" style="width:42%; height:70px; border-color:#3300ff; margin-top:0px; border-collapse:collapse; float:left; margin-left:-1px;">
+				        <tr align="center">
+					        <td style="background-color:#f2f2f2;"align="center">분당 수수료<br />매출액 목표</td> 
+			                <td style="background-color:#f2f2f2;"align="center">분당 상품<br />수수료액</td>
+					        <td style="background-color:#f2f2f2;"align="center">분당 광고<br />특약수수료</td>
+					        <td style="background-color:#f2f2f2;"align="center">예상 PGM<br />매출액달성율</td> 
+					    </tr>
+					    <tr align="center">
+				            <td><input type="text" id="mField" name="nmSalePerSec_P2" class="valuefield1"onchange="javascript:auto_comma(this,this.value);" style="text-align:center;width:95%;"></td>
+				            <td><input type="text" id="mField" name="nmSalePerSec_ww3" class="valuefield1"onchange="javascript:auto_comma(this,this.value);" style="text-align:center;width:95%;" onblur="fmYSM2();"> </td>    
+				            <td><input type="text" id="mField" name="nmSalePerSec_ww4" class="valuefield1" onchange="javascript:auto_comma(this,this.value);"onblur="PGM2();fmYSM();fmYSM2();"style="text-align:center;width:95%;"></td>
+				            <td><input type="text" id="mField" name="nmSalePerSec_PGM2" class="valuefield1" style="text-align:center;width:95%;"readonly></td>
+						</tr>
+					</table>
+					<table border="1" id="exp3" style="width:27%; height:70px; border-color:#111111; margin-top:0px; border-collapse:collapse; float:left; margin-left:-1px;">
+					    <tr align="center">
+					        <td style="background-color:#f2f2f2;"align="center">분당 예상<br />취급고량</td> 
+					        <td style="background-color:#ffff00;"align="center">수수료<br />매출율</td> 
+					        <td style="background-color:#f2f2f2;"align="center">분당 예상<br />공헌이익액</td> 
+					        <td style="background-color:#ffff00;"align="center">예상<br />공헌이익율</td> 
+					    </tr>
+					    <tr align="center">
+					        <td><input type="text" id="mField" onkeypress="num_chk()" class="valuefield1" name="nmSalePerSec_ys2" style="text-align:center;width:95%;" maxlength="20"readonly></td>
+				            <td><input type="text" id="mField" onkeypress="num_chk(this);"  class="valuefield1" name="nmSalePerSec_y2" style="text-align:center;width:95%;" maxlength="20" readonly></td>
+				            <td><input type="text" id="mField" onkeypress="num_chk(this);" class="valuefield1" name="nmSalePerSec_yadd1"  style="text-align:center;width:95%;" maxlength="20" readonly></td>
+					        <td><input type="text" id="mField" onkeypress="num_chk(this);"class="valuefield1" name="nmSalePerSec_yadd2" style="text-align:center;width:95%;" maxlength="20" readonly></td>
+					    </tr>
+                    </table>
+				</td>
+			</tr>					
+			<tr height="30"><td>&nbsp;</td></tr>
+			<tr style="padding-left:20px;">
+				<td align="left">
+				<table width="740px" ID="Table4">
+					<tr>
+						<!--<td>4. 변경사유(구체적으로 기술)</td>-->
+						<td align="right"><a class="Btn02" border=0 onClick="ADD('EX1');" style="cursor:hand"><span>[+]</span></a> <a class="Btn02" border=0 onClick="REMOVE('EX1');" style="cursor:hand"><span>[-]</span></a></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+			<tr style="padding-left:20px">
+				<td>
+					<table border="1" width="740px height="100%" style="MARGIN-TOP: 0px;BORDER-COLLAPSE: collapse;" id="EX1" bordercolor="#111111">
+						<tr >
+							<td  width="5%" align="center" bgColor="#f2f2f2">상품기능(설명)</td>
+							<td  width="5%" align="center">1</td>
+							<td class="aligncenter" ><input type="text" id="mField" class="valuefield1" name="nmChg_Reason1" style="width:100%" maxlength="60" ></td>
+						</tr>
+
+					</table>
+				</td>
+			</tr>
+			
+			<tr style="padding-left:20px;">
+				<td align="left">
+				<table width="740px" ID="Table6">
+					<tr>
+						<!--<td>4. 변경사유(구체적으로 기술)</td>-->
+						<td align="right"><a class="Btn02" border=0 onClick="ADD('EX2');" style="cursor:hand"><span>[+]</span></a> <a class="Btn02" border=0 onClick="REMOVE('EX2');" style="cursor:hand"><span>[-]</span></a></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+			<tr style="padding-left:20px">
+				<td>
+					<table border="1" width="740px height="100%" style="MARGIN-TOP: 0px;BORDER-COLLAPSE: collapse;" id="EX2" bordercolor="#111111">
+						<tr >
+							<td  width="5%" align="center" bgColor="#f2f2f2">고객<br />제공<br />가치</td>
+							<td  width="5%" align="center">1</td>
+							<td class="aligncenter" ><input type="text" id="mField" class="valuefield1" name="nmChg_Reason2" style="width:100%" maxlength="60" ></td>
+						</tr>
+
+					</table>
+				</td>
+			</tr>
+
+			
+			<tr style="padding-left:20px;">
+				<td align="left">
+				<table width="740px">
+					<tr>
+						<!--<td>4. 변경사유(구체적으로 기술)</td>-->
+						<td align="right"><a class="Btn02" border=0 onClick="ADD('CHG');" style="cursor:hand"><span>[+]</span></a> <a class="Btn02" border=0 onClick="REMOVE('CHG');" style="cursor:hand"><span>[-]</span></a></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+			<tr style="padding-left:20px">
+				<td>
+					<table border="1" width="740px height="100%" style="MARGIN-TOP: 0px;BORDER-COLLAPSE: collapse;" id="CHG" bordercolor="#111111">
+						<tr >
+							<td  width="5%" align="center" bgColor="#f2f2f2">특기사항</td>
+							<td  width="5%" align="center">1</td>
+							<td class="aligncenter" ><input type="text" id="mField" class="valuefield1" name="nmChg_Reason" style="width:100%" maxlength="60" ></td>
+						</tr>
+
+					</table>
+				</td>
+			</tr>
+			
+			<tr height="20"><td>&nbsp;</td></tr>
+			<tr style="padding-left:20px;">
+				<td align="left">
+				<table width="100%" ID="Table2">
+					<tr>
+						<td width="36%">4. 신용평가 등급에 따른 구비서류</td>
+						<td width="64%">
+							<select id="mField" name="nmTrust" style="border:1px solid #D1D1D1;width:120;">
+								<option value=""></option>
+								<option value="NS D등급이하">NS D등급이하</option>
+								<option value="NS C등급이상">NS C등급이상</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+			<tr style="padding-left:20px;">
+				<td>
+					<table border="1" width="740px" height="100%" style="MARGIN-TOP: 0px;BORDER-COLLAPSE: collapse" id="Table3" bordercolor="#111111">
+						<tr>
+							<td  width="18%" align="center" bgColor="#f2f2f2">서류명</td>
+							<td  width="15%" align="center" bgColor="#f2f2f2">확인</td>
+							<td  width="18%" align="center" bgColor="#f2f2f2">서류명</td>
+							<td  width="15%" align="center" bgColor="#f2f2f2">확인</td>
+							<td  width="18%" align="center" bgColor="#f2f2f2">서류명</td>
+							<td  width="15%" align="center" bgColor="#f2f2f2">확인</td>
+						</tr>
+						<tr>
+							
+							<td bgColor="#f2f2f2"><a href="javascript:void(0)" onclick="OpenTransact();return false;">1.전자거래기본계약서</a></td>
+							<td ><input type="text" id="mField" name="txtTransact" class="valuefield1" style="text-align:center;width:100%"></td>
+							<td bgColor="#f2f2f2">4.협력사간 거래계약서사본 수입신고필증 외</td>
+							<td >
+								<table width="100%" style="table-layout:fixed">
+									<tr>
+										<td  width="75%"><nobr><span id="AttFileInfo4"></span></nobr></td>
+										<td  width="25%">
+											<img src="/GWImages/Common/btn/btn_att_small.gif" onclick="attFile(4);" style="cursor:hand"> <img src="/GWImages/Common/btn/btn_del_small.gif" onclick="delFile(4);" style="cursor:hand">
+										</td>
+									</tr>
+								</table>
+							</td>
+							<td bgColor="#f2f2f2">6.이행(지급)보증보험증권</td>
+							<td >
+								<table width="100%" style="table-layout:fixed">
+									<tr>
+										<td  width="75%"><nobr><span id="AttFileInfo9"></span></nobr></td>
+										<td  width="25%">
+											<img src="/GWImages/Common/btn/btn_att_small.gif" onclick="attFile(9);" style="cursor:hand"> <img src="/GWImages/Common/btn/btn_del_small.gif" onclick="delFile(9);" style="cursor:hand">
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td bgColor="#f2f2f2"><a href="javascript:void(0)" onclick="OpenProduct();return false;">2.상품공급신청서</a></td>
+							<td ><input type="text" id="mField" name="txtProduct" class="valuefield1" style="text-align:center;width:100%"></td>
+							<td bgColor="#f2f2f2">5.결제계좌사본</td>
+							<td >
+								<table width="100%" style="table-layout:fixed">
+									<tr>
+										<td  width="75%"><nobr><span id="AttFileInfo8"></span></nobr></td>
+										<td  width="25%">
+											<img src="/GWImages/Common/btn/btn_att_small.gif" onclick="attFile(8);" style="cursor:hand"> <img src="/GWImages/Common/btn/btn_del_small.gif" onclick="delFile(8);" style="cursor:hand">
+										</td>
+									</tr>
+								</table>
+							</td>
+							<td id="td10" bgColor="#f2f2f2">7.연대보증 계약서(대표자 외)</td>
+							<td >
+								<table id="td10_1" width="100%" style="table-layout:fixed">
+									<tr>
+										<td  width="75%"><nobr><span id="AttFileInfo10"></span></nobr></td>
+										<td  width="25%">
+											<img src="/GWImages/Common/btn/btn_att_small.gif" onclick="attFile(10);" style="cursor:hand"> <img src="/GWImages/Common/btn/btn_del_small.gif" onclick="delFile(10);" style="cursor:hand">
+										</td>
+									</tr>
+								</table>&nbsp;
+							</td>
+						</tr>
+						<tr>
+							<td bgColor="#f2f2f2">3.상품개발기획서</td>
+							<td >
+								<table width="100%" style="table-layout:fixed">
+									<tr>
+										<td  width="75%"><nobr><span id="AttFileInfo3"></span></nobr></td>
+										<td  width="25%">
+											<img src="/GWImages/Common/btn/btn_att_small.gif" onclick="attFile(3);" style="cursor:hand"> <img src="/GWImages/Common/btn/btn_del_small.gif" onclick="delFile(3);" style="cursor:hand">
+										</td>
+									</tr>
+								</table>
+							</td>
+							<td bgColor="#f2f2f2">*종전실적</td>
+							<td >
+								<table width="100%" style="table-layout:fixed">
+									<tr>
+										<td  width="75%"><nobr><span id="AttFileInfo14"></span></nobr></td>
+										<td  width="25%">
+											<img src="/GWImages/Common/btn/btn_att_small.gif" onclick="attFile(14);" style="cursor:hand"> <img src="/GWImages/Common/btn/btn_del_small.gif" onclick="delFile(14);" style="cursor:hand">
+										</td>
+									</tr>
+								</table>
+							</td>
+							<td bgColor="#f2f2f2">*기타서류</td>
+							<td >
+								<table width="100%" style="table-layout:fixed">
+									<tr>
+										<td  width="75%"><nobr><span id="AttFileInfo15"></span></nobr></td>
+										<td  width="25%">
+											<img src="/GWImages/Common/btn/btn_att_small.gif" onclick="attFile(15);" style="cursor:hand"> <img src="/GWImages/Common/btn/btn_del_small.gif" onclick="delFile(15);" style="cursor:hand">
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td bgColor="#f2f2f2">*원가내역서</td>
+							<td >
+								<table width="100%" style="table-layout:fixed">
+									<tr>
+										<td  width="75%"><nobr><span id="AttFileInfo13"></span></nobr></td>
+										<td  width="25%">
+											<img src="/GWImages/Common/btn/btn_att_small.gif" onclick="attFile(13);" style="cursor:hand"> <img src="/GWImages/Common/btn/btn_del_small.gif" onclick="delFile(13);" style="cursor:hand">
+										</td>
+									</tr>
+								</table>
+							</td>
+							<td bgColor="#f2f2f2">사업자등록증사본</td>
+							<td >
+								<table width="100%" style="table-layout:fixed">
+									<tr>
+										<td  width="75%"><nobr><span id="AttFileInfo16"></span></nobr></td>
+										<td  width="25%">
+											<img src="/GWImages/Common/btn/btn_att_small.gif" onclick="attFile(16);" style="cursor:hand"> <img src="/GWImages/Common/btn/btn_del_small.gif" onclick="delFile(16);" style="cursor:hand">
+										</td>
+									</tr>
+								</table>
+							</td>
+							<td bgColor="#f2f2f2">법인등기부등본</td>
+							<td >
+								<table width="100%" style="table-layout:fixed">
+									<tr>
+										<td  width="75%"><nobr><span id="AttFileInfo17"></span></nobr></td>
+										<td  width="25%">
+											<img src="/GWImages/Common/btn/btn_att_small.gif" onclick="attFile(17);" style="cursor:hand"> <img src="/GWImages/Common/btn/btn_del_small.gif" onclick="delFile(17);" style="cursor:hand">
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>			
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+			
+			
+				<td class="aligncenter"><b>(주)엔에스쇼핑</b></td>
+			</tr>
+			
+		</table>
+		
+		<table border="0" style="MARGIN-TOP: 0px;WIDTH: 90%;BORDER-COLLAPSE: collapse" align="center" ID="Table16">								
+			<tr>
+				<td height="10"></td>
+			</tr>
+			
+		</table> 
+	
+	</div>							
+	
+	<p></p>
+	<p></p>
+	<table border="0" cellpadding="0" cellspacing="0" align="center" width="740"><tr><td height="2"></td></tr></table>
+	<table cellpadding="2" cellspacing="0" bgcolor="#FFFFFF" border="1" bgcolor="#FFFFFF" border="2"  bordercolor="#111111" style="border-collapse: collapse;" align="center" width="740" height="75">
+        <tr height="25">
+            <td width="15%" height="25" align="center" valign="middle" bgcolor="#F2F2F2">참&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조</td> 
+	        <td width="85%" id="CCLine" class="Approval_common">
+	            <div id="SendCC"></div>
+	            <div id="RecCC"></div>
+	        </td>
+        </tr>
+        <tr height="25" style="display:none;">
+	        <td width="15%" align="center" valign="middle" bgcolor="#F2F2F2">연결파일</td>
+	        <td width="85%" id="FileLink" class="Approval_common"></td>
+        </tr>
+        <tr height="25">
+	        <td width="15%" align="center" valign="middle" bgcolor="#F2F2F2">첨부파일</td>
+	        <td width="85%" id="AttFileInfo" class="Approval_common"></td>
+        </tr>
+        <tr height="25">
+	        <td width="15%" height="24" align="center" valign="middle" bgcolor="#F2F2F2">연결문서</td>
+	        <td width="85%" id="DocLinkInfo" class="Approval_common"></td>
+        </tr>
+	 </table>	
+							
+	<input type="hidden" name="write" value="write" id="Hidden14">
+	<div id='divErrorMessage' class='errormessage'></div>
+<script language="javascript" type="text/javascript">
+var m_xmlHTTP = CreateXmlHttpRequest();	  //new ActiveXObject("Msxml2.XMLHTTP");
+var m_evalXML = CreateXmlDocument();    //new ActiveXObject("Msxml2.DOMDocument");
+var m_evalXML2 = CreateXmlDocument(); //new ActiveXObject("MSXML2.DOMDocument");
+var m_addField, m_index;
+var asgMinus = new Array('nmREQ_SaleRatio', 'nmREQ_Profit', 'nmREQ_Margin', 'nmOLD_SaleRatio', 'nmOLD_Profit', 'nmOLD_Margin', 'nmSalePerSec_y2', 'nmSalePerSec_yadd2');//이준희 : '-' 기호를 허용하는 란들의 배열을 추가함.
+
+window.onload = initOnload;
+function initOnload() {
+    initialize();
+}
+
+function initialize() { 
+    if (window.parent.document.readyState == "complete") {
+        window.parent.document.onreadystatechange = event_noop;
+        initForm();
+        initApvList();
+        //window.setTimeout(initialize, 500);				
+    }
+}
+
+function initForm() {
+	//거래변경품의서 수정 시작 2007.03
+	//2차 결재일 경우 내부 품의만 존재한다. 스키마 강제 변경
+	try{
+		//if (APV_NO.value == "1" || getInfo("APV_NO") == "1"){
+		//	parent.menu.setInfo('scChgrOU','0');parent.menu.setInfo('scChgrOUV','');parent.menu.setInfo('scCHBisV','');	
+		//}
+	}catch(e){}
+	//거래변경품의서 수정 끝 2007.03
+
+	initFields();
+	G_displaySpnAttInfo(false);
+	G_displaySpnAttInfo_EBH(false);
+}
+function initFields() {
+	//document.getElementById("SUBJECT").value = getInfo("fmnm") + "["+ m_oFormMenu.getLngLabel(getInfo("dpdn_apv"),false) + "  " + m_oFormMenu.getLngLabel(getInfo("usdn"), false) +"]";
+	setFields(dField); //editable field	
+	
+    document.getElementById("headname").innerHTML =  getInfo("fmnm");	
+	//SUBJECT.value = sformname + "["+getInfo("dpdn_apv")+ "  " +getInfo("usdn")+"]";
+	
+	if(getInfo("mode")=="DRAFT"|| getInfo("mode")=="TEMPSAVE")
+	{	
+			//try{alert(parent.opener.getInfo("BODY_CONTEXT"))}catch(e){alert(e.message)}
+			if (parent.blegacy == "1"){
+				//APV_NO.value = "1";
+				//2007.04 추가
+				parent.menu.setInfo('scChgrOU','0');parent.menu.setInfo('scChgrOUV','');parent.menu.setInfo('scCHBisV','');	
+
+				setBodyContext(parent.opener.getInfo("BODY_CONTEXT"));
+				//FileLinkInfo.value = parent.opener.AttFileInfo.innerHTML;
+				//PreApvLineInfo.value = parent.opener.LApvLine.innerHTML;
+			}else{
+				if(getInfo("BODY_CONTEXT") != null) setBodyContext(getInfo("BODY_CONTEXT"));
+			}
+			
+			
+			document.getElementById("Wday").innerHTML = "작성일 : "+formatDate(getInfo("svdt"),"R");
+			
+			document.getElementsByName("nmSvdate").value = formatDate(getInfo("svdt"),"R");
+			document.getElementsByName("nmName")[0].value = m_oFormMenu.getLngLabel(getInfo("usdn"), false);    //담당MD명
+			
+	}else{
+		setBodyContext(getInfo("BODY_CONTEXT"));
+		TransCondition();   //2013.10.02 추가
+		//Gian.innerHTML =  INITIATOR_INFO.value;					
+		//Wday.innerHTML = "작성일 : "+nmSvdate.value;
+		//woong 아래로 수정함 2011-05-19
+		document.getElementById("Wday").innerHTML = "작성일 : " + formatDate(getInfo("INITIATED_DATE"),"R");
+		//document.getElementById("Wday").innerHTML = "작성일 : " + document.getElementById("nmSvdate").value;
+		FileLinkInfo.value = FileLink.innerHTML;
+		if (getInfo("mode") == "APPROVAL" || getInfo("mode") == "RECAPPROVAL"|| getInfo("mode") == "REDRAFT")
+		{
+		    clickConfirm();
+		}
+	}	
+	//if(FileLinkInfo.value!=""){FileLink.innerHTML = FileLinkInfo.value;}
+	
+}
+//BODY_CONTEXT로 구성될 cField, mField 정보를 읽어옴.
+function getBodyContext(){
+	var szBodyContext='';		
+	document.getElementsByName("SUBJECT")[0].value = getInfo("fmnm")+"/"+document.getElementsByName("nmCompanyname")[0].value+"/"+ document.getElementsByName("nmCompanycode")[0].value+"/"+document.getElementsByName("nmREQ_Pname")[0].value;
+	var sBodyContext = "<BODY_CONTEXT>" + getCFields(cField)+ getMFields(mField)+getOperationInfo()+ "</BODY_CONTEXT>";
+	return makeNode("BODY_CONTEXT",sBodyContext,null,false);  
+
+}
+//본문 XML로 구성
+function makeBodyContext(){ //debugger
+	var sBodyContext="";	
+	//xml 구성 예제 : <body><item><name></name></item><item><name></name></item></body>
+	//sBodyContext="<body><item><name>첫번째</name></item><item><name>두번째</name></item></body>";
+ 
+	sBodyContext = "<BODY_CONTEXT>" + getCFields(cField)+ getMFields(mField)+getOperationInfo()+ "</BODY_CONTEXT>";	
+	return sBodyContext;
+}
+
+
+//수신결제 및 2차결제일때 입력란 활성화
+function chkState(gab,V){
+//if ((getInfo("mode") == "RECAPPROVAL")||(getInfo("mode") == "REDRAFT")||(APV_NO.value=="1")){
+if ((getInfo("mode") == "RECAPPROVAL")||(getInfo("mode") == "REDRAFT")){
+		switch (gab){
+			case "REQ": 
+					for(var i=0;i<V;i++){
+					    document.getElementsByName("nmREQ_Margin")[i].disabled=false;
+					    document.getElementsByName("nmREQ_Profit")[i].disabled=false;
+					    document.getElementsByName("nmREQ_Win")[i].disabled=false;
+					}
+					break;
+					
+			case "OLD": 
+					for(var i=0;i<V;i++){
+//					    document.getElementsByName("nmOLD_Profit")[i + 1].disabled=false;
+//					    document.getElementsByName("nmOLD_Win")[i + 1].disabled=false;
+					}
+					break;
+			}
+	}else{
+		switch (gab){
+			case "REQ": 
+					for(var i=0;i<V;i++){
+					
+					}
+					break;
+					
+			case "OLD": 
+					for(var i=0;i<V;i++){
+					
+					}
+					break;
+			}
+	
+	}		
+}
+
+function getOperationInfo(){ //debugger;
+	var sText="";
+	
+	sText = "<OPERATIONINFO>";	//첫번째 테이블
+	if (document.getElementsByName("nmREQ_Pname").length == null){       
+			sText += "<ITEM>";
+			sText += makeNode("nmREQ_Pname",document.getElementsByName("nmREQ_Pname").value);
+			sText += makeNode("nmREQ_TimeText",document.getElementsByName("nmREQ_TimeText").value);
+			sText += makeNode("nmREQ_Pcode",document.getElementsByName("nmREQ_Pcode").value);
+			sText += makeNode("nmREQ_Cost",document.getElementsByName("nmREQ_Cost").value);
+			sText += makeNode("nmREQ_SPrice",document.getElementsByName("nmREQ_SPrice").value);
+			sText += makeNode("nmREQ_SaleRatio",document.getElementsByName("nmREQ_SaleRatio").value);	
+			sText += makeNode("nmREQ_TPrice",document.getElementsByName("nmREQ_TPrice").value);		
+			sText += makeNode("nmREQ_Margin",document.getElementsByName("nmREQ_Margin").value);
+//			sText += makeNode("nmREQ_line",document.getElementsByName("nmREQ_line").value);
+			sText += makeNode("nmREQ_Profit",document.getElementsByName("nmREQ_Profit").value);		
+			sText += makeNode("nmREQ_Win",document.getElementsByName("nmREQ_Win").value);
+			sText += makeNode("nmREQ_InterMon",document.getElementsByName("nmREQ_InterMon").value);		
+			sText += makeNode("nmREQ_ARS_W",document.getElementsByName("nmREQ_ARS_W").value);		
+			sText += makeNode("nmREQ_ARS_C",document.getElementsByName("nmREQ_ARS_C").value);		
+			sText += "</ITEM>";
+	}else{
+		for(var i=0; i < document.getElementsByName("nmREQ_Pname").length; i++){        
+			sText += "<ITEM>";
+			sText += makeNode("nmREQ_Pname",document.getElementsByName("nmREQ_Pname")[i].value);
+			sText += makeNode("nmREQ_TimeText",document.getElementsByName("nmREQ_TimeText")[i].value);
+			sText += makeNode("nmREQ_Pcode",document.getElementsByName("nmREQ_Pcode")[i].value);
+			sText += makeNode("nmREQ_Cost",document.getElementsByName("nmREQ_Cost")[i].value);
+			sText += makeNode("nmREQ_SPrice",document.getElementsByName("nmREQ_SPrice")[i].value);
+			sText += makeNode("nmREQ_SaleRatio",document.getElementsByName("nmREQ_SaleRatio")[i].value);
+			sText += makeNode("nmREQ_TPrice",document.getElementsByName("nmREQ_TPrice")[i].value);	
+			sText += makeNode("nmREQ_Margin",document.getElementsByName("nmREQ_Margin")[i].value);
+//			sText += makeNode("nmREQ_line",document.getElementsByName("nmREQ_line")[i].value);
+			sText += makeNode("nmREQ_Profit",document.getElementsByName("nmREQ_Profit")[i].value);		
+			sText += makeNode("nmREQ_Win",document.getElementsByName("nmREQ_Win")[i].value);		
+			sText += makeNode("nmREQ_InterMon",document.getElementsByName("nmREQ_InterMon")[i].value);		
+			sText += makeNode("nmREQ_ARS_W",document.getElementsByName("nmREQ_ARS_W")[i].value);		
+			sText += makeNode("nmREQ_ARS_C",document.getElementsByName("nmREQ_ARS_C")[i].value);		
+			sText += "</ITEM>";
+		}
+	}
+	
+	sText += "</OPERATIONINFO>";
+	sText += "<OLD_OPERATION>";		//두번째 테이블
+	if (document.getElementsByName("nmOLD_Cost1").length == null){       
+			sText += "<ITEM>";
+			sText += makeNode("nmOLD_Cost1",document.getElementsByName("nmOLD_Cost1")[0].value);
+			sText += makeNode("nmOLD_SPrice1",document.getElementsByName("nmOLD_SPrice1")[0].value);
+			sText += makeNode("nmOLD_SaleRatio1",document.getElementsByName("nmOLD_SaleRatio1")[0].value);
+			sText += makeNode("nmOLD_TPU1",document.getElementsByName("nmOLD_TPU1")[0].value);
+			sText += makeNode("nmOLD_TPD1",document.getElementsByName("nmOLD_TPD1")[0].value);
+			sText += makeNode("nmOLD_TPrice1",document.getElementsByName("nmOLD_TPrice1")[0].value);	
+			sText += makeNode("nmOLD_Win1",document.getElementsByName("nmOLD_Win1")[0].value);		
+			sText += makeNode("nmOLD_InterMon1",document.getElementsByName("nmOLD_InterMon1")[0].value);		
+			sText += makeNode("nmOLD_Pcode1",document.getElementsByName("nmOLD_Pcode1")[0].value);
+			sText += makeNode("nmOLD_Sang1",document.getElementsByName("nmOLD_Sang1")[0].value);
+			sText += makeNode("nmOLD_Type1",document.getElementsByName("nmOLD_Type1")[0].value);		
+			sText += makeNode("nmOLD_Delivery_21",document.getElementsByName("nmOLD_Delivery_21")[0].value);
+			sText += makeNode("nmOLD_Delivery_Day1",document.getElementsByName("nmOLD_Delivery_Day1")[0].value);
+				
+			sText += "</ITEM>";
+	}else{
+		for(var i=0; i < document.getElementsByName("nmOLD_Cost1").length; i++){        
+			sText += "<ITEM>";
+			sText += makeNode("nmOLD_Cost1",document.getElementsByName("nmOLD_Cost1")[i].value);
+			sText += makeNode("nmOLD_SPrice1",document.getElementsByName("nmOLD_SPrice1")[i].value);
+			sText += makeNode("nmOLD_SaleRatio1",document.getElementsByName("nmOLD_SaleRatio1")[i].value);
+			sText += makeNode("nmOLD_TPU1",document.getElementsByName("nmOLD_TPU1")[i].value);
+			sText += makeNode("nmOLD_TPD1",document.getElementsByName("nmOLD_TPD1")[i].value);
+			sText += makeNode("nmOLD_TPrice1",document.getElementsByName("nmOLD_TPrice1")[i].value);	
+			sText += makeNode("nmOLD_Win1",document.getElementsByName("nmOLD_Win1")[i].value);		
+			sText += makeNode("nmOLD_InterMon1",document.getElementsByName("nmOLD_InterMon1")[i].value);		
+			sText += makeNode("nmOLD_Pcode1",document.getElementsByName("nmOLD_Pcode1")[i].value);
+			sText += makeNode("nmOLD_Sang1",document.getElementsByName("nmOLD_Sang1")[i].value);
+			sText += makeNode("nmOLD_Type1",document.getElementsByName("nmOLD_Type1")[i].value);		
+			sText += makeNode("nmOLD_Delivery_21",document.getElementsByName("nmOLD_Delivery_21")[i].value);
+			sText += makeNode("nmOLD_Delivery_Day1",document.getElementsByName("nmOLD_Delivery_Day1")[i].value);		
+			sText += "</ITEM>";
+		}
+	}
+	
+	sText += "</OLD_OPERATION>";
+	
+	sText += "<OLD_OPERATION2>";		//두번째 테이블2(상성위변경)
+	if (document.getElementsByName("nmOLD_Cost1_S1").length == null){       
+		sText += "<ITEM>";
+		sText += makeNode("nmOLD_Cost1_S1",document.getElementsByName("nmOLD_Cost1_S1")[0].value);
+		sText += makeNode("nmOLD_SPrice1_S1",document.getElementsByName("nmOLD_SPrice1_S1")[0].value);
+		sText += makeNode("nmOLD_SaleRatio1_S1",document.getElementsByName("nmOLD_SaleRatio1_S1")[0].value);
+		sText += makeNode("nmOLD_TPU1_S1",document.getElementsByName("nmOLD_TPU1_S1")[0].value);
+		sText += makeNode("nmOLD_TPD1_S1",document.getElementsByName("nmOLD_TPD1_S1")[0].value);
+		sText += makeNode("nmOLD_TPrice1_S1",document.getElementsByName("nmOLD_TPrice1_S1")[0].value);	
+		sText += makeNode("nmOLD_Win1_S1",document.getElementsByName("nmOLD_Win1_S1")[0].value);		
+		sText += makeNode("nmOLD_InterMon1_S1",document.getElementsByName("nmOLD_InterMon1_S1")[0].value);		
+		sText += makeNode("nmOLD_Pcode1_S1",document.getElementsByName("nmOLD_Pcode1_S1")[0].value);
+		sText += makeNode("nmOLD_Sang1_S1",document.getElementsByName("nmOLD_Sang1_S1")[0].value);
+		sText += makeNode("nmOLD_Type1_S1",document.getElementsByName("nmOLD_Type1_S1")[0].value);		
+		sText += makeNode("nmOLD_Delivery_21_S1",document.getElementsByName("nmOLD_Delivery_21_S1")[0].value);
+		sText += makeNode("nmOLD_Delivery_Day1_S1",document.getElementsByName("nmOLD_Delivery_Day1_S1")[0].value);
+		sText += "</ITEM>";
+			
+	}
+	sText += "</OLD_OPERATION2>";
+		
+	 
+	
+	
+	//woong 시작
+	sText += "<EX1_OPERATION>";		//세번째 테이블
+		if (document.getElementsByName("nmChg_Reason1").length == null){   
+			sText += "<ITEM>";
+			sText += makeNode("nmChg_Reason1",document.getElementsByName("nmChg_Reason1").value);
+			sText += "</ITEM>";
+	    }else{
+		    for(var i=0; i < document.getElementsByName("nmChg_Reason1").length; i++){
+			    sText += "<ITEM>";
+			    sText += makeNode("nmChg_Reason1",document.getElementsByName("nmChg_Reason1")[i].value);
+			    sText += "</ITEM>";
+		    }
+	    }
+	sText += "</EX1_OPERATION>";
+	
+	sText += "<EX2_OPERATION>";		//세번째 테이블
+		if (document.getElementsByName("nmChg_Reason2").length == null){   
+			sText += "<ITEM>";
+			sText += makeNode("nmChg_Reason2",document.getElementsByName("nmChg_Reason2").value);
+			sText += "</ITEM>";
+	    }else{
+		    for(var i=0; i < document.getElementsByName("nmChg_Reason2").length; i++){
+			    sText += "<ITEM>";
+			    sText += makeNode("nmChg_Reason2",document.getElementsByName("nmChg_Reason2")[i].value);
+			    sText += "</ITEM>";
+		    }
+	    }
+	sText += "</EX2_OPERATION>";
+	//woong 끝
+	
+	sText += "<CHG_OPERATION>";		//세번째 테이블
+		if (document.getElementsByName("nmChg_Reason").length == null){   
+			sText += "<ITEM>";
+			sText += makeNode("nmChg_Reason",document.getElementsByName("nmChg_Reason").value);
+			sText += "</ITEM>";
+	    }else{
+		    for(var i=0; i < document.getElementsByName("nmChg_Reason").length; i++){
+			    sText += "<ITEM>";
+			    sText += makeNode("nmChg_Reason",document.getElementsByName("nmChg_Reason")[i].value);
+			    sText += "</ITEM>";
+		    }
+	    }
+	sText += "</CHG_OPERATION>";
+	
+	//5번 항목 테이블
+	sText += "<EXP_OPERATION>";		//5번 항목
+	if (document.getElementsByName("nmSalePerSec_ys1").length == null){       
+			sText += "<ITEM>";
+			sText += makeNode("nmSalePerSec_P1",document.getElementsByName("nmSalePerSec_p1").value);
+			sText += makeNode("nmSalePerSec_ys1",document.getElementsByName("nmSalePerSec_ys1").value);
+			sText += makeNode("nmSalePerSec_PGM1",document.getElementsByName("nmSalePerSec_PGM1").value);
+			sText += makeNode("nmSalePerSec_P2",document.getElementsByName("nmSalePerSec_P2").value);	
+			sText += makeNode("nmSalePerSec_ww3",document.getElementsByName("nmSalePerSec_ww3").value);
+			sText += makeNode("nmSalePerSec_ww4",document.getElementsByName("nmSalePerSec_ww4").value);
+			sText += makeNode("nmSalePerSec_PGM2",document.getElementsByName("nmSalePerSec_PGM2").value);
+			sText += makeNode("nmSalePerSec_ys2",document.getElementsByName("nmSalePerSec_ys2").value);
+			sText += makeNode("nmSalePerSec_y2",document.getElementsByName("nmSalePerSec_y2").value);
+			sText += makeNode("nmSalePerSec_yadd1",document.getElementsByName("nmSalePerSec_yadd1").value);
+            sText += makeNode("nmSalePerSec_yadd2",document.getElementsByName("nmSalePerSec_yadd2").value);
+			sText += "</ITEM>";
+	}else{
+		for(var i=0; i < document.getElementsByName("nmSalePerSec_ys1").length; i++){        
+			sText += "<ITEM>";
+			sText += makeNode("nmSalePerSec_P1",document.getElementsByName("nmSalePerSec_P1")[i].value);
+			sText += makeNode("nmSalePerSec_ys1",document.getElementsByName("nmSalePerSec_ys1")[i].value);
+			sText += makeNode("nmSalePerSec_PGM1",document.getElementsByName("nmSalePerSec_PGM1")[i].value);
+			sText += makeNode("nmSalePerSec_P2",document.getElementsByName("nmSalePerSec_P2")[i].value);
+			sText += makeNode("nmSalePerSec_ww3",document.getElementsByName("nmSalePerSec_ww3")[i].value);
+			sText += makeNode("nmSalePerSec_ww4",document.getElementsByName("nmSalePerSec_ww4")[i].value);
+			sText += makeNode("nmSalePerSec_PGM2",document.getElementsByName("nmSalePerSec_PGM2")[i].value);
+			sText += makeNode("nmSalePerSec_ys2",document.getElementsByName("nmSalePerSec_ys2")[i].value);
+			sText += makeNode("nmSalePerSec_y2",document.getElementsByName("nmSalePerSec_y2")[i].value);
+			sText += makeNode("nmSalePerSec_yadd1",document.getElementsByName("nmSalePerSec_yadd1")[i].value);
+			sText += makeNode("nmSalePerSec_yadd2",document.getElementsByName("nmSalePerSec_yadd2")[i].value);	
+			sText += "</ITEM>";
+		}
+	}
+	sText += "</EXP_OPERATION>";
+
+	return sText;
+}
+
+function getOperationInfo_jju(){
+	var sText="";
+	sText = "<OPERATIONINFO>";
+	if (document.getElementsByName("nmREQ_Pname").length == null){       
+			sText += "<ITEM>";
+			sText += makeNode("nmREQ_Pname",document.getElementsByName("nmREQ_Pname").value);
+			sText += makeNode("nmREQ_TimeText",document.getElementsByName("nmREQ_TimeText").value);
+			sText += makeNode("nmREQ_Pcode",document.getElementsByName("nmREQ_Pcode").value);
+			sText += makeNode("nmREQ_Cost",document.getElementsByName("nmREQ_Cost").value);
+			sText += makeNode("nmREQ_SPrice",document.getElementsByName("nmREQ_SPrice").value);
+			sText += makeNode("nmREQ_SaleRatio",document.getElementsByName("nmREQ_SaleRatio").value);	
+			sText += makeNode("nmREQ_TPrice",document.getElementsByName("nmREQ_TPrice").value);		
+			sText += makeNode("nmREQ_Margin",document.getElementsByName("nmREQ_Margin").value);
+//			sText += makeNode("nmREQ_line",document.getElementsByName("nmREQ_line").value);		
+			sText += makeNode("nmREQ_Profit",document.getElementsByName("nmREQ_Profit").value);	
+			sText += makeNode("nmREQ_Win",(document.getElementsByName("nmREQ_Win")[i].checked == true?"1":""));		
+			sText += makeNode("nmREQ_InterMon",document.getElementsByName("nmREQ_InterMon").value);		
+			sText += makeNode("nmREQ_ARS_W",document.getElementsByName("nmREQ_ARS_W").value);		
+			sText += makeNode("nmREQ_ARS_C",document.getElementsByName("nmREQ_ARS_C").value);		
+			sText += "</ITEM>";
+	}else{
+		for(var i=0; i < document.getElementsByName("nmREQ_Pname").length; i++){   
+			sText += "<ITEM>";
+			sText += makeNode("nmREQ_Pname",document.getElementsByName("nmREQ_Pname")[i].value);
+			sText += makeNode("nmREQ_TimeText",document.getElementsByName("nmREQ_TimeText")[i].value);
+			sText += makeNode("nmREQ_Pcode",document.getElementsByName("nmREQ_Pcode")[i].value);
+			sText += makeNode("nmREQ_Cost",document.getElementsByName("nmREQ_Cost")[i].value);
+			sText += makeNode("nmREQ_SPrice",document.getElementsByName("nmREQ_SPrice")[i].value);
+			sText += makeNode("nmREQ_SaleRatio",document.getElementsByName("nmREQ_SaleRatio")[i].value);	
+			sText += makeNode("nmREQ_TPrice",document.getElementsByName("nmREQ_TPrice")[i].value);		
+//			sText += makeNode("nmREQ_Margin",document.getElementsByName("nmREQ_line")[i].value);
+			sText += makeNode("nmREQ_Margin",document.getElementsByName("nmREQ_Margin")[i].value);
+			sText += makeNode("nmREQ_Profit",document.getElementsByName("nmREQ_Profit")[i].value);					
+			sText += makeNode("nmREQ_Win",(document.getElementsByName("nmREQ_Win")[i].checked == true?"1":""));		
+			sText += makeNode("nmREQ_InterMon",document.getElementsByName("nmREQ_InterMon")[i].value);		
+			sText += makeNode("nmREQ_ARS_W",document.getElementsByName("nmREQ_ARS_W")[i].value);		
+			sText += makeNode("nmREQ_ARS_C",document.getElementsByName("nmREQ_ARS_C")[i].value);		
+			sText += "</ITEM>";
+		}
+	}
+	sText += "</OPERATIONINFO>";
+	sText += "<OLD_OPERATION>";
+		if (document.getElementsByName("nmOLD_Pname").length == null){     
+			sText += "<ITEM>";
+			sText += makeNode("nmOLD_Cost",document.getElementsByName("nmOLD_Cost").value);
+			sText += makeNode("nmOLD_SPrice",document.getElementsByName("nmOLD_SPrice").value);
+			sText += makeNode("nmOLD_SaleRatio",document.getElementsByName("nmOLD_SaleRatio").value);	
+			sText += makeNode("nmOLD_Tprice",document.getElementsByName("nmOLD_Tprice").value);		
+			sText += makeNode("nmOLD_Win",(document.getElementsByName("nmOLD_Win")[i].checked == true?"1":""));		
+			sText += makeNode("nmOLD_InterMon",document.getElementsByName("nmOLD_InterMon").value);		
+			sText += makeNode("nmOLD_ARS_W",document.getElementsByName("nmOLD_ARS_W").value);		
+			sText += makeNode("nmOLD_ARS_C",document.getElementsByName("nmOLD_ARS_C").value);		
+			sText += "</ITEM>";
+	}else{
+		for(var i=0; i < document.getElementsByName("nmOLD_Pname").length; i++){      
+			sText += "<ITEM>";
+			sText += makeNode("nmOLD_Cost",document.getElementsByName("nmOLD_Cost")[i].value);
+			sText += makeNode("nmOLD_SPrice",document.getElementsByName("nmOLD_SPrice")[i].value);
+			sText += makeNode("nmOLD_SaleRatio",document.getElementsByName("nmOLD_SaleRatio")[i].value);	
+			sText += makeNode("nmOLD_Profit",document.getElementsByName("nmOLD_Profit")[i].value);		
+			sText += makeNode("nmOLD_Win",(document.getElementsByName("nmOLD_Win")[i].checked == true?"1":""));		
+			sText += makeNode("nmOLD_InterMon",document.getElementsByName("nmOLD_InterMon")[i].value);		
+			sText += makeNode("nmOLD_ARS_W",document.getElementsByName("nmOLD_ARS_W")[i].value);		
+			sText += makeNode("nmOLD_ARS_C",document.getElementsByName("nmOLD_ARS_C")[i].value);		
+			sText += "</ITEM>";
+		}
+	}
+	sText += "</OLD_OPERATION>";
+	
+	//woong 시작
+	sText += "<EX1_OPERATION>";
+		if (document.getElementsByName("nmChg_Reason1").length == null){    
+			sText += "<ITEM>";
+			sText += makeNode("nmChg_Reason1",document.getElementsByName("nmChg_Reason1").value);
+			sText += "</ITEM>";
+	    }else{
+		    for(var i=0; i < document.getElementsByName("nmChg_Reason1").length; i++){
+			    sText += "<ITEM>";
+			    sText += makeNode("nmChg_Reason1",document.getElementsByName("nmChg_Reason1")[i].value);
+			    sText += "</ITEM>";
+		    }
+	    }
+	sText += "</EX1_OPERATION>";
+	
+	sText += "<EX2_OPERATION>";
+		if (document.getElementsByName("nmChg_Reason2").length == null){    
+			sText += "<ITEM>";
+			sText += makeNode("nmChg_Reason2",document.getElementsByName("nmChg_Reason2").value);
+			sText += "</ITEM>";
+	    }else{
+		    for(var i=0; i < document.getElementsByName("nmChg_Reason2").length; i++){
+			    sText += "<ITEM>";
+			    sText += makeNode("nmChg_Reason2",document.getElementsByName("nmChg_Reason2")[i].value);
+			    sText += "</ITEM>";
+		    }
+	    }
+	sText += "</EX2_OPERATION>";
+	//woong 끝
+	
+	sText += "<CHG_OPERATION>";
+		if (document.getElementsByName("nmChg_Reason").length == null){    
+			sText += "<ITEM>";
+			sText += makeNode("nmChg_Reason",document.getElementsByName("nmChg_Reason").value);
+			sText += "</ITEM>";
+	    }else{
+		    for(var i=0; i < document.getElementsByName("nmChg_Reason").length; i++){
+			    sText += "<ITEM>";
+			    sText += makeNode("nmChg_Reason",document.getElementsByName("nmChg_Reason")[i].value);
+			    sText += "</ITEM>";
+		    }
+	    }
+	sText += "</CHG_OPERATION>";
+	
+		//5번 항목 테이블
+	sText += "<EXP_OPERATION>";		//5번 항목
+	if (document.getElementsByName("nmSalePerSec_ys1").length == null){       
+			sText += "<ITEM>";
+			sText += makeNode("nmSalePerSec_P1",document.getElementsByName("nmSalePerSec_p1").value);
+			sText += makeNode("nmSalePerSec_ys1",document.getElementsByName("nmSalePerSec_ys1").value);
+			sText += makeNode("nmSalePerSec_PGM1",document.getElementsByName("nmSalePerSec_PGM1").value);
+			sText += makeNode("nmSalePerSec_yars1",document.getElementsByName("nmSalePerSec_yars1").value);
+			sText += makeNode("nmSalePerSec_yars2",document.getElementsByName("nmSalePerSec_yars2").value);
+			sText += makeNode("nmSalePerSec_yars3",document.getElementsByName("nmSalePerSec_yars3").value);
+			sText += makeNode("nmSalePerSec_P2",document.getElementsByName("nmSalePerSec_P2").value);	
+			sText += makeNode("nmSalePerSec_ww3",document.getElementsByName("nmSalePerSec_ww3").value);
+			sText += makeNode("nmSalePerSec_ww4",document.getElementsByName("nmSalePerSec_ww4").value);
+			sText += makeNode("nmSalePerSec_PGM2",document.getElementsByName("nmSalePerSec_PGM2").value);
+			sText += makeNode("nmSalePerSec_ys2",document.getElementsByName("nmSalePerSec_ys2").value);
+			sText += makeNode("nmSalePerSec_y2",document.getElementsByName("nmSalePerSec_y2").value);
+			sText += makeNode("nmSalePerSec_yadd1",document.getElementsByName("nmSalePerSec_yadd1").value);
+            sText += makeNode("nmSalePerSec_yadd2",document.getElementsByName("nmSalePerSec_yadd2").value);
+			sText += "</ITEM>";
+	}
+	else{
+		for(var i=0; i < document.getElementsByName("nmSalePerSec_ys1").length; i++){        
+			sText += "<ITEM>";
+			sText += makeNode("nmSalePerSec_P1",document.getElementsByName("nmSalePerSec_P1")[i].value);
+			sText += makeNode("nmSalePerSec_ys1",document.getElementsByName("nmSalePerSec_ys1")[i].value);
+			sText += makeNode("nmSalePerSec_PGM1",document.getElementsByName("nmSalePerSec_PGM1")[i].value);
+			sText += makeNode("nmSalePerSec_yars1",document.getElementsByName("nmSalePerSec_yars1")[i].value);	
+			sText += makeNode("nmSalePerSec_yars2",document.getElementsByName("nmSalePerSec_yars2")[i].value);	
+			sText += makeNode("nmSalePerSec_yars3",document.getElementsByName("nmSalePerSec_yars3")[i].value);	
+			sText += makeNode("nmSalePerSec_P2",document.getElementsByName("nmSalePerSec_P2")[i].value);
+			sText += makeNode("nmSalePerSec_ww3",document.getElementsByName("nmSalePerSec_ww3")[i].value);
+			sText += makeNode("nmSalePerSec_ww4",document.getElementsByName("nmSalePerSec_ww3")[i].value);
+			sText += makeNode("nmSalePerSec_PGM2",document.getElementsByName("nmSalePerSec_PGM2")[i].value);
+			sText += makeNode("nmSalePerSec_ys2",document.getElementsByName("nmSalePerSec_ys2")[i].value);
+			sText += makeNode("nmSalePerSec_y2",document.getElementsByName("nmSalePerSec_y2")[i].value);
+			sText += makeNode("nmSalePerSec_yadd1",document.getElementsByName("nmSalePerSec_yadd1")[i].value);
+			sText += makeNode("nmSalePerSec_yadd2",document.getElementsByName("nmSalePerSec_yadd2")[i].value);	
+			sText += "</ITEM>";
+		}
+	}
+	sText += "</EXP_OPERATION>";
+	return sText;
+} 
+
+
+//인쇄를 위한 BODY_CONTEXT로 구성될 cField, mField 정보를 읽어옴
+function getPrintBodyContext(){
+	var szPrintBodyContext='';	
+	szPrintBodyContext = getCFields(cField)+ getMFields(mField);	
+	return szPrintBodyContext;	
+}
+function setFields(Fields) {
+	for(var i=0; i<Fields.length; i++) {
+		var fld = Fields[i];
+		if(fld.dataFld!="")
+		{
+			(getInfo(fld.name)!=undefined)? fld.value=getInfo(fld.name):(getInfo(fld.dataFld)!=undefined)?fld.value=getInfo(fld.dataFld):fld.value='';
+			//alert(fld.name);
+			//alert(fld.value);
+		}
+	}	
+}
+
+
+
+function setBodyContext(VAL){
+    
+	var xmlschema = CreateXmlDocument(); //new ActiveXObject("MSXML2.DOMDocument");
+	xmlschema.loadXML( VAL );				 
+        	
+    var oNodeList= xmlschema.documentElement.childNodes;        	
+	var elmRoot, elmList1, elmList2, elmList3, elmList4, elmList5, elmList6, elm;
+	elmRoot = xmlschema.documentElement;
+	elmList1 = elmRoot.selectNodes("OPERATIONINFO/ITEM");        	
+
+	for(var i=0; i < elmList1.length; i++){
+			var elm = elmList1.nextNode();
+			if (i  > 0 ) {ADD("REQ");}
+			var elmchilds = elm.childNodes;
+			for(var j=0; j < elm.childNodes.length; j++){
+				var elmtext = elmchilds.nextNode();
+				document.getElementsByName(elmtext.nodeName)[i].value = elmtext.text;
+			}
+		}
+	chkState("REQ",elmList1.length);
+	elmList2 = elmRoot.selectNodes("OLD_OPERATION/ITEM");        	
+
+	for(var i=0; i < elmList2.length; i++){
+			var elm = elmList2.nextNode();
+			if (i  > 0 ) {ADD("OLD");}
+			var elmchilds = elm.childNodes;
+			for(var j=0; j < elm.childNodes.length; j++){
+				var elmtext = elmchilds.nextNode();
+				
+				document.getElementsByName(elmtext.nodeName)[i].value = elmtext.text;
+			}
+		}
+	chkState("OLD",elmList2.length);
+	elmList3 = elmRoot.selectNodes("CHG_OPERATION/ITEM");        	
+
+	for(var i=0; i < elmList3.length; i++){
+			var elm = elmList3.nextNode();
+			if (i  > 0 ) {ADD("CHG");}
+			var elmchilds = elm.childNodes;
+			for(var j=0; j < elm.childNodes.length; j++){
+				var elmtext = elmchilds.nextNode();
+				document.getElementsByName(elmtext.nodeName)[i].value = elmtext.text;
+				
+			}
+		}
+    
+    
+    //woong 시작
+	elmList4 = elmRoot.selectNodes("EX1_OPERATION/ITEM");        	
+
+	for(var i=0; i < elmList4.length; i++){
+			var elm = elmList4.nextNode();
+			if (i  > 0 ) {ADD("EX1");}
+			var elmchilds = elm.childNodes;
+			for(var j=0; j < elm.childNodes.length; j++){
+				var elmtext = elmchilds.nextNode();
+				document.getElementsByName(elmtext.nodeName)[i].value = elmtext.text;
+				
+			}
+		}
+		
+	elmList5 = elmRoot.selectNodes("EX2_OPERATION/ITEM");        	
+
+	for(var i=0; i < elmList5.length; i++){
+			var elm = elmList5.nextNode();
+			if (i  > 0 ) {ADD("EX2");}
+			var elmchilds = elm.childNodes;
+			for(var j=0; j < elm.childNodes.length; j++){
+				var elmtext = elmchilds.nextNode();
+				document.getElementsByName(elmtext.nodeName)[i].value = elmtext.text;
+				
+			}
+		}
+	//woong 끝
+	
+	elmList6 = elmRoot.selectNodes("EXP_OPERATION/ITEM");        	
+
+	for(var i=0; i < elmList6.length; i++){
+		var elm = elmList6.nextNode();
+		if (i  > 0 ) {ADD("EXP");}
+		var elmchilds = elm.childNodes;
+		for(var j=0; j < elm.childNodes.length; j++){
+			var elmtext = elmchilds.nextNode();
+			document.getElementsByName(elmtext.nodeName)[i].value = elmtext.text;
+		}
+	}
+
+	for (var k=0; k<oNodeList.length; k++){
+		var oNode = oNodeList.item(k);
+		var szname = oNode.nodeName;
+		
+		if( szname == "schema" ){
+		 if(oNode.getAttribute("Gusung") == "1" ) { eval("Gusung").checked = true; }
+		 if(oNode.getAttribute("SGusung") == "1") { eval("SGusung").checked = true;  }
+		 if(oNode.getAttribute("Cost") == "1") { eval("Cost").checked = true; }
+		 if(oNode.getAttribute("Deliver") == "1") { eval("Deliver").checked = true; }
+		 if(oNode.getAttribute("Promotion") == "1") { eval("Promotion").checked = true; }	
+		 if(oNode.getAttribute("Winwin") == "1") { eval("Winwin").checked = true; }	
+		 if(oNode.getAttribute("Etc") == "1") { eval("Etc").checked = true; }	
+		 
+		}
+						
+		if (szname.substring(0,2) == "nm" || szname == "DOCLINKS"){ //연결문서 추가 2006.12
+			eval(szname).value = oNode.text;
+		}else if(szname == "FileLinkInfo"){
+			FileLink.innerHTML = oNode.text;
+			eval(szname).value = oNode.text; //2007.04 추가
+		}else if(szname == "SDATE"){		 
+			SDATE.value = oNode.text;
+		}else if(szname == "EDATE"){		 
+			EDATE.value = oNode.text;
+		}else if(szname == "DAYS"){		 
+			DAYS.value = oNode.text;
+		}else if(szname == "PreApvLineInfo"){	//발신부서 추가 2008.01	 
+			PreApvLineInfo.value = oNode.text;
+		}else if(szname == "txtTransact"){		 
+			txtTransact.value = oNode.text;
+		}else if(szname == "txtProduct"){		 
+			txtProduct.value = oNode.text;
+		}else if(szname == "qmName"){   //2013.10.02 담당QM명 추가		 
+			document.getElementsByName("qmName")[0].value = oNode.text;
+		}else if(szname == "textTime"){
+		    document.getElementsByName("textTime")[0].value = oNode.text;
+		}
+	}
+}
+
+// checkbox 값을 얻어옴(1또는 0)
+function getCFields(Field){
+	var sText = "<schema ";
+	var fieldname, fieldvalue;
+	
+	for(var i=0;i<cField.length;i++){
+		fieldname = cField[i].name;
+		fieldname = fieldname.replace("chk","");
+		sText += fieldname  + "=\"" + (cField[i].checked == true?"1":"0")+"\"" + " ";
+	}	
+	sText+="/>";
+	return sText;		
+}
+
+//input box에 
+function getMFields(Fields){
+		var sText = "";
+		for(var i=0;i<Fields.length;i++){
+			sText += makeNode(Fields[i].name, Fields[i].value);
+		}
+		return sText;
+}	
+   
+
+function checkForm(bTempSave){   //debugger
+	if (bTempSave) {
+	} else {
+		if(getInfo("mode") == "REDRAFT"){
+			var xmlApv= new ActiveXObject("MSXML2.DOMDocument");
+			xmlApv.loadXML("<apvlist>"+getInfo("apst")+"</apvlist>");
+			var oFirstNode=xmlApv.selectSingleNode("apvlist/steps/step[@unittype='ou' and @routetype='receive']/ou[@code='"+getInfo("dpid_apv")+"' and person/taskinfo/@kind='charge']");
+			if(oFirstNode != null){
+				dField["REDRAFT_DATE"].value = oFirstNode.selectSingleNode("person/taskinfo[@kind='charge']").getAttribute("datecompleted")
+				dField["REDRAFT_DATE"].value = dField["REDRAFT_DATE"].value.substring(0,10);
+				dField["EBH_DATE"].value = getDayInterval(getInfo("INITIATED_DATE").substring(0,10), dField["REDRAFT_DATE"].value);	//프로세스 개설기일(기안일자-재기안일자)
+				dField["EBH_DATE"].value = parseInt(dField["EBH_DATE"].value) + parseInt(1);
+				dField["REAL_DATE"].value = nmWDATE.value.replace(/[.]/g, "-");
+			}
+		}
+	}
+	
+	if(qmName.value == '') {
+		alert('담당QM명을 입력하세요');
+		return false;
+	}else {
+		return true;
+	}
+	return true;
+}
+
+function addList2(){
+	var winW = 640;
+	var winH = 480;
+	var status = "channelmode=no, toolbar=yes, location=no, directories=no, status=no, menubar=no, scrollbars=yes, width="+winW+", height=" + winH + ", left=400, top=300";
+	
+	var vRetval = window.open("../../COVIBOOKNet/Enterprise/EnterpriseForms.aspx?EBH=true","",status);
+}
+
+var num = 1;
+var num1 = 1;
+var num2 = 1;
+
+function ADD(sobj)
+{
+if(document.getElementsByName("confirm_key")[0].value == "NO")
+{
+  var gab;
+  sobj = eval(sobj).id; 
+	if ((getInfo("mode") == "RECAPPROVAL")||(getInfo("mode") == "REDRAFT")){
+		 gab="";		
+	}else{gab="disabled";}
+
+  var tempVal = "" ;
+  switch (sobj){
+	case "REQ":  
+		var tbl = document.getElementById("REQ");
+		
+		var oTbody ;
+        if(String(navigator.userAgent).toLowerCase().indexOf("safari") > -1) oTbody = tbl.children[0];    
+        else oTbody = tbl.children[0];
+		var tr = oTbody.insertRow(-1);
+		var td0 = tr.insertCell(0);
+		var td1 = tr.insertCell(1);
+		var td2 = tr.insertCell(2);
+		var td3 = tr.insertCell(3);
+		var td4 = tr.insertCell(4);
+		var td5 = tr.insertCell(5);
+		var td6 = tr.insertCell(6);
+		var td7 = tr.insertCell(7);
+		var td8 = tr.insertCell(8);
+		var td9 = tr.insertCell(9);
+		var td10 = tr.insertCell(10);
+		var td11 = tr.insertCell(11);
+		var td12 = tr.insertCell(12);
+		
+        
+        tr.align = 'center';
+        td0.className ='aligncenter';
+		td0.innerHTML ='<input type="radio" class="valuefield1" name="nmREQ_Select" onclick="prod_chk2(\'REQ\',this)" >';
+		td1.className ='aligncenter';
+		td1.innerHTML ='<input type="text" id="mField" class="valuefield1" name="nmREQ_Pname" style="text-align:center;ime-mode:active;width:97%;" maxlength="15" >';
+		td2.className ='aligncenter';
+		tempVal = "" ;
+		tempVal = tempVal + '<select id="Select1" NAME="nmREQ_Win" style="border:1px solid #D1D1D1;"style="width:65;height:10;">' ;
+//		tempVal = tempVal + '<option value=""></option>' ;
+		tempVal = tempVal + '<option value="정률">정률</option>' ;
+		tempVal = tempVal + '<option value="광고특약">광고특약</option>' ;
+		tempVal = tempVal + '<option value="지자체홍보비">지자체홍보비</option>' ;
+		tempVal = tempVal + '<option value="광고홍보비">광고홍보비</option>' ;
+		tempVal = tempVal + '</select>' ;
+		td2.innerHTML = tempVal;
+		td3.className ='aligncenter';
+		td3.innerHTML = '<input type="text" id="mField" class="valuefield1" name="nmREQ_TimeText" onblur="add_percent4(this);" style="text-align:center;ime-mode:active;width:97%;" maxlength="4">';
+		td4.className ='aligncenter';
+		td4.innerHTML = '<input type="text" id="mField" class="valuefield1" name="nmREQ_Pcode" style="text-align:center;ime-mode:disabled;width:97%;" maxlength="8" onkeypress="num_chk();"  onkeyup="prod_chk(this);">';
+		td5.className ='aligncenter';
+		td5.innerHTML = '<input type="text" id="mField" class="valuefield1" name="nmREQ_Cost" style="text-align:right;ime-mode:disabled;width:97%;padding-right:1pt" maxlength="10" onkeypress="num_chk()" onchange="javascript:auto_comma(this,this.value);" onblur="get_float(this);">';
+		td6.className ='aligncenter';
+		td6.innerHTML = '<input type="text" id="mField" class="valuefield1" name="nmREQ_SPrice" style="text-align:right;ime-mode:disabled;width:97%;" maxlength="10" onkeypress="num_chk()" onchange="javascript:auto_comma(this,this.value);" onblur="get_float(this);">';
+		td7.className ='aligncenter';
+		td7.innerHTML = '<input type="text" id="mField" class="valuefield1" name="nmREQ_SaleRatio" style="text-align:right;ime-mode:disabled;width:97%;" onblur="add_percent4(this);" maxlength="5" >';
+		td8.className ='aligncenter';
+		td8.innerHTML = '<input type="text" id="mField" class="valuefield1" name="nmREQ_TPrice" style="text-align:center;ime-mode:active;width:97%;" onchange="javascript:auto_comma(this,this.value);" maxlength="15">';
+	    td9.className ='aligncenter';
+		td9.innerHTML ='<input type="text" id="mField" class="valuefield1" name="nmREQ_Margin" style="text-align:right;ime-mode:disabled;width:97%;padding-right:1pt" onkeypress="num_chk(this);" onchange="javascript:auto_comma(this,this.value);" onblur="get_float(this);fmYSM4();" maxlength="20" ><input type="text" id="mField" class="valuefield1" name="nmREQ_Profit" style="text-align:right;ime-mode:disabled;width:97%;padding-right:1pt" onkeypress="num_chk(this);" onblur="add_percent6(this); fmYSM3();" maxlength="20">';
+//		<input type="text" id="mField" class="valuefield1" name="nmREQ_line"  style="height :3%; background-color:black; width:97%;"/>
+		td10.className ='aligncenter';
+		td10.innerHTML = '<input type="text" id="mField" class="valuefield1" name="nmREQ_InterMon" style="text-align:center;ime-mode:disabled;width:97%;" maxlength="3" >';        
+		td11.className ='aligncenter';
+		td11.innerHTML = '<input type="text" id="mField" class="valuefield1" name="nmREQ_ARS_C" style="text-align:right;ime-mode:disabled;width:97%;" maxlength="6"  onkeypress="num_chk();" onchange="javascript:auto_comma(this,this.value);" onblur="get_float(this);">';        
+		td12.className ='aligncenter';
+		td12.innerHTML = '<input type="text" id="mField" class="valuefield1" name="nmREQ_ARS_W" style="text-align:right;ime-mode:disabled;width:97%;" maxlength="6" onkeypress="num_chk();" onchange="javascript:auto_comma(this,this.value);" onblur="get_float(this);">';   
+		break;
+		
+
+	 
+	 case "OLD":  
+		var tbl = document.getElementById("OLD");
+		var oTbody ;
+        if(String(navigator.userAgent).toLowerCase().indexOf("safari") > -1) oTbody = tbl.children[0];    
+        else oTbody = tbl.children[0];
+		var tr = oTbody.insertRow(tbl.rows.length - 2);
+		var td1 = tr.insertCell(0);
+		var td2 = tr.insertCell(1);
+		var td3 = tr.insertCell(2);
+		var td4 = tr.insertCell(3);
+		var td5 = tr.insertCell(4);
+		var td6 = tr.insertCell(5);
+		var td7 = tr.insertCell(6);
+		var td8 = tr.insertCell(7);
+		var td9 = tr.insertCell(8);
+		var td10 = tr.insertCell(9);
+		var td11 = tr.insertCell(10);
+		var td12 = tr.insertCell(11);
+		var td13 = tr.insertCell(12);
+		var td14 = tr.insertCell(13);
+		
+		if( document.getElementsByName("nmCondition")[0].value == "상선위 조건" ) {
+		   
+		    td1.bgColor='#f2f2f2';
+		    td1.className ='aligncenter';
+		    td1.align='center';
+		    td1.innerHTML='상선위조건';
+		}
+		else if( document.getElementsByName("nmCondition")[0].value == "종전방송조건" || document.getElementsByName("nmCondition")[0].value == "") 
+		{
+		    td1.bgColor='#f2f2f2';
+		    td1.className ='aligncenter';
+		    td1.align='center';
+		    td1.innerHTML='종전조건';
+		}
+		
+	    td2.className ='aligncenter';
+		tempVal = "" ;
+		tempVal = tempVal + '<select id="mField" NAME="nmOLD_Win1" style="border:1px solid #D1D1D1;"style="width:55;height:10;">' ;
+//		tempVal = tempVal + '<option value=""></option>' ;
+		tempVal = tempVal + '<option value="정률">정률</option>' ;
+		tempVal = tempVal + '<option value="광고특약">광고특약</option>' ;
+		tempVal = tempVal + '<option value="지자체홍보비">지자체홍보비</option>' ;
+		tempVal = tempVal + '<option value="광고홍보비">광고홍보비</option>' ;
+		tempVal = tempVal + '</select>' ;
+		td2.innerHTML = tempVal;
+		td3.className ='aligncenter';		
+		                                                                                                                                       //'onclick="callZQM_IF_PACK_UNIT(' + "'DBOX2'" + ');'
+		td3.innerHTML = '<img src="/GWImages/Common/btn/bt_select_p.gif"  name="btnRequest1" id="Img3" class="Out" align="absmiddle" border="0" onclick="getProduct(' + "'oldTr" + (tbl.rows.length - 3).toString() + "'" + ');" style="display:;cursor:hand;">&nbsp;<input type="text" id="mField" class="valuefield1" name="nmOLD_Cost1" style="text-align:right;ime-mode:disabled;width:65%" maxlength="10" size="12" onkeypress="num_chk()" onkeyup="auto_comma(this,this.value);" onblur="get_float(this);">';
+		td4.className ='aligncenter';
+		td4.innerHTML = '<input type="text" id="mField" class="valuefield1" name="nmOLD_SPrice1" style="text-align:right;ime-mode:disabled;" maxlength="10" size="8" onkeypress="num_chk()" onchange="javascript:auto_comma(this,this.value);" onblur="get_float(this);">';
+		td5.className ='aligncenter';
+		td5.innerHTML = '<input type="text" id="mField" class="valuefield1" name="nmOLD_SaleRatio1" style="text-align:right;ime-mode:disabled;" onblur="add_percent4(this);" maxlength="5" size="5">';
+		td6.className='aligncenter';
+		td6.innerHTML='<input type="text" id="mField" class="valuefield1" name="nmOLD_TPU1" style="text-align:center;width:95%;"onchange="javascript:auto_comma(this,this.value);"><input type="text" id="mField" class="valuefield1" name="nmOLD_TPD1" style="text-align:center;width:95%;"onblur="add_percent6(this);">';
+		td7.className ='aligncenter';
+		td7.innerHTML = '<input type="text" id="mField" class="valuefield1" onblur="fmTprice();"onchange="javascript:auto_comma(this,this.value);" name="nmOLD_TPrice1" style="text-align:center;width:95%;">';
+		td8.className ='aligncenter';
+		td8.innerHTML = '<input type="text" id="mField" class="valuefield1" name="nmOLD_InterMon1" style="text-align:center;ime-mode:disabled;" maxlength="" size="3">';
+		td9.className ='aligncenter';
+        td9.innerHTML = '<input type="text" id="mField" class="valuefield1" name="nmOLD_Pcode1" style="text-align:center;ime-mode:disabled;" maxlength="8" size="5" onkeypress="num_chk()">';
+		td10.className ='aligncenter';
+		td10.innerHTML = '<input type="text" id="mField" class="valuefield1" name="nmOLD_Sang1" style="text-align:center;ime-mode:disabled;" maxlength="15" size="12">';
+        td11.className ='aligncenter';
+		td11.innerHTML ='  ';
+		td12.className ='aligncenter';
+		tempVal = "" ;
+		tempVal = tempVal + '<select id="mField" NAME="nmOLD_Type1" style="border:1px solid #D1D1D1;"style="width:50;height:10;" >' ;
+		tempVal = tempVal + '<option value=""></option>' ;
+		tempVal = tempVal + 'option value="직매입거래">직매입거래</option>' ;
+		tempVal = tempVal + '<option value="외상매입형">외상매입형</option>' ;
+		tempVal = tempVal + '<option value="혼합매입형">혼합매입형</option>' ;
+		tempVal = tempVal + '<option value="정률수수료">정률수수료</option>' ;
+		tempVal = tempVal + '<option value="혼합수수료">혼합수수료</option>' ;
+		tempVal = tempVal + '<option value="상품소개수수료">상품소개수수료</option>';
+		tempVal = tempVal + '<option value="주문제조거래">주문제조거래</option></option>';
+		tempVal = tempVal + '</select>' ;
+		td12.innerHTML = tempVal;
+		td13.className ='aligncenter';
+		tempVal = "" ;
+		tempVal = tempVal + '<select id="mField" NAME="nmOLD_Delivery_21" style="border:1px solid #D1D1D1;"style="width:40;height:10;">' ;
+		tempVal = tempVal + '<option value=""></option>' ;
+		tempVal = tempVal + '<option value="센터">센터</option>' ;
+		tempVal = tempVal + '<option value="업체">협력사</option>' ;
+		tempVal = tempVal + '<option value="지원">지원</option>' ;
+		tempVal = tempVal + '</select>';
+		td13.innerHTML = tempVal;
+		td14.className ='aligncenter';
+		tempVal = "" ;
+		tempVal = tempVal + '<select id="mField" NAME="nmOLD_Delivery_Day1" style="border:1px solid #D1D1D1;"style="width:40;height:10;">' ;
+		tempVal = tempVal + '<option value="일">일</option>' ;
+		tempVal = tempVal + 'option value="1일">1일</option>' ;
+		tempVal = tempVal + '<option value="2일">2일</option>' ;
+		tempVal = tempVal + '<option value="3일">3일</option>' ;
+		tempVal = tempVal + '<option value="4일">4일</option>' ;
+		tempVal = tempVal + '<option value="5일">5일</option>' ;
+		tempVal = tempVal + '<option value="6일">6일</option>';
+		tempVal = tempVal + '<option value="7일">7일</option></option>';
+		tempVal = tempVal + '</select>' ;
+		td14.innerHTML = tempVal;
+		break; 
+		
+	 case "REQ":  
+		var tbl = document.getElementById("REQ");
+		var oTbody ;
+        if(String(navigator.userAgent).toLowerCase().indexOf("safari") > -1) oTbody = tbl.children[0];    
+        else oTbody = tbl.children[0];
+		var tr = oTbody.insertRow(-1);	
+
+	case "CHG":  
+		//var tbl = document.all["CHG"];
+		var tbl = document.getElementById("CHG");
+		var oTbody ;
+        if(String(navigator.userAgent).toLowerCase().indexOf("safari") > -1) oTbody = tbl.children[0];    
+        else oTbody = tbl.children[0];
+		var tr = oTbody.insertRow(-1);
+		//var tr = tbl.insertRow();
+		var td1 = tr.insertCell(0);
+		var td2 = tr.insertCell(1);
+		
+		tbl.rows(0).cells(0).rowSpan = num + 1;
+		td1.className ='condition';
+		td1.innerHTML = '<td width="5%">' + (num + 1) + '</td>';
+		td1.align = "center";
+		td2.className ='aligncenter';
+		td2.innerHTML ='<input type="text" id="mField" class="valuefield1" name="nmChg_Reason" style="width:100%">';
+		
+		
+		num++;
+		break;	
+		
+	case "EX1":  
+		//var tbl = document.all["CHG"];
+		var tbl = document.getElementById("EX1");
+		var oTbody ;
+        if(String(navigator.userAgent).toLowerCase().indexOf("safari") > -1) oTbody = tbl.children[0];    
+        else oTbody = tbl.children[0];
+		var tr = oTbody.insertRow(-1);
+		//var tr = tbl.insertRow();
+		var td1 = tr.insertCell(0);
+		var td2 = tr.insertCell(1);
+		
+		tbl.rows(0).cells(0).rowSpan = num1 + 1;
+		td1.className ='condition';
+		td1.innerHTML = '<td width="5%">' + (num1 + 1) + '</td>';
+		td1.align = "center";
+		td2.className ='aligncenter';
+		td2.innerHTML ='<input type="text" id="mField" class="valuefield1" name="nmChg_Reason1" style="width:100%">';
+		
+		num1++;
+		break;
+		
+	case "EX2":  
+		//var tbl = document.all["CHG"];
+		var tbl = document.getElementById("EX2");
+		var oTbody ;
+        if(String(navigator.userAgent).toLowerCase().indexOf("safari") > -1) oTbody = tbl.children[0];    
+        else oTbody = tbl.children[0];
+		var tr = oTbody.insertRow(-1);
+		//var tr = tbl.insertRow();
+		var td1 = tr.insertCell(0);
+		var td2 = tr.insertCell(1);
+		
+		tbl.rows(0).cells(0).rowSpan = num2 + 1;
+		td1.className ='condition';
+		td1.innerHTML = '<td width="5%">' + (num2 + 1) + '</td>';
+		td1.align = "center";
+		td2.className ='aligncenter';
+		td2.innerHTML ='<input type="text" id="mField" class="valuefield1" name="nmChg_Reason2" style="width:100%">';
+		
+		num2++;
+		break;		
+	}
+	
+	}else{
+	alert("예상실적결과를 확정하였습니다.");
+	}
+}
+
+function REMOVE(sobj){	
+  sobj = eval(sobj).id;
+  //sobj = document.getElementById(sobj).id;  	
+  switch (sobj){
+	case "REQ":  	
+		//var tbl = document.all["REQ"];
+		var tbl = document.getElementById("REQ");   //document.getElementById("CHG");
+		if(tbl.rows.length > 3){
+			var tr = tbl.deleteRow(-1);}
+		
+		var tbl2 = document.getElementById("exp1");
+		if(tbl2.rows.length > 2){
+			var tr2 = tbl2.deleteRow(-1);}
+		
+		var tbl3 = document.getElementById("exp2");
+		if(tbl3.rows.length > 2){
+			var tr3 = tbl3.deleteRow(-1);}
+			
+        var tbl4 = document.getElementById("exp3");
+		if(tbl4.rows.length > 2){
+			var tr4 = tbl4.deleteRow(-1);}	
+			
+		break;
+		
+	case "OLD":
+		var tbl = document.getElementById("OLD");
+		if(tbl.rows.length > 4){
+			var tr = tbl.deleteRow(tbl.rows.length - 3);}
+			
+	  /*var tbl = document.getElementById("OLD");*
+		if(tbl.rows.length > 4){
+			var tr1 = tbl.deleteRow(-1);}
+			
+			var tbl = document.getElementById("OLD");
+		if(tbl.rows.length > 4){
+			var tr2 = tbl.deleteRow(-1);}*/
+		
+			
+		break;
+	case "CHG":
+		var tbl = document.getElementById("CHG");
+		if(tbl.rows.length > 1){
+			var tr=tbl.deleteRow(-1);num--;}
+		break;
+	case "EX1":
+		var tbl = document.getElementById("EX1");
+		if(tbl.rows.length > 1){
+			var tr=tbl.deleteRow(-1);num1--;}
+		break;
+	case "EX2":
+		var tbl = document.getElementById("EX2");
+		if(tbl.rows.length > 1){
+			var tr=tbl.deleteRow(-1);num2--;}
+		break;
+	}
+}
+
+
+//숫자만 가져오기
+function get_number(val) {
+    var str = ""+val;
+    var temp = "";
+    var num = "";
+    for(var i=0; i<str.length; i++) {
+        temp = str.charAt(i);
+        if (temp >= "0" && temp <= "9") {
+            num += temp;
+        }
+    }
+    if ( (num != null) && (num != "") && (num != "0") ) {
+        return parseInt(num,10); //십진수로 변환하여 리턴
+    } else {
+        return "0";
+    }   
+} 
+
+
+function add_percent(val)
+{//debugger;//"%"삽입
+	var i = 0;
+	try
+	{//debugger;
+		for(i = 0; i < asgMinus.length; i++)
+		{
+			if(val.name == asgMinus[i])
+			{//debugger;//alert(keyCode);
+				if(val.value.indexOf('-') > -1)
+				{//debugger;//'-'가 있을 경우
+					val.value = '-' + val.value.replace(/-/gi, '');//첫번째 '-'를 제외한 나머지 '-'를 제거함.
+				}
+				break;
+			}
+		}
+	}
+	catch(e)
+	{
+	}
+	var num = val.value;
+	var str = "";
+	if(num.length != 0)
+	{
+		for(i = 0; i < num.length; i++)
+		{
+			if(num.charAt(i)=="%")
+			{
+				str = parseFloat(num).toFixed(1);
+			}
+			else{
+			str = parseFloat(num).toFixed(1)+"%";
+			}
+		}
+		
+	}
+	val.value=str;
+}
+
+function add_percent1(val)
+{//debugger;//"%"삽입
+	var i = 0;
+	try
+	{//debugger;
+		for(i = 0; i < asgMinus.length; i++)
+		{
+			if(val.name == asgMinus[i])
+			{//debugger;//alert(keyCode);
+				if(val.value.indexOf('-') > -1)
+				{//debugger;//'-'가 있을 경우
+					val.value = '-' + val.value.replace(/-/gi, '');//첫번째 '-'를 제외한 나머지 '-'를 제거함.
+				}
+				break;
+			}
+		}
+	}
+	catch(e)
+	{
+	}
+	var num = val.value;
+	var str = "";
+	if(num.length != 0)
+	{
+		for(i = 0; i < num.length; i++)
+		{
+			if(num.charAt(i)=="%")
+			{
+				str = parseInt(num);
+			}
+			else{
+			str = parseInt(num)+"%";
+			}
+		}
+		
+	}
+	val.value=str;
+}
+
+//"%"삽입 소수점 1자리까지
+function add_percent3(val){
+   if(val.value>0){
+	var num = val.value;
+	var str="";
+	str = parseFloat(num).toFixed(1);
+	str= str+"%";
+	val.value=str;
+	}
+	else if(val.value==null)
+	{
+	   str= "";
+	   val.value=str;
+	}
+	
+}
+
+//정수 %고정
+function add_percent4(val){
+	if (val.value>0){
+	var num = val.value;
+	var str="";
+	str = parseInt(num);
+	str= str+"%";
+	val.value=str;
+	}
+	else if (val.value==null)
+	{
+	str= "";
+	val.value=str;
+	}
+}
+
+//정수 %고정
+function add_percent5(val){
+	var num = val.value;
+	var str="";
+	str = num;
+	str= str+"%";
+	val.value=str;
+}
+
+function add_percent6(val){
+	if (val.value>0){
+	    var str="";
+	    str= parseFloat(val.value).toFixed(1) + "%";
+	    val.value=str;
+	}
+	else if (val.value==null)
+	{
+	    str= "";
+	    val.value=str;
+	}
+}
+
+//%삽입
+function change_percent(val)
+{
+    var str = 0
+    str = val * 100;
+    str = str.toFixed(1);
+    
+    if(str > 0){
+        str = "+" + str + "%";
+    } else if(str > 0){
+        str = "-" + str + "%";
+    } else {
+        str = str + "%";
+    }   
+    return str;
+}
+//%삽입 부호 +, -부호제거
+function change_percent2(val)
+{
+    var str = 0
+    str = val * 100;
+    
+    
+    if(str > 0){
+      str = str.toFixed(1);
+      str = str + "%";
+    }   
+      return str;
+}
+
+//텍스트입력시 소수점 첫번째까지
+function change_percent3(val)
+{
+    var str = 0
+    str = val * 100;
+    str = parseFloat(str).toFixed(1);
+    
+  
+    return str;
+}
+
+function add_comma(val)
+{//debugger;//콤마삽입
+    
+    var num = val;
+    if(num.length <= 3) return num;
+    
+    var temp = "";
+    if(val.indexOf("-") > -1) {
+        temp = "-";
+        num = num.replace(/-/g, "");
+    }
+    
+    var loop = Math.ceil(num.length / 3);
+    var offset = num.length % 3;
+    if(offset==0) offset = 3;
+    var str = num.substring(0, offset);
+    
+    for(i=1;i<loop;i++)
+    {
+        str += "," + num.substring(offset, offset+3);
+        offset += 3;
+    }
+    
+    if(temp == "-") str = "-" + str;
+    
+    return str;
+}
+
+
+// , 관련 함수 추가 
+// 사용 방법 <input > 태그에 onblur="javascript:addCommas(this,this.value);" 이벤트 추가 해 주시면 됩니다. 
+function auto_comma(frmName, strValue) {
+
+           strValue=strValue.replace(/,/g,""); // ,제거
+           var iCnt=0; // 피리어드갯수 
+           for(i=0;i<strValue.length;i++) {
+                     if(strValue.charAt(i)==".") iCnt++;
+           }
+           if(iCnt == 1) {//소숫점이 있는 경우 
+                     var strDecimal=strValue.split(".");
+                     strValue=strDecimal[0] // 소숫점 앞의 자리만 , 를 더한다.
+                     var objRegExp=new RegExp('(-?[0-9]+)([0-9]{3})');
+                     while(objRegExp.test(strValue)) {
+                                strValue=strValue.replace(objRegExp,'$1,$2');
+                     }
+                     strValue=strValue+"."+strDecimal[1];
+           }
+           else{ //소숫점 없는 경우 
+                     var objRegExp = new RegExp('(-?[0-9]+)([0-9]{3})');
+                     while (objRegExp.test(strValue)) {
+                                strValue = strValue.replace(objRegExp, '$1,$2');
+                     }
+           }
+           frmName.value = strValue;
+}
+
+function auto_comma2(strValue) {
+
+           strValue=strValue.replace(/,/g,""); // ,제거
+           var iCnt=0; // 피리어드갯수 
+           for(i=0;i<strValue.length;i++) {
+                     if(strValue.charAt(i)==".") iCnt++;
+           }
+           if(iCnt == 1) {//소숫점이 있는 경우 
+                     var strDecimal=strValue.split(".");
+                     strValue=strDecimal[0] // 소숫점 앞의 자리만 , 를 더한다.
+                     var objRegExp=new RegExp('(-?[0-9]+)([0-9]{3})');
+                     while(objRegExp.test(strValue)) {
+                                strValue=strValue.replace(objRegExp,'$1,$2');
+                     }
+                     strValue=strValue+"."+strDecimal[1];
+           }
+           else{ //소숫점 없는 경우 
+                     var objRegExp = new RegExp('(-?[0-9]+)([0-9]{3})');
+                     while (objRegExp.test(strValue)) {
+                                strValue = strValue.replace(objRegExp, '$1,$2');
+                     }
+           }
+           return strValue;
+}
+
+
+function get_float(val)
+{//debugger;//소숫점 없애기
+	try
+	{
+		if(val.value == '-')
+		{//(주)코비젼 이준희(2007-05-31): '-'와 같은 값을 방지함.
+			val.value = '-0';
+		}
+	}
+	catch(e)
+	{
+	}
+    var str = val.value;
+    var position = str.length-1;
+    if(str.lastIndexOf(".")==position)
+    {
+        val.value = str.substring(0,position);
+    }
+}
+
+var selectOBJ;
+function prod_chk(obj) {
+    //alert(obj.value);
+    //debugger;
+    if (obj.value.length < 4) {
+        return;
+    }
+
+    selectOBJ = obj;
+    
+    var pXML = "EXEC usp_wfform_select_trans '" + getInfo("sabun") + "','" + obj.value + "'";
+    //var aXML = "<param><name>PROD_CODE</name><type>varchar</type><length>34</length><value><![CDATA[" + obj.value + "]]></value></param>";
+    var aXML = "";
+    var connectionname = "COVI_FLOW_SI_ConnectionString";
+
+    var sXML = "<Items><connectionname>" + connectionname + "</connectionname><xslpath></xslpath><sql><![CDATA[" + pXML + "]]></sql>" + aXML + "</Items>";
+
+    var szURL = "../getXMLQuery.aspx";
+
+    //requestHTTP("POST", szURL, true, "text/xml; charset=utf-8", receiveHTTPReturnProd, sXML);
+
+}
+
+function prod_chk2(str, obj){
+    selectOBJ = obj;
+    
+    var		iWidth=800;iHeight=500;sSize="fix"; //2011.03.02 이은정 height수정
+	var		sUrl="../GoodsList/GoodsListSelect.aspx?GUBUN="+str;
+	//20060926이후창 변경		
+	if(sUrl!=null)openWindow(sUrl,"",iWidth,iHeight,sSize);
+}
+
+
+function receiveHTTPReturnProd() {
+    if (m_xmlHTTP.readyState == 4) {
+        //debugger;
+        m_xmlHTTP.onreadystatechange = event_noop;
+        xmlReturn = m_xmlHTTP.responseXML;
+
+        if (xmlReturn.xml == "") {
+         
+        } else {
+            var errorNode=xmlReturn.selectSingleNode("response/error");
+            if (errorNode != null) {
+                //bCompensate = true; sParam = null; alert("Desc: " + errorNode.text);
+            } else 
+            {
+                 if (document.getElementsByName("nmREQ_Pname").length == null) {
+                    document.getElementsByName("nmREQ_Pname").value = xmlReturn.selectSingleNode("response/NewDataSet/Table/GOOD_NM").text;         //상품명
+                    document.getElementsByName("nmREQ_Mcode").value = xmlReturn.selectSingleNode("response/NewDataSet/Table/MOTHER_ID").text;       //머더코드
+                    document.getElementsByName("nmREQ_Cost").value = xmlReturn.selectSingleNode("response/NewDataSet/Table/COST").text;             //원가 (VAT포함)
+                    document.getElementsByName("nmREQ_SPrice").value = xmlReturn.selectSingleNode("response/NewDataSet/Table/PRICE").text;          //판매가 (VAT포함)
+                    document.getElementsByName("nmREQ_SaleRatio").value = xmlReturn.selectSingleNode("response/NewDataSet/Table/MARGIN_RATE").text; //매출비율
+                    document.getElementsByName("nmREQ_Profit").value = xmlReturn.selectSingleNode("response/NewDataSet/Table/BC_CONTB_RATE").text;  //공헌이익율
+                    document.getElementsByName("nmREQ_Margin").value = xmlReturn.selectSingleNode("response/NewDataSet/Table/BC_CONTB_AMT").text;   //단위당 공헌이익액
+                    document.getElementsByName("nmREQ_Win").value = xmlReturn.selectSingleNode("response/NewDataSet/Table/WINWIN_YN").text;         //윈윈여부
+                    document.getElementsByName("nmREQ_InterMon").value = xmlReturn.selectSingleNode("response/NewDataSet/Table/INTF_DIV_MMS").text; //무이자개월수
+                        
+                    
+                } else {
+                    for (var i = 0; i < document.getElementsByName("nmREQ_Pcode").length; i++) {
+                        if (document.getElementsByName("nmREQ_Pcode")[i] == selectOBJ) {
+                            if (xmlReturn.selectSingleNode("response/NewDataSet/Table/GOOD_NM") != null) {
+                                document.getElementsByName("nmREQ_Pname")[i].value = xmlReturn.selectSingleNode("response/NewDataSet/Table/GOOD_NM").text;         //상품명
+                                document.getElementsByName("nmREQ_Mcode")[i].value = xmlReturn.selectSingleNode("response/NewDataSet/Table/MOTHER_ID").text;       //머더코드
+                                document.getElementsByName("nmREQ_Cost")[i].value = xmlReturn.selectSingleNode("response/NewDataSet/Table/COST").text;             //원가 (VAT포함)
+                                document.getElementsByName("nmREQ_SPrice")[i].value = xmlReturn.selectSingleNode("response/NewDataSet/Table/PRICE").text;          //판매가 (VAT포함)
+                                document.getElementsByName("nmREQ_SaleRatio")[i].value = xmlReturn.selectSingleNode("response/NewDataSet/Table/MARGIN_RATE").text; //매출비율
+                                document.getElementsByName("nmREQ_Profit")[i].value = xmlReturn.selectSingleNode("response/NewDataSet/Table/BC_CONTB_RATE").text;  //공헌이익율
+                                document.getElementsByName("nmREQ_Margin")[i].value = xmlReturn.selectSingleNode("response/NewDataSet/Table/BC_CONTB_AMT").text;   //단위당 공헌이익액
+                                document.getElementsByName("nmREQ_Win")[i].value = xmlReturn.selectSingleNode("response/NewDataSet/Table/WINWIN_YN").text;         //윈윈여부
+                                document.getElementsByName("nmREQ_InterMon")[i].value = xmlReturn.selectSingleNode("response/NewDataSet/Table/INTF_DIV_MMS").text; //무이자개월수
+                                
+                            }
+                            else {
+                                document.getElementsByName("nmREQ_Pname")[i].value = "";
+                                document.getElementsByName("nmREQ_Mcode")[i].value = "";
+                                document.getElementsByName("nmREQ_Cost")[i].value = "";
+                                document.getElementsByName("nmREQ_SPrice")[i].value = "";
+                                document.getElementsByName("nmREQ_SaleRatio")[i].value = "";
+                                document.getElementsByName("nmREQ_Profit")[i].value = "";
+                                document.getElementsByName("nmREQ_Margin")[i].value = "";
+
+                                document.getElementsByName("nmREQ_Win")[i].value = "";
+                                document.getElementsByName("nmREQ_InterMon")[i].value = "";
+                                document.getElementsByName("nmREQ_ARS_W").value = "";
+                                document.getElementsByName("nmREQ_ARS_C").value = "";
+                            }
+                            
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+}	
+
+function num_chk(ctrl)
+//function num_chk()//(주)코비젼 이준희(2007-05-21): [매출비율]/[공헌이익율]/[단위당 공헌이익액]란에서 -기호를 허용하기 위해 수정함.
+{//debugger;//숫자만 입력받기
+    if (navigator.userAgent.indexOf("MSIE") == -1)
+    {//IE가 아니면
+		return;//함수를 탈출함.
+    }
+    var keyCode = window.event.keyCode;
+    var i = 0;
+    if (( (keyCode < 48) || (keyCode > 57) ) && (keyCode != 46) )
+    {
+		try
+		{//debugger;
+			for(i = 0; i < asgMinus.length; i++)
+			{//if(ctrl.name == 'nmREQ_Profit' || ctrl.name == 'nmREQ_Margin')
+				try
+				{
+					if(ctrl.name == asgMinus[i])
+					{//debugger;//alert(keyCode);
+						if(keyCode == 45)
+						{//debugger;//'-' 기호일 경우
+							if(ctrl.value.indexOf('-') == -1)
+							{//'-'가 중복되지 않았을 경우
+								if(ctrl.value == '0')
+								{//'0-'와 같은 값을 방지함
+									ctrl.value = '';
+								}
+								return;//정상이므로 함수를 탈출함.
+							}
+						}
+						break;
+					}
+				}
+				catch(e0)
+				{
+				}
+			}
+		}
+		catch(e1)
+		{
+		}
+        event.returnValue = false;
+        alert("숫자와 소수점만 입력 가능합니다.");
+    }
+    return;
+}
+
+function Writeday(){
+	var mydate= new Date();
+	var year = mydate.getFullYear();
+	var date=mydate.getDate();
+	var month=mydate.getMonth()+1;
+	var Fullday = year+" 년  "+month+" 월  "+date+" 일";
+	return Fullday;
+	}	
+
+
+function addList(){
+	var rgParams=null;
+	rgParams=new Array();
+	rgParams["bMail"]  = false;
+	rgParams["bUser"] = true;
+	rgParams["bGroup"] =false;
+	rgParams["bRef"] = false;
+	rgParams["bIns"] = false; 
+	rgParams["bRecp"] = false; 
+	rgParams["sCatSignType"] = "수신결재"; 
+	rgParams["sDeptSignType"] = "일반결재";
+	rgParams["sDeptSignStatus"] = "수신"; 
+	rgParams["sUserSignType"] = "일반결재";
+	rgParams["sUserSignStatus"] = "대기"; 
+	rgParams["objMessage"] = window;
+
+	var szFont = "FONT-FAMILY: '굴림';font-size:9px;";
+	var nWidth = 640;
+	var nHeight = 480;
+	var vRetval = window.showModalDialog("/COVIWeb/approval/address/address.aspx", rgParams, szFont+"dialogHeight:"+nHeight+"px;dialogWidth:"+nWidth+"px;status:no;resizable:yes;help:no;");
+}
+
+function insertToList(oList){
+	var m_oChargeList = CreateXmlDocument(); //new ActiveXObject("MSXML2.DOMDocument");
+	m_oChargeList.loadXML("<?xml version='1.0' encoding='utf-8'?>"+oList.xml);
+	
+	//alert(oList.xml);
+
+	var elmRoot = m_oChargeList.documentElement;
+	var elmlist = elmRoot.selectNodes("item");
+	var elm;
+	if (elmlist.length > 1 ){alert('담당자는 1명만 입력가능합니다');return;}
+	for(var i=0; i< elmlist.length; i++){
+		elm = elmlist.nextNode();
+		document.getElementsByName("qmName")[0].value = m_oFormMenu.getLngLabel(elm.selectSingleNode("DN").text,false);
+		//nmPosition.value = elm.selectSingleNode("PO").text;
+		//nmPart.value = elm.selectSingleNode("DP").text;
+	}
+}
+
+function readCheck(i){readCheck[i]="1";}
+
+
+////////////////////////////////////////////////////
+///												 ///
+///  글자수 체크 스크립트           시작         ////
+///												 ///
+////////////////////////////////////////////////////
+
+function chkMsgLength(intMax,objMsg) {
+ var length = lengthMsg(objMsg.value);
+ if (length > intMax) {
+  alert("최대 " + intMax + "byte이므로 초과된 글자수는 자동으로 삭제됩니다.\n");
+  objMsg.value = objMsg.value.replace(/\r\n$/, "");
+  objMsg.value = assertMsg(intMax,objMsg.value);
+ }
+}
+
+ 
+function lengthMsg(objMsg) {
+ var nbytes = 0;
+ for (i=0; i<objMsg.length; i++) {
+  var ch = objMsg.charAt(i);
+  if(escape(ch).length > 4) {
+  nbytes += 2;
+  } else if (ch == '\n') {
+   if (objMsg.charAt(i-1) != '\r') {
+    nbytes += 1;
+   }
+  } else if (ch == '<' || ch == '>') {
+   nbytes += 4;
+  } else {
+   nbytes += 1;
+  }
+ }
+ return nbytes;
+}
+
+ 
+
+function assertMsg(intMax,objMsg) {
+ var inc = 0;
+ var nbytes = 0;
+ var msg = "";
+
+ var msglen = objMsg.length;
+ for (i=0; i<msglen; i++) {
+  var ch = objMsg.charAt(i);
+  if (escape(ch).length > 4) {
+  inc = 2;
+  } else if (ch == '\n') {
+   if (objMsg.charAt(i-1) != '\r') {
+   inc = 1;
+   }
+  } else if (ch == '<' || ch == '>') {
+   inc = 4;
+  } else {
+   inc = 1;
+  }
+  if ((nbytes + inc) > intMax) {
+   break;
+  }
+  nbytes += inc;
+  msg += ch;
+ }
+ //st.innerHTML = nbytes; //현재 byte수를 넣는다
+ return msg;
+}
+
+
+////////////////////////////////////////////////////
+///												 ///
+///  글자수 체크 스크립트         끝             ////
+///												 ///
+////////////////////////////////////////////////////
+
+function NaN_Chenk(temp)
+{
+	return temp == "NaN" ? "0" : temp;
+}
+
+function fmJM()
+{
+
+    var em = parseInt(document.getElementsByName("nmSalePerSec_em")[0].value == ""?"0":document.getElementsByName("nmSalePerSec_em")[0].value.replace(/\,/g,""),10);
+	var en = parseInt(document.getElementsByName("nmSalePerSec_en")[0].value== ""?"0":document.getElementsByName("nmSalePerSec_en")[0].value.replace(/\,/g,""),10);
+	document.getElementsByName("nmSalePerSec_emy")[0].value = NaN_Chenk(parseInt(em / (en / 1.1) + 0.5).toString());
+}
+
+function fmMARSPRICE()
+{
+
+    var emy = parseInt(document.getElementsByName("nmSalePerSec_emy")[0].value== ""?"0":document.getElementsByName("nmSalePerSec_emy")[0].value.replace(/\,/g,""),10);
+	var ars1 = parseFloat(document.getElementsByName("nmSalePerSec_ars1")[0].value== ""?"0":document.getElementsByName("nmSalePerSec_ars1")[0].value.replace(/\,/g,""),10) / 100;
+	var ars2 = parseInt(document.getElementsByName("nmSalePerSec_ars2")[0].value== ""?"0":document.getElementsByName("nmSalePerSec_ars2")[0].value.replace(/\,/g,""),10);
+	document.getElementsByName("nmSalePerSec_ars3")[0].value = NaN_Chenk(parseInt(emy * ars1 * ars2 + 0.5,10).toString());
+	document.getElementsByName("nmSalePerSec_ars3")[0].value = add_comma(document.getElementsByName("nmSalePerSec_ars3")[0].value);
+}
+
+function fmJMPRICE()
+{
+
+    var em = parseInt(document.getElementsByName("nmSalePerSec_em")[0].value == ""?"0":document.getElementsByName("nmSalePerSec_em")[0].value.replace(/\,/g,""),10);
+	var eb = parseFloat(document.getElementsByName("nmSalePerSec_eb")[0].value = ""?"0":document.getElementsByName("nmSalePerSec_eb")[0].value.replace(/\,/g,""),10)  / 100;
+	var ww1 = parseInt(document.getElementsByName("nmSalePerSec_ww1")[0].value == ""?"0":document.getElementsByName("nmSalePerSec_ww1")[0].value.replace(/\,/g,""),10);
+	var ars3 = parseInt(document.getElementsByName("nmSalePerSec_ars3")[0].value == ""?"0":document.getElementsByName("nmSalePerSec_ars3")[0].value.replace(/\,/g,""),10);
+	document.getElementsByName("nmSalePerSec")[0].value = NaN_Chenk(parseInt(em*eb+ww1+ars3+0.5,10).toString());
+	document.getElementsByName("nmSalePerSec")[0].value = add_comma(document.getElementsByName("nmSalePerSec")[0].value);
+}
+
+
+
+//분당 예상취급 고량
+function fmYSM()
+{
+    var ys1, ww4;
+    if(document.getElementsByName("nmSalePerSec_ys1").length > 1){
+        for (var i = 0; i < document.getElementsByName("nmSalePerSec_ys1").length; i++) {
+            ys1 = parseFloat(document.getElementsByName("nmSalePerSec_ys1")[i].value== ""?"0":document.getElementsByName("nmSalePerSec_ys1")[i].value.replace(/\,/g,""),10);
+            ww4 = parseFloat(document.getElementsByName("nmSalePerSec_ww4")[i].value== ""?"0":document.getElementsByName("nmSalePerSec_ww4")[i].value.replace(/\,/g,""),10);
+            
+            var sprice = 0;
+	        if(document.getElementsByName("nmREQ_SPrice").length == null)  
+	        {
+		        sprice = parseFloat(document.getElementsByName("nmREQ_SPrice").value== ""?"0":document.getElementsByName("nmREQ_SPrice").value.replace(/\,/g,""),10);
+	        }
+	        else
+	        {
+		        sprice = parseFloat(document.getElementsByName("nmREQ_SPrice")[i].value== ""?"0":document.getElementsByName("nmREQ_SPrice")[i].value.replace(/\,/g,""),10);
+	        }
+	        //분당 예상취급 고량 = (분당예상 취급고매출액-분당 광고특약 수수료)/판매가
+            document.getElementsByName("nmSalePerSec_ys2")[i].value = parseFloat((ys1-ww4)/sprice).toFixed(1);
+        }
+    }else{
+         ys1 = parseFloat(document.getElementsByName("nmSalePerSec_ys1")[0].value== ""?"0":document.getElementsByName("nmSalePerSec_ys1")[0].value.replace(/\,/g,""),10);
+         ww4 = parseFloat(document.getElementsByName("nmSalePerSec_ww4")[0].value== ""?"0":document.getElementsByName("nmSalePerSec_ww4")[0].value.replace(/\,/g,""),10);
+         
+        var sprice = 0;
+	    if(document.getElementsByName("nmREQ_SPrice").length == null)  
+	    {
+		    sprice = parseFloat(document.getElementsByName("nmREQ_SPrice").value== ""?"0":document.getElementsByName("nmREQ_SPrice").value.replace(/\,/g,""),10);
+	    }
+	    else
+	    {
+		    sprice = parseFloat(document.getElementsByName("nmREQ_SPrice")[0].value== ""?"0":document.getElementsByName("nmREQ_SPrice")[0].value.replace(/\,/g,""),10);
+	    }
+	    //분당 예상취급 고량 = (분당예상 취급고매출액-분당 광고특약 수수료)/판매가
+	    if(ys1-ww4 == 0 && sprice == 0){
+	        document.getElementsByName("nmSalePerSec_ys2")[0].value = "";
+	    } else {
+	        if(sprice == 0){
+                document.getElementsByName("nmSalePerSec_ys2")[0].value = "";
+            } else {
+                document.getElementsByName("nmSalePerSec_ys2")[0].value = parseFloat((ys1-ww4)/sprice).toFixed(1);
+            }
+	    }
+	}
+}
+	
+
+
+///V3 수수료 매출율
+function fmYSM2()
+{
+    var ys1,ww3,ww4;
+    if(document.getElementsByName("nmSalePerSec_ys1").length > 1){
+        for (var i = 0; i < document.getElementsByName("nmSalePerSec_ys1").length; i++) {
+            ww3 = parseInt(document.getElementsByName("nmSalePerSec_ww3")[i].value== ""?"0":document.getElementsByName("nmSalePerSec_ww3")[i].value.replace(/\,/g,""),10);
+            ys1 = parseInt(document.getElementsByName("nmSalePerSec_ys1")[i].value== ""?"0":document.getElementsByName("nmSalePerSec_ys1")[i].value.replace(/\,/g,""),10);
+            ww4 = parseInt(document.getElementsByName("nmSalePerSec_ww4")[i].value== ""?"0":document.getElementsByName("nmSalePerSec_ww4")[i].value.replace(/\,/g,""),10);
+	        //수수료 매출율 = (분당 수수료액 + 분당 광고 특약수수료) / 예상취급고 매출액 * 100%
+	        document.getElementsByName("nmSalePerSec_y2")[i].value = parseFloat((ww3+ww4)/ys1 * 100).toFixed(1);
+	        document.getElementsByName("nmSalePerSec_y2")[i].value = document.getElementsByName("nmSalePerSec_y2")[i].value+"%";
+        }
+    } else {
+        ww3 = parseInt(document.getElementsByName("nmSalePerSec_ww3")[0].value== ""?"0":document.getElementsByName("nmSalePerSec_ww3")[0].value.replace(/\,/g,""),10);
+        ys1 = parseInt(document.getElementsByName("nmSalePerSec_ys1")[0].value== ""?"0":document.getElementsByName("nmSalePerSec_ys1")[0].value.replace(/\,/g,""),10);
+        ww4 = parseInt(document.getElementsByName("nmSalePerSec_ww4")[0].value== ""?"0":document.getElementsByName("nmSalePerSec_ww4")[0].value.replace(/\,/g,""),10);
+        //수수료 매출율 = (분당 수수료액 + 분당 광고 특약수수료분당) /예상취급고 매출액 * 100%
+        if(ww3+ww4 == 0 && ys1 == 0){
+            document.getElementsByName("nmSalePerSec_y2")[0].value = "";
+        } else {
+            if(ys1 == 0) {
+                document.getElementsByName("nmSalePerSec_y2")[0].value = "";
+            } else {
+                document.getElementsByName("nmSalePerSec_y2")[0].value = parseFloat((ww3+ww4)/ys1 * 100).toFixed(1);
+	            document.getElementsByName("nmSalePerSec_y2")[0].value = document.getElementsByName("nmSalePerSec_y2")[0].value+"%";
+            }
+        }
+    }
+}
+
+//예상 공헌이익율
+function fmYSM3()
+{
+    var Profit, ys1;
+    
+    if(document.getElementsByName("nmSalePerSec_ys1").length > 1){
+        for (var i = 0; i < document.getElementsByName("nmSalePerSec_ys1").length; i++) {
+            Profit = parseFloat(document.getElementsByName("nmREQ_Profit")[i].value== ""?"0":document.getElementsByName("nmREQ_Profit")[i].value.replace(/\,/g,""),10);
+            ys1 = parseInt(document.getElementsByName("nmSalePerSec_ys1")[i].value== ""?"0":document.getElementsByName("nmSalePerSec_ys1")[i].value.replace(/\,/g,""),10);
+	        //예상 공헌이익율 = 분당 예상 공헌이익율
+	        document.getElementsByName("nmSalePerSec_yadd2")[i].value = parseFloat(Profit).toFixed(1);
+	        document.getElementsByName("nmSalePerSec_yadd2")[i].value = add_percent3(document.getElementsByName("nmSalePerSec_yadd2")[i].value);
+        }
+    } else {
+        Profit = parseFloat(document.getElementsByName("nmREQ_Profit")[0].value== ""?"0":document.getElementsByName("nmREQ_Profit")[0].value.replace(/\,/g,""),10);
+        ys1 = parseInt(document.getElementsByName("nmSalePerSec_ys1")[0].value== ""?"0":document.getElementsByName("nmSalePerSec_ys1")[0].value.replace(/\,/g,""),10);
+	     //예상 공헌이익율 = 분당 예상 공헌이익율
+	    document.getElementsByName("nmSalePerSec_yadd2")[0].value = parseFloat(Profit).toFixed(1);
+	    document.getElementsByName("nmSalePerSec_yadd2")[0].value = 
+	    document.getElementsByName("nmSalePerSec_yadd2")[0].value == 0.0 ? "" : document.getElementsByName("nmSalePerSec_yadd2")[0].value + "%";
+	}
+}
+//분당 예상 공헌이익액
+function fmYSM4()
+{
+    var Margin, ys1;
+    if(document.getElementsByName("nmSalePerSec_ys1").length > 1){
+        for (var i = 0; i < document.getElementsByName("nmSalePerSec_ys1").length; i++) {
+            Margin = parseInt(document.getElementsByName("nmREQ_Margin")[i].value.replace(/[,]/g,""),10);
+            ys1 = parseInt(document.getElementsByName("nmSalePerSec_ys1")[i].value== ""?"0":document.getElementsByName("nmSalePerSec_ys1")[i].value.replace(/\,/g,""),10);
+	        //예상 공헌이익액 = 분당 예상 공헌이익액
+	        document.getElementsByName("nmSalePerSec_yadd1")[i].value = NaN_Chenk(parseInt(Margin, 10).toString());
+	        document.getElementsByName("nmSalePerSec_yadd1")[i].value = add_comma(document.getElementsByName("nmSalePerSec_yadd1")[i].value);
+        }
+    } else {
+        Margin = parseInt(document.getElementsByName("nmREQ_Margin")[0].value== ""?"0":document.getElementsByName("nmREQ_Margin")[0].value.replace(/\,/g,""),10);
+        ys1 = parseInt(document.getElementsByName("nmSalePerSec_ys1")[0].value== ""?"0":document.getElementsByName("nmSalePerSec_ys1")[0].value.replace(/\,/g,""),10);
+	    //예상 공헌이익액 = 분당 예상 공헌이익액 
+	    document.getElementsByName("nmSalePerSec_yadd1")[0].value = NaN_Chenk(parseInt(Margin, 10).toString());
+	    document.getElementsByName("nmSalePerSec_yadd1")[0].value = add_comma(document.getElementsByName("nmSalePerSec_yadd1")[0].value);
+	}
+}
+//예상 PGM취급고달성율
+function PGM1()
+{
+    var p1, ys1;
+    if(document.getElementsByName("nmSalePerSec_ys1").length > 1){
+        for (var i = 0; i < document.getElementsByName("nmSalePerSec_ys1").length; i++) {
+            p1 = parseInt(document.getElementsByName("nmSalePerSec_P1")[i].value== ""?"0":document.getElementsByName("nmSalePerSec_P1")[i].value.replace(/\,/g,""),10);
+            ys1 = parseInt(document.getElementsByName("nmSalePerSec_ys1")[i].value== ""?"0":document.getElementsByName("nmSalePerSec_ys1")[i].value.replace(/\,/g,""),10);
+          
+	        //예상PGM취급고달성율 = (분당예상 취급고매출액/분당 취급고 목표) * 100%
+	        if(document.getElementsByName("nmSalePerSec_PGM1")[i].value==null)
+	        {
+	        
+	        document.getElementsByName("nmSalePerSec_PGM1")[i].value ="";
+	        
+	        }
+	        else
+	        {
+	            if(ys1 == 0 || p1 == 0){
+	                document.getElementsByName("nmSalePerSec_PGM1")[0].value = "";
+	            } else {
+	                document.getElementsByName("nmSalePerSec_PGM1")[0].value = parseFloat(ys1/p1*100).toFixed(1);
+	                document.getElementsByName("nmSalePerSec_PGM1")[0].value = document.getElementsByName("nmSalePerSec_PGM1")[0].value+"%";
+	            }
+	        }
+        }
+    } else {
+            p1 = parseInt(document.getElementsByName("nmSalePerSec_P1")[0].value== ""?"0":document.getElementsByName("nmSalePerSec_P1")[0].value.replace(/\,/g,""),10);
+            ys1 = parseInt(document.getElementsByName("nmSalePerSec_ys1")[0].value== ""?"0":document.getElementsByName("nmSalePerSec_ys1")[0].value.replace(/\,/g,""),10);
+	        
+	        //예상PGM취급고달성율 = (분당예상 취급고매출액/분당 취급고 목표) * 100%
+	        if(document.getElementsByName("nmSalePerSec_PGM1")[0].value ==null)
+	        {
+	          document.getElementsByName("nmSalePerSec_PGM1")[0].value="";
+	        }
+	        else
+	        {
+	            if(ys1 == 0 || p1 == 0){
+	                document.getElementsByName("nmSalePerSec_PGM1")[0].value = "";
+	            } else {
+	                document.getElementsByName("nmSalePerSec_PGM1")[0].value = parseFloat(ys1/p1*100).toFixed(1);
+	                document.getElementsByName("nmSalePerSec_PGM1")[0].value = document.getElementsByName("nmSalePerSec_PGM1")[0].value+"%";
+	            }
+           }
+    }
+}	
+
+//예상 PGM매출액 달성율
+function PGM2()
+{
+    var p2,ww3,ww4, ys1;
+  
+    if(document.getElementsByName("nmSalePerSec_ys1").length > 1){
+        for (var i = 0; i < document.getElementsByName("nmSalePerSec_ys1").length; i++) {
+            p2 = parseInt(document.getElementsByName("nmSalePerSec_P2")[i].value== ""?"0":document.getElementsByName("nmSalePerSec_P2")[i].value.replace(/\,/g,""),10);
+            ww3 = parseInt(document.getElementsByName("nmSalePerSec_ww3")[i].value== ""?"0":document.getElementsByName("nmSalePerSec_ww3")[i].value.replace(/\,/g,""),10);
+            ww4 = parseInt(document.getElementsByName("nmSalePerSec_ww4")[i].value== ""?"0":document.getElementsByName("nmSalePerSec_ww4")[i].value.replace(/\,/g,""),10);
+            ys1 = parseInt(document.getElementsByName("nmSalePerSec_ys1")[i].value== ""?"0":document.getElementsByName("nmSalePerSec_ys1")[i].value.replace(/\,/g,""),10);
+	        //예상PGM매출액달성율 = (분당 수수료매출액 목표 + 분당 광고 특액수수료)/분당 수수료매출액 목표) * 100%
+	        if(document.getElementsByName("nmSalePerSec_PGM2")[i].value ==null)
+	        {
+	          document.getElementsByName("nmSalePerSec_PGM2")[i].value="";
+	        }
+	        else
+	        {
+	          document.getElementsByName("nmSalePerSec_PGM2")[i].value = parseFloat((ww3+ww4)/p2*100).toFixed(1);
+	          document.getElementsByName("nmSalePerSec_PGM2")[i].value = document.getElementsByName("nmSalePerSec_PGM2")[i].value+"%";
+	        }
+	        
+        }
+    } else {
+            p2 = parseInt(document.getElementsByName("nmSalePerSec_P2")[0].value== ""?"0":document.getElementsByName("nmSalePerSec_P2")[0].value.replace(/\,/g,""),10);
+            ww3 = parseInt(document.getElementsByName("nmSalePerSec_ww3")[0].value== ""?"0":document.getElementsByName("nmSalePerSec_ww3")[0].value.replace(/\,/g,""),10);
+            ww4 = parseInt(document.getElementsByName("nmSalePerSec_ww4")[0].value== ""?"0":document.getElementsByName("nmSalePerSec_ww4")[0].value.replace(/\,/g,""),10);
+            ys1 = parseInt(document.getElementsByName("nmSalePerSec_ys1")[0].value== ""?"0":document.getElementsByName("nmSalePerSec_ys1")[0].value.replace(/\,/g,""),10);
+	        
+	        //예상PGM매출액달성율 = (분당 수수료매출액 목표 + 분당 광고 특액수수료)/분당 수수료매출액 목표) * 100%
+	        if(document.getElementsByName("nmSalePerSec_PGM2")[0].value ==null)
+	        {
+	          document.getElementsByName("nmSalePerSec_PGM2")[0].value="";
+	        }
+	        else
+	        {
+	            if(ww3+ww4 == 0 && p2 == 0){
+	                document.getElementsByName("nmSalePerSec_PGM2")[0].value = "";
+	            } else {
+	                if(p2 == 0) {
+	                    document.getElementsByName("nmSalePerSec_PGM2")[0].value = "";
+	                } else {
+	                    document.getElementsByName("nmSalePerSec_PGM2")[0].value = parseFloat((ww3+ww4)/p2*100).toFixed(1);
+	                    document.getElementsByName("nmSalePerSec_PGM2")[0].value = document.getElementsByName("nmSalePerSec_PGM2")[0].value+"%";
+	                }
+	            }
+           }
+    }
+}	
+
+
+//상선위 대비 변경내용(방송시간 가중치)
+function fmTimega()
+{
+   
+    var tmg1, tmg2;
+    if(document.getElementsByName("nmREQ_TimeText").length)
+    {
+           if(document.getElementsByName("nmOLD_Timega1")[0].value<0){
+             
+             tmg1=document.getElementsByName("nmREQ_TimeText")[0].value.replace(/[\-,]/g, "");
+             tmg2=document.getElementsByName("nmOLD_Timega1")[0].value.replace(/[\-,]/g, "");
+             document.getElementsByName("nmOLD_Timega1_S1")[0].value = NaN_Chenk(parseInt(tmg1,10).toString())-NaN_Chenk(parseInt(tmg2,10).toString());
+             document.getElementsByName("nmOLD_Timega1_S1")[0].value = add_comma(document.getElementsByName("nmOLD_Timega1_S1")[0].value);
+             }
+             else if(document.getElementsByName("nmOLD_Timega1")[0].value>0){
+             
+             tmg1 = parseInt(document.getElementsByName("nmREQ_TimeText")[0].value== ""?"0":document.getElementsByName("nmREQ_TimeText")[0].value.replace(/\,/g,""),10);
+             tmg2 = parseInt(document.getElementsByName("nmOLD_Timega1")[0].value== ""?"0":document.getElementsByName("nmOLD_Timega1")[0].value.replace(/\,/g,"") ,10);
+             document.getElementsByName("nmOLD_Timega1_S1")[0].value = NaN_Chenk(parseInt(tmg1,10).toString())-NaN_Chenk(parseInt(tmg2,10).toString());
+             document.getElementsByName("nmOLD_Timega1_S1")[0].value = document.getElementsByName("nmOLD_Timega1_S1")[0].value > 0 ? "+" + document.getElementsByName("nmOLD_Timega1_S1")[0].value : document.getElementsByName("nmOLD_Timega1_S1")[0].value;
+             }
+    }
+     else 
+    {
+             
+             document.getElementsByName("nmOLD_Timega1_S1")[0].value = NaN_Chenk(parseInt(0,10).toString());
+             
+	}
+}
+
+//상선위 대비 변경내용(원가)
+function fmwonga()
+{
+    var won1, won2;
+    if(document.getElementsByName("nmREQ_Cost").length){
+       
+             won1 = parseInt(document.getElementsByName("nmREQ_Cost")[0].value== ""?"0":document.getElementsByName("nmREQ_Cost")[0].value.replace(/\,/g,""),10);
+             won2 =  parseInt(document.getElementsByName("nmOLD_Cost1")[0].value== ""?"0":document.getElementsByName("nmOLD_Cost1")[0].value.replace(/\,/g,"") ,10);
+
+              document.getElementsByName("nmOLD_Cost1_S1")[0].value = parseInt(won1) - parseInt(won2);
+              //document.getElementsByName("nmOLD_Cost1_S1")[0].value =add_comma(document.getElementsByName("nmOLD_Cost1_S1")[0].value);
+              if(document.getElementsByName("nmOLD_Cost1_S1")[0].value == 0) {
+                document.getElementsByName("nmOLD_Cost1_S1")[0].value = "0";
+              } else {
+                document.getElementsByName("nmOLD_Cost1_S1")[0].value =  
+                  document.getElementsByName("nmOLD_Cost1_S1")[0].value > 0 ? "+" + add_comma(document.getElementsByName("nmOLD_Cost1_S1")[0].value) : 
+                 add_comma(document.getElementsByName("nmOLD_Cost1_S1")[0].value);
+              }
+    } else {
+              document.getElementsByName("nmOLD_Cost1_S1")[0].value = parseInt(0,10);
+             document.getElementsByName("nmOLD_Cost1_S1")[0].value = add_comma(document.getElementsByName("nmOLD_Cost1_S1")[0].value);
+	}
+}
+
+//상선위 대비 변경내용(판매가 (VTA포함))
+function fmMSPrice()
+{
+    var sp1, sp2;
+    
+    if(document.getElementsByName("nmREQ_SPrice").length){
+             sp1 = parseInt(document.getElementsByName("nmREQ_SPrice")[0].value== ""?"0":document.getElementsByName("nmREQ_SPrice")[0].value.replace(/\,/g,""),10);
+             sp2 = parseInt(document.getElementsByName("nmOLD_SPrice1")[0].value== ""?"0":document.getElementsByName("nmOLD_SPrice1")[0].value.replace(/\,/g,"") ,10);
+             
+             document.getElementsByName("nmOLD_SPrice1_S1")[0].value = parseInt(sp1,10) - parseInt(sp2,10);
+            // document.getElementsByName("nmOLD_SPrice1_S1")[0].value = add_comma(document.getElementsByName("nmOLD_SPrice1_S1")[0].value);    LBH
+             document.getElementsByName("nmOLD_SPrice1_S1")[0].value =  
+             document.getElementsByName("nmOLD_SPrice1_S1")[0].value > 0 ? 
+             "+" +add_comma(document.getElementsByName("nmOLD_SPrice1_S1")[0].value) : add_comma(document.getElementsByName("nmOLD_SPrice1_S1")[0].value);
+    } else {
+             
+       
+             document.getElementsByName("nmOLD_SPrice1_S1")[0].value = parseInt(0,10);
+             document.getElementsByName("nmOLD_SPrice1_S1")[0].value = add_comma(document.getElementsByName("nmOLD_SPrice1_S1")[0].value);
+             
+	}
+}
+
+//상선위 대비 변경내용(상품 매출비율)
+function fmSRatio()
+{
+   
+    var sr1, sr2;
+    
+    if(document.getElementsByName("nmREQ_SaleRatio").length){
+        
+             sr1 = parseFloat(document.getElementsByName("nmREQ_SaleRatio")[0].value== ""?"0":document.getElementsByName("nmREQ_SaleRatio")[0].value.replace(/\,/g,""),10);
+             sr2 = parseFloat(document.getElementsByName("nmOLD_SaleRatio1")[0].value== ""?"0":document.getElementsByName("nmOLD_SaleRatio1")[0].value.replace(/\,/g,"") ,10);
+             
+             sr2check = sr2.toString().substring(0,1);
+             
+             if(sr2check == "-"){
+                document.getElementsByName("nmOLD_SaleRatio1_S1")[0].value = parseFloat(sr1/100) + parseFloat(sr2/100);
+             } else {
+                document.getElementsByName("nmOLD_SaleRatio1_S1")[0].value = parseFloat(sr1/100) - parseFloat(sr2/100);
+             }
+       
+             
+             document.getElementsByName("nmOLD_SaleRatio1_S1")[0].value = change_percent(document.getElementsByName("nmOLD_SaleRatio1_S1")[0].value);
+	       
+        
+    } else {
+            
+       
+             document.getElementsByName("nmOLD_SaleRatio1_S1")[0].value = NaN_Chenk(parseFloat(0,10).toString());
+             document.getElementsByName("nmOLD_SaleRatio1_S1")[0].value = change_percent(document.getElementsByName("nmOLD_SaleRatio1_S1")[0].value);
+             
+	}
+}
+
+
+//상선위 대비 변경내용(분당 공헌이익액)
+function fmMargin()
+{
+   
+    var mg1, mg2;
+    
+    
+        
+    if(document.getElementsByName("nmREQ_Margin").length){
+    
+        
+             mg1 = parseInt(document.getElementsByName("nmREQ_Margin")[0].value== ""?"0":document.getElementsByName("nmREQ_Margin")[0].value.replace(/\,/g,""),10);
+             mg2 = parseInt(document.getElementsByName("nmOLD_TPU1")[0].value== ""?"0":document.getElementsByName("nmOLD_TPU1")[0].value.replace(/\,/g,"") ,10);
+             
+             document.getElementsByName("nmOLD_TPU1_S1")[0].value = NaN_Chenk(parseInt(mg1,10).toString()) - NaN_Chenk(parseInt(mg2,10).toString());
+             document.getElementsByName("nmOLD_TPU1_S1")[0].value = document.getElementsByName("nmOLD_TPU1_S1")[0].value >0 ? "+" +add_comma(document.getElementsByName("nmOLD_TPU1_S1")[0].value) : add_comma(document.getElementsByName("nmOLD_TPU1_S1")[0].value);
+             //document.getElementsByName("nmOLD_TPU1_S1")[0].value = add_comma(document.getElementsByName("nmOLD_TPU1_S1")[0].value);
+	       
+        
+    } else {
+             
+       
+             document.getElementsByName("nmOLD_TPU1_S1")[0].value = NaN_Chenk(parseInt(0,10).toString());
+             document.getElementsByName("nmOLD_TPU1_S1")[0].value = add_comma(document.getElementsByName("nmOLD_TPU1_S1")[0].value);
+             
+	}
+}
+
+//상선위 대비 변경내용(공헌이익율)
+function fmProfit()
+{
+   
+    var pf1, pf2, pf2check;
+    if(document.getElementsByName("nmREQ_Profit").length){
+        
+             pf1 = parseFloat(document.getElementsByName("nmREQ_Profit")[0].value== ""?"0":document.getElementsByName("nmREQ_Profit")[0].value.replace(/\,/g,""),10);
+             pf2 = parseFloat(document.getElementsByName("nmOLD_TPD1")[0].value== ""?"0":document.getElementsByName("nmOLD_TPD1")[0].value.replace(/\,/g,"") ,10);
+             
+             pf2check = pf2.toString().substring(0,1);
+             
+             if(pf2check == "-"){
+                document.getElementsByName("nmOLD_TPD1_S1")[0].value = parseFloat(pf1/100) + parseFloat(pf2/100);
+             } else {
+                document.getElementsByName("nmOLD_TPD1_S1")[0].value = parseFloat(pf1/100) - parseFloat(pf2/100);
+             }
+       
+             
+             document.getElementsByName("nmOLD_TPD1_S1")[0].value = change_percent(document.getElementsByName("nmOLD_TPD1_S1")[0].value);
+	       
+        
+    } else {
+            
+       
+             document.getElementsByName("nmOLD_TPD1_S1")[0].value = NaN_Chenk(parseFloat(0,10).toString());
+             document.getElementsByName("nmOLD_TPD1_S1")[0].value = change_percent(document.getElementsByName("nmOLD_TPD1_S1")[0].value);
+             
+	}
+}
+//상선위 대비 변경내용(무이자개월수)
+function fmInterMon()
+{
+   
+var im1, im2;
+    
+    if(document.getElementsByName("nmREQ_InterMon").length){
+    
+        
+             im1 = parseInt(document.getElementsByName("nmREQ_InterMon")[0].value== ""?"0":document.getElementsByName("nmREQ_InterMon")[0].value.replace(/\,/g,""),10);
+             im2 = parseInt(document.getElementsByName("nmOLD_InterMon1")[0].value== ""?"0":document.getElementsByName("nmOLD_InterMon1")[0].value.replace(/\,/g,"") ,10);
+             
+             document.getElementsByName("nmOLD_InterMon1_S1")[0].value = NaN_Chenk(parseInt(im1,10).toString()) - NaN_Chenk(parseInt(im2,10).toString());
+             document.getElementsByName("nmOLD_InterMon1_S1")[0].value = document.getElementsByName("nmOLD_InterMon1_S1")[0].value >0 ? "+" +document.getElementsByName("nmOLD_InterMon1_S1")[0].value : document.getElementsByName("nmOLD_InterMon1_S1")[0].value;
+             //document.getElementsByName("nmOLD_InterMon1_S1")[0].value = document.getElementsByName("nmOLD_InterMon1_S1")[0].value;
+	       
+        
+    } else {
+             
+       
+             document.getElementsByName("nmOLD_InterMon1_S1")[0].value = NaN_Chenk(parseInt(0,10).toString());
+            // document.getElementsByName("nmOLD_InterMon1_S1")[0].value = document.getElementsByName("nmOLD_InterMon1_S1")[0].value;
+             
+	}
+}
+
+
+
+//상선위 대비 변경내용(방송 광고특약수수료)
+function fmTprice()
+{
+   
+    var tp1, tp2;
+    
+    if(document.getElementsByName("nmREQ_TPrice").length){
+        
+             tp1 = parseInt(document.getElementsByName("nmREQ_TPrice")[0].value== ""?"0":document.getElementsByName("nmREQ_TPrice")[0].value.replace(/\,/g,""),10);
+             tp2 = parseInt(document.getElementsByName("nmOLD_TPrice1")[0].value== ""?"0":document.getElementsByName("nmOLD_TPrice1")[0].value.replace(/\,/g,"") ,10);
+        
+             document.getElementsByName("nmOLD_TPrice1_S1")[0].value = parseInt(tp1,10) - parseInt(tp2,10);
+             //document.getElementsByName("nmOLD_TPrice1_S1")[0].value = add_comma(document.getElementsByName("nmOLD_TPrice1_S1")[0].value);
+             document.getElementsByName("nmOLD_TPrice1_S1")[0].value = document.getElementsByName("nmOLD_TPrice1_S1")[0].value >0 ? "+" +add_comma(document.getElementsByName("nmOLD_TPrice1_S1")[0].value) : add_comma(document.getElementsByName("nmOLD_TPrice1_S1")[0].value);
+           
+	       
+        
+    } else {
+             
+       
+             document.getElementsByName("nmOLD_TPrice1_S1")[0].value = parseInt(0,10);
+             document.getElementsByName("nmOLD_TPrice1_S1")[0].value = add_comma(document.getElementsByName("nmOLD_TPrice1_S1")[0].value);
+             
+	}
+}
+
+
+
+function delChange(idx) { 
+/*
+	if(nmOLD_Cost.length == null) {
+		var maxLength = nmOLD_Delivery_Day.options.length ;
+		switch (nmOLD_Delivery_1.value){
+		case "":
+			for ( var i=maxLength-1; i>0; i-- ) {
+				nmOLD_Delivery_Day.remove(i);
+			}
+			break;
+		case "센터":
+			for ( var i=maxLength-1; i>0; i-- ) {
+				nmOLD_Delivery_Day.remove(i);
+			}
+		        var boxOption1 = document.createElement("OPTION");
+		        var boxOption2 = document.createElement("OPTION");
+		        var boxOption3 = document.createElement("OPTION");
+	                //boxOption1.text  = "내일";
+        	        //boxOption1.value = "내일";
+	                //nmOLD_Delivery_Day.add(boxOption1);
+	                boxOption2.text  = "2일";
+        	        boxOption2.value = "2일";
+	                nmOLD_Delivery_Day.add(boxOption2);
+	                boxOption3.text  = "3일";
+        	        boxOption3.value = "3일";
+	                nmOLD_Delivery_Day.add(boxOption3);
+			break;
+		case "업체":
+			for ( var i=maxLength-1; i>0; i-- ) {
+				nmOLD_Delivery_Day.remove(i);
+			}
+		        var boxOption1 = document.createElement("OPTION");
+		        var boxOption2 = document.createElement("OPTION");
+		        var boxOption3 = document.createElement("OPTION");
+		        var boxOption4 = document.createElement("OPTION");
+	                boxOption1.text  = "2일";
+        	        boxOption1.value = "2일";
+	                nmOLD_Delivery_Day.add(boxOption1);
+	                boxOption2.text  = "3일";
+        	        boxOption2.value = "3일";
+	                nmOLD_Delivery_Day.add(boxOption2);
+	                boxOption3.text  = "5일";
+        	        boxOption3.value = "5일";
+	                nmOLD_Delivery_Day.add(boxOption3);
+	                boxOption4.text  = "7일";
+        	        boxOption4.value = "7일";
+	                nmOLD_Delivery_Day.add(boxOption4);
+			break;
+		}
+	}
+	else {*/
+		//var obj = eval("nmOLD_Delivery_Day[" + idx + "]") ;
+		//var obj = document.getElementById("nmOLD_Delivery_Day" + idx);  //document.getElementsByName("nmOLD_Delivery_Day" + idx);
+		var obj = document.getElementsByName("nmOLD_Delivery_Day" + idx)[0];
+		var maxLength = obj.options.length ;
+  
+//alert(maxLength);
+		//switch (eval("nmOLD_Delivery_1[" + idx + "]").value){
+		//switch (document.getElementById("nmOLD_Delivery_1" + idx).value){
+		switch (document.getElementsByName("nmOLD_Delivery_1" + idx)[0].value) {
+		case "":
+			for ( var i=maxLength-1; i>0; i-- ) {
+				obj.remove(i);
+			}
+			break;
+		case "센터":
+			for ( var i=maxLength-1; i>0; i-- ) {
+				obj.remove(i);
+			}
+		        var boxOption1 = document.createElement("OPTION");
+		        var boxOption2 = document.createElement("OPTION");
+		        var boxOption3 = document.createElement("OPTION");
+	                //boxOption1.text  = "내일";
+        	        //boxOption1.value = "내일";
+	                //obj.add(boxOption1);
+	                boxOption2.text  = "2일";
+        	        boxOption2.value = "2일";
+	                obj.add(boxOption2);
+	                boxOption3.text  = "3일";
+        	        boxOption3.value = "3일";
+	                obj.add(boxOption3);
+			break;
+		case "업체":
+			for ( var i=maxLength-1; i>0; i-- ) {
+				obj.remove(i);
+			}
+		        var boxOption1 = document.createElement("OPTION");
+		        var boxOption2 = document.createElement("OPTION");
+		        var boxOption3 = document.createElement("OPTION");
+		        var boxOption4 = document.createElement("OPTION");
+	                boxOption1.text  = "2일";
+        	        boxOption1.value = "2일";
+	                obj.add(boxOption1);
+	                boxOption2.text  = "3일";
+        	        boxOption2.value = "3일";
+	                obj.add(boxOption2);
+	                boxOption3.text  = "5일";
+        	        boxOption3.value = "5일";
+	                obj.add(boxOption3);
+	                boxOption4.text  = "7일";
+        	        boxOption4.value = "7일";
+	                obj.add(boxOption4);
+			break;
+		case "지원":
+			for ( var i=maxLength-1; i>0; i-- ) {
+				obj.remove(i);
+			}
+		        var boxOption1 = document.createElement("OPTION");
+		        var boxOption2 = document.createElement("OPTION");
+		        var boxOption3 = document.createElement("OPTION");
+	                //boxOption1.text  = "내일";
+        	        //boxOption1.value = "내일";
+	                //obj.add(boxOption1);
+	                boxOption2.text  = "2일";
+        	        boxOption2.value = "2일";
+	                obj.add(boxOption2);
+	                boxOption3.text  = "3일";
+        	        boxOption3.value = "3일";
+	                obj.add(boxOption3);
+			break;
+		}
+	//}
+}
+
+function OpenKSRM() {
+/*
+	var tempRandomNum = Math.random() * 100000;
+	//var randomNum = tempRandomNum.toString().substring(2,7);
+	var randomNum = tempRandomNum.toString().split(".")[0];
+	//alert(randomNum);
+	
+	var dd = new Date().getDate().toString();
+	dd = dd.length == 1 ? "0" + dd : dd;
+	var hh = new Date().getHours().toString();
+	hh = hh.length == 1 ? "0" + hh : hh;
+	var mm = new Date().getMinutes().toString();
+	mm = mm.length == 1 ? "0" + mm : mm;
+	var ss = new Date().getSeconds().toString();
+	ss = ss.length == 1 ? "0" + ss : ss;
+	var tempDate = dd + hh + mm + ss;
+	//alert(tempDate);
+	var tempInitKey = parseInt(tempDate) - parseInt(randomNum);
+	var initKey = tempInitKey.toString();
+	
+	while (initKey.length < 8) {
+		initKey = "0" + initKey;
+	}
+	//alert(initKey);
+	var siteKey = "120110571";
+	var tempHashCodeKey = parseInt(siteKey) - parseInt(randomNum);
+	
+	//alert(parseInt(siteKey) + " : " + parseInt(randomNum)) ;
+	var hashCodeKey = tempHashCodeKey.toString();
+	
+	while (hashCodeKey.length <10) {
+		hashCodeKey = "0" + hashCodeKey;
+	}
+	//alert(hashCodeKey);
+	
+	while (randomNum.length <5) {
+		randomNum = "0" + randomNum;
+	}
+	
+	var steKey = initKey + hashCodeKey + randomNum;
+	//alert(tempDate + " : " + randomNum + " : " +  initKey + " : " + hashCodeKey);	
+	//alert(steKey);
+
+	//window.open("http://www.k-srm.co.kr/refbfautologin.do?acctp=C2&isSSL=&ID=nsplan&siteKey=45821454xxxxxxxxx79854665&BZNO=4168109622", "go_ksrm", "width=900,height=600,scrollbar=auto");
+	var szURL = "http://www.k-srm.co.kr/refbfautologin.do?acctp=C0&isSSL=&ID=nsplan&siteKey=" + steKey + "&BZNO=2088110042";	//1178133642
+	//alert(szURL);
+	//window.open(szURL, "go_ksrm", "width=900,height=600,scrollbar=auto");
+	
+	document.form.target = "go_ksrm"; 
+	document.form.action = szURL
+	document.form.submit();
+*/
+
+	if (document.getElementsByName("nmLicensenum")[0].value == ""){
+		alert("사업자등록번호를 선택하세요.");
+	}else{
+		var License = document.getElementsByName("nmLicensenum")[0].value;
+		//현재 페이지를 유지하기 위해 테스트페이지를 띄우고, 그 페이지에서 링크페이지를 호출하는 방식으로 수정
+		var szURL = "/CoviWeb/Approval/Forms/Test_Link.htm?License=" + License;
+		window.open(szURL, "go_ksrm", "width=900,height=600,scrollbar=auto");
+	}
+}
+function OpenTransact() {
+	if(document.getElementsByName("txtTransact")[0].value == "") {
+		alert("계약서 번호를 입력하세요.");
+	}else {
+		//window.open("https://ebiz.nsmall.com/common/Main.jsp?_param=NSS_LOGIN_HANDLER&user_id=ebiz&password=ebiz&_origin=/contract/nss/CONTRACT_ONE_Main.jsp?cont_seq=244174", "", "center=yes,scrollbars=yes,status=no,toolbar=no,resizable=yes,location=no,menu=no,width=1024,height=600");
+		var szURL = "https://ebiz.nsmall.com/common/Main.jsp?_param=NSS_LOGIN_HANDLER&user_id=ebiz&password=ebiz&_origin=/contract/nss/CONTRACT_ONE_Main.jsp?cont_seq=" + document.getElementsByName("txtTransact")[0].value;
+		window.open(szURL, "", "center=yes,scrollbars=yes,status=no,toolbar=no,resizable=yes,location=no,menu=no,width=1024,height=600");
+	}
+}
+function OpenProduct() {
+	if(document.getElementsByName("txtProduct")[0].value == "") {
+		alert("계약서 번호를 입력하세요.");
+	}else {
+		//window.open("https://ebiz.nsmall.com/common/Main.jsp?_param=NSS_LOGIN_HANDLER&user_id=ebiz&password=ebiz&_origin=/contract/nss/CONTRACT_ONE_Main.jsp?cont_seq=237782", "", "center=yes,scrollbars=yes,status=no,toolbar=no,resizable=yes,location=no,menu=no,width=1024,height=600");
+		var szURL = "https://ebiz.nsmall.com/common/Main.jsp?_param=NSS_LOGIN_HANDLER&user_id=ebiz&password=ebiz&_origin=/contract/nss/CONTRACT_ONE_Main.jsp?cont_seq=" + document.getElementsByName("txtProduct")[0].value;
+		window.open(szURL, "", "center=yes,scrollbars=yes,status=no,toolbar=no,resizable=yes,location=no,menu=no,width=1024,height=600");
+	}
+}
+
+
+
+function CreditRating() {
+	//if(nmTrust.value == "NS C등급이상") {
+	if(document.getElementsByName("nmTrust")[0].value == "NS C등급이상") {
+		td10.style.visibility = "hidden";
+		td10_1.style.visibility = "hidden";
+		td11.style.visibility = "hidden";
+		td11_1.style.visibility = "hidden";
+		td12.style.visibility = "hidden";
+		td12_1.style.visibility = "hidden";
+	} else {
+		td10.style.visibility = "visible";
+		td10_1.style.visibility = "visible";
+		td11.style.visibility = "visible";
+		td11_1.style.visibility = "visible";
+		td12.style.visibility = "visible";
+		td12_1.style.visibility = "visible";
+	}
+}
+function TransCondition() {
+     if( document.getElementsByName("nmCondition")[0].value == "상선위 조건" ) {
+      
+      document.getElementById("tdTxtChg0").innerText =  "※ 상선위조건 및 상선위대비 변경사항";
+      document.getElementById("tdTxtChg").innerText =  "상선위회차";
+      document.getElementById("tdTxtChg2").innerText = "상선위조건";
+      document.getElementById("tdTxtChg3").innerText = "상선위대비변경내용";
+      document.getElementById("tdTxtChg4").innerText = "상선위대비변경사유";
+      
+      
+   }
+   else if( document.getElementsByName("nmCondition")[0].value == "종전방송조건" || document.getElementsByName("nmCondition")[0].value == "" )
+   {
+      document.getElementById("tdTxtChg0").innerText =  "※ 종전조건 및 종전대비 변경사항";
+      document.getElementById("tdTxtChg").innerText =  "상품구성";
+      document.getElementById("tdTxtChg2").innerText = "종전조건";
+      document.getElementById("tdTxtChg3").innerText = "종전대비\n변경내용";
+      document.getElementById("tdTxtChg4").innerText = "종전대비\n변경사유";
+   }
+}
+
+var m_ibIdx=0;
+function attFile(No) {  //debugger;
+	attNo = No;	//현재 첨부 팝업을 클릭한 필드의 id를 전역변수에 저장
+	//alert("AAaaa");
+
+    
+	//var aAttFile = ATTACH_FILE_INFO.value.split("^^^");
+/*	var aAttFile = document.all("ATTACH_FILE_INFO" + attNo).value.split("^^^");
+	var sAttFile = aAttFile[m_ibIdx];
+	var attach =  (sAttFile != null)?sAttFile.replace("%","%25").replace("#","%23").replace("+","%2B").replace(/'/g, "&apos;").replace(/name=&apos;/g, "name='").replace(/&apos; location/g, "' location").replace(/location=&apos;/g, "location='").replace(/&apos;>/g, "'>"):"";
+*/
+    var strphygicalName="";
+    var strlocation="";
+    var strINIListFiles="";
+
+    //ATTACH_FILE_INFO에서 업로드 파일 정보를 가져온다
+    var strURL ="";
+    
+    if ( document.getElementsByName("ATTACH_FILE_INFO" + attNo)[0].value != ""){	
+		var r, res;
+		var s =document.getElementsByName("ATTACH_FILE_INFO" + attNo)[0].value;
+		
+		res = /^^^/i;
+		attFiles = s.replace(res, "");
+		
+		var m_oFileList = CreateXmlDocument();
+		m_oFileList.loadXML("<?xml version='1.0' encoding='utf-8'?>"+attFiles);
+		var elmRoot, elmList, elm, elmTaskInfo;
+		
+		var elmListLoc,elmLoc;
+		elmRoot = m_oFileList.documentElement;
+		
+		if (elmRoot != null){
+		    
+			elmList = elmRoot.selectNodes("//file");		
+			elmListLoc	= elmRoot.selectNodes("//file");		
+			szAttFileInfo = "";
+			
+			elmTaskInfo=elmListLoc.nextNode();
+			
+			
+			//substring(elm.getAttribute("location").lastIndexOf("/")+1, elm.getAttribute("location").length)
+			for (var i=0; i<elmList.length;i++) 
+			{
+			    strlocation = elmTaskInfo.getAttribute("location");
+			    strlocation=strlocation.substring(0,strlocation.lastIndexOf("/")+1);
+			    
+                elm = elmList.nextNode();
+				strINIListFiles = strINIListFiles + elm.getAttribute("location").substring(elm.getAttribute("location").lastIndexOf("/")+1, elm.getAttribute("location").length)+":"+elm.getAttribute("size") +":"+elm.getAttribute("user_name") +":"+elm.getAttribute("dept_name") +";" ;
+				//strlocation = elm.getAttribute("location").substring(0, elm.getAttribute("location").lastIndexOf("/")+1);
+			}
+			
+		}
+	}
+
+	var re_attach = toUTF8(strINIListFiles);	
+	
+	var strURL = "../FileAttach/fileupload.aspx?INIListFiles="+re_attach; 
+	
+	//openWindow(strURL,"fileattach",377,342, "fix");	
+	frAttachFiles.location = strURL;
+}
+function delFile(No) {
+	document.all("attach" + No).value = "";
+	document.all("ATTACH_FILE_INFO" + No).value = "";
+	document.getElementById("AttFileInfo" + No).innerHTML = "";
+}
+function setAttachInfo(AttFileInfo_EBH, AttFiles){
+//alert(attNo);
+	if ( cField["attach" + attNo].value == "" ){
+		//AttFileInfo.innerHTML = AttFileInfo_EBH;
+		document.getElementById("AttFileInfo" + attNo).innerHTML = AttFileInfo_EBH;
+		cField["attach" + attNo].value = AttFiles; //attach에서 변경
+		dField["ATTACH_FILE_INFO" + attNo].value = AttFiles; //attach에서 변경
+	}else{
+//alert(AttFileInfo.tagName);
+//alert(AttFileInfo);
+		//var aAttFileInfo = AttFileInfo.innerHTML.split("|");
+		var aAttFileInfo = document.getElementById("AttFileInfo" + attNo).innerHTML.split("|");
+		var aAttach = attach.value.split("^^^");
+		var aAttFile = ATTACH_FILE_INFO.value.split("^^^");
+		aAttFileInfo[m_ibIdx] = AttFileInfo_EBH;
+		aAttach[m_ibIdx] = AttFiles;
+		aAttFile[m_ibIdx] = AttFiles;
+
+		var sAttFileInfo = "";
+		var sAttach = "";
+		var sAttFile = "";
+		
+		for(var i=0; i < aAttach.length; i++){
+			sAttFileInfo += "|" + aAttFileInfo[i];
+			sAttach += "^^^" + aAttach[i];
+			sAttFile += "^^^" + aAttFile[i];
+		}
+		if (sAttFileInfo.length > 1) sAttFileInfo = sAttFileInfo.substring(1);
+		if (sAttach.length > 1) sAttach = sAttach.substring(3);
+		if (sAttFile.length > 1) sAttFile = sAttFile.substring(3);
+
+		//AttFileInfo.innerHTML = sAttFileInfo;
+		document.getElementById("AttFileInfo" + attNo).innerHTML = sAttFileInfo;
+		cField["attach" + attNo].value = sAttach; //attach에서 변경
+		dField["ATTACH_FILE_INFO" + attNo].value = sAttFile; //attach에서 변경
+	}	
+}
+
+function getProduct(targetId) { 
+	//if(nmCondition.value == "상선위 조건") {
+	if(document.getElementsByName("nmCondition")[0].value == "상선위 조건") {
+		var winW = 640;
+		var winH = 480;
+		var status = "channelmode=no, toolbar=yes, location=no, directories=no, status=no, menubar=no, scrollbars=yes, width="+winW+", height=" + winH + ", left=400, top=300";
+		
+		//var vRetval = window.open("../../COVIBOOKNet/Product/List_Product_Flow.aspx?targetId=" + targetId, "", status);
+		var vRetval = window.open("/COVIWEB/COVIBOOKNet/Product/List_Product_Flow.aspx?targetId=" + targetId, "", status);
+	}else {
+		alert("상선위 조건을 선택하세요.");
+	}
+}
+
+function setValue(prodcode, targetId) {
+	SetDataXSL(prodcode, targetId);
+}
+// XSL 에서  UID(키값을) 넘겨 받아서 페이지에 출력
+function SetDataXSL(prodcode, targetId){
+	//var sText="<ROOT><SPNAME>REGISTER_UID_SEARCH</SPNAME><PARAMETER><UID>"+UID+"</UID></PARAMETER></ROOT>";	
+	var sText="<ROOT><SPNAME>PRODUCT_PDCODE_SEARCH_VIEW</SPNAME><PARAMETER><PROD_CODE>"+prodcode+"</PROD_CODE></PARAMETER></ROOT>";	
+	
+	//alert(sText);
+	evalXML2(sText);		
+	
+	requestHTTP2("POST","../../COVIBOOKNet/List_com.aspx",true,"text/xml",receiveHTTP2,m_evalXML2,targetId);
+
+	//GubunKey = prodcode;			
+}
+function evalXML2(sXML){
+//alert(sXML);
+	if(!m_evalXML2.loadXML(sXML)){
+		var err = m_evalXML2.parseError;
+		throw new Error(err.errorCode,"desc:"+err.reason+"\nsrctxt:"+err.srcText+"\nline:"+err.line+"\tcolumn:"+err.linepos);
+	}
+}
+function requestHTTP2(sMethod,sUrl,bAsync,sCType,pCallback,vBody,targetId){
+	m_xmlHTTP.open(sMethod,sUrl,bAsync);
+	m_xmlHTTP.setRequestHeader("Accept-Language","ko");
+	m_xmlHTTP.setRequestHeader("Content-type", sCType);
+	if(pCallback!=null)
+	{
+		m_xmlHTTP.onreadystatechange = function() { if(m_xmlHTTP.readyState == 4) pCallback(targetId); };
+	}
+	
+	(vBody!=null)?m_xmlHTTP.send(vBody):m_xmlHTTP.send();
+	//alert(sUrl);
+}
+function receiveHTTP2(targetId){
+	if(m_xmlHTTP.readyState==4){
+		m_xmlHTTP.onreadystatechange=event_noop;
+		
+		//alert(m_xmlHTTP.responseXML.xml);					
+		
+		var errorNode = m_xmlHTTP.responseXML.selectSingleNode("response/error");
+						
+		if(errorNode!=null)
+		{
+			alert("Desc: " + errorNode.text);
+			window.close();
+		}
+		else
+		{
+			var elmRoot, elmList,elm;
+			var xmlschema = CreateXmlDocument();  //CreateXmlDocument();   new ActiveXObject("MSXML2.DOMDocument");
+			xmlschema.loadXML(m_xmlHTTP.responseXML.xml);
+			
+			//alert(m_xmlHTTP.responseXML.xml);         LBH
+							
+			elmRoot = xmlschema.documentElement;
+			elmList = elmRoot.selectSingleNode("//ROW").childNodes;
+			var nIndex = targetId.substring(5);
+			
+			for (var i=0; i<elmList.length; i++)
+			{
+				var oNode = elmList.item(i);
+				var szname = oNode.nodeName;
+				
+				if(szname == "PRE_SUPPLYING_PRICE")
+				{
+					document.getElementsByName("nmOLD_Cost1")[nIndex - 1].value = oNode.text;
+				}
+				if(szname == "PRE_PRICE")
+				{
+					document.getElementsByName("nmOLD_SPrice1")[nIndex - 1].value = oNode.text;
+				}
+				if(szname == "PRE_MARGIN_RATE")
+				{
+					document.getElementsByName("nmOLD_SaleRatio1")[nIndex - 1].value = parseFloat(oNode.text).toFixed(1) + "%";
+				}
+//				if(szname == "PRE_PROFIT")
+//				{
+//					document.getElementsByName("nmOLD_TPD1")[nIndex - 1].value = parseFloat(oNode.text).toFixed(1) + "%";
+//				}   
+			}
+			
+			if(nIndex == 1) {
+			    fmSRatio();
+			    fmProfit();
+			    fmMargin();
+			    fmMSPrice();
+                fmwonga();
+			}
+			
+		}
+	}			
+}
+
+function getDayInterval(time1,time2) { 
+	if(time1.length != 10 || time2.length != 10) { 
+	return 0; 
+	} 
+	var sTimeArr = time1.split("-"); 
+	var eTimeArr = time2.split("-"); 
+	if(sTimeArr.length != 3 || eTimeArr.length != 3) { 
+	return 0; 
+	} 
+	var sDate = new Date(sTimeArr[0],(parseInt(sTimeArr[1], 10)-1),sTimeArr[2]); 
+	var eDate = new Date(eTimeArr[0],(parseInt(eTimeArr[1], 10)-1),eTimeArr[2]); 
+	var day = 1000 * 3600 * 24; //24시간 
+
+	return parseInt((eDate - sDate) / day, 10); 
+}
+function setAttachInfo2(AttFileInfo, AttFiles){	
+	cField["attach" + attNo].value = AttFileInfo; //attach에서 변경
+	dField["ATTACH_FILE_INFO" + attNo].value = AttFileInfo; //attach에서 변경
+	G_displaySpnAttInfo3(attNo);
+}
+
+function clickConfirm()
+{
+    //결과확정 버튼 숨김, 결과수정 버튼 보이게 처리
+    document.getElementById("BtnConfirm").style.display = "none";
+    document.getElementById("BtnModify").style.display = "";
+    
+   
+    
+    
+    //입력된 정보 수정 못하도록 비활성화
+    if(document.getElementsByName("nmSalePerSec_ys1").length > 1){
+        for (var i = 0; i < document.getElementsByName("nmSalePerSec_ys1").length; i++) {
+            document.getElementsByName("nmSalePerSec_P1")[i].disabled = true;
+            document.getElementsByName("nmSalePerSec_ys1")[i].disabled = true;
+            document.getElementsByName("nmSalePerSec_PGM1")[i].disabled = true;
+            document.getElementsByName("nmSalePerSec_P2")[i].disabled = true;
+            document.getElementsByName("nmSalePerSec_ww3")[i].disabled = true;
+            document.getElementsByName("nmSalePerSec_ww4")[i].disabled = true;
+            document.getElementsByName("nmSalePerSec_PGM2")[i].disabled = true;
+            document.getElementsByName("nmSalePerSec_ys2")[i].disabled = true;
+            document.getElementsByName("nmSalePerSec_y2")[i].disabled = true;
+            document.getElementsByName("nmSalePerSec_yadd1")[i].disabled = true;
+            document.getElementsByName("nmSalePerSec_yadd2")[i].disabled = true;
+        }
+    }else{
+            document.getElementsByName("nmSalePerSec_P1")[0].disabled = true;
+            document.getElementsByName("nmSalePerSec_ys1")[0].disabled = true;
+            document.getElementsByName("nmSalePerSec_PGM1")[0].disabled = true;
+            document.getElementsByName("nmSalePerSec_P2")[0].disabled = true;
+            document.getElementsByName("nmSalePerSec_ww3")[0].disabled = true;
+            document.getElementsByName("nmSalePerSec_ww4")[0].disabled = true;
+            document.getElementsByName("nmSalePerSec_PGM2")[0].disabled = true;
+            document.getElementsByName("nmSalePerSec_ys2")[0].disabled = true;
+            document.getElementsByName("nmSalePerSec_y2")[0].disabled = true;
+            document.getElementsByName("nmSalePerSec_yadd1")[0].disabled = true;
+            document.getElementsByName("nmSalePerSec_yadd2")[0].disabled = true;
+    }
+    document.getElementsByName("confirm_key")[0].value = "YES";
+}
+function clickModify()
+{
+    //결과확정 버튼 숨김, 결과수정 버튼 보이게 처리
+    document.getElementById("BtnConfirm").style.display = "";
+    document.getElementById("BtnModify").style.display = "none";
+    
+    //입력된 정보 수정 할수 있도록 활성화
+    if(document.getElementsByName("nmSalePerSec_ys1").length > 1){
+        for (var i = 0; i < document.getElementsByName("nmSalePerSec_ys1").length; i++) {
+            document.getElementsByName("nmSalePerSec_P1")[i].disabled = false;
+            document.getElementsByName("nmSalePerSec_ys1")[i].disabled = false;
+            document.getElementsByName("nmSalePerSec_PGM1")[i].disabled = false;
+            document.getElementsByName("nmSalePerSec_P2")[i].disabled = false;
+            document.getElementsByName("nmSalePerSec_ww3")[i].disabled = false;
+            document.getElementsByName("nmSalePerSec_ww4")[i].disabled = false;
+            document.getElementsByName("nmSalePerSec_PGM2")[i].disabled = false;
+            document.getElementsByName("nmSalePerSec_ys2")[i].disabled = false;
+            document.getElementsByName("nmSalePerSec_y2")[i].disabled = false;
+            document.getElementsByName("nmSalePerSec_yadd1")[i].disabled = false;
+            document.getElementsByName("nmSalePerSec_yadd2")[i].disabled = false;
+    }
+    }else{
+            document.getElementsByName("nmSalePerSec_P1")[0].disabled = false;
+            document.getElementsByName("nmSalePerSec_ys1")[0].disabled = false;
+            document.getElementsByName("nmSalePerSec_PGM1")[0].disabled = false;
+            document.getElementsByName("nmSalePerSec_P2")[0].disabled = false;
+            document.getElementsByName("nmSalePerSec_ww3")[0].disabled = false;
+            document.getElementsByName("nmSalePerSec_ww4")[0].disabled = false;
+            document.getElementsByName("nmSalePerSec_PGM2")[0].disabled = false;
+            document.getElementsByName("nmSalePerSec_ys2")[0].disabled = false;
+            document.getElementsByName("nmSalePerSec_y2")[0].disabled = false;
+            document.getElementsByName("nmSalePerSec_yadd1")[0].disabled = false;
+            document.getElementsByName("nmSalePerSec_yadd2")[0].disabled = false;
+    }
+    document.getElementsByName("confirm_key")[0].value = "NO";
+}
+
+function REQ_TANS_Data_Binding2() {
+    fmSRatio();
+    fmProfit();
+    fmMargin();
+    fmMSPrice();
+    fmwonga();
+}
+</script>
+
+<!-- 태그프리 추가-->
+<script language="JScript" for="tbContentElement" event="OnControlInit">
+   //본문 내용 
+   if (getInfo("BODY_CONTEXT") != undefined){     //기안,임시저장으로 저장된 값 setting
+        /*
+       var m_objXML = new ActiveXObject("MSXML2.DOMDocument");
+       m_objXML.loadXML("<root>"+getInfo("BODY_CONTEXT")+"</root>");
+
+       try{tbContentElement.HtmlValue = m_objXML.documentElement.selectSingleNode("TagFree").text;}catch(e){}
+       */
+       setBodyContext(getInfo("BODY_CONTEXT"));
+       try{G_displaySpnDocLinkInfo();}catch(e){}
+
+   }else {//양식 생성 시 입력한 본문내역 조회            
+        if (getInfo("fmbd") != "undefined")
+        {
+      
+         try{var dom = tbContentElement.getDom();	dom.body.innerHTML= getInfo("fmbd");}catch(e){}
+        }
+   }     
+</script>
+<form id="frPCSAVE" name="frPCSAVE" method="post"  target="frAttachFiles" action="">
+			<textarea id="txtHTML" name="txtHTML" rows="" cols="" style="display:none;" ></textarea>
+		</form>
+		<iframe src="" name="frAttachFiles" height="1" width="1" ></iframe>
+	</body>
+</html>

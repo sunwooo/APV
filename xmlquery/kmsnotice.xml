@@ -1,0 +1,9 @@
+<?xml version="1.0"  encoding="utf-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql">
+	<sql:header>
+		<sql:param name='BOARD_NO'>172</sql:param>
+	</sql:header>
+	<sql:query>
+		exec dbo.sp_listview '5',@BOARD_NO,1,'subject','',10,'','','N'
+	</sql:query>
+</ROOT>

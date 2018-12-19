@@ -1,0 +1,70 @@
+.tbdButton
+{
+    BACKGROUND-COLOR: buttonface;
+    BORDER-BOTTOM: buttonface 1px solid;
+    BORDER-LEFT: buttonface 1px solid;
+    BORDER-RIGHT: buttonface 1px solid;
+    BORDER-TOP: buttonface 1px solid;
+    HEIGHT: 22px;
+    WIDTH: 23px;
+}
+.tbdToolbar
+{
+    BACKGROUND-COLOR: buttonface;
+    BORDER-BOTTOM: buttonshadow 1px solid;
+    BORDER-LEFT: buttonhighlight 1px solid;
+    BORDER-RIGHT: buttonshadow 1px solid;
+    BORDER-TOP: buttonhighlight 1px solid;
+    HEIGHT: 27px
+}
+.tbdSeparator
+{
+    BORDER-LEFT: buttonshadow 1px solid;
+    BORDER-RIGHT: buttonhighlight 1px solid;
+    FONT-SIZE: 0px;
+    HEIGHT: 22px;
+    WIDTH: 1px
+}
+.tbdIconDown
+{
+    tbdIconDownPressed: 
+}
+.tbdIcon
+{
+    HEIGHT: 22px;
+    WIDTH: 23px
+}
+.tbdGeneral
+{
+    HEIGHT: 22px
+}
+.tbdButtonMouseOverUp
+{
+    BACKGROUND-COLOR: buttonface;
+    BORDER-BOTTOM: buttonshadow 1px solid;
+    BORDER-LEFT: buttonhighlight 1px solid;
+    BORDER-RIGHT: buttonshadow 1px solid;
+    BORDER-TOP: buttonhighlight 1px solid;
+    HEIGHT: 23px;
+    WIDTH: 24px
+}
+.tbdButtonMouseOverDown
+{
+    BACKGROUND-COLOR: buttonface;
+    BORDER-BOTTOM: buttonhighlight 1px solid;
+    BORDER-LEFT: buttonshadow 1px solid;
+    BORDER-RIGHT: buttonhighlight 1px solid;
+    BORDER-TOP: buttonshadow 1px solid;
+    HEIGHT: 23px;
+    WIDTH: 24px
+}
+.tbdButtonDown
+{
+    BACKGROUND-COLOR: gainsboro;
+    BORDER-BOTTOM: buttonhighlight 1px solid;
+    BORDER-LEFT: buttonshadow 1px solid;
+    BORDER-RIGHT: buttonhighlight 1px solid;
+    BORDER-TOP: buttonshadow 1px solid;
+    HEIGHT: 23px;
+    WIDTH: 24px
+}

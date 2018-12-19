@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ReceiptModify.aspx.cs" Inherits="Approval_Doclist_ReceiptDelelte" %>

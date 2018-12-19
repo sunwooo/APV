@@ -1,0 +1,18 @@
+﻿<?xml version="1.0"  encoding="utf-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql">
+	<sql:header>
+		<sql:param name='OWNER_ID'></sql:param>
+		<sql:param name='LIST_TYPE'>4</sql:param>
+		<sql:param name='FISCAL_YEAR'></sql:param>
+		<sql:param name='SERIAL_NUMBER'></sql:param>
+		<sql:param name='COMMENT'></sql:param>
+	</sql:header>
+	<sql:query>
+		UPDATE WF_DOC_REG_LIST
+		SET  EFFECTUATION_COMMENT = @COMMENT
+		WHERE OWNER_UNIT_CODE= @OWNER_ID
+		AND DOC_LIST_TYPE = @LIST_TYPE
+		AND FISCAL_YEAR = @FISCAL_YEAR
+		AND SERIAL_NUMBER = @SERIAL_NUMBER
+	</sql:query>
+</ROOT>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	sql:xsl="wf_PrivateDomainData01.xsl">
+	<sql:header>
+		<sql:param name='USER_ID'>200208</sql:param>
+	</sql:header>
+	<sql:query>
+		SELECT  PDD_ID, 
+				DISPLAY_NAME, 
+				ABSTRACT, 
+                DSCR,
+				PRIVATE_CONTEXT
+        FROM    WF_PRIVATE_DOMAIN_DATA (NOLOCK) 
+		WHERE 	CUSTOM_CATEGORY = 'DISTRIBUTIONCONTEXT'
+		AND	OWNER_ID = @USER_ID
+		ORDER BY DISPLAY_NAME DESC
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

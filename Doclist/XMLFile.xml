@@ -1,0 +1,25 @@
+﻿57ccc12b-accd-43ee-ba4a-71cbe15efebd@@@<ClientAppInfo>
+  <App name="FormInfo">
+    <forminfos>
+      <forminfo prefix="WF_FORM_ISU_CM_COM003" revision="0" instanceid="406594BE-23A3-47F0-BE74-661E9D74F84F" id="48259224-f727-4264-b6f5-4dabaae39e90" name="구매요구서" schemaid="f21fb62d-d8e8-456b-8d5e-227036c5c8a5" index="0" filename="ISU_CM_COM003" subject="R030324" secure_doc="0" req_response="" isfile="1" feedback="0" selfeedback="1" IsCommYN="Y" />
+    </forminfos>
+  </App>
+</ClientAppInfo>;1c6b5ca6-714e-408b-b350-9c61cc47e285;02_01_02@@@R030324 ^acb92ff2-3516-4191-829c-a27730077619@@@<ClientAppInfo>
+  <App name="FormInfo">
+    <forminfos>
+      <forminfo prefix="WF_FORM_ISU_CM_COM003" revision="0" instanceid="FD81F7A4-5ED2-4FE9-8302-BB0EB83CBDB9" id="48259224-f727-4264-b6f5-4dabaae39e90" name="구매요구서" schemaid="f21fb62d-d8e8-456b-8d5e-227036c5c8a5" index="0" filename="ISU_CM_COM003" subject="R030342" secure_doc="0" req_response="" isfile="1" feedback="0" selfeedback="1" IsCommYN="N" />
+    </forminfos>
+  </App>
+</ClientAppInfo>;a2ad234b-a9cd-4e81-81a7-4a2e46429558;02_01_02@@@R030342 ^375b8a72-edd8-49bf-8908-ee0f03806513@@@<ClientAppInfo>
+  <App name="FormInfo">
+    <forminfos>
+      <forminfo prefix="WF_FORM_ISU_CM_COM003" revision="0" instanceid="80FCAA4D-3A5F-42D9-8C14-23030AD95AEF" id="48259224-f727-4264-b6f5-4dabaae39e90" name="구매요구서" schemaid="f21fb62d-d8e8-456b-8d5e-227036c5c8a5" index="0" filename="ISU_CM_COM003" subject="R030340" secure_doc="0" req_response="" isfile="1" feedback="0" selfeedback="1" IsCommYN="Y" />
+    </forminfos>
+  </App>
+</ClientAppInfo>;3298864b-9769-4872-8617-c1e465acd73e;02_01_02@@@R030340 ^^c7043a84-b4d2-4ea7-9d31-10d80f631ae1@@@<ClientAppInfo>
+  <App name="FormInfo">
+    <forminfos>
+      <forminfo prefix="WF_FORM_ISU_CM_COM003" revision="0" instanceid="31E5414A-E84D-4E54-93C0-D6F26F4FED0E" id="48259224-f727-4264-b6f5-4dabaae39e90" name="구매요구서" schemaid="f21fb62d-d8e8-456b-8d5e-227036c5c8a5" index="0" filename="ISU_CM_COM003" subject="R030370" secure_doc="0" req_response="" isfile="1" feedback="0" selfeedback="1" IsCommYN="Y" />
+    </forminfos>
+  </App>
+</ClientAppInfo>;30803a9e-9446-4395-bdff-196982a70862;02_01_02@@@R030370

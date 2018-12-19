@@ -1,0 +1,17 @@
+﻿<?xml version="1.0"  encoding="utf-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql" >
+	<sql:header>
+		<sql:param name='OWNER_UNIT_CODE'>2100</sql:param>
+		<sql:param name='DOC_LIST_TYPE'>1</sql:param>
+		<sql:param name='YEARMONTH'>2004</sql:param>
+		<sql:param name='PAGE'></sql:param>
+		<sql:param name='PAGECOUNT'></sql:param>
+		<sql:param name='ORDER_FIELD'></sql:param>
+		<sql:param name='ORDER_SORT'></sql:param>
+	</sql:header>
+	<sql:query>
+
+	EXEC dbo.sp_formdocList @OWNER_UNIT_CODE ,@DOC_LIST_TYPE ,@YEARMONTH ,@PAGE ,@PAGECOUNT, @ORDER_FIELD, @ORDER_SORT
+
+	</sql:query>
+</ROOT>

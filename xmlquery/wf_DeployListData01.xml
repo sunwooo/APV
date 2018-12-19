@@ -1,0 +1,10 @@
+<?xml version="1.0"  encoding="utf-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	sql:xsl="wf_DeployListData01.xsl">
+  <sql:header>
+    <sql:param name='USER_ID'>200208</sql:param>
+  </sql:header>
+  <sql:query>
+    SELECT *  FROM ORG_GROUP  ORDER BY SORT_KEY FOR XML AUTO
+  </sql:query>
+</ROOT>

@@ -1,0 +1,102 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Language" content="ko">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Pragma" content="no-cache">
+		<title>전자결재</title>
+		<link rel="stylesheet" type="text/css" href="../common/button.css">
+		<link rel="stylesheet" type="text/css" href="../common/list.css">
+		<script language="javascript" src="../common/function.js"></script>		
+	</head>
+	<body>
+		<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" align="center">
+		  <tr> 
+		    <td align="center" valign="top" width="100%">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr> 
+			  <td class="openline" colspan="2">&nbsp;&nbsp;&nbsp;결재양식선택</td>
+			</tr>
+			<tr> 
+			  <td  height="10" colspan="2"  >&nbsp;</td>
+			</tr>
+			</table>
+			<!--내용들어갈 테이블 시작  -->
+			<table width="85%" height="65%" border="0" cellspacing="1" cellpadding="0" align="center" bgcolor="#999999">
+				<tr>
+					<td bgcolor="#FFFFFF" valign="top" width="100%" height="100%">
+						<IFRAME ID="ifrDL" FRAMEBORDER="0" name="ifrDL" style="HEIGHT:100%; WIDTH:100%" Border="0" SRC="FormTree.aspx"></IFRAME>
+					</td>
+				</tr>
+			</table>
+			<!--내용들어갈 테이블 끝  -->
+		      	<table width="100%"   border="0" cellspacing="0" cellpadding="0" align="center">
+				<tr><td  height="10" >&nbsp;</td></tr>
+			  	<tr> 
+			    		<td style="background-color:#598ACF;height:1px"></td>
+			  	</tr>
+			  	<tr> 
+			    		<td style="background-color:#DFECFD;height:4px"></td>
+			  	</tr>
+			</table>	  
+			<!------ 버튼 구역 --------->
+			<table width="90%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+			  		<td height="5"></td>
+				</tr>
+				<tr> 
+			  		<td align="center">
+						<input type="button" value="   확 인" class="button_bok" onclick="OK()">&nbsp;
+						<input type="button" value="취 소" class="button_b01" OnClick="window.close()">
+					</td>
+				</tr>
+				<tr>
+			  		<td height="5"></td>
+				</tr>
+		      	</table>
+			</td>
+		</tr>
+		</table>
+		<input type="hidden" name="txtSelectedName"> <input type="hidden" name="txtSelectedID">
+		<input type="hidden" name="txtSelectedPrefix" ID="txtSelectedPrefix"> <input type="hidden" name="txtSelectedschemaid" ID="txtSelectedschemaid">
+		<input type="hidden" name="txtSelectedRevision" ID="txtSelectedRevision"> <input type="hidden" name="txtSelectedFileName" ID="txtSelectedFileName">
+		<SCRIPT LANGUAGE="JavaScript">
+			function OK(){
+				if (self.txtSelectedID.value == "") {
+					alert("양식을 선택하십시요") ; 
+				}else{
+					var strURL = "../forms/form.aspx?fmid=" + txtSelectedID.value + "&fmnm=" + toUTF8(txtSelectedName.value) + "&fmpf="+txtSelectedPrefix.value+"&scid="+txtSelectedschemaid.value+"&mode=DRAFT&fmrv="+txtSelectedRevision.value+"&fmfn="+txtSelectedFileName.value;
+					//if ((txtSelectedPrefix.value == "DRAFT") || (txtSelectedPrefix.value == "DRAFT02") || (txtSelectedPrefix.value == "OUTERPUBLISH")) {
+					//	openWindow(strURL,"Form",780,600,'resize');
+					//}
+					//else {
+					//	openWindow(strURL,"Form",780,600,'resize');
+					//}
+					openWindow(strURL,"Form",800,600,'resize');
+					window.close();
+				}	
+			}
+			function toUTF8(szInput){
+				var wch,x,uch="",szRet="";
+				for (x=0; x<szInput.length; x++) {
+					wch=szInput.charCodeAt(x);
+					if (!(wch & 0xFF80)) {
+						szRet += "%" + wch.toString(16);
+					}
+					else if (!(wch & 0xF000)) {
+						uch = "%" + (wch>>6 | 0xC0).toString(16) +
+							  "%" + (wch & 0x3F | 0x80).toString(16);
+						szRet += uch;
+					}
+					else {
+						uch = "%" + (wch >> 12 | 0xE0).toString(16) +
+							  "%" + (((wch >> 6) & 0x3F) | 0x80).toString(16) +
+							  "%" + (wch & 0x3F | 0x80).toString(16);
+						szRet += uch;
+					}
+				}
+				return(szRet);
+			}
+		</SCRIPT>
+	</body>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0"  encoding="utf-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql">
+	<sql:header/>
+	<sql:query>
+		SELECT A.CLASS_ID, 
+			A.CLASS_NAME,
+			B.FORM_ID, 
+			B.SCHEMA_ID, 
+			B.REVISION, 
+			B.FORM_NAME, 
+			B.FORM_PREFIX, 
+			B.FORM_DESC, 
+			B.FILE_NAME , 
+			A.SORT_KEY, 
+			B.SORT_KEY 
+		FROM WF_CLASSIFICATION A, WF_FORMS B 
+		WHERE  A.CLASS_ID = B.CLASS_ID 
+			AND    A.CLASS_NAME != 'HIDDEN'
+			AND    B.USAGE_STATE = '0'
+		ORDER BY A.SORT_KEY, B.SORT_KEY
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

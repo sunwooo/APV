@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Untitled Page</title>
+    <script language="javascript" type="text/javascript">
+    function goURL(){
+        window.location.href = "tempLogin.aspx?loginid=" + loginid.value + "&linkurl=" + linkurl.value;
+    }
+    </script>
+</head>
+<body>
+    login id : <input type="text" id="loginid" name="loginid" value="draken" size="100"/>
+    <br />
+    redirect url : <input type="text" id="linkurl" name="linkurl" value="/CoviWeb/approval/default.aspx"  size="100"/>
+    <br />
+    <input type="button" id="Go" name="Go" value="GO!!!" onclick="goURL()" />
+</body>
+</html>

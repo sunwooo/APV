@@ -1,0 +1,230 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+	<HEAD>
+		<TITLE>수신처 관리</TITLE>
+		<meta http-equiv="Content-Language" content="ko">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Pragma" content="no-cache">
+		<LINK rel="stylesheet" type="text/css" HREF="/GWImages/covi/app_css_style.css">
+		<script language="javascript" src="/CoviWeb/common/script/COVIFlowNet/openWindow.js"></script>
+		<script language="javascript" type="text/javascript" src="/CoviWeb/SiteReference/js/utility.js"></script>
+		<SCRIPT LANGUAGE="JavaScript">
+		<!--
+		var m_oRecList = new ActiveXObject("MSXML2.DOMDocument");
+		var mType=0;
+		function window.onload(){
+			//receive_names 구성 : code:name;code:name;...;
+			//receipt_list 구성 : code;code;
+			RECEIVE_NAMES.value = opener.m_oFormEditor.RECEIVE_NAMES.value;
+			RECEIPT_LIST.value = opener.m_oFormEditor.RECEIPT_LIST.value;
+			if (RECEIVE_NAMES.value == '')	RECEIVE_NAMES.value='@@';
+			if (RECEIPT_LIST.value == '')	RECEIPT_LIST.value='@@';
+			if ( opener.getInfo("mode") == "DRAFT" || opener.getInfo("mode") == "TEMPSAVE" ){
+				cbok.style.display = "";
+				cbAdd.style.display = "";
+				cbdelete.style.display = "";
+			}
+			chkAction(0);
+		}
+		function OK(){
+			opener.m_oFormEditor.RECEIVE_NAMES.value = RECEIVE_NAMES.value;
+			opener.m_oFormEditor.RECEIPT_LIST.value = RECEIPT_LIST.value;			
+			opener.m_oFormEditor.RecLine.innerHTML = opener.m_oFormEditor.initRecList();	//배포처 출력
+			window.close();
+		}
+		function makeNode(szcode, szname){
+			var oOption = document.createElement("OPTION");	
+			selRec.options.add(oOption);
+			oOption.text=szname;
+			oOption.value=szcode;	
+			return;	
+		}
+		function make_selRec(sRecList){
+			var intCount = self.selRec.options.length;
+			for (var i=intCount;i!=0;i--){
+				self.selRec.options.remove(i-1);			
+			}	
+			if ( sRecList != null && sRecList !=''){
+				var aRec = sRecList.split(";");
+				for(var i=0;i<aRec.length;i++){
+					makeNode(aRec[i].split(":")[0],aRec[i].split(":")[1]);
+				}
+			}
+			return;
+		}
+		function  chkAction(actType){
+			mType=actType;
+			var aRecDept = RECEIVE_NAMES.value.split("@");
+			var sRecDept = aRecDept[mType];
+			make_selRec(sRecDept);
+		}
+function addList(){
+	var bUser=false;
+	var bGroup=false;
+	var bCCGroup=false;
+	switch (mType){
+		case 0: bGroup=true;break;
+		case 1: bUser=true;break;
+		case 2: bGroup=true;bCCGroup=true;break;
+	}
+	var rgParams=null;
+	rgParams=new Array();
+	rgParams["bMail"]  = false;
+	rgParams["bUser"] = bUser;
+	rgParams["bGroup"] = bGroup;
+	rgParams["bRef"] = false;
+	rgParams["bIns"] = false; 
+	rgParams["bRecp"] = false; 
+	rgParams["bCCGroup"] = bCCGroup; //참조자그룹
+	rgParams["sCatSignType"] = "수신결재"; 
+	rgParams["sDeptSignType"] = "일반결재";
+	rgParams["sDeptSignStatus"] = "수신"; 
+	rgParams["sUserSignType"] = "일반결재";
+	rgParams["sUserSignStatus"] = "대기"; 
+	rgParams["objMessage"] = window;
+
+	var aRecDept = RECEIVE_NAMES.value.split("@");
+	var sRecDept = aRecDept[mType];
+	if (sRecDept != null){
+		if(sRecDept.length>15) rgParams["sGroup"] = sRecDept.substring(7,sRecDept.length-8);
+	}
+	var szFont = "FONT-FAMILY: '굴림';font-size:9px;";
+    var nWidth = 640;
+    var nHeight = 610;
+    var sFeature = szFont+"dialogHeight:"+nHeight+"px;dialogWidth:"+nWidth+"px;status:no;resizable:yes;help:no;";
+    var strNewFearture = ModifyDialogFeature(sFeature);
+    var vRetval = window.showModelessDialog("/COVIWeb/approval/address/address.aspx", rgParams, strNewFearture);
+    //var vRetval = window.showModelessDialog("../address/address.aspx", rgParams, szFont+"dialogHeight:"+nHeight+"px;dialogWidth:"+nWidth+"px;status:no;resizable:yes;help:no;");
+}
+function insertToList(oList){
+	var aRecDept = RECEIVE_NAMES.value.split("@");
+	var sRecDept='';
+	var elmList, emlNode;
+	elmList = oList.selectNodes("//item");
+	for(var i=0;i<elmList.length;i++){
+		emlNode = elmList.nextNode();
+		if (chkDuplicate(emlNode.selectSingleNode("AN").text))	sRecDept+=";"+emlNode.selectSingleNode("AN").text+":"+emlNode.selectSingleNode("DN").text;
+	}
+	if( aRecDept[mType].length < 1 ) sRecDept = sRecDept.substring(1);
+	aRecDept[mType] += sRecDept;
+
+	sRecDept = "";
+	for(var i=0 ; i< aRecDept.length ; i++){sRecDept+='@' + aRecDept[i];}
+
+	if( sRecDept.length > 1 ) sRecDept = sRecDept.substring(1);
+
+	RECEIVE_NAMES.value = sRecDept;
+	RECEIPT_LIST.value = RecList();
+	chkAction(mType);
+}
+function chkDuplicate(code){
+	var aRecDept = RECEIVE_NAMES.value.split("@");
+	var cmpString = aRecDept[mType];
+	var cmpIndex = cmpString.indexOf(code);
+	if ( cmpIndex < 0){ return true;}else{return false;}
+}
+function RecList(){
+	var aRecDept = RECEIVE_NAMES.value.split("@");
+	var sRecList="";
+	for(var i=0; i< aRecDept.length;i++){
+		var aRec = aRecDept[i].split(";");
+		sRecList+="@";
+		sRecDept= "";
+		for(var j=0;j<aRec.length;j++){
+			sRecDept += ";"+aRec[j].split(":")[0];	
+		}
+		if (sRecDept.length > 0) sRecDept = sRecDept.substring(1);
+		sRecList+= sRecDept;
+	}
+	if (sRecList.length > 0) sRecList = sRecList.substring(1);
+	return sRecList;
+}
+function delList(){
+	if ( self.selRec.selectedIndex > -1 ){
+		self.selRec.options.remove(self.selRec.selectedIndex);			
+		var aRecDept = RECEIVE_NAMES.value.split("@");
+		var aRecCode = RECEIPT_LIST.value.split("@");
+		var sRecDept='';
+		var sRecCode='';
+		for(var i=0;i<self.selRec.options.length;i++){
+			sRecDept+=";"+self.selRec.options[i].value + ":" + self.selRec.options[i].text;
+			sRecCode+=";"+self.selRec.options[i].value;
+		}
+		if (sRecDept.length > 0) sRecDept = sRecDept.substring(1);
+		if (sRecCode.length > 0) sRecCode = sRecCode.substring(1);
+		aRecDept[mType] = sRecDept;
+		aRecCode[mType] = sRecCode;
+		sRecDept='';
+		sRecCode='';
+		for(var j=0; j< aRecDept.length;j++){
+			sRecDept += "@" + aRecDept[j];				
+			sRecCode += "@" + aRecCode[j];				
+		}
+		if (sRecDept.length > 0) sRecDept = sRecDept.substring(1);
+		if (sRecCode.length > 0) sRecCode = sRecCode.substring(1);
+		RECEIVE_NAMES.value = sRecDept;
+		RECEIPT_LIST.value = sRecCode;
+	}
+}
+		//-->
+		</SCRIPT>
+		<SCRIPT FOR="cbBTN" EVENT="onmousedown()">this.className = 'Over';</SCRIPT>
+		<SCRIPT FOR="cbBTN" EVENT="onmouseover()">this.className = 'Over';</SCRIPT>
+		<SCRIPT FOR="cbBTN" EVENT="onmouseout()">this.className = 'Out';</SCRIPT>
+	</HEAD>
+	<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+		<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td height="3" colspan="2" align="center" valign="middle" class="table_topline"></td>
+			</tr>
+			<tr class="table_green">
+				<td width="24%" height="40" align="left" valign="middle">&nbsp;&nbsp;&nbsp;<img src="/CoviWeb/common/Images/icon/icon_pop.gif" width="27" height="18" align="absMiddle">
+					<span class="text-blue2">수신처 지정 </span></td>
+				<td align="right" valign="bottom" class="right10px">&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td height="1" colspan="2" align="center" valign="middle" class="pop_line"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center" valign="top" class="pop_bg">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr> 
+							<td  height="25" colspan="2" align="right">
+								<input type="radio" value="dept" checked name="radAction" id="radAction" style="WIDTH: 30;" onClick="chkAction(0);">부서
+								<input type="radio" value="person" name="radAction" id="radAction" style="WIDTH: 30;" onClick="chkAction(1);">개인
+								<!-- <input type="radio" value="group" name="radAction" id="radAction" style="WIDTH: 30;" onClick="chkAction(2);">배포그룹 -->
+								<img src="/CoviWeb/common/Images/button/btn_add2.gif"  name="cbAdd" id="cbBTN" onclick="addList();" class="Out" align="absmiddle" border="0" style="display:none; cursor:hand;">
+								&nbsp;<img src="/CoviWeb/common/Images/button/btn_delete.gif"  name="cbdelete" id="cbBTN" onclick="delList();" class="Out" align="absmiddle" border="0" style="display:none; cursor:hand;">
+									<input type="hidden" name="RECEIVE_NAMES">
+									<input type="hidden" name="RECEIPT_LIST">
+							</td>
+						</tr>
+					</table>
+					<!--내용들어갈 테이블 시작  -->
+					<table width="100%" height="80%" border="0" cellspacing="0" cellpadding="0" align="center">
+						<tr>
+							<td bgcolor="#FFFFFF"  width="100%" height="100%" align="center" >
+								<SELECT NAME="selRec" ID="selRec" SIZE="4" style="width:100%;height:100%;">
+								</SELECT>
+							</td>
+						</tr>
+						<tr> 
+								<td class="table_line"></td>
+						</tr>
+					</table>
+					<!--내용들어갈 테이블 끝  -->
+					<BR>
+						<img src="/CoviWeb/common/Images/button/btn_confirm.gif"  name="cbok" id="cbBTN" onclick="OK()"  class="Out" align="absmiddle" border="0" style="display:none; cursor:hand;">
+						<img src="/CoviWeb/common/Images/button/btn_close.gif"  name="cbclose" id="cbBTN" OnClick="window.close()" class="Out" align="absmiddle" border="0" style="cursor:hand;>
+					<BR>
+				</td>
+			</tr>
+			<tr>
+				<td height="3" colspan="2" align="center" valign="middle" class="table_topline"></td>
+			</tr>
+		</table>
+
+	</BODY>
+</HTML>

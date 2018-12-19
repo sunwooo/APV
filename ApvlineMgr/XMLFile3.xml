@@ -1,0 +1,110 @@
+﻿"<steps initiatorcode=\"ISU_ST12001\" initiatoroucode=\"ISU_STISU_ST011\" status=\"inactive\">
+  <division divisiontype=\"send\" name=\"일반결재\" oucode=\"\" ouname=\"\">
+    <taskinfo status=\"inactive\" kind=\"approve\"/>
+    <step unittype=\"person\" routetype=\"approve\" name=\"일반결재\">
+      <ou code=\"ISU_STISU_ST011\" name=\"정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀\" company=\"이수시스템(주)\">
+        <person code=\"ISU_ST12002\" name=\"오유승;Oh Yoo-Seung;오유승;吳有陞\" position=\"ISU_STA135;사원;Staff;JAP 사원;社員\" title=\"ISU_ST10150;팀원;(영)팀원;J팀원;C팀원\" level=\"ISU_STA330;4급갑;;;\" oucode=\"ISU_STISU_ST011\" ouname=\"정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀\" sipaddress=\"\" stampRights=\"N\">
+          <taskinfo status=\"inactive\" result=\"inactive\" kind=\"normal\"/>
+        </person>
+      </ou>
+    </step>
+    <step unittype=\"person\" routetype=\"approve\" name=\"일반결재\">
+      <ou code=\"ISU_STISU_ST011\" name=\"정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀\" company=\"이수시스템(주)\">
+        <person code=\"ISU_ST01004\" name=\"이한일;LEEHAN-IL;이한일;李漢日\" position=\"ISU_STA115;차장;Deputy General Manager;じちょう;次長\" title=\"ISU_ST10150;팀원;(영)팀원;J팀원;C팀원\" level=\"ISU_STA315;1급을;1급을;;\" oucode=\"ISU_STISU_ST011\" ouname=\"정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀\" sipaddress=\"\" stampRights=\"N\">
+          <taskinfo status=\"inactive\" result=\"inactive\" kind=\"normal\"/>
+        </person>
+      </ou>
+    </step>
+  </division>
+</steps>"
+
+
+
+function initApvList(){
+m_oApvList.loadXML("<?xml version='1.0' encoding='utf-8'?>" + parent.menu.field["APVLIST"].value);
+setInlineApvList(m_oApvList);
+setInFormField();
+if(getInfo("mode") == "APPROVAL" || getInfo("mode") == "PROCESS" || getInfo("mode") == "PCONSULT" || getInfo("mode") == "RECAPPROVAL") {
+chkRetire(getInfo("mode"));
+}
+}
+
+//2015.01.08 결재선상의 퇴직자 체크(기결재자 제외)
+var sUserName, sDeptName ;
+var retireCheck = false;
+function chkRetire(strMode)
+{
+var xmlApv = new ActiveXObject("MSXML2.DOMDocument");
+xmlApv.loadXML("<?xml version='1.0' encoding='utf-8'?>"+parent.menu.field["APVLIST"].value);
+try
+{
+var nodesAllItems;
+if(strMode == "APPROVAL" || strMode == "PCONSULT"){
+nodesAllItems = xmlApv.selectNodes("steps/division/step/ou/person[taskinfo/@status='inactive']");//기결재자는 체크 안함
+} else{
+nodesAllItems = xmlApv.selectNodes("steps/division/step/ou/person[taskinfo/@status='pending' or taskinfo/@status='inactive']");
+}
+
+if(nodesAllItems.length > 0)
+{
+var oSteps = xmlApv.selectSingleNode("steps");
+chkAbsent(oSteps, strMode);
+}
+}
+catch(e){alert(e.message);}
+}
+function chkAbsent(oSteps, oMode){
+var oUsers;
+if(oMode == "APPROVAL" || oMode == "PCONSULT"){
+oUsers = oSteps.selectNodes("division/step/ou/person[taskinfo/@status='inactive']");//기결재자는 체크 안함
+}else{
+oUsers = oSteps.selectNodes("division/step/ou/person[taskinfo/@status='pending' or taskinfo/@status='inactive']");//기결재자는 체크 안함
+}
+var elmUsers;
+var sUsers="";
+var pXML, sXML;
+var szURL = "../getXMLQuery.aspx";
+if(oUsers.length > 0 ){
+for(var i=0; i<oUsers.length; i=''
+                   elmUsers = 'oUsers'[i=''
+                       sUsers = 'elmUsers.getAttribute'
+                       sUserName = "elmUsers.getAttribute"
+                       sDeptName = "elmUsers.getAttribute"
+                       pXML = " EXEC dbo.usp_CheckAbsentMember '"  + sUsers=""
+                       sXML = "<Items><connectionname>ORG_ConnectionString</connectionname><xslpath></xslpath><sql><![CDATA[" + pXML=""
+                       requestHTTP=""("POST",szURL="",false="","text/xml",receiveHTTPchkAbsentUsers="",sXML=""
+                       if=""(retireCheck="") break=""; 
+               }
+        }   
+}
+//2015.01.08 결재선상의 퇴직자 체크(기결재자 제외)
+function receiveHTTPchkAbsentUsers(){
+var chkUserTF = true;
+if(m_xmlHTTP.readyState==4){
+m_xmlHTTP.onreadystatechange=event_noop;
+if(m_xmlHTTP.responseText.charAt(0)=="\r"){
+}else{
+var errorNode=m_xmlHTTP.responseXML.selectSingleNode("response/error");
+if(errorNode!=null){
+return false;
+}else{
+var xmlReturn=m_xmlHTTP.responseXML;
+var elmlist = xmlReturn.selectNodes("response/NewDataSet/Table");
+if(elmlist.length > 0){
+sUserName = "A";
+return true;
+}else{
+var arrUserName = sUserName.split(";");
+sUserName = arrUserName[0];
+var arrDeptName = sDeptName.split(";");
+var arrDeptName2 = arrDeptName[0].split("\\");
+//alert("결재선상의 퇴직자(" + arrUserName[0] + ":" + arrDeptName2[2] +")가 있으니 \n반려 또는 이전 결재자에게 요청 하여 결재문서를 취소하여 주십시오.\n기타 사항은 HOPE 관리자에게 문의 하시기 바랍니다.");
+//doButtonActionD();
+parent.menu.openRetire(arrUserName[0], arrDeptName2[2]);
+retireCheck = true;
+return false;
+}
+}
+}
+}
+}

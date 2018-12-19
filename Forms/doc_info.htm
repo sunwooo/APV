@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+	<HEAD>
+		<TITLE>문서정보관리</TITLE>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" type="text/css" href="/GWImages/covi/app_css_style.css" />
+		<style type="text/css">
+						<!--
+		SELECT {WIDTH:98%;}
+		INPUT {WIDTH:98%;}
+		.grid {font-family: "굴림체";	font-size: 12px;	text-align:left;height: 25px;}
+		.gap{margin-right:6px;}
+		--></style>
+					<script language="javascript" src="/CoviWeb/common/script/COVIFlowNet/openWindow.js"></script>
+					<script language="JavaScript" src="calendar/__cal.js"></script>
+					<script language="VBScript" src="calendar/__cal.vbs"></script>
+					<SCRIPT LANGUAGE="JavaScript">
+		<!--
+		var m_xmlHTTP=new ActiveXObject("MSXML2.XMLHTTP");
+		var m_objXML=new ActiveXObject("MSXML2.DOMDocument");
+		var g_szAcceptLang="ko";
+
+		function window.onload(){
+			//(opener.getInfo("scOPub") == '1') ? frmSearch.outpub.style.display = "" : frmSearch.outpub.style.display = "none" ;
+			if( opener.DOC_CLASS_ID.value != '') {
+				var sDoc_Class_ID = opener.DOC_CLASS_ID.value;
+				var aDoc_Class_ID =	sDoc_Class_ID.split("/");    
+				frmSearch.txtDocCode1.value = aDoc_Class_ID[0];
+				frmSearch.txtDocCode2.value = aDoc_Class_ID[1];
+				frmSearch.txtDocCode3.value = aDoc_Class_ID[2];
+				frmSearch.txtDocCode.value = aDoc_Class_ID[2];
+				frmSearch.txtDocCodeDesc.value = opener.DOC_CLASS_NAME.value;
+				frmSearch.Doc_Level.value = opener.DOC_LEVEL.value;
+				frmSearch.IsPublic.value = opener.ISPUBLIC.value;
+				frmSearch.Save_Term.value = opener.SAVE_TERM.value;
+				frmSearch.APPLIED.value = opener.APPLIED.value;
+				frmSearch.Save_Term.value = opener.APPLIED_TERM.value;
+			}
+			if ((opener.getInfo("scOPub") == '1') &&( opener.RECEIVE_NAMES.value !='')){
+				frmSearch.RECEIVE_NAMES.value =  opener.RECEIVE_NAMES.value;
+			}
+			if (opener.getInfo("scOPub") == '1') outpub.style.display = "";
+			//window.document.body.attachEvent("onkeydown", event_window_onkeydown);
+		}
+		
+		function doc_class(){
+			var szURL = "/covinet/COVIDocsNet/WEB/MAIN/selectDocCode.aspx?formName=frmSearch&docCodeField=txtDocCode&docCodeDescField=txtDocCodeDesc&useDocNo=N";
+			openWindow(szURL,"문서분류조회",360,387,"fix");
+			//openWindow(szURL,"문서분류조회",400,400,"fix");
+		}
+		function OK(){
+			if(ChkValid()){
+				opener.DOC_CLASS_ID.value = frmSearch.txtDocCode1.value +"/"+  frmSearch.txtDocCode2.value +"/"+ frmSearch.txtDocCode3.value;
+				opener.DOC_CLASS_NAME.value =  frmSearch.txtDocCodeDesc.value;
+				opener.DOC_LEVEL.value =  frmSearch.Doc_Level.value;
+				opener.ISPUBLIC.value =  frmSearch.IsPublic.value;
+				opener.SAVE_TERM.value =  frmSearch.Save_Term.value;
+				opener.APPLIED.value =  frmSearch.APPLIED.value;
+				opener.APPLIED_TERM.value =  frmSearch.Save_Term.value;
+				if ((opener.getInfo("scOPub") == '1') &&( frmSearch.RECEIVE_NAMES.value!='')){
+					opener.RECEIVE_NAMES.value =  frmSearch.RECEIVE_NAMES.value;
+				}
+				opener.SetHwpCtrlDocuInfo();
+				window.close();
+			}
+		}
+		function ChkValid(){
+			var rtn = true;
+			if (frmSearch.txtDocCode3.value == ''){
+				alert('문서분류를 선택하십시요');
+				frmSearch.txtDocCodeDesc.focus();
+				return false;
+			}
+			if (frmSearch.Save_Term.value == ''){
+				alert('보존기간을 선택하십시요');
+				return false;
+			}
+			if (frmSearch.IsPublic.value == ''){
+				alert('공개여부를 선택하십시요');
+				return false;
+			}
+			if (frmSearch.Doc_Level.value == ''){
+				alert('문서등급을선택하십시요');
+				return false;
+			}
+			if (frmSearch.APPLIED.value==''){
+				alert('시행일을 입력하십시요');
+				return false;
+			}
+			if ((opener.getInfo("scOPub") == '1') &&( frmSearch.RECEIVE_NAMES.value =='')){
+				alert('대외수신처를 입력하십시요');
+				return false;
+			}
+			return rtn;
+		}
+		//function event_window_onkeydown(){if(event.keyCode==13)event_button_find();}
+		function event_button_find(){
+			if (frmSearch.txtDocCode.value != ''){
+				queryGetData();
+			}else{
+				alert("문서분류코드를 넣어주세요.");
+				window.frmSearch.txtDocCode.focus();
+				frmSearch.txtDocCode1.value = "";
+				frmSearch.txtDocCode2.value = "";
+				frmSearch.txtDocCode3.value = "";
+				frmSearch.txtDocCode.value = "";
+				frmSearch.txtDocCodeDesc.value =""; 
+			}  
+		}
+		function queryGetData(){
+			var szURL=	"/xmlDocs/query/docs_doccodequery01.xml?DOC_CODE=" + frmSearch.txtDocCode.value; 
+
+			requestHTTP("GET",szURL,true,"text/xml",receiveHTTP,null);
+		}
+		function event_noop(){return(false);}    
+		function requestHTTP(sMethod,sUrl,bAsync,sCType,pCallback,vBody){
+			m_xmlHTTP.open(sMethod,sUrl,bAsync);
+			m_xmlHTTP.setRequestHeader("Accept-Language",g_szAcceptLang);
+			m_xmlHTTP.setRequestHeader( "Content-type", sCType);
+			if(pCallback!=null)m_xmlHTTP.onreadystatechange = pCallback;
+			(vBody!=null)?m_xmlHTTP.send(vBody):m_xmlHTTP.send();
+		}
+		function receiveHTTP(){
+			if(m_xmlHTTP.readyState == 4){
+				m_xmlHTTP.onreadystatechange = event_noop;//re-entrant gate
+				if(m_xmlHTTP.responseText.charAt(0)=='\r'){
+					alert("오류가 발생했습니다.\nSource:event_listen_queryGetData() in search.htm\n"+m_xmlHTTP.responseText);
+				}else{
+					var oDOM =m_xmlHTTP.responseXML;
+					if(oDOM.xml==""){
+						alert(m_xmlHTTP.responseText);
+					}else{
+						var oErr = oDOM.selectSingleNode("response/error");
+						if(oErr==null){
+								var oItem = oDOM.selectSingleNode("response/item");
+								frmSearch.txtDocCode1.value = oItem.selectSingleNode("doc_code1").text;
+								frmSearch.txtDocCode2.value = oItem.selectSingleNode("doc_code2").text;
+								frmSearch.txtDocCode3.value = oItem.selectSingleNode("doc_code3").text;
+								frmSearch.txtDocCode.value = oItem.selectSingleNode("doc_code").text;
+								frmSearch.txtDocCodeDesc.value = oItem.selectSingleNode("doc_name1").text+"/"+oItem.selectSingleNode("doc_name2").text+
+								"/"+oItem.selectSingleNode("doc_name3").text;
+						}else{
+							if(oErr.text!="none")		alert(oErr.text);
+							frmSearch.txtDocCode1.value = "";
+							frmSearch.txtDocCode2.value = "";
+							frmSearch.txtDocCode3.value = "";
+							frmSearch.txtDocCode.value = "";
+							frmSearch.txtDocCodeDesc.value =""; 
+						}
+					}
+				}
+			}
+		}
+		
+		//-->
+					</SCRIPT>
+					<SCRIPT FOR="cbBTN" EVENT="onmousedown()">this.className = 'Over';</SCRIPT>
+					<SCRIPT FOR="cbBTN" EVENT="onmouseover()">this.className = 'Over';</SCRIPT>
+					<SCRIPT FOR="cbBTN" EVENT="onmouseout()">this.className = 'Out';</SCRIPT>
+	</HEAD>
+	<BODY topmargin="0" leftmargin="0" scroll="no">
+		<FORM METHOD="POST" ID="frmSearch" NAME="frmSearch">
+			<!--전체 페이지 아웃라인 테이블-->
+			<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<!--제목이미지 들어가는 부분 테이블 시작-->
+						<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+							<tr>
+								<td class="pop_title_text" width="200"><img src="/COVINet/images/title_pop_doc.gif"></td>
+								<td width="25px"><img src="/COVINet/images/pop_middle.gif"></td>
+								<td align="right" background="/COVINet/images/background_pop_title2.gif"><img src="/COVINet/images/pop_logo.gif"></td>
+							</tr>
+							<tr>
+								<td height="15" colspan="3"></td>
+							</tr>
+						</table>
+						<!--제목이미지 들어가는 부분 테이블 끝-->
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<!--제목을 제외한 나머지 내용부분 들어가는 전체 아웃라인 테이블 시작-->
+						<table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+							<tr>
+								<td bgcolor="#8e8e8e">
+									<img src="/COVINet/images/bar_color_start.gif" width="52" height="2"></td>
+							</tr>
+							<tr>
+								<td height="10"></td>
+							</tr>
+							<tr>
+								<td>
+									<!--내용의 외곽의 회색 테두리 테이블 시작-->
+									<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#c5c5c5">
+										<tr>
+											<td bgcolor="#FFFFFF">
+												<!-- 실제 내용부분시작-->
+												<table width="100%" border="0" cellspacing="0" cellpadding="0">
+													<tr>
+														<td width="100" class="grid">&nbsp; <img src="/COVINet/images/icon_gray.gif" class="gap">문서분류코드</td>
+														<td width="210"><INPUT TYPE="text" ID="txtDocCode" NAME="txtDocCode" class="select_text" onKeyPress="if(event.keyCode==13)event_button_find();"></td>
+														<td>&nbsp;<button id="btnFind" onClick="event_button_find()">검 색</button></td>
+													</tr>
+													<tr>
+														<td width="100" class="grid">&nbsp; <img src="/COVINet/images/icon_gray.gif" class="gap">문서분류명</td>
+														<td width="210"><INPUT TYPE="text" name="txtDocCodeDesc" id="txtDocCodeDesc" readonly class="select_text"></td>
+														<td><img src="/COVINet/images/bt_select.gif" name="btDocClass" id="cbBTN" class="Out" align="absmiddle"
+																border="0" onClick="doc_class();"></td>
+													</tr>
+													<tr>
+														<td class="grid">&nbsp; <img src="/COVINet/images/icon_gray.gif" class="gap">일련번호</td>
+														<td><INPUT TYPE="text" name="DOC_NO" id="DOC_NO" readonly class="select_text"></td>
+														<td style="font-size:12px;color:#999999">완료 후 부여</td>
+													</tr>
+													<tr>
+														<td class="grid">&nbsp; <img src="/COVINet/images/icon_gray.gif" class="gap">보존기간</td>
+														<td><SELECT NAME="Save_Term" class="select_text">
+																<OPTION VALUE="1년">1년</OPTION>
+																<OPTION VALUE="3년">3년</OPTION>
+																<OPTION VALUE="5년">5년</OPTION>
+																<OPTION VALUE="영구">영구보존</OPTION>
+															</SELECT></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td class="grid">&nbsp; <img src="/COVINet/images/icon_gray.gif" class="gap">공개여부</td>
+														<td>
+															<select NAME="IsPublic" class="select_text">
+																<OPTION VALUE="공개">공개</OPTION>
+																<OPTION VALUE="비공개">비공개</OPTION>
+															</select></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td class="grid">&nbsp; <img src="/COVINet/images/icon_gray.gif" class="gap">문서등급</td>
+														<td><select NAME="Doc_Level" class="select_text">
+																<OPTION VALUE="1급문서">1급문서</OPTION>
+																<OPTION VALUE="2급문서">2급문서</OPTION>
+																<OPTION VALUE="3급문서">3급문서</OPTION>
+																<OPTION VALUE="4급문서">4급문서</OPTION>
+															</select></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td class="grid">&nbsp; <img src="/COVINet/images/icon_gray.gif" class="gap">시행일자
+														</td>
+														<td><INPUT TYPE="text" name="APPLIED" id="APPLIED" value="" readonly class="select_text"></td>
+														<td><img src="/COVINet/images/bt_select.gif" name="btApplied" id="cbBTN" class="Out" align="absmiddle"
+																border="0" onclick="document.all['Doc_Level'].style.display='none';MiniCal(APPLIED,-200,-70);"></td>
+													</tr>
+													<tr>
+														<td colspan="3">
+															<div id="outpub" name="outpub" style="display:none;">
+																<TABLE border="0" style="border-collapse: collapse;MARGIN-TOP: 0px; width:100%;">
+																	<TR>
+																		<TD width="95" class="grid">&nbsp; <img src="/COVINet/images/icon_gray.gif" class="gap">외부수신처</TD>
+																		<TD align="left"><INPUT TYPE="text" name="RECEIVE_NAMES" id="RECEIVE_NAMES" style="border-collapse: collapse;MARGIN-TOP: 0px;; width:90%;"
+																				class="select_text"><br>
+																			<font color='red'>수신처구분 : , &nbsp;&nbsp;예)(주)홍길동주식회사, 교육부</font></TD>
+																	</TR>
+																</TABLE>
+															</div>
+														</td>
+													</tr>
+												</table>
+												<!--실제 내용부분 끝-->
+											</td>
+										</tr>
+									</table>
+									<!--내용의 외곽의 회색 테두리 테이블 끝-->
+								</td>
+							</tr>
+							<tr>
+								<td height="10"></td>
+							</tr>
+							<tr>
+								<td bgcolor="#8e8e8e">
+									<img src="/COVINet/images/bar_color_start.gif"></td>
+							</tr>
+							<tr>
+								<td height="35" align="center"> <!--확인,취소 버튼-->
+									<img src="/COVINet/images/bt_ok.gif" name="cbBTN" id="cbBTN" onclick="OK()" class="Out"
+										align="absmiddle" border="0"> <img src="/COVINet/images/bt_cancle.gif" name="cbBTN" id="cbBTN" OnClick="window.close()"
+										class="Out" align="absmiddle" border="0">
+								</td>
+							</tr>
+						</table>
+						<!--제목을 제외한 나머지 내용부분 들어가는 전체 아웃라인 테이블 끝-->
+					</td>
+				</tr>
+			</table>
+			<!--전체 페이지 아웃라인 테이블 끝-->
+			<INPUT TYPE="hidden" ID="txtDocCode1" NAME="txtDocCode1"> <INPUT TYPE="hidden" ID="txtDocCode2" NAME="txtDocCode2">
+			<INPUT TYPE="hidden" ID="txtDocCode3" NAME="txtDocCode3">
+		</FORM>
+		<div id="minical" OnClick="this.style.display='none';document.all['Doc_Level'].style.display='';"
+			oncontextmenu="return false" ondragstart="return false" onselectstart="return false"
+			style="background : buttonface; margin: 5; margin-top: 2;border-top: 1 solid buttonhighlight;border-left: 1 solid buttonhighlight;border-right: 1 solid buttonshadow;border-bottom: 1 solid buttonshadow;width:155;display:none;position: absolute; z-index: 1"></div>
+	</BODY>
+	</BODY>
+</HTML>

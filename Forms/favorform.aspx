@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="favorform.aspx.cs" Inherits="Approval_Forms_favorform" %>

@@ -1,0 +1,117 @@
+<html>
+<head>
+<title>CUCKOO</title>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
+<link href="/GWImages/covi/app_css_style.css" rel="stylesheet" type="text/css">
+<script Language="javascript">
+
+var Close_check = false;
+function window.onload()
+{
+ 
+ //getdialogparameter(dialogArguments);
+ RECEIPT.value = dialogArguments[0];  //수신
+ REFER.value = dialogArguments[1];    //참조
+ 
+}
+
+function OK_onclick()
+{
+    var archives = new Array();
+	
+	if (phone.value == "")
+	{
+	    alert ("전화번호를 입력해 주시기 바랍니다!");
+	    return;
+	}
+	
+	archives[0] = phone.value;
+	archives[1] = RECEIPT.value;
+	archives[2] = REFER.value;
+	
+	window.returnValue = archives;
+	//window.returnValue[1] = InitTr;
+//	window.returnValue[2] = InitTr1;  
+//	window.returnValue = document.clock.calendar1.value
+//	window.returnValue = document.clock.time.value
+	
+	Close_check == true;
+	window.close();
+}
+
+function Cancel_onclick()
+{
+    window.returnValue = "";
+	//window.close();
+	window.close();
+}
+
+</script>
+
+
+
+</head>
+<body leftmargin="0" topmargin="0" marginheight="0"  marginwidth="0">
+    <table height="196" cellspacing="0" cellpadding="0" width="400" border="0">
+        <tbody>
+            <tr class="table_green">
+                <td class="pop_titlebg" valign="center" align="left" width="43%" height="28">
+                    &nbsp;&nbsp;&nbsp;<img height="20" src="/COVINet/images/icon/icon_pop.gif" width="20"
+                        align="absMiddle">
+                    성안문 변환
+                </td>
+                <td class="pop_titlebg" valign="bottom" align="right" width="57%" height="28">
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="pop_contentsbg" valign="top" align="middle" colspan="2" height="154">
+                    <br>
+                    <table cellspacing="0" cellpadding="0" width="380" border="0">
+                        <tbody>
+                            <tr>
+                                <td class="pop_contentsbg" height="100">
+                                    <table style="border-right: #b2b2b2 1px solid; border-top: #b2b2b2 1px solid; border-left: #b2b2b2 1px solid;
+                                        border-bottom: #b2b2b2 1px solid; border-collapse: collapse" bordercolor="#b2b2b2"
+                                        cellspacing="0" cellpadding="3" width="380" border="1">
+                                        <tbody>
+                                            <tr>
+                                                <td class="pop_subtitlebg2" align="middle" width="43" height="30">
+                                                    전화</td>
+                                                <td width="319" bgcolor="#ffffff" height="30">
+                                                    <input id="phone" name='Phone' maxlength=3 style="border:1px solid #C0C0C0; padding-left:4;padding-top:5;width:100%;height:100%;" >
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pop_subtitlebg2" align="middle" width="43" height="30">
+                                                    수신</td>
+                                                <td width="319" bgcolor="#ffffff" height="30">
+                                                    <input id="RECEIPT" name='RECEIPT' style="border:1px solid #C0C0C0; padding-left:4;padding-top:5;width:100%;height:100%;" >
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="pop_subtitlebg2" align="middle" width="43" height="30">
+                                                    참조</td>
+                                                <td width="319" bgcolor="#ffffff" height="30">
+                                                    <input id="REFER" name='REFER' style="border:1px solid #C0C0C0; padding-left:4;padding-top:5;width:100%;height:100%;" >
+                                                    </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr align="center">
+                                    <td ><div align="center"><IMG id=IMG3 style ="CURSOR: hand" onclick=OK_onclick() height=20 src="/COVINet/COVIFlowNet/Forms/image/ok.GIF" width=65 >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG style="CURSOR: hand" onclick=Cancel_onclick() height=20 src="/COVINet/COVIFlowNet/Forms/image/cancel.GIF" width=65> </div></td>
+                                    <td ><div align="center">&nbsp;</div></td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <TR>
+                <td class="pop_bottomline" valign="center" align="middle" colspan="2" height="3">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="GetOleXMLQuery.aspx.cs" Inherits="Approval_GetOleXMLQuery" %>

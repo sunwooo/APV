@@ -1,0 +1,314 @@
+﻿#region 저작권 및 프로그램 정보
+//
+// 이 프로그램에 대한 저작권을 포함한 지적재산권은 (주)보광에 있으며,
+// (주)보광이 명시적으로 허용하지 않은 사용, 복사, 변경, 제3자에의 공개, 배포는 엄격히 금지되며,
+// (주)보광의 지적재산권 침해에 해당됩니다.
+// (Copyright ⓒ 2006 Bokwang Co., Ltd. All Rights Reserved)
+//
+// You are strictly prohibited to copy, disclose, distribute, modify, or use  this program in part or
+// as a whole without the prior written consent of Bokwang Co., Ltd. Bokwang Co., Ltd.,
+// owns the intellectual property rights in and to this program.
+// (Copyright ⓒ 2007 Bokwang Co., Ltd. All Rights Reserved)
+//
+// Program Information:
+//
+//저작자 ........... 신택상
+//프로젝트 ......... 보광 통합 그룹웨어
+//제목 ............. 전자결재 문서 게시판 이관
+//기능 설명 ........ 결재완료된 문서 게시판 이관
+//
+// Revision History:
+// 
+// 2007.08.30 : v1.0.0  - 신택상, 프로그램 최초 작성
+//
+#endregion
+
+#region 참조
+using System;
+using System.IO;
+using System.Data;
+using System.Data.SqlClient;
+using System.Text;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.XPath;
+
+using Feelanet.Dev2005.Common;
+#endregion
+public partial class Approval_Forms_SendBBS : PageBase
+{
+    private SqlTransaction trBBS;
+    
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        /// [dbo].[BDP_MESSAGE_INSERT]
+        ///  @ID_FOLDER				INT				-- 폴더아이디
+        /// ,@DT_EXPIRED			CHAR(10)		-- 만료일자
+        /// ,@DT_POPUP				CHAR(10)		-- 팝업종료일
+        /// ,@NM_SUBJECT			NVARCHAR(256)	-- 제목
+        /// ,@YN_POPUP				CHAR(1)			-- 팝업여부
+        /// ,@YN_TOP				CHAR(1)			-- 상단여부
+        /// ,@YN_SIGNATURE			CHAR(1)			-- 사인여부
+        /// ,@YN_RSS				CHAR(1)			-- RSS공개여부
+        /// ,@YN_SCRAP				CHAR(1)			-- 스크랩허용
+        /// ,@YN_ANSWER				CHAR(1)			-- 답글알림
+        /// ,@YN_COMMENT			CHAR(1)			-- 덧글알림
+        /// ,@ID_LCATEGORY			INT				-- 대분류
+        /// ,@ID_SCATEGORY			INT				-- 소분류
+        /// ,@NM_NOTICEMEDIA		VARCHAR(64)		-- 알림매체
+        /// ,@DS_CONTENTS			TEXT			-- 본문
+        /// ,@NM_TRACKBACKURL		VARCHAR(256)	-- 트랙백주소
+        /// ,@NM_SCRAPURL			VARCHAR(256)	-- 스크랩원본주소
+        /// ,@CD_MESSAGESTATUS		VARCHAR(20)		-- 메시지상태
+        /// ,@CD_REGISTER			VARCHAR(50)		-- 등록자
+        /// ,@NM_REGISTERIP			VARCHAR(16)		-- 등록자IP
+        /// 
+
+        string ID_FORDER;
+        string NAME_FORDER;
+        string SUBJECT;
+        string DS_CONTENTS;
+
+        string rtn;
+        Response.ContentType = "text/xml";
+        Response.Expires = -1;
+        Response.CacheControl = "no-cache";
+        Response.Buffer = true;
+        Response.Write("<?xml version='1.0' encoding='utf-8'?>");
+        Response.Write("<response>");
+
+        try
+        {
+            XmlDocument oXML = null;
+            oXML = new XmlDocument();
+            oXML = pParseRequestBytes();
+
+            ID_FORDER = oXML.SelectSingleNode("BBS/ID_FOLDER").InnerText;
+            NAME_FORDER = oXML.SelectSingleNode("BBS/NAME_FORDER").InnerText;
+            SUBJECT = oXML.SelectSingleNode("BBS/SUBJECT").InnerText.Replace("'", "''"); 
+            DS_CONTENTS = oXML.SelectSingleNode("BBS/HTML_BODY").InnerText.Replace("\r\n", "").Replace("'", "''");
+
+            if (ID_FORDER != "" && ID_FORDER != null)
+            {
+                rtn = SendBBS(ID_FORDER, NAME_FORDER, SUBJECT, DS_CONTENTS);
+                Response.Write("<BBSNO>" + rtn + "</BBSNO>");
+            }
+            #region setpoint
+            //보광그룹 포인트 입력 - 49 : 결재승인 취소
+            SetPoint("54", Sessions.PERSON_CODE.ToString(), DateTime.Now.ToString());
+            #endregion
+        }
+        catch (Exception ex)
+        {
+            pHandleException(ex);
+        }
+        finally
+        {
+            Response.Write("</response>");
+        }
+
+       
+
+    }
+
+    private void pHandleException(Exception ex)
+    {
+        try
+        {
+            Response.Write("<error><![CDATA[" + pParseStackTrace(ex) + "]]></error>");
+        }
+        catch (Exception e)
+        {
+            Response.Write("<error><![CDATA[" + e.Message + "]]></error>");
+        }
+    }
+
+    private String pParseStackTrace(Exception _ex)
+    {
+        try
+        {
+            Exception InnEx = _ex;
+            System.Text.StringBuilder sb = new System.Text.StringBuilder(" #"
+                + InnEx.Message + "#"
+                + InnEx.StackTrace.Substring(InnEx.StackTrace.LastIndexOf("   at ")));
+            sb.Insert(0, "[" + InnEx.GetType().ToString() + "]");
+            while (InnEx.InnerException != null)
+            {
+                InnEx = InnEx.InnerException;
+                sb.Insert(0, " #" + InnEx.Message + "#" +
+                    InnEx.StackTrace.Substring(InnEx.StackTrace.LastIndexOf("   at ")));
+            }
+            sb.Insert(0, "[" + InnEx.GetType().ToString() + "]");
+            return sb.ToString();
+        }
+        catch (Exception e)
+        {
+            throw new Exception(null, e);
+        }
+    }
+
+    public string SendBBS(string ID_FORDER,string NAME_FORDER, string SUBJECT, string DS_CONTENTS)
+    {
+
+        string strCon = Feelanet.Dev2005.Server.Common.ConfigurationManagement.ConfigurationManager.Items["ORG_ConnectionString"].ToString();
+        
+        StringBuilder sbSQL = new StringBuilder();
+        StringBuilder sbSQLCONTENT = new StringBuilder();
+        sbSQL.Append("[dbo].[BDP_MESSAGE_INSERT] ");
+        sbSQL.Append(" @ID_FOLDER = '").Append(  Convert.ToInt32(ID_FORDER)).Append( "'"); //				INT				-- 폴더아이디
+        sbSQL.Append(" ,@DT_EXPIRED= '' "); //			CHAR(10)		-- 만료일자
+        sbSQL.Append(" ,@DT_POPUP= '' "); //				CHAR(10)		-- 팝업종료일
+        sbSQL.Append(" ,@NM_SUBJECT='").Append(SUBJECT).Append("'"); //			NVARCHAR(256)	-- 제목
+        sbSQL.Append(" ,@YN_POPUP= 'N'"); //				CHAR(1)			-- 팝업여부
+        sbSQL.Append(" ,@YN_TOP= 'N'"); //				CHAR(1)			-- 상단여부
+        sbSQL.Append(" ,@YN_SIGNATURE= 'N'"); //			CHAR(1)			-- 사인여부
+        sbSQL.Append(" ,@YN_RSS= 'N'"); //			CHAR(1)			-- RSS공개여부
+        sbSQL.Append(" ,@YN_SCRAP= 'N'"); //				CHAR(1)			-- 스크랩허용
+        sbSQL.Append(" ,@YN_SECURITY= 'N'"); //			CHAR(1)			-- 보안여부
+        sbSQL.Append(" ,@YN_ANSWER= 'N'"); //				CHAR(1)			-- 답글알림
+        sbSQL.Append(" ,@YN_COMMENT= 'N'"); //			CHAR(1)			-- 덧글알림
+        sbSQL.Append(" ,@ID_LCATEGORY= 1"); //			INT				-- 대분류
+        sbSQL.Append(" ,@ID_SCATEGORY= 1"); //			INT				-- 소분류
+        sbSQL.Append(" ,@NM_NOTICEMEDIA= '1'"); //		VARCHAR(64)		-- 알림매체
+        //sbSQL.Append(" ,@DS_CONTENTS='" + DS_CONTENTS + "'"); //		TEXT			-- 본문
+        sbSQL.Append(" ,@NM_TRACKBACKURL= ''"); //		VARCHAR(256)	-- 트랙백주소
+        sbSQL.Append(" ,@NM_SCRAPURL= ''"); //			VARCHAR(256)	-- 스크랩원본주소
+        sbSQL.Append(" ,@CD_MESSAGESTATUS= 'REGIST'"); //		VARCHAR(20)		-- 메시지상태
+        sbSQL.Append(" ,@CD_REGISTER='").Append( Sessions.PERSON_CODE.ToString()).Append("'"); //			VARCHAR(50)		-- 등록자
+        sbSQL.Append(" ,@NM_REGISTERIP='").Append( Sessions.USER_IPADDRESS.ToString()).Append("'"); //			VARCHAR(16)		-- 등록자IP
+        
+
+
+        SqlConnection conn = new SqlConnection(strCon);
+        SqlCommand command = new SqlCommand();
+        SqlCommand ContentCommand = new SqlCommand();
+        string ID_Message = string.Empty;
+        int outp = 0;
+
+        try
+        {
+            command.Connection = conn;
+            command.CommandText = sbSQL.ToString();
+            command.CommandType = CommandType.Text;
+
+
+
+            conn.Open();
+            //트렌젝션 시작
+            trBBS = conn.BeginTransaction(IsolationLevel.Serializable, "savePlan");
+            //트렌젝션 설치
+            command.Transaction = trBBS;
+
+            ID_Message = command.ExecuteScalar().ToString();
+
+
+            sbSQLCONTENT.Append("[dbo].[BDP_MESSAGE_CONTENTS_UPDATE]");
+            sbSQLCONTENT.Append(" @ID_MESSAGE = '").Append( ID_Message ).Append("'"); //				INT				-- 게시판 번호
+            sbSQLCONTENT.Append(" ,@DS_CONTENTS='").Append( DS_CONTENTS).Append("'"); //		TEXT			-- 본문
+
+            command.CommandText = sbSQLCONTENT.ToString();
+            outp = command.ExecuteNonQuery();
+
+            trBBS.Commit();
+
+            return ID_Message;
+
+            
+        }
+        catch (Exception ex)
+        {
+            if(trBBS != null) 
+            {
+                trBBS.Rollback("savePlan");
+            }
+
+            throw ex;
+        }
+        finally
+        {
+            conn.Close();
+            command.Dispose();
+            sbSQL = null;
+            sbSQLCONTENT = null;
+        }
+        
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+        //////////////////////////////////////////////////////
+        //DataSet ds = new DataSet();
+        //DataItem INPUT = new DataItem();
+        //DataItem OUTPUT = null;
+
+
+
+        //INPUT.add("@ID_FOLDER", Convert.ToInt32(ID_FORDER)); //				INT				-- 폴더아이디
+        //INPUT.add("@DT_EXPIRED",""); //			CHAR(10)		-- 만료일자
+        //INPUT.add("@DT_POPUP",""); //				CHAR(10)		-- 팝업종료일
+        //INPUT.add("@NM_SUBJECT", SUBJECT); //			NVARCHAR(256)	-- 제목
+        //INPUT.add("@YN_POPUP","N"); //				CHAR(1)			-- 팝업여부
+        //INPUT.add("@YN_TOP","N"); //				CHAR(1)			-- 상단여부
+        //INPUT.add("@YN_SIGNATURE","N"); //			CHAR(1)			-- 사인여부
+        //INPUT.add("@YN_RSS","N"); //			CHAR(1)			-- RSS공개여부
+        //INPUT.add("@YN_SCRAP","N"); //				CHAR(1)			-- 스크랩허용
+        //INPUT.add("@YN_ANSWER","N"); //				CHAR(1)			-- 답글알림
+        //INPUT.add("@YN_COMMENT","N"); //			CHAR(1)			-- 덧글알림
+        //INPUT.add("@ID_LCATEGORY",1); //			INT				-- 대분류
+        //INPUT.add("@ID_SCATEGORY",1); //			INT				-- 소분류
+        //INPUT.add("@NM_NOTICEMEDIA","1"); //		VARCHAR(64)		-- 알림매체
+        //INPUT.add("@DS_CONTENTS	", DS_CONTENTS); //		TEXT			-- 본문
+        //INPUT.add("@NM_TRACKBACKURL",""); //		VARCHAR(256)	-- 트랙백주소
+        //INPUT.add("@NM_SCRAPURL",""); //			VARCHAR(256)	-- 스크랩원본주소
+        //INPUT.add("@CD_MESSAGESTATUS","REGIST"); //		VARCHAR(20)		-- 메시지상태
+        //INPUT.add("@CD_REGISTER",Sessions.PERSON_CODE.ToString()); //			VARCHAR(50)		-- 등록자
+        //INPUT.add("@NM_REGISTERIP", Sessions.USER_IPADDRESS.ToString()); //			VARCHAR(16)		-- 등록자IP
+
+        //OUTPUT = InvokeRemoteMethod("BK.MyBK.Business.BaseService.Board.Message.TxWorker", "MessageInsert", INPUT) as DataItem;
+        ////OUTPUT = InvokeRemoteMethod("BK.MyBK.Business.BaseService.Board.Message.TxWorker", "MessageInsert", INPUT) as DataItem;
+
+        //if (OUTPUT != null && OUTPUT.DataSet != null && OUTPUT.DataSet.Tables.Count > 0)
+        //{
+        //    ds = OUTPUT.DataSet.Copy();
+        //    //rtnValue = pTransform(ds.GetXml(), "wf_worklistquery01.xsl");
+
+        //}
+    }
+
+    private XmlDocument pParseRequestBytes()
+    {
+        try
+        {
+            XmlDocument oXMLData = new XmlDocument();
+            System.Text.Decoder oDecoder = System.Text.Encoding.UTF8.GetDecoder();
+            System.Byte[] aBytes = Request.BinaryRead(Request.TotalBytes);
+            long iCount = oDecoder.GetCharCount(aBytes, 0, aBytes.Length);
+            System.Char[] aChars = new char[iCount];
+            oDecoder.GetChars(aBytes, 0, aBytes.Length, aChars, 0);
+            oXMLData.Load(new System.IO.StringReader(new String(aChars)));
+            return oXMLData;
+        }
+        catch (Exception e)
+        {
+            throw new Exception(null, e);
+        }
+    }
+}

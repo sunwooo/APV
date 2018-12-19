@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<HEAD>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<TITLE>XFileUploadMonitor</TITLE>
+</HEAD>
+<script FOR="MonitorCTL" Event="OnError(nCode, sMsg, sDetailMsg)" language="javascript">
+	fileinfo = "error"
+	OnFileMonitorError(nCode, sMsg, sDetailMsg);
+</script>
+<script language="Javascript">
+    	function OnFileMonitorError(nCode, sMsg, sDetailMsg)
+    	{
+    	    //alert(nCode);
+    		alert(sMsg);
+    		//alert(sDetailMsg);
+    	}
+</script>
+<script language="javascript" src="../../SiteReference/js/ClientMessageBox.js"></script>
+<script language="javascript" src="../../SiteReference/js/Utility.js"></script>
+<script language="javascript" src="../../SiteReference/js/Config.js"></script>
+<script language="javascript" src="../../SiteReference/js/EmbedObject.js"></script>
+		
+<script language="VBS"  >
+'msgbox "http://" + document.location.host +"/COVINet/FrontStorage/Approval"
+
+    dim fileinfo
+	sub NowStart(gValue)
+	
+	'	2007.04.18 kckangy put
+	'	document.all("MonitorCTL").CodePage = 65001
+	'        document.all("MonitorCTL").EnablePutMode = TRUE
+	'        document.all("MonitorCTL").UploadURL = "http://" + document.location.host +"/COVINet/FrontStorage/Approval"
+	
+			
+	'        document.all("MonitorCTL").Items = opener.document.all("ListUpCTL").Items
+	'        document.all("MonitorCTL").Properties = opener.document.all("ListUpCTL").Properties
+
+       	'	If 0 <= document.all("MonitorCTL").Count then
+       	'		document.all("MonitorCTL").EnableEmptyFileUpload = TRUE
+       	'		document.all("MonitorCTL").Transfer
+       	'	End If
+
+		'	2007.04.18 kckangy add post
+	 	    document.all("MonitorCTL").CodePage = 65001
+	 	    document.all("MonitorCTL").UploadURL = gValue
+		    document.all("MonitorCTL").Items = opener.document.all("ListUpCTL").Items					
+		    document.all("MonitorCTL").Properties = opener.document.all("ListUpCTL").Properties
+                
+            
+       		If 0 <= document.all("MonitorCTL").Count then
+       			document.all("MonitorCTL").EnableEmptyFileUpload = TRUE
+       			document.all("MonitorCTL").Transfer
+       		End If
+    	end sub 
+
+	sub EndProc()
+		''opener.form1.savefilename.value = document.all("MonitorCTL").LastSaveFileName
+		''opener.insertfiles()
+		'self.window.close()
+		'dialogArguments.savefilename.value = document.all("MonitorCTL")[0]
+		'dialogArguments.insertfiles
+		'opener.document.all("childalive").value ="0"
+		
+		'if not opener.closed  then
+		'	opener.winclose()
+		'end if
+		
+	end sub	
+		
+	sub getFiles()
+		dim filename
+		dim filesize
+		if  opener.closed  then
+			exit sub
+		end if
+			For i = 1 to document.all("MonitorCTL").Count	
+				
+				IF i >1 THEN
+					filename = filename + "||"
+					filesize = filesize + "||"
+				END IF
+
+				filename = filename + Mid(document.all("MonitorCTL")(i).Name, InStrRev(document.all("MonitorCTL")(i).Name, "\") + 1) 
+				filesize = filesize + Mid(document.all("MonitorCTL")(i).Size, InStrRev(document.all("MonitorCTL")(i).Size, "\") + 1)
+							
+			Next			
+			if not fileinfo="error" then
+				opener.document.all("savefilename").value = filename
+				opener.document.all("savefilesize").value = filesize
+			end if
+			MonitorCTL.CloseWindow
+			WinClose()
+	end sub
+</script>
+
+<script language="VBS" for="MonitorCTL" event="OnTransferComplete()"> 
+	getFiles()
+</script>
+
+<script language="VBS" for="MonitorCTL" event="OnCloseWIndow()"> 
+	EndProc() 
+</script> 
+<script language="javascript">
+function callNowStart()
+{   
+    //gURL = SiteURL + '/' + ApplicationName + "/Approval/FileAttach/PostUpload.aspx?folder=Approval"
+    gURL = "http://" + document.location.host + '/' + ApplicationName + "/Approval/FileAttach/PostUpload.aspx?folder=Approval";
+    NowStart(gURL);
+}
+function WInClose()
+{
+	opener.window.close(); 
+}
+
+</script>
+
+<BODY onload="callNowStart()" bgcolor="#D6D3CE" >
+
+    <script language="javascript"type="text/javascript">
+        PrintDextUploadMonitor("MonitorCTL", 455,455);
+    </script>
+</BODY>
+
+</HTML>
+
+
+

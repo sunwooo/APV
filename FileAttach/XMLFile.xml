@@ -1,0 +1,266 @@
+﻿<HTML>
+  <HEAD>
+    <META content="TAGFREE X-Free Editor" version="1.0">
+      <STYLE>
+        p, ol, li, ul {
+        margin-top: 2pt; margin-bottom: 2pt;
+        }
+        td {
+        word-break: break-all
+        }
+        blockquote {
+        margin-top: 0pt; margin-bottom: 0pt
+        }
+      </STYLE>
+    </HEAD>
+  <BODY style="FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt" tweedittype="true">
+    <DIV align="center">
+      <SPAN style="FONT-SIZE: 18pt"></SPAN>
+      <TABLE style="BORDER-LEFT: #d6dfe1 1px solid; MARGIN-TOP: 30px; WIDTH: 678px; BACKGROUND: #fff; MARGIN-LEFT: 2px; BORDER-TOP: #d6dfe1 1px solid; BORDER-RIGHT: #d6dfe1 1px solid" border="0" cellSpacing="0" cellPadding="0" width="680">
+        <TBODY>
+          <TR>
+            <TD>
+              <DIV style="WIDTH: 100%; BACKGROUND: url(http://news.isusystem.co.kr/img/201401/img/bg_top.jpg) #aeb6bb no-repeat; HEIGHT: 72px">
+                <UL>
+                  <LI style="PADDING-BOTTOM: 0px; PADDING-LEFT: 20px; PADDING-RIGHT: 20px; FLOAT: left; PADDING-TOP: 28px">
+                    <A href="http://www.isusystems.co.kr/" target="_blank">
+                      <IMG border="0" src="http://news.isusystem.co.kr/img/201401/img/isu_itnewsletter.png">
+                    </A>
+                  </LI>
+                  <LI style="PADDING-BOTTOM: 0px; PADDING-LEFT: 17px; PADDING-RIGHT: 15px; FLOAT: right; PADDING-TOP: 15px">
+                    <IMG src="http://news.isusystem.co.kr/img/201401/img/img_201401.png"> 
+                  </LI>
+                </UL>
+              </DIV>
+            </TD>
+          </TR>
+          <TR>
+            <TD>
+              <IMG border="0" src="http://news.isusystem.co.kr/img/201401/img/isu_mainimg_201401.png" width="678" height="385" useMap=#"Map">
+            </TD>
+          </TR>
+          <TR>
+            <TD style="PADDING-BOTTOM: 10px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; PADDING-TOP: 10px">
+              <!-- 01:스페셜 리포트_START -->
+              <TABLE border="0" cellSpacing="0" cellPadding="0" width="100%">
+                <TBODY>
+                  <TR>
+                    <TD class="left" colSpan="2">
+                      <H1 class="bluegreen">스페셜 리포트</H1>
+                    </TD>
+                  </TR>
+                  <TR>
+                    <TD height="15" colSpan="2"></TD>
+                    <TR>
+                      <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 30px; PADDING-RIGHT: 10px; BACKGROUND: url(http://news.isusystem.co.kr/img/icon_arrow.png) no-repeat 15px 7px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                        <A href="http://news.kukinews.com/article/view.asp?page=1&amp;gCode=eco&amp;arcid=0007812752&amp;cp=nv" target="_blank">이수시스템, 독자 개발 모델로 한성자동차 인사시스템 구축 착수 </A>
+                      </TD>
+                      <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 30px; PADDING-RIGHT: 10px; BACKGROUND: url(http://news.isusystem.co.kr/img/icon_arrow.png) no-repeat 15px 7px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                        <A href="http://www.ciokorea.com/t/557/신기술%7C미래/19413" target="_blank">2014년에 걱정할 필요가 없는 10가지</A>
+                      </TD>
+                    </TR>
+                    <TR>
+                      <TD height="10" colSpan="2"></TD>
+                    </TR>
+                </TBODY>
+              </TABLE>
+              <!-- //01:스페셜 리포트_END -->
+            </TD>
+          </TR>
+          <TR>
+            <TD style="PADDING-BOTTOM: 10px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; PADDING-TOP: 10px">
+              <!--02:주요 IT 관련 뉴스 클리핑_START-->
+              <TABLE border="0" cellSpacing="0" cellPadding="0" width="100%">
+                <TBODY>
+                  <TR>
+                    <TD class="left" colSpan="2">
+                      <H1 class="green">주요 IT 관련 뉴스 클리핑</H1>
+                    </TD>
+                  </TR>
+                  <TR>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 30px; PADDING-RIGHT: 10px; BACKGROUND: url(http://news.isusystem.co.kr/img/icon_arrow.png) no-repeat 15px 7px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <A href="http://www.newsis.com/ar_detail/view.html?ar_id=NISX20131202_0012559071&amp;cID=10809&amp;pID=10800" target="_blank">
+                        "수배차량 꼼짝마" 광주시-경찰 CCTV 정보 공유<SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(NEWSIS/20131202)</SPAN>
+                      </A>
+                    </TD>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 30px; PADDING-RIGHT: 10px; BACKGROUND: url(http://news.isusystem.co.kr/img/icon_arrow.png) no-repeat 15px 7px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <A href="http://media.daum.net/digital/newsview?newsid=20131223151727061" target="_blank">
+                        "둘 다 비켜" 제3 모바일 OS 온다<SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(주간동아/20131223)</SPAN>
+                      </A>
+                    </TD>
+                  </TR>
+                  <TR>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 30px; PADDING-RIGHT: 10px; BACKGROUND: url(http://news.isusystem.co.kr/img/icon_arrow.png) no-repeat 15px 7px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <A href="http://www.channelit.co.kr/news/articleView.html?idxno=405033" target="_blank">
+                        네덜란드, 유망 IT ‘사물인터넷’ 발전에 ‘촉각’<SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(채널IT/20131126)</SPAN>
+                      </A>
+                    </TD>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 30px; PADDING-RIGHT: 10px; BACKGROUND: url(http://news.isusystem.co.kr/img/icon_arrow.png) no-repeat 15px 7px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <A href="http://www.channelit.co.kr/news/articleView.html?idxno=407430" target="_blank">
+                        전력 44% 감소, 에너지 신기술 ‘뉴리오' 화제 <SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(채널IT/20131213)</SPAN>
+                      </A>
+                    </TD>
+                  </TR>
+                  <TR>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 30px; PADDING-RIGHT: 10px; BACKGROUND: url(http://news.isusystem.co.kr/img/icon_arrow.png) no-repeat 15px 7px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <A href="http://news1.kr/articles/1432541" target="_blank">
+                        내년 공공 SW사업 발주 3조3000억 규모<SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(NEWS1/20131202)</SPAN>
+                      </A>
+                    </TD>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 30px; PADDING-RIGHT: 10px; BACKGROUND: url(http://news.isusystem.co.kr/img/icon_arrow.png) no-repeat 15px 7px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <A href="http://ciobiz.etnews.com/news/news/tech/2887236_1801.html" target="_blank">
+                        정부 클라우드서비스인증제 `헛발질`…올해 단 1곳도 없어 <SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(전자신문/20131213)</SPAN>
+                      </A>
+                    </TD>
+                  </TR>
+                  <TR>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 30px; PADDING-RIGHT: 10px; BACKGROUND: url(http://news.isusystem.co.kr/img/icon_arrow.png) no-repeat 15px 7px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <A href="http://ciobiz.etnews.com/news/news/inovation/2889334_1822.html" target="_blank">
+                        새해 공공 빅데이터 사업 규모 `기대 이하`<SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(전자신문/20131220)</SPAN>
+                      </A>
+                    </TD>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 30px; PADDING-RIGHT: 10px; BACKGROUND: url(http://news.isusystem.co.kr/img/icon_arrow.png) no-repeat 15px 7px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <A href="http://ciobiz.etnews.com/news/special/analysis/2876145_1807.html" target="_blank">
+                        시행 1년 샵메일, 왜 적용 꺼릴까 <SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(전자신문/20131128)</SPAN>
+                      </A>
+                    </TD>
+                  </TR>
+                </TBODY>
+              </TABLE>
+              <!--//02:주요 IT 관련 뉴스 클리핑_END-->
+            </TD>
+          </TR>
+          <TR>
+            <TD style="PADDING-BOTTOM: 10px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; BACKGROUND: #e7e7e7; PADDING-TOP: 10px">
+              <!--03:동종 업계 IT 동향_START-->
+              <TABLE border="0" cellSpacing="0" cellPadding="0" width="100%">
+                <TBODY>
+                  <TR>
+                    <TD class="left" colSpan="2">
+                      <H1 class="blue">동종 업계 IT 동향</H1>
+                    </TD>
+                  </TR>
+                  <TR>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <STRONG>효성인포메이션, 주요업무 클라우드 전환 신속 지원 `눈길`</STRONG>
+                      <SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(디지털타임즈/20131219)</SPAN>
+                      <BR>
+                        <BR>
+                          <A href="http://www.dt.co.kr/contents.htm?article_no=2013121902012560786002" target="_blank">비즈니스 혁신의 속도를 높이고 폭발적으로 증가하는 데이터를 효율적으로 관리하기 위해 클라우드 컴퓨팅 구축에 대한 시장의 관심이 높아지고 있다. 효성인포메이션시스템(대표 양정규)은 서버, 스토리지, 네트워크, 가상화 솔루션으로 구성된 컨버지드 인프라 플랫폼 `히타치 UCP'로 기업 고객들이 신속하고 안전하게 중요 업무를 클라우드로 전환 수 있도록 지원한다…[더보기]</A>
+                    </TD>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <STRONG>HP 클라우드, MS 애저·SAP HANA 함께간다</STRONG>
+                      <SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(ZDNet/20131212)</SPAN>
+                      <BR>
+                        <BR>
+                          <A href="http://www.zdnet.co.kr/news/news_view.asp?artice_id=20131212110157" target="_blank">HP가 오픈스택 플랫폼 전략에 마이크로소프트(MS) 윈도 애저와 SAP 고성능분석어플라이언스(HANA)를 끌어들였다. 대응할 수 있는 기업 고객 수요의 외연을 넓히려는 시도로 비친다..[더보기]</A>
+                    </TD>
+                  </TR>
+                  <TR>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <STRONG>SK하이닉스, TSV 기술 적용한 4단 적층 초고속 D램 개발 성공</STRONG>
+                      <SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(전자신문/20131226)</SPAN>
+                      <BR>
+                        <BR>
+                          <A href="http://www.etnews.com/news/device/device/2891281_1479.html" target="_blank">SK하이닉스(대표 박성욱)가 실리콘관통전극(TSV) 기술을 적용한 초고속 메모리(HBM) 개발에 성공했다고 26일 밝혔다. 20나노급 D램을 TSV 방식으로 4단 적층한 제품으로 국제반도체표준협의기구(JEDEC)에서 표준화를 추진하는 고성능·저전력·고용량 제품이다. 1.2V 전압에서 1Gbps 처리 속도를 구현할 수 있고, 1024개 정보출입구(I/O)로 초당 128GB의 데이터 처리가 가능하다. 초당 28GB의 데이터를 처리할 수 있는 GDDR5보다 4배 이상 빠르고, 전력소비는 40% 줄였다…[더보기]</A>
+                    </TD>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <STRONG>현대차, 빅데이터 분석 본격화</STRONG>
+                      <SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(전자신문/20131213)</SPAN>
+                      <BR>
+                        <BR>
+                          <A href="http://ciobiz.etnews.com/news/news/inovation/2885305_1822.html" target="_blank">현대자동차가 차량 품질·서비스 향상을 위한 빅데이터 사업을 본격화한다. 이미 빅데이터 사업에 뛰어든 도요타, 포드, GM 등 글로벌 자동차 업체와 시장 경쟁이 한층 치열해질 것으로 보인다. 12일 업계에 따르면 현대차는 최근 `VCRM(자동차고객관계관리) 데이터 분석 프로젝트` 사업자로 테라데이타를 선정했다. 조만간 사업에 착수해 새해 4월께 프로젝트를 마무리할 방침이다. 이번 데이터 분석 프로세스 정립과 분석 모델 개발을 바탕으로 향후 인프라 구축 등 본사업에 착수할 것으로 보인다…[더보기]</A>
+                    </TD>
+                    <TR>
+                      <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                        <STRONG>브로케이드, 2014년 5대 IT 트렌드 선정 발표 </STRONG>
+                        <SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(ACROFAN/20131218)</SPAN>
+                        <BR>
+                          <BR>
+                            <A href="http://www.acrofan.com/ko-kr/commerce/news/20131218/00000018" target="_blank">브로케이드(한국 지사장 권원상)가 NFV(네트워크기능가상화) 및 소프트웨어정의 기술 도입 가속화 등을 필두로 2014년 IT 비즈니스 환경을 특징 지을 5대 트렌드를 선정하여 발표했다. 브로케이드코리아 권원상 지사장은 “2013년에도 우리 삶을 바꿀 만 한 많은 사건들이 있었다. 미국의 과학자들이 3D 프린터를 이용하여 최초로 신체의 일부를 실험실에서 만들어 냈고, 유럽입자물리연구소(CERN)에서 힉스 입자(Higgs Boson)를 발견한 피터 힉스(Peter Higgs) 교수가 노벨물리학상을 수상했고, 또한 마이크로소프트가 새롭게 출시한 콘솔 게임기 ‘엑스박스 원(Xbox One)’은 필적할 수 없는 게임 방식으로 하루 만에 판매 백만 개를 돌파하는 기염을 토했다”며, 2013년을 마무리하는 소감을 밝혔다. …[더보기]</A>
+                      </TD>
+                      <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                        <STRONG>내년 이통시장 경쟁 어느 해보다 뜨겁다… 광대역LTE 본격화, 황창규호 출범</STRONG>
+                        <SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(국민일보/20131225)</SPAN>
+                        <BR>
+                          <BR>
+                            <A href="http://news.kukinews.com/article/view.asp?page=1&amp;gCode=imt&amp;arcid=0007880738&amp;code=41151111" target="_blank">내년 이동통신시장은 다른 해보다 경쟁이 더 치열할 전망이다. 광대역 롱텀에볼루션(LTE) 서비스 본격화, 단말기유통구조개선법 시행 등 다양한 변수들이 포진하고 있기 때문이다. 이통3사가 올해 주파수 경매를 통해 할당받은 주파수로 전국 광대역 LTE 서비스를 본격 실시하면서 마케팅 경쟁은 내년에 불붙을 것으로 보인다. KT가 올해 수도권 지역에서 가장 먼저 광대역 LTE 서비스를 시작한 데 이어 다른 이통사들은 내년 하반기 전국으로 서비스 지역을 확대할 계획이다…[더보기]</A>
+                          </TD>
+                    </TR>
+                </TBODY>
+              </TABLE>
+              <!--//03:동종 업계 IT 동향_END-->
+            </TD>
+          </TR>
+          <TR>
+            <TD style="PADDING-BOTTOM: 10px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; PADDING-TOP: 10px">
+              <!--04:업계 IT 도입 사례_START-->
+              <TABLE border="0" cellSpacing="0" cellPadding="0">
+                <TBODY>
+                  <TR>
+                    <TD class="left" colSpan="2">
+                      <H1 class="green">업계 IT 도입 사례</H1>
+                    </TD>
+                  </TR>
+                  <TR>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <STRONG>한진그룹 IT 계열사 `유니컨버스`, IT 통합관제시스템 구축</STRONG>
+                      <SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(전자신문/20131218)</SPAN>
+                      <BR>
+                        <BR>
+                          <A href="http://www.etnews.com/news/computing/solution/2887430_1476.html" target="_blank">한진그룹 IT 계열사인 유니컨버스는 `CA 님소프트 모니터`를 도입해 IT 통합관제 시스템을 구축했다고 18일 밝혔다. 이를 통해 유니컨버스는 전통적인 데이터센터는 물론이고 가상화, 클라우드 환경의 IT 시스템을 통합 관리할 수 있게 됐다 …[더보기]</A>
+                        </TD>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <STRONG>해수부-NIA, 해양수산 안전 정보체계 구축 ‘맞손’</STRONG>
+                      <SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(채널IT/20131218)</SPAN>
+                      <BR>
+                        <BR>
+                          <A href="http://vod.channelit.co.kr/index.php/media/view/page/1/gubun/vod/pgr_no/400/id/1170" target="_blank">해양수산부와 한국정보화진흥원(NIA)이 맞손을 잡았다. 최신 정보통신기술(ICT)을 활용한 해양수산 안전 정보체계 구축에 함께 나선 것이다.해수부와 정보화진흥원은 지난 13일 서울 중구 무교동 정보화진흥원 대회실에서 양 기관간 ICT 융합협력을 위한 포괄적 업무협약(MOU)을 체결했다…[더보기]</A>
+                        </TD>
+                  </TR>
+                  <TR>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <STRONG>신한은행 데이터센터 이전 프로젝트</STRONG>
+                      <SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(전자신문/20131210)</SPAN>
+                      <BR>
+                        <BR>
+                          <A href="http://ciobiz.etnews.com/news/case/domestic/2882657_1811.html" target="_blank">신한금융그룹은 2001년 신한금융지주회사를 출범한 이래 현재 13개 금융계열사를 보유한 대형 금융그룹으로 성장했다. 오늘날 신한금융그룹의 규모는 금융회사 인수합병, 각종 사업 확대 등으로 엄청나게 커졌다. 지난 10년간 눈부신 성장을 하는 과정에서 고민거리가 하나 있었다…[더보기]</A>
+                    </TD>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <STRONG>HP, 저가 패블릿으로 스마트폰 시장 복귀 </STRONG>
+                      <SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(전자신문/20131224)</SPAN>
+                      <BR>
+                        <BR>
+                          <A href="http://www.etnews.com/news/international/2890800_1496.html" target="_blank">2011년 스마트폰117 사업을 접었던 HP가 패블릿311폰을 앞세워 시장에 복귀한다고 기가옴이 보도했다. 기존 제품보다 상대적으로 저렴한 가격을 무기로 인도와 중국 같은 성장 시장을 공략할 방침이다…[더보기]</A>
+                        </TD>
+                  </TR>
+                  <TR>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <STRONG>금융사 불법영업 상시감시시스템 구축</STRONG>
+                      <SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(전자신문/20131224)</SPAN>
+                      <BR>
+                        <BR>
+                          <A href="http://ciobiz.etnews.com/news/news/inovation/2890909_1822.html" target="_blank">금융사의 불건전 영업행위 근절을 위해 상시감시시스템이 구축된다. 동양 사태로 촉발된 불완전 판매 등을 감시하는 지표도 개발된다. 금융감독원은 금융감독시스템 혁신 방안의 하나로 `금융리스크 사전인지시스템`을 구축한다고 밝혔다…[더보기]</A>
+                        </TD>
+                    <TD style="PADDING-BOTTOM: 5px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; VERTICAL-ALIGN: top; PADDING-TOP: 10px" class="left" width="50%">
+                      <STRONG>한국IBM, 한화생명 전사 고객정보 통합 시스템 구축 완료</STRONG>
+                      <SPAN style="PADDING-LEFT: 5px; COLOR: #959595; FONT-SIZE: 10px">(중앙일보/20131125)</SPAN>
+                      <BR>
+                        <BR>
+                          <A href="http://www.ciokorea.com/news/19426" target="_blank">한국IBM이 최근 한화생명(www.hanwhalife.com)의 전사 고객정보 통합시스템을 구축 완료했다고 밝혔다.이번 프로젝트를 통해 한화생명은 IBM의 MDM(Master Data Management) 시스템을 이용해 전사 고객정보를 통합 관리하게 되었다. MDM 시스템은 기업의 마스터 정보를 전사 관점에서 효과적으로 관리하기 위해 데이터 모델, 프로세스, 관리체계를 통해 통합 관리하는 CDI(Customer Data Integration) 시스템이다…[더보기]</A>
+                        </TD>
+                  </TR>
+                </TBODY>
+              </TABLE>
+              <!-- //04:업계 IT 도입 사례_END	-->
+            </TD>
+          </TR>
+        </TBODY>
+      </TABLE>
+      
+    </DIV>
+    <MAP name="Map">
+      <AREA href="http://it.donga.com/16906/" shape="rect" target="_blank" coords="294,187,645,340">
+    </MAP>
+  </BODY>
+</HTML>

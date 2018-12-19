@@ -1,0 +1,42 @@
+<?xml version="1.0"  encoding="euc-kr" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	sql:xsl="org_memberquery03.xsl" >
+	<sql:header>
+		<sql:param name='ENT_CODE'></sql:param>
+		<sql:param name='DN'></sql:param>
+		<sql:param name='DP'></sql:param>
+		<sql:param name='AN'></sql:param>
+		<sql:param name='LV'></sql:param>
+		<sql:param name='TL'></sql:param>
+		<sql:param name='WK'></sql:param>
+	</sql:header>
+	<sql:query>
+		if @ENT_CODE != ''
+		SELECT [ORG_PERSON].*, B.PARENT_UNIT_CODE, C.NAME
+		FROM [ORG_PERSON] , [ORG_UNIT] B, [ORG_UNIT] C
+		WHERE 	[ORG_PERSON].ENT_CODE = @ENT_CODE
+		AND	[ORG_PERSON].USAGE_STATE = 'A'
+		AND  [ORG_PERSON].UNIT_CODE = B.UNIT_CODE
+		AND  B.USAGE_STATE = 'A'
+		AND  C.USAGE_STATE = 'A'
+		AND	( [ORG_PERSON].DISPLAY_NAME LIKE @DN+'%' OR @DN is null)
+		AND	( [ORG_PERSON].UNIT_NAME LIKE @DP+'%' OR @DP is null)
+		AND	( [ORG_PERSON].JOBPOSITION_Z LIKE @LV+'%' OR @LV is null)
+		AND	( [ORG_PERSON].JOBTITLE_Z LIKE @TL+'%' OR @TL is null)
+		ORDER BY [ORG_PERSON].TITLE_CODE ASC, [ORG_PERSON].LEVEL_CODE ASC
+		FOR XML AUTO
+		else
+		SELECT [ORG_PERSON].*, B.PARENT_UNIT_CODE, C.NAME
+		FROM [ORG_PERSON] , [ORG_UNIT] B, [ORG_UNIT] C
+		WHERE 	[ORG_PERSON].USAGE_STATE = 'A'
+		AND  [ORG_PERSON].UNIT_CODE = B.UNIT_CODE
+		AND  B.USAGE_STATE = 'A'
+		AND  C.USAGE_STATE = 'A'
+		AND	( [ORG_PERSON].DISPLAY_NAME LIKE @DN+'%' OR @DN is null)
+		AND	( [ORG_PERSON].UNIT_NAME LIKE @DP+'%' OR @DP is null)
+		AND	( [ORG_PERSON].JOBPOSITION_Z LIKE @LV+'%' OR @LV is null)
+		AND	( [ORG_PERSON].JOBTITLE_Z LIKE @TL+'%' OR @TL is null)
+		ORDER BY [ORG_PERSON].TITLE_CODE ASC, [ORG_PERSON].LEVEL_CODE ASC
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

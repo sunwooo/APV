@@ -1,0 +1,9 @@
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"	
+      sql:xsl="org_memberquery01.xsl">
+	<sql:header>
+		<sql:param name='PERSON_CODE'>00000</sql:param>
+	</sql:header>
+	<sql:xpath-query mapping-schema="org_member.xml">
+        /ORG_PERSON[PERSON_CODE=$PERSON_CODE and USAGE_STATE="A"]
+	</sql:xpath-query>
+</ROOT>

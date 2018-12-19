@@ -1,0 +1,13 @@
+<?xml version="1.0"  encoding="utf-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	sql:xsl="org_enterprisequery.xsl">
+	<sql:header>
+		<sql:param name='ENT_CODE'>General</sql:param>
+	</sql:header>
+	<sql:query>
+		SELECT [ORG_ENTERPRISE].*
+		FROM [ORG_ENTERPRISE]
+		WHERE 	[ORG_ENTERPRISE].ENT_CODE = @ENT_CODE
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

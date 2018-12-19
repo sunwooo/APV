@@ -1,0 +1,12 @@
+<?xml version="1.0"  encoding="euc-kr" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql">
+	<sql:header>
+		<sql:param name='UID'>47</sql:param>
+	</sql:header>
+	<sql:query>
+		select subject, dhtml_admit, dhtml_body 
+		from gw_board
+		where uid = @UID
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

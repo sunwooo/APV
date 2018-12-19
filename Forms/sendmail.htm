@@ -1,0 +1,151 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Language" content="ko">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Pragma" content="no-cache">
+		<title>메일 발송</title>
+		<link rel="stylesheet" type="text/css" href="../common/coviflowbody.css">
+			<link rel="stylesheet" type="text/css" href="../common/button.css">
+			<script language="javascript" type="text/javascript" src="/CoviWeb/SiteReference/js/utility.js"></script>
+				<SCRIPT LANGUAGE="javascript">
+var xmlHTTP = new ActiveXObject("MSXML2.XMLHTTP");
+var m_evalXML = new ActiveXObject("MSXML2.DOMDocument");
+var subject;
+var body;
+var email;
+function window.onload(){
+	if (window.dialogArguments != null){
+		var objWinDlgArgs = window.dialogArguments;
+		title.value = objWinDlgArgs["tSubject"];
+		subject = objWinDlgArgs["tSubject"];
+		body = objWinDlgArgs["tBody"];
+		email = objWinDlgArgs["tEmail"];
+	}
+}
+function addressInspection(){
+   openGal("일반결재","일반결재","수신","일반결재","대기",false,false,false,false,true,false);
+}
+function openGal(sCatSignType,sDeptSignType,sDeptSignStatus,sUserSignType,sUserSignStatus,bMail,bUser,bGroup,bRef,bIns,bRecp){
+	var rgParams=null;
+	rgParams=new Array();
+	rgParams["bMail"]  = bMail;
+	rgParams["bUser"] = bUser;
+	rgParams["bGroup"] = bGroup;
+	rgParams["bRef"] = bRef;
+	rgParams["bIns"] = bIns; 
+	rgParams["bRecp"] = bRecp; 
+	rgParams["sCatSignType"] = sCatSignType; 
+	rgParams["sDeptSignType"] = sDeptSignType;
+	rgParams["sDeptSignStatus"] = sDeptSignStatus; 
+	rgParams["sUserSignType"] = sUserSignType;
+	rgParams["sUserSignStatus"] = sUserSignStatus; 
+	rgParams["objMessage"] = window;
+
+	var szFont = "FONT-FAMILY: '굴림';font-size:9px;";
+    var nWidth = 640;
+    var nHeight = 610;
+    var sFeature = szFont+"dialogHeight:"+nHeight+"px;dialogWidth:"+nWidth+"px;status:no;resizable:yes;help:no;";
+    var strNewFearture = ModifyDialogFeature(sFeature);
+    var vRetval = window.showModelessDialog("/COVIWeb/approval/address/address.aspx", rgParams, strNewFearture);
+    //var vRetval = window.showModelessDialog("../address/address.aspx", rgParams, szFont+"dialogHeight:"+nHeight+"px;dialogWidth:"+nWidth+"px;status:no;resizable:yes;help:no;");
+}
+function insertIns(oCloneXML){
+	var dn="";
+	var em=""; 
+	var sendXMLDOM = new ActiveXObject("MSXML2.DOMDocument");
+	sendXMLDOM.loadXML(oCloneXML.xml);
+	
+	var nodesAllItems = sendXMLDOM.selectNodes("addresslist/item");
+	if (nodesAllItems.length > 0){
+		for(var x=0; x<nodesAllItems.length; x++){
+			if (x==0){
+				dn = nodesAllItems.item(x).selectSingleNode("DN").text;
+				em = nodesAllItems.item(x).selectSingleNode("EM").text;
+			}else{
+				dn = dn + ";" + nodesAllItems.item(x).selectSingleNode("DN").text;
+				em = em + ";" + nodesAllItems.item(x).selectSingleNode("EM").text;
+			}			
+		}
+	}
+	Rec.value = dn;
+	Recid.value = em;
+}
+function sendmail(){
+	try{
+		var szURL = "sendmail.aspx";
+		var szText = "<?xml version='1.0'?><request>"
+					+ makeNode("from",email,false)
+					+ makeNode("to",Recid.value,false)
+					+ makeNode("subject",title.value,true)
+					+ makeNode("body","<pre>"+txtbody.value+"</pre><br>"+body,true)
+					+ "</request>";
+		evalXML(szText);
+		requestHTTP("POST",szURL,true,"text/xml",receiveHTTP,szText);					
+	}catch(e){
+		alert("Error : "+e.description + "\r\nError number: " + e.number);
+	}	
+}
+function evalXML(sXML){
+	if(!m_evalXML.loadXML(sXML)){
+		var err = m_evalXML.parseError;
+		throw new Error(err.errorCode,"desc:"+err.reason+"\nsrctxt:"+err.srcText+"\nline:"+err.line+"\tcolumn:"+err.linepos);
+	}
+}
+function receiveHTTP(){
+	if(xmlHTTP.readyState==4){
+		xmlHTTP.onreadystatechange=event_noop;
+		if(xmlHTTP.responseText.charAt(0)=='\r'){
+			alert(xmlHTTP.responseText);
+		}else{
+			var errorNode=xmlHTTP.responseXML.selectSingleNode("response/error");
+			(errorNode!=null)?alert("Desc: " + errorNode.text):window.close();
+		}
+	}
+}
+function makeNode(sName,vVal,bCData){
+	return "<"+sName+">"+(bCData?"<![CDATA[":"")+vVal+(bCData?"]]>":"")+"</"+sName+">";
+}
+function requestHTTP(sMethod,sUrl,bAsync,sCType,pCallback,vBody){
+	xmlHTTP.open(sMethod,sUrl,bAsync);
+	xmlHTTP.setRequestHeader("Accept-Language","ko");
+	xmlHTTP.setRequestHeader("Content-type", sCType);
+	if(pCallback!=null)xmlHTTP.onreadystatechange = pCallback;
+	(vBody!=null)?xmlHTTP.send(vBody):xmlHTTP.send();
+}
+function event_noop(){return(false);}
+				</SCRIPT>
+	</head>
+	<body leftmargin="0" topmargin="0">
+		<table border="0" cellpadding="0" cellspacing="0" width='100%' height="100%">
+			<tr height="30">
+				<td height="30" colspan="2" background="../image/t_bg.gif" style="COLOR:WHITE; FONT-FAMILY: 굴림; FONT-SIZE: 11pt; FONT-WEIGHT: BOLD">&nbsp;&nbsp;&nbsp;<b>메일 
+						발송</b>
+				</td>
+			</tr>
+			<tr height="30">
+				<td width="100">&nbsp;<input type="button" value="받을 사람" name="btnRec" onclick="addressInspection();" style="font-size:9pt;height:20;width:90;background-color: #CCDDFF;cursor:hand"></td>
+				<td><input name="Rec" style="height:20;width:350;" readonly><input name="Recid" type="hidden" style="height:20;width:350;" readonly></td>
+			</tr>
+			<tr height="30">
+				<td width="100" align="center">&nbsp;제 목 :</td>
+				<td><input name="title" style="height:20;width:350;"></td>
+			</tr>
+			<tr height="100%">
+				<td colspan="2" align="center"><textarea name="txtbody" style="width:95%;height:95%"></textarea></td>
+			</tr>
+			<tr height="30">
+				<td height="30" colspan="2" style="COLOR:RED; FONT-FAMILY: 굴림; FONT-SIZE: 10pt;">&nbsp;&nbsp;&nbsp;- 
+					결재문서가 첨부되어 발송됩니다. -
+				</td>
+			</tr>
+			<tr height="30" bgcolor="threedface">
+				<td colspan="2" align="center">
+					<img id="btnclose" align="absmiddle" name="cbBTN" class="btnClass" src="/COVINet/image/btn_sendmail.gif"
+						onclick="javascript:sendmail();"> <img id="btnclose" align="absmiddle" name="cbBTN" class="btnClass" src="/COVINet/image/btn_cancel.gif"
+						onclick="javascript:parent.close();">
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

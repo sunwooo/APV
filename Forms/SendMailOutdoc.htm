@@ -1,0 +1,154 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE> 인쇄 </TITLE>
+<link rel="stylesheet" type="text/css" href="/GWImages/covi/app_css_style.css">
+<!--<link rel="stylesheet" type="text/css" href="../../common/style/coviflownet/formedit.css">-->
+<!-- 보광 공통 -->
+<script src="/CoviWeb/SiteReference/js/Config.js" type="text/javascript"></script>
+<script src="/CoviWeb/SiteReference/js/ClientMessageBox.js" type="text/javascript"></script>
+<script src="/CoviWeb/SiteReference/js/EmbedObject.js" type="text/javascript"></script>
+<script src="/CoviWeb/SiteReference/js/Utility.js" type="text/javascript"></script>	
+<script language="javascript" type="text/javascript" src="/CoviWeb/SiteReference/js/utility.js"></script>  
+<script language="javascript">
+	
+	var printDiv;
+    var m_xmlHTTP=new ActiveXObject("MSXML2.XMLHTTP");
+    var m_objXML=new ActiveXObject("MSXML2.DOMDocument");
+    var g_szAcceptLang="ko";
+	
+	function window.onload()
+	{
+	    
+	    var chkOpener ="";
+	    try {setBodyContext(opener.getInfo("BODY_CONTEXT"));}
+		catch(e) {chkOpener="error"}
+		RECEIVE_NO.innerHTML = opener.getInfo("RECEIVE_NO");
+		
+		//메일발송창 띄우기
+		//openWindow("sendmail.htm","","800","700","fix");
+		openWindow("SendMail2.aspx","","800","700","fix");
+		
+	}
+	function openWindow(fileName,windowName,theWidth,theHeight, etcParam) {
+	    var objNewWin;
+	    var x = theWidth;
+	    var y = theHeight;
+
+	    var sy = window.screen.height / 2 - y / 2 - 70;
+	    if (etcParam == 'fix') {
+		    etcParam = "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0";
+		    var sy = window.screen.height / 2 - y / 2 - 40;
+	    }
+	    else if (etcParam == 'resize') {
+		    etcParam = "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=1";
+		    var sy = window.screen.height / 2 - y / 2 - 40;
+	    }
+
+	    var sx = window.screen.width  / 2 - x / 2;
+
+
+	    if (sy < 0 ) {
+		    sy = 0;
+	    }
+    	
+	    var sz = ",top=" + sy + ",left=" + sx;
+
+	    if (windowName == "newMessageWindow") 
+	    {
+	    windowName = new String(Math.round(Math.random() * 100000));
+	    } 
+
+	    var strNewFearture = ModifyWindowFeature(etcParam + ",width=" + x + ",height=" + y + sz);
+        objNewWin = window.open(fileName,windowName,strNewFearture);
+        //objNewWin = window.open(fileName,windowName, etcParam + ",width=" + x + ",height=" + y + sz);
+}
+	function CloseWindows()
+	{
+	    window.close();
+	}
+	
+    function event_noop(){return(false);} 
+    
+    function setBodyContext(sBodyContext){
+	    //본문 채우기
+	    var m_objXML=new ActiveXObject("MSXML2.DOMDocument");
+	    var elmList, elm;
+	    var elmListLan;
+	    try{
+		    m_objXML.loadXML("<?xml version='1.0' encoding='utf-8'?>"+sBodyContext);
+		    elmList = m_objXML.documentElement.childNodes;
+		    if(elmList.length == 0){
+			    tbContentElement.innerHTML = sBodyContext; //기존 기안 양식일 경우
+		    }else{
+			    for(var i=0; i < elmList.length; i++){
+				    var elm = elmList.item(i);
+				    try{
+				        eval(elm.nodeName).innerHTML = elm.text;
+				    }catch(e){}
+				    }
+		    }
+    		
+	    }catch(e){
+		    alert(e.message);
+	    }
+    }
+    
+</script>
+</HEAD>
+
+<BODY topmargin="0" leftmargin="0" scroll="auto">
+     
+    <br /><br />
+    메일출력중입니다....
+    <br /><br /><br /><br /><br /><br /><br />
+    <div id='sContents'>
+    <table border='0' width="86%" height="900"align="center">
+        <tr height="55"><td></td></tr>
+	    <tr>
+	        <td  align="center" style="font-size:18pt; font-family:굴림체; font-weight:bold;letter-spacing:0;" >(주)코비젼</td>
+	    </tr>
+	    <tr><td   height="15">&nbsp;</td></tr>
+	    <tr>
+	        <td align="center" style="font-size:11pt; font-family:굴림체; letter-spacing:-1;">
+	            <span id="address"></span>/전화:<span style="font-family:Times New Roman" id="phone_no"></span>/전송:<span style="font-family:Times New Roman" id="trans"></span>/담당:<span id="Charge"></span>
+	        </td>
+	    </tr>
+	    <tr>
+	        <td  height="3" style="background-color:#969696;"></td>
+	    </tr>
+	    <tr height="13"><td> </td></tr>
+	    <tr>
+	        <td  style="font-size:14pt; font-family:바탕;">문서번호 : <span id='RECEIVE_NO'></span></td>
+	    </tr>
+	    <tr height="13"><td> </td></tr>
+	    <tr>
+	        <td  style="font-size:14pt; font-family:바탕;">시행일자 : <span id="sdate"></span></td>
+	    </tr>
+	    <tr height="13"><td> </td></tr>
+	    <tr>
+	        <td  style="font-size:14pt; font-family:바탕;">(경&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;유) <span id="via"></span></td>
+	    </tr>
+	    <tr height="13"><td> </td></tr>
+	    <tr>
+	        <td  style="font-size:14pt; font-family:바탕;">수&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신 : <span id="receipt"></span></td>
+	    </tr>
+	    <tr height="13"><td> </td></tr>
+	    <tr>
+	        <td  style="font-size:14pt; font-family:바탕;">참&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조 : <span id="refer"></span></td>
+	    </tr>
+	    <tr height="13"><td> </td></tr>
+	    <tr>
+	        <td  style="font-size:14pt; font-family:바탕; font-weight:bold;">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목 : <span id="outdoc_submit"></span></td>
+	    </tr>
+	    <tr>
+	        <td  height="3" style="background-color:#000000;"></td>
+	    </tr>
+	    <tr><td   height="15">&nbsp;</td></tr>
+	    <tr height="640">
+	        <td   valign="top"><span id='tbContentElement'></span></td>
+	    </tr>
+	 </table> 
+    </div>
+</BODY>
+</HTML>

@@ -1,0 +1,171 @@
+﻿using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.Xml;
+
+public partial class COVIFlowNet_perProcess : PageBase
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        Response.ContentType = "text/xml";
+        Response.Expires = -1;
+        Response.CacheControl = "no-cache";
+        Response.Buffer = true;
+
+        Response.Write("<?xml version='1.0' encoding='utf-8'?><response>");
+
+        try
+        {
+            pSetData();
+        }
+        catch (Exception ex)
+        {
+            pHandleException(ex);
+        }
+        finally
+        {
+            Response.Write("</response>");
+        }
+    }
+
+    private void pSetData()
+    {
+        XmlDocument oXML = null;
+
+        try
+        {
+            oXML = new XmlDocument();
+            oXML = pParseRequestBytes();
+
+            String reserved3 = oXML.SelectSingleNode("Items/reserved3").InnerText;
+            String reserved4 = oXML.SelectSingleNode("Items/reserved4").InnerText;
+            String reserved5 = oXML.SelectSingleNode("Items/reserved5").InnerText;
+            String deputy = oXML.SelectSingleNode("Items/deputy").InnerText;
+            String deputy_usage = oXML.SelectSingleNode("Items/deputy_usage").InnerText;
+            String UserAlias = oXML.SelectSingleNode("Items/UserAlias").InnerText;
+
+            string szQuery = " UPDATE ORG_PERSON SET RESERVED3 = @RESERVED3,RESERVED4 = @RESERVED4,RESERVED5 = @RESERVED5,DEPUTY = @DEPUTY,DEPUTY_NAME = @DEPUTY_NAME,DEPUTY_USAGE = @DEPUTY_USAGE  WHERE PERSON_CODE = @PERSON_CODE ";
+            object oRet = null;
+            //using (Covi.DBManager.IDBCommand oComm = Covi.DBManager.DBFactory.CreateCommand("DbProvider", "ORG_ConnectionString", true))
+            using (Covi.DBManager.IDBCommand oComm = Covi.DBManager.DBFactory.CreateCommand(Feelanet.Dev2005.Server.Common.ConfigurationManagement.ConfigurationManager.Items["DbProvider"].ToString(), Feelanet.Dev2005.Server.Common.ConfigurationManagement.ConfigurationManager.Items["ORG_ConnectionString"].ToString(), false))
+            {
+                System.Data.IDataParameter param1 = oComm.CreateParameter();
+                param1.DbType = DbType.String;
+                param1.ParameterName = "@RESERVED3";
+                param1.Value = reserved3;
+                oComm.DbParameters.Add(param1);
+
+                System.Data.IDataParameter param2 = oComm.CreateParameter();
+                param2.DbType = DbType.String;
+                param2.ParameterName = "@RESERVED4";
+                param2.Value = reserved4;
+                oComm.DbParameters.Add(param2);
+
+                System.Data.IDataParameter param3 = oComm.CreateParameter();
+                param3.DbType = DbType.String;
+                param3.ParameterName = "@RESERVED5";
+                param3.Value = reserved5;
+                oComm.DbParameters.Add(param3);
+
+                System.Data.IDataParameter param4 = oComm.CreateParameter();
+                param4.DbType = DbType.String;
+                param4.ParameterName = "@DEPUTY";
+                param4.Value = deputy;
+                oComm.DbParameters.Add(param4);
+
+                System.Data.IDataParameter param5 = oComm.CreateParameter();
+                param5.DbType = DbType.String;
+                param5.ParameterName = "@DEPUTY_NAME";
+                param5.Value = reserved5;
+                oComm.DbParameters.Add(param5);
+
+                System.Data.IDataParameter param6 = oComm.CreateParameter();
+                param6.DbType = DbType.String;
+                param6.ParameterName = "@DEPUTY_USAGE";
+                param6.Value = deputy_usage;
+                oComm.DbParameters.Add(param6);
+
+                System.Data.IDataParameter param7 = oComm.CreateParameter();
+                param7.DbType = DbType.String;
+                param7.ParameterName = "@PERSON_CODE";
+                param7.Value = UserAlias;
+                oComm.DbParameters.Add(param7);
+
+                oRet = oComm.ExecuteNonQuery(szQuery);
+            }            
+        }
+        catch (System.Exception ex)
+        {
+            
+            
+            throw new System.Exception(null, ex);
+        }
+        finally
+        {
+            //code
+        }            
+    }
+
+    private XmlDocument pParseRequestBytes()
+    {
+        try
+        {
+            XmlDocument oXMLData = new XmlDocument();
+            System.Text.Decoder oDecoder = System.Text.Encoding.UTF8.GetDecoder();
+            System.Byte[] aBytes = Request.BinaryRead(Request.TotalBytes);
+            long iCount = oDecoder.GetCharCount(aBytes, 0, aBytes.Length);
+            System.Char[] aChars = new char[iCount];
+            oDecoder.GetChars(aBytes, 0, aBytes.Length, aChars, 0);
+            oXMLData.Load(new System.IO.StringReader(new String(aChars)));
+            return oXMLData;
+        }
+        catch (Exception e)
+        {
+            throw new Exception(null, e);
+        }
+    }
+
+    private String pParseStackTrace(Exception _ex)
+    {
+        try
+        {
+            Exception InnEx = _ex;
+            System.Text.StringBuilder sb = new System.Text.StringBuilder(" #"
+                + InnEx.Message + "#"
+                + InnEx.StackTrace.Substring(InnEx.StackTrace.LastIndexOf("   at ")));
+            sb.Insert(0, "[" + InnEx.GetType().ToString() + "]");
+            while (InnEx.InnerException != null)
+            {
+                InnEx = InnEx.InnerException;
+                sb.Insert(0, " #" + InnEx.Message + "#" +
+                    InnEx.StackTrace.Substring(InnEx.StackTrace.LastIndexOf("   at ")));
+            }
+            sb.Insert(0, "[" + InnEx.GetType().ToString() + "]");
+            return sb.ToString();
+        }
+        catch (Exception e)
+        {
+            throw new Exception(null, e);
+        }
+    }
+   
+    private void pHandleException(Exception ex)
+    {
+        try
+        {
+            Response.Write("<error><![CDATA[" + pParseStackTrace(ex) + "]]></error>");
+        }
+        catch (Exception e)
+        {
+            Response.Write("<error><![CDATA[" + e.Message + "]]></error>");
+        }
+    }
+
+}

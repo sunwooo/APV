@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="GetCommonCodeList.aspx.cs" Inherits="Approval_Portal_GetCommonCodeList" %>

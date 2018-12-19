@@ -1,0 +1,534 @@
+﻿var m_XMLDOM = new ActiveXObject("MSXML2.DOMDocument");
+var g_szAcceptLang = "ko";
+var m_szUrlParams = "";
+var m_xmlHTTP;
+var m_objResultWin;
+var m_ENT="";
+
+var g_objMessage;
+var m_oParent;
+var m_oUserList;
+var g_eGalTable = window.document.all['tblGalInfo'];
+var g_eCurrentRow = null;
+var m_iCurrentList = -1;
+var m_bUser;
+var m_bGroup;
+var m_bRef;
+var m_bMail;
+var m_bIns;
+var m_bRecp;
+var m_bCCGroup;
+var m_objWinDlgArgs = parent.parent.parent.dialogArguments;
+
+function window.onload(){
+	m_bMail = getArg("bMail",false);
+	m_bUser = getArg("bUser",false);
+	m_bGroup = getArg("bGroup",false);
+	m_bRef = getArg("bRef",false);
+	m_bIns = getArg("bIns",false);//상근감사
+	m_bRecp = getArg("bRecp",false);
+	m_bCCGroup = getArg("bCCGroup",false);
+
+	g_objMessage = getArg("objMessage",null); 
+
+	m_XMLDOM.loadXML("<selected><to>"+getArg("sTo","")+"</to><cc>"+getArg("sCc","")+"</cc><bcc>"+getArg("sBcc","")+"</bcc><user>"+getArg("sUser","")+"</user><group>"+getArg("sGroup","")+"</group><role>"+getArg("sRole","")+"</role></selected>");
+	if(!m_XMLDOM.parsed){
+		alertParseError(m_XMLDOM.parseError);
+		parent.parent.parent.close();
+	}
+
+	g_eGalTable[0].attachEvent("onmousedown",event_GalTable_onmousedown);
+	g_eGalTable[1].attachEvent("onmousedown",event_GalTable_onmousedown);
+	g_eGalTable[2].attachEvent("onmousedown",event_GalTable_onmousedown);
+	g_eGalTable[3].attachEvent("onmousedown",event_GalTable_onmousedown);
+	g_eGalTable[4].attachEvent("onmousedown",event_GalTable_onmousedown);
+	g_eGalTable[5].attachEvent("onmousedown",event_GalTable_onmousedown);
+	document.attachEvent("onmousemove",event_GalTable_onmousemove);
+
+	if(m_bMail){
+		trList[0].runtimeStyle.display = "block";
+		switchParentNode(0);
+		refresh(0);
+		trList[1].runtimeStyle.display = "block";
+		switchParentNode(1);
+		refresh(1);
+		trList[2].runtimeStyle.display = "block";
+		switchParentNode(2);
+		refresh(2);
+		parent.parent.RightFrmset.rows = "60%,*";
+		radRecips[0].checked = true;
+	}else if(m_bUser || m_bRef || m_bIns){
+		divGalTable[3].runtimeStyle.height = "234";
+		trList[3].runtimeStyle.display = "block";
+		switchParentNode(3);
+		refresh(3);
+		radRecips[3].checked = true;
+		if (m_bCCGroup)	parent.parent.Tab.dftPriv.style.display="block";
+	}else if(m_bGroup || m_bRecp){
+		if (m_bCCGroup){
+			parent.Tab.m_oSelTab.className="TabUnSel";
+			parent.Tab.m_oSelTab.style.display="none";
+			var oNode = parent.Tab.document.all(parent.Tab.m_oSelTab.contentID);
+			oNode.className="TabUnSel";
+
+			parent.Tab.dftRole.className="TabSel";
+			parent.Tab.dftRole.style.display="block";
+			
+			oNode = parent.Tab.document.all("tabRole");
+
+			oNode.className="TabSel";
+			
+			oNode = oNode.firstChild;
+			if(oNode.src==""||oNode.src=="_blank"){
+				oNode.src = oNode.dataSrc;
+			}
+			trList[5].runtimeStyle.display = "block";
+		}else{
+			trList[4].runtimeStyle.height = "400";
+			divGalTable[4].runtimeStyle.height="385";
+			trList[4].runtimeStyle.display = "block";
+		}
+		parent.parent.RightFrmset.rows = "100%,*";
+		radRecips[4].checked = true;
+		switchParentNode(4);
+		refresh(4);
+	}else{
+		trList[5].runtimeStyle.display = "block";
+		switchParentNode(5);
+		refresh(5);
+		parent.parent.RightFrmset.rows = "15%,*";
+	}
+}
+
+function alertParseError(err){
+	alert("오류가 발생했습니다. in selected.js\ndesc:"+err.reason+"\nsrcurl:"+err.url+"\nsrctxt:"+err.srcText+"\nline:"+err.line+"\tcolumn:"+err.linepos);
+}
+function setSourceList(oSource){
+	m_oUserList = oSource;
+}
+function getArg(sArgName,vDefault){
+	try{
+		var v = m_objWinDlgArgs[sArgName];
+		if(v==null)return vDefault;else return v;
+	}catch(e){
+		return vDefault;
+	}
+}
+/*원본
+function addDblClicked(){
+	if (m_bGroup == false && m_bCCGroup==true && parent.parent.Tab.m_oSelTab.contentID!="tabPriv"){
+		alert('그룹을 선택하시지 않았습니다. \n그룹탭을 선택하신 후 작업하세요!!!');
+		return false;
+	}
+	for (var i=0;i<radRecips.length;i++){
+		if(radRecips[i].checked==true){
+			addClicked(i);
+			break;
+		}
+	}
+} */
+// 체크박스 멀티체크 20060913 - 인호
+function addDblClicked(){
+for (var i=0;i<radRecips.length;i++)
+	{
+		if(radRecips[i].checked==true){
+			addClicked(i);
+			break;
+		}
+	}
+}
+
+
+//체크박스 멀티체크 20060921-인호최종수정
+function addClicked(iType){
+
+	if (m_bGroup == false && m_bCCGroup==true && parent.parent.Tab.m_oSelTab.contentID!="tabPriv"){
+		alert('그룹을 선택하시지 않았습니다. \n그룹탭을 선택하신 후 작업하세요!!!');
+		return false;
+	}
+	if ((iType==3)&&(m_bGroup || m_bRecp)){
+		if(m_bCCGroup){iType=5;}else{iType=4;}
+	}	
+    var oChkRowSelect = top.ListItems.chkRowSelect;
+	var oSelNode = m_oUserList.getCurrentNode();
+	
+	if(oSelNode != null){
+		switchParentNode(iType);
+		if(m_oParent.selectSingleNode("item[AN = '" + oSelNode.selectSingleNode("AN").text + "']") == null){
+			addListItem(oSelNode.cloneNode(true));
+			refresh(iType);
+		}
+	}
+	else{
+	 if(oChkRowSelect.length != null || oChkRowSelect.length == null){
+	    if(oChkRowSelect.length == undefined ){
+	        if(oChkRowSelect.checked){		//	체크된것만 가져오기
+	            var oSelNode = m_oUserList.getCurrentNode(oChkRowSelect.value);//수정분
+	            if (oSelNode != null)
+	            {
+		            if (oSelNode.length > 1) {
+			            alert('한명만 선택하십시요.');
+			            return;
+		            }	
+	            }
+	            if(oSelNode != null){
+		            switchParentNode(iType);
+		            if(m_oParent.selectSingleNode("item[AN = '" + oSelNode.selectSingleNode("AN").text + "']") == null){
+			            if(m_oParent.selectSingleNode("item[AN = '" + oSelNode.selectSingleNode("AN").text + "']") == null){
+				            addListItem(oSelNode.cloneNode(true));
+				            refresh(iType);
+			            }
+		            }
+	            }
+            }
+	    }else{
+	        for (var i=0; i < oChkRowSelect.length; i++){
+		        if(oChkRowSelect[i].checked){		//	체크된것만 가져오기
+			            var oSelNode = m_oUserList.getCurrentNode(oChkRowSelect[i].value);//수정분
+			            if (oSelNode != null)
+			            {
+				            if (oSelNode.length > 1) {
+					            alert('한명만 선택하십시요.');
+					            return;
+				            }	
+			            }
+			            if(oSelNode != null){
+				            switchParentNode(iType);
+				            if(m_oParent.selectSingleNode("item[AN = '" + oSelNode.selectSingleNode("AN").text + "']") == null){
+					            if(m_oParent.selectSingleNode("item[AN = '" + oSelNode.selectSingleNode("AN").text + "']") == null){
+						            addListItem(oSelNode.cloneNode(true));
+						            refresh(iType);
+					            }
+				            }
+			            }
+		            }
+	            }
+	        }
+	    }
+	}  
+}
+function addNode(oNode){
+	var oSelNode = oNode;
+	var iType;
+	
+	if(oSelNode != null){
+		for (var i=0;i<radRecips.length;i++){
+			if(radRecips[i].checked==true){
+				iType = i;
+				break;
+			}
+		}	
+		switchParentNode(iType);
+		if (m_oParent!=null){
+			if(m_oParent.selectSingleNode("item[AN = '" + oSelNode.selectSingleNode("AN").text + "']") == null){
+				addListItem(oSelNode.cloneNode(true));
+				refresh(iType);
+			}
+		}
+	}
+}
+/* 원본
+function removeClicked(iType){
+	if ((iType==3)&&(m_bGroup || m_bRecp)){
+		if(m_bCCGroup){iType=5;}else{iType=4;}
+	}
+	if(iType != m_iCurrentList) return;
+
+	switchParentNode(iType);
+	
+	if(g_eCurrentRow!=null){
+		var oSelNode = m_oParent.selectSingleNode("item[AN = '" + g_eCurrentRow.an + "']");
+		
+		removeListItem(oSelNode);
+		g_eCurrentRow = null;
+		m_iCurrentList = -1;
+		refresh(iType);
+	}
+} */
+//체크박스 삭제부분수정 20060913-인호
+function removeClicked(iType){
+    for (iType=0;iType<4;iType++){
+	    allRemoveClicked(iType);
+	    }
+    }
+//다중체크 20060913- 인호신규추가부분
+function allRemoveClicked(iType) {
+	var eTR;
+	switch(iType){
+		case 0:
+			eTBL = parent.SelectedItems.g_eGalTable[0].children[1];
+			break;
+		case 1:
+			eTBL = parent.SelectedItems.g_eGalTable[1].children[1];
+			break;
+		case 2:
+			eTBL = parent.SelectedItems.g_eGalTable[2].children[1];
+			break;
+		case 3:
+			eTBL = parent.SelectedItems.g_eGalTable[3].children[1];
+			break;
+		case 4:
+			eTBL = parent.SelectedItems.g_eGalTable[4].children[1];
+			break;
+	}
+	for(i=0;i<eTBL.rows.length;i++) {
+		eTR = eTBL.rows[i];
+		if ( eTR.className == "rowselected") {
+			g_eCurrentRow = eTR;
+			parent.SelectedItems.Multiremove(iType);
+			refresh(iType);  
+		}
+	}
+	
+}
+function Multiremove(iType){
+	if(iType != m_iCurrentList) return;
+	
+	switchParentNode(iType);
+	
+	if(g_eCurrentRow!=null){
+		var oSelNode = m_oParent.selectSingleNode("item[AN = '" + g_eCurrentRow.an + "']");
+		removeListItem(oSelNode);
+		g_eCurrentRow = null;
+	}
+}
+
+
+//신규추가부분 완료
+    
+function switchParentNode(iType){
+	switch(iType){
+		case 0:
+			m_oParent = m_XMLDOM.selectSingleNode("selected/to");
+			break;
+		case 1:
+			m_oParent = m_XMLDOM.selectSingleNode("selected/cc");
+			break;
+		case 2:
+			m_oParent = m_XMLDOM.selectSingleNode("selected/bcc");
+			break;
+		case 3:
+			m_oParent = m_XMLDOM.selectSingleNode("selected/user");
+			break;
+		case 4:
+			m_oParent = m_XMLDOM.selectSingleNode("selected/group");
+			break;
+		case 5:
+			m_oParent = m_XMLDOM.selectSingleNode("selected/group");
+			break;
+	}
+}
+function cancelClicked(){
+	parent.parent.close();
+}
+function okClicked(){
+	if(m_bMail){
+		addRecipient("MsgTo",m_XMLDOM.selectSingleNode("selected/to"));
+		addRecipient("MsgCc",m_XMLDOM.selectSingleNode("selected/cc"));
+		addRecipient("MsgBcc",m_XMLDOM.selectSingleNode("selected/bcc"));
+	}else if(m_bUser||m_bRef){
+		inputValues("selected/user");
+	}else if(m_bIns){
+		m_oParent = m_XMLDOM.selectSingleNode("selected/user");
+		if(m_oParent.hasChildNodes()){
+			copyToIns();
+		}
+	}else if(m_bGroup||m_bRecp){
+		inputValues("selected/group");
+	}
+	parent.parent.close();
+	
+}
+function addRecipient(szWhich,oParent){
+	if(oParent.hasChildNodes()){
+		var szDN="";
+		var szAddrs="";
+		var oInput;
+		var oNodes = oParent.childNodes;
+		var oItem = oNodes.nextNode();
+		while(oItem!=null){
+			szDN = oItem.selectSingleNode("DN").text.replace(/\x08/g,"&");
+			//escape any [ or ] or \
+			szDN = szDN.replace(/(\\|\[|\])/g,"\\"+"$1");
+			szAddrs = szAddrs + ";" + szDN + "[smtp:" + oItem.selectSingleNode("EM").text.replace(/\x08/g,"&") + "]";
+			oItem = oNodes.nextNode();
+		}		
+		oInput = g_objMessage.document.all(szWhich);
+		oInput.value = oInput.value + szAddrs;
+	}
+}
+function copyToIns(){
+	var oCloneXML = new ActiveXObject("MSXML2.DOMDocument");
+	oCloneXML.loadXML("<addresslist></addresslist>");
+	var oParent = oCloneXML.firstChild;
+	var oChildren = m_oParent.childNodes;
+	var oChild = oChildren.nextNode();
+	while(oChild!=null){
+		oParent.appendChild(oChild.cloneNode(true));
+		try{oChild = oChildren.nextNode();}catch(e){oChild=null;}
+	}
+	g_objMessage.insertIns(oCloneXML);
+	return;
+}
+function inputValues(sElm){
+	m_oParent = m_XMLDOM.selectSingleNode(sElm);	
+	//if(m_oParent.hasChildNodes()){		
+		g_objMessage.insertToList(m_oParent);
+	//}
+}
+function nodeData(oNode,szName){
+	return oNode.selectSingleNode(szName).text.replace(/\x08/g,"&");
+}
+function setMessage(objMsgWindow){
+	g_objMessage = objMsgWindow;
+}
+function addListItem(oNode){
+	try{
+		m_oParent.appendChild(oNode);
+	}catch(e){
+		alert(e.description);
+	}
+}
+function removeListItem(oNode){
+	try{
+		m_oParent.removeChild(oNode);
+	}catch(e){
+		alert(e.description);
+	}
+}
+function refresh(iType){
+	
+	clearContents(iType);
+	
+	var rgData = new Array();
+	var nodes = m_oParent.selectNodes("item");
+	
+	if (nodes.length > 0)
+	{
+		g_eGalTable[iType].rows(0).style.display="";
+		if(m_bGroup || m_bRecp){
+			if ( m_bCCGroup ){
+				for(var x=0; x<nodes.length; x++){                       
+					rgData[0] = nodeXData(nodes,x,"AN");
+					rgData[1] = nodeXData(nodes,x,"DN");
+					//rgData[2] = "";//nodeXData(nodes,x,"SGAN");
+					//rgData[3] = nodeXData(nodes,x,"SGDN");
+
+					addAddress(iType,rgData,
+							nodeXData(nodes,x,"AN"),
+							"",
+							nodeXData(nodes,x,"AN"));
+				}
+
+			}else{
+				for(var x=0; x<nodes.length; x++){                       
+					rgData[0] = "";//nodeXData(nodes,x,"AN");
+					rgData[1] = nodeXData(nodes,x,"DN");
+					rgData[2] = "";//nodeXData(nodes,x,"SGAN");
+					rgData[3] = nodeXData(nodes,x,"SGDN");
+
+					addAddress(iType,rgData,
+							nodeXData(nodes,x,"EM"),
+							nodeXData(nodes,x,"JD"),
+							nodeXData(nodes,x,"AN"));
+				}
+			}
+		}else{
+			for(var x=0; x<nodes.length; x++)
+			{                       
+				rgData[0] = nodeXData(nodes,x,"DN");
+				rgData[1] = nodeXData(nodes,x,"PO");
+				rgData[2] = nodeXData(nodes,x,"TL");
+				rgData[3] = nodeXData(nodes,x,"DP");
+
+				addAddress(iType,rgData,
+						nodeXData(nodes,x,"EM"),
+						nodeXData(nodes,x,"JD"),
+						nodeXData(nodes,x,"AN"));
+			}
+		}
+	}
+}
+function nodeXData(nodes,idx,szName){
+	try{
+		return nodes.item(idx).selectSingleNode(szName).text.replace(/\x08/g,"&");
+	}catch(e){return "";}
+}
+function addAddress(iType,rgData,szEM,szJD,szAN){
+
+	var eTD;
+	var eTR = g_eGalTable[iType].insertRow();
+	eTR.setAttribute("className","rowunselected");
+	eTR.setAttribute("em",szEM);
+	eTR.setAttribute("jd",szJD);
+	eTR.setAttribute("an",szAN);
+
+	for (var x=0;x<rgData.length;x++)
+	{
+		eTD = eTR.insertCell();
+		eTD.halign = "top";
+		eTD.noWrap=true;
+		eTD.style.paddingRight = "10px";
+		eTD.innerHTML = rgData[x].replace(/&/g,"&amp;");
+	}
+}
+function event_GalTable_onmousedown(){
+	if (event.srcElement.parentElement.parentElement.tagName != "THEAD" && event.srcElement.tagName != "TABLE" )
+	{
+		if (g_eCurrentRow != null)
+		{
+			g_eCurrentRow.setAttribute("className","rowunselected");
+			g_eCurrentRow.style.backgroundColor = "#FFFFFF";//"transparent";
+			g_eCurrentRow.style.color = "#333333";//"windowtext";
+		}
+		eTR = event.srcElement.parentElement;
+		while(eTR.tagName != "TR")
+		{
+			eTR = eTR.parentElement;
+		}
+		eTR.setAttribute("className","rowselected");
+		g_eCurrentRow = eTR;
+		g_eCurrentRow.style.backgroundColor = "#EEF7F9";//"highlight";
+		g_eCurrentRow.style.color =  "#FFFFFF";//"highlighttext";		
+		processSelectedRow();
+	}
+}
+function event_GalTable_onmousemove(){
+	var el = event.srcElement;
+	
+	tooltip.runtimeStyle.display = "none";
+	
+	if(el==null)return;
+	
+	if (el.tagName != "TH" && el.tagName != "TABLE" && el.tagName != "DIV" && el.tagName != "SPAN")
+	{
+		while(el.tagName != "TR")
+		{
+			el = el.parentElement;
+			if(el==null)return;
+		}
+		if(el.jd!=null && el.jd != ""){
+			tooltip.innerText = el.jd;
+			tooltip.style.left = event.clientX + 10;
+			tooltip.style.top = event.clientY + 10;
+			tooltip.style.zIndex = 1;
+			tooltip.runtimeStyle.display = "block";
+		}
+	}
+}
+function processSelectedRow(){
+	var el = g_eCurrentRow.parentElement;
+	while(el.tagName != "TABLE")
+	{
+		el = el.parentElement;
+	}
+	m_iCurrentList = parseInt(el.name);
+	parent.parent.Detail.getDetailInfo(g_eCurrentRow.an);
+}
+function clearContents(iType){
+	for (var x=g_eGalTable[iType].rows.length-1; x >= 1; x--)
+	{
+		g_eGalTable[iType].deleteRow(x);
+	}
+	divGalTable[iType].style.display = "block";
+}

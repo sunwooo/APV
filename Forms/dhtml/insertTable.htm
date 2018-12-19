@@ -1,0 +1,85 @@
+<HTML>
+	<HEAD>
+		<TITLE>표 삽입</TITLE>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="../../common/button.css">
+			<SCRIPT FOR="cbBTN" EVENT="onmousedown()">this.className = 'btnDown';</SCRIPT>
+			<SCRIPT FOR="cbBTN" EVENT="onmouseover()">this.className = 'btnOver';</SCRIPT>
+			<SCRIPT FOR="cbBTN" EVENT="onmouseout()">this.className = 'btnOut';</SCRIPT>
+			<SCRIPT LANGUAGE="JavaScript">
+function IsDigit(){
+	return ((event.keyCode >= 48) && (event.keyCode <= 57))
+}
+function onSubmit() {
+	var arr = new Array();
+	arr["NumRows"] = NumRows.value;
+	arr["NumCols"] = NumCols.value;
+	arr["TableAttrs"] = "style='font-size: 10pt' border='1' cellspacing='0' cellpadding='0' bordercolorlight='#000000' bordercolordark='#FFFFFF' width='550'";
+	arr["CellAttrs"] = "id='eTD' width=" + (100 / parseInt(NumCols.value)).toString() + "%";
+	arr["Caption"] = Caption.value;
+	window.returnValue = arr;
+	window.close();
+}
+function window.onload() {
+	for ( elem in window.dialogArguments ) {
+		switch( elem ) {
+			case "NumRows":
+				NumRows.value = window.dialogArguments["NumRows"];
+				break;
+			case "NumCols":
+				NumCols.value = window.dialogArguments["NumCols"];
+				break;
+			case "TableAttrs":
+//				TableAttrs.value = window.dialogArguments["TableAttrs"];
+				break;
+			case "CellAttrs":
+//				CellAttrs.value = window.dialogArguments["CellAttrs"];
+				break;
+			case "Caption":
+				Caption.value = window.dialogArguments["Caption"];
+				break;
+		}
+	}
+
+}
+			</SCRIPT>
+	</HEAD>
+	<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" rightmargin="0" scroll="no">
+		<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
+			<tr>
+				<td valign="top" colspan="2">
+					<table align="center" border="0" cellpadding="0" cellspacing="0" height="34" width="100%">
+						<tr>
+							<td background="../DHTML/images/t_bg.gif" width="40"></td>
+							<td background="../DHTML/images/t_bg.gif" style="COLOR:WHITE; FONT-FAMILY: 굴림; FONT-SIZE: 11pt; FONT-WEIGHT: BOLD">
+								표 삽입
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<TR>
+				<TD align="right">
+				행:&nbsp;
+				<TD><INPUT ID="NumRows" TYPE="TEXT" SIZE="3" NAME="NumRows" ONKEYPRESS="event.returnValue=IsDigit();">
+			<TR>
+				<TD align="right">
+				열:&nbsp;
+				<TD><INPUT ID="NumCols" TYPE="TEXT" SIZE="3" NAME="NumCols" ONKEYPRESS="event.returnValue=IsDigit();">
+			<TR>
+				<TD align="right">
+				제목:&nbsp;
+				<TD><INPUT TYPE="TEXT" SIZE="20" NAME="Caption">
+			</TR>
+			<TR>
+				<TD>&nbsp;</TD>
+			</TR>
+			<TR>
+				<td colspan="2" width="100%" height="30" align="center" valign="bottom" bgcolor="buttonface">
+					<img src="../DHTML/images/i_bottom_ok.gif" name="cbBTN" class="btnClass" ID="OK" type="SUBMIT"
+						onclick="onSubmit()">&nbsp; <img src="../DHTML/images/i_bottom_cancel.gif" name="cbBTN" class="btnClass" OnClick="window.close()">
+				</td>
+			</TR>
+		</table>
+	</body>
+</HTML>

@@ -1,0 +1,37 @@
+﻿		<steps initiatorcode="ISU_STWEBMASTER" initiatoroucode="ISU_STISU_ST011" status="active" datecreated="2014-05-27 08:57:41">
+  <division divisiontype="send" name="발신" oucode="ISU_STISU_ST011" ouname="정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀">
+    <taskinfo status="rejected" result="pending" kind="send" datereceived="2014-05-27 08:56:53" datecompleted="2014-05-27 09:00:25" />
+    <step unittype="person" routetype="approve" name="기안자">
+      <ou code="ISU_STISU_ST011" name="정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀">
+        <person code="ISU_STWEBMASTER" name="관리자;webmaster;관리자;webmaster" position="ISU_STZ999;기타;etc.;;" title="ISU_ST99999;기타;etc.;;其他" level="ISU_STZ999;기타;;;" oucode="ISU_STISU_ST011" ouname="정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀" sipaddress="">
+          <taskinfo status="completed" result="completed" kind="charge" datereceived="2014-05-27 08:57:41" customattribute1="sign_ISU_STWEBMASTER_WebmasterSing_0.bmp" datecompleted="2014-05-27 08:57:41" wiid="99AC2857-44EF-405D-A0D9-CF9F3F462F0C" />
+        </person>
+      </ou>
+    </step>
+    <step unittype="ou" routetype="assist" allottype="serial" name="협조부서">
+      <taskinfo status="completed" result="completed" kind="normal" datereceived="2014-05-27 08:58:03" datecompleted="2014-05-27 08:58:26" />
+      <ou code="ISU_STISU_ST005" name="ERP사업팀;EPR BUSINESS TEAM;ERP사업팀;ERP사업팀">
+        <taskinfo status="completed" result="completed" kind="normal" datereceived="2014-05-27 08:58:03" piid="B41209E8-39CE-4D91-BFCC-72CBE16AD506" datecompleted="2014-05-27 08:58:26" />
+        <person code="ISU_ST96001" name="김득환;KIMDEUK-HWAN;김득환;金得煥" position="ISU_STA110;부장;General Manager;;" title="ISU_ST10150;팀원;(영)팀원;J팀원;C팀원" level="ISU_STA310;1급갑;;;" oucode="ISU_STISU_ST005" ouname="ERP사업팀;EPR BUSINESS TEAM;ERP사업팀;ERP사업팀" sipaddress="">
+          <taskinfo status="completed" result="completed" kind="charge" datereceived="2014-05-27 08:58:07" datecompleted="2014-05-27 08:58:22" customattribute1="sign_ISU_ST96001_0.gif" />
+        </person>
+      </ou>
+    </step>
+    <step unittype="person" routetype="approve" name="일반결재">
+      <ou code="ISU_STISU_ST011" name="정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀" company="이수시스템(주)">
+        <person code="ISU_ST12001" name="박선우;Park Sun-woo;박선우;朴仙又" position="ISU_STA135;사원;Staff;사원;社員" title="ISU_ST10150;팀원;(영)팀원;J팀원;C팀원" level="ISU_STA330;4급갑;;;" oucode="ISU_STISU_ST011" ouname="정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀" sipaddress="" stampRights="N">
+          <taskinfo status="completed" result="completed" kind="normal" datereceived="2014-05-27 08:58:30" datecompleted="2014-05-27 08:59:19" customattribute1="" />
+        </person>
+      </ou>
+    </step>
+    <step unittype="person" routetype="approve" name="일반결재">
+      <ou code="ISU_STISU_ST011" name="정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀" company="이수시스템(주)">
+        <person code="ISU_ST01004" name="이한일;LEEHAN-IL;이한일;李漢日" position="ISU_STA115;차장;Deputy General Manager;じちょう;次長" title="ISU_ST10150;팀원;(영)팀원;J팀원;C팀원" level="ISU_STA315;1급을;1급을;;" oucode="ISU_STISU_ST011" ouname="정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀" sipaddress="" stampRights="N">
+          <taskinfo status="rejected" result="rejected" kind="normal" datereceived="2014-05-27 08:59:26" datecompleted="2014-05-27 09:00:04" customattribute1="sign_ISU_ST01004_ISUST_0.gif">
+            <comment relatedresult="rejected" datecommented="2014-05-27 09:00:05"><![CDATA[123]]></comment>
+          </taskinfo>
+        </person>
+      </ou>
+    </step>
+  </division>
+</steps>"	String

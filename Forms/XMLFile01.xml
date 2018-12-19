@@ -1,0 +1,133 @@
+﻿<request>
+  <piid>be3abaf9-f83d-48c3-b23e-d1884be81634</piid>
+  <wiid>d6ab5ce5-9eae-470d-83a4-2b7b11d84e50</wiid>
+  <pdef>WFDB87C3AD4D0D4A169DC667C7878026DD</pdef>
+  <pfsk>T006</pfsk>
+  <ptid>ISU_PS00199</ptid>
+  <mode>PROCESS</mode>
+  <dpid>ISU_STISU_ST011</dpid>
+  <usid>ISU_STWEBMASTER</usid>
+  <sabun>WEBMASTER</sabun>
+  <dpid_apv>ISU_STISU_ST011</dpid_apv>
+  <dpdn_apv>정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀</dpdn_apv>
+  <usdn>관리자;webmaster;관리자;webmaster</usdn>
+  <dpdsn>정보관리팀</dpdsn>
+  <fmid>c1452c20-265d-4cf6-b027-b71fb7513e15</fmid>
+  <fmnm>기안품의_test</fmnm>
+  <fmpf>WF_FORM_ISU_PS_DRF010</fmpf>
+  <fmbt>TagFree</fmbt>
+  <fmrv>0</fmrv>
+  <fiid>981E04E2-4512-46E2-AF93-E8798CBB9653</fiid>
+  <ftid></ftid>
+  <pfid>eb22df04-6930-46cb-9fa7-c54ca1cd0534</pfid>
+  <scid>b99bbbb2-d29a-49de-870f-b51b0efce167</scid>
+  <fmfn></fmfn>
+  <fiid_response>99A4A6C1-7D04-4DEB-90E7-01C0FC0EBA8D</fiid_response>
+  <fiid_spare>96E03EA0-19C1-42A5-A58D-3ED817F64AF4</fiid_spare>
+  <ClientAppInfo>
+    <App name=\"FormInfo\">
+      <forminfos>
+        <forminfo prefix=\"WF_FORM_ISU_PS_DRF010\" revision=\"0\" instanceid=\"981E04E2-4512-46E2-AF93-E8798CBB9653\" id=\"c1452c20-265d-4cf6-b027-b71fb7513e15\" name=\"기안품의_test\" schemaid=\"b99bbbb2-d29a-49de-870f-b51b0efce167\" index=\"0\" filename=\"\" subject=\"퇴직자 테스트\" secure_doc=\"0\" req_response=\"\" isfile=\"0\" feedback=\"0\" selfeedback=\"1\" />
+      </forminfos>
+    </App>
+  </ClientAppInfo>
+  <apvlist>
+    <steps initiatorcode=\"ISU_PS00199\" initiatoroucode=\"ISU_PSF0057\" status=\"active\" datecreated=\"2015-01-27 09:31:27\">
+      <division divisiontype=\"send\" name=\"발신\" oucode=\"ISU_PSF0057\" ouname=\"연구개발팀 공정기술파트;연구개발팀 공정기술파트;연구개발팀 공정기술파트;연구개발팀 공정기술파트\">
+        <taskinfo status=\"pending\" result=\"pending\" kind=\"send\" datereceived=\"2015-01-27 09:30:09\" />
+        <step unittype=\"person\" routetype=\"approve\" name=\"기안자\">
+          <ou code=\"ISU_PSF0057\" name=\"연구개발팀 공정기술파트;연구개발팀 공정기술파트;연구개발팀 공정기술파트;연구개발팀 공정기술파트\">
+            <person code=\"ISU_PS00199\" name=\"이진호;LEEJIN-HO;이진호;李眞鎬\" position=\"ISU_PSA125;과장;Manager;;\" title=\"ISU_PS10150;팀원;K;;\" level=\"ISU_PSA320;2급;;;\" oucode=\"ISU_PSF0057\" ouname=\"연구개발팀 공정기술파트;연구개발팀 공정기술파트;연구개발팀 공정기술파트;연구개발팀 공정기술파트\" sipaddress=\"\">
+              <taskinfo status=\"completed\" result=\"completed\" kind=\"charge\" datereceived=\"2015-01-27 09:31:27\" customattribute1=\"sign_ISU_PS00199_0.bmp\" datecompleted=\"2015-01-27 09:31:27\" wiid=\"D6AB5CE5-9EAE-470D-83A4-2B7B11D84E50\" />
+            </person>
+          </ou>
+        </step>
+        <step unittype=\"person\" routetype=\"approve\" name=\"일반결재\">
+          <ou code=\"ISU_PSF1602\" name=\"사업기획팀;사업기획팀;사업기획팀;사업기획팀\" company=\"(주)이수페타시스\">
+            <person code=\"ISU_PS12003\" name=\"김동린;KIM DONG LIN;김동린;金東璘\" position=\"ISU_PSA135;사원;Staff;;社員\" title=\"ISU_PS10150;팀원;K;;\" level=\"ISU_PSA330;4급갑;;;\" oucode=\"ISU_PSF1602\" ouname=\"사업기획팀;사업기획팀;사업기획팀;사업기획팀\" sipaddress=\"\" stampRights=\"N\">
+              <taskinfo status=\"completed\" result=\"completed\" kind=\"normal\" datereceived=\"2015-01-27 09:31:37\" datecompleted=\"2015-01-27 09:32:36\" customattribute1=\"\" wiid=\"e47395f9-abfc-4b3b-a1c7-ec40992d8ff5\" />
+            </person>
+          </ou>
+        </step>
+        <step unittype=\"person\" routetype=\"approve\" name=\"일반결재\">
+          <ou code=\"ISU_STISU_ST011\" name=\"정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀\" company=\"이수시스템(주)\">
+            <person code=\"ISU_ST98004\" name=\"황태진;HWANGTAE-JIN;황태진;黃泰振\" position=\"ISU_STA110;부장;General Manager;;\" title=\"ISU_ST10050;팀장;C;;\" level=\"ISU_STA310;1급갑;;;\" oucode=\"ISU_STISU_ST011\" ouname=\"정보관리팀;SYSTEM BUSINESS TEAM;정보관리팀;정보관리팀\" sipaddress=\"\" stampRights=\"N\">
+              <taskinfo status=\"inactive\" result=\"inactive\" kind=\"normal\" />
+            </person>
+          </ou>
+        </step>
+      </division>
+    </steps>
+  </apvlist>
+  <forminfoext>
+    <forminfo>
+      <outerpub>False</outerpub>
+      <innerpub>False</innerpub>
+      <innerpost>False</innerpost>
+      <scABox>1</scABox>
+      <scSBox>1</scSBox>
+      <scRBox>0</scRBox>
+      <scRPBox>1</scRPBox>
+      <scCBox>0</scCBox>
+      <scCPBox>0</scCPBox>
+      <scGARBox>0</scGARBox>
+      <scGAPBox>0</scGAPBox>
+      <scSAPBox>0</scSAPBox>
+      <scSARBox>0</scSARBox>
+      <scFAPBox>0</scFAPBox>
+      <scJFBox>0</scJFBox>
+      <scJFBoxV></scJFBoxV>
+      <scGRBox>0</scGRBox>
+      <receiptlist></receiptlist>
+      <sealauthority></sealauthority>
+      <scEdms>False</scEdms>
+      <scEdmsLegacy>True</scEdmsLegacy>
+      <docclass></docclass>
+      <issuedocno>False</issuedocno>
+      <docinfo>
+        <outerpubdocno></outerpubdocno>
+        <docno></docno>
+        <recno></recno>
+        <dpdsn>정보관리팀</dpdsn>
+        <catcode>165</catcode>
+        <catname>12.기타/기타/</catname>
+        <keepyear>1</keepyear>
+        <fiscalyear></fiscalyear>
+        <enforcedate></enforcedate>
+        <docsec>10</docsec>
+        <ispublic>N</ispublic>
+        <deptcode>ISU_STISU_ST011</deptcode>
+        <deptpath>전체\\이수시스템(주)\\대표이사\\사업 2본부\\정보관리팀</deptpath>
+        <attach>
+          <path>\\\\ISUDEVWEB\\GWStorage\\e-sign\\ApprovalEDMS\\981E04E2-4512-46E2-AF93-E8798CBB9653.mht</path>
+        </attach>
+        <circulation>1</circulation>
+        <sentunitname></sentunitname>
+        <regcomment></regcomment>
+      </docinfo>
+      <JFID></JFID>
+      <IsChargeConfirm>false</IsChargeConfirm>
+      <ChargeOU></ChargeOU>
+      <rejectedto>true</rejectedto>
+      <MakeReport></MakeReport>
+      <WORKREQUEST_ID></WORKREQUEST_ID>
+      <parentfiid></parentfiid>
+      <IsLegacy></IsLegacy>
+      <entcode>ISU_PS</entcode>
+      <entname>(주)이수페타시스</entname>
+      <docnotype>5</docnotype>
+      <ConsultOK>false</ConsultOK>
+      <IsMobile>true</IsMobile>
+      <IsSubReturn>false</IsSubReturn>
+      <IsDeputy>true</IsDeputy>
+      <scAutoCmm>0</scAutoCmm>
+      <scAutoCmmV></scAutoCmmV>
+      <scNotify>1</scNotify>
+      <scNotifyV></scNotifyV>
+      <IsSMS>N</IsSMS>
+    </forminfo>
+  </forminfoext>
+  <formdata></formdata>
+  <PIID>be3abaf9-f83d-48c3-b23e-d1884be81634</PIID>
+  <admintype>ADMIN</admintype>
+</request>"

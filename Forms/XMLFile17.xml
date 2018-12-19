@@ -1,0 +1,89 @@
+﻿"<?xml version=\"1.0\"?>\r\n<steps initiatorcode=\"ISU_PS00199\" initiatoroucode=\"ISU_PSF0057\" status=\"active\" datecreated=\"2015-01-20 13:57:36\">
+  <division divisiontype=\"send\" name=\"발신\" oucode=\"ISU_PSF0057\" ouname=\"연구개발팀 공정기술파트;연구개발팀 공정기술파트;연구개발팀 공정기술파트;연구개발팀 공정기술파트\">
+    <taskinfo status=\"pending\" result=\"pending\" kind=\"send\" datereceived=\"2015-01-20 13:56:22\"/>
+    <step unittype=\"person\" routetype=\"approve\" name=\"기안자\">
+      <ou code=\"ISU_PSF0057\" name=\"연구개발팀 공정기술파트;연구개발팀 공정기술파트;연구개발팀 공정기술파트;연구개발팀 공정기술파트\">
+        <person code=\"ISU_PS00199\" name=\"이진호;LEEJIN-HO;이진호;李眞鎬\" position=\"ISU_PSA125;과장;Manager;;\" title=\"ISU_PS10150;팀원;K;;\" level=\"ISU_PSA320;2급;;;\" oucode=\"ISU_PSF0057\" ouname=\"연구개발팀 공정기술파트;연구개발팀 공정기술파트;연구개발팀 공정기술파트;연구개발팀 공정기술파트\" sipaddress=\"\">
+          <taskinfo status=\"completed\" result=\"completed\" kind=\"charge\" datereceived=\"2015-01-20 13:57:36\" customattribute1=\"sign_ISU_PS00199_0.bmp\" datecompleted=\"2015-01-20 13:57:36\" wiid=\"2B4472DB-6B2E-4B08-B3B4-74E398DDB60F\"/>
+        </person>
+      </ou>
+    </step>
+    <step unittype=\"person\" routetype=\"approve\" name=\"일반결재\">
+      <ou code=\"ISU_PSF1602\" name=\"사업기획팀;사업기획팀;사업기획팀;사업기획팀\" company=\"(주)이수페타시스\">
+        <person code=\"ISU_PS12003\" name=\"김동린;KIM DONG LIN;김동린;金東璘\" position=\"ISU_PSA135;사원;Staff;;社員\" title=\"ISU_PS10150;팀원;K;;\" level=\"ISU_PSA330;4급갑;;;\" oucode=\"ISU_PSF1602\" ouname=\"사업기획팀;사업기획팀;사업기획팀;사업기획팀\" sipaddress=\"\" stampRights=\"N\">
+          <taskinfo status=\"completed\" result=\"completed\" kind=\"normal\" datereceived=\"2015-01-20 13:57:46\" datecompleted=\"2015-01-20 14:01:38\" customattribute1=\"\" wiid=\"1ba39933-f8bd-42d1-8a57-7e8c8780d343\"/>
+        </person>
+      </ou>
+    </step>
+    <step unittype=\"person\" routetype=\"assist\" allottype=\"serial\" name=\"순차합의\">
+      <taskinfo status=\"completed\" result=\"completed\" kind=\"normal\" datereceived=\"2015-01-20 14:01:43\" datecompleted=\"2015-01-20 14:03:10\"/>
+      <ou code=\"ISU_PSF1602\" name=\"사업기획팀;사업기획팀;사업기획팀;사업기획팀\" company=\"(주)이수페타시스\">
+        <person code=\"ISU_PS12024\" name=\"박건태;PARK.GEON.TAE;박건태;朴健泰\" position=\"ISU_PSA115;차장;Deputy General Manager;;次長\" title=\"ISU_PS10150;팀원;K;;\" level=\"ISU_PSA315;1급을;;;\" oucode=\"ISU_PSF1602\" ouname=\"사업기획팀;사업기획팀;사업기획팀;사업기획팀\" sipaddress=\"\" stampRights=\"N\">
+          <taskinfo status=\"completed\" result=\"completed\" kind=\"normal\" datereceived=\"2015-01-20 14:01:43\" datecompleted=\"2015-01-20 14:03:09\" customattribute1=\"\"/>
+        </person>
+      </ou>
+    </step>
+    <step unittype=\"person\" routetype=\"approve\" name=\"일반결재\">
+      <ou code=\"ISU_PSF1602\" name=\"사업기획팀;사업기획팀;사업기획팀;사업기획팀\" company=\"(주)이수페타시스\">
+        <person code=\"ISU_PS09009\" name=\"최창복;CHOI CHARLES;최창복;崔昶福\" position=\"ISU_PSA110;부장;General Manager;;\" title=\"ISU_PS10050;팀장;C;;\" level=\"ISU_PSA310;1급갑;;;\" oucode=\"ISU_PSF1602\" ouname=\"사업기획팀;사업기획팀;사업기획팀;사업기획팀\" sipaddress=\"\" stampRights=\"N\">
+          <taskinfo status=\"pending\" result=\"pending\" kind=\"normal\" datereceived=\"2015-01-20 14:03:14\"/>
+        </person>
+      </ou>
+    </step>
+  </division>
+</steps>\r\n"
+
+
+
+"<formdata>
+  <INITIATOR_NAME>이진호;LEEJIN-HO;이진호;李眞鎬</INITIATOR_NAME>
+  <INITIATOR_ID>ISU_PS00199</INITIATOR_ID>
+  <INITIATOR_OU_NAME>연구개발팀 공정기술파트;연구개발팀 공정기술파트;연구개발팀 공정기술파트;연구개발팀 공정기술파트</INITIATOR_OU_NAME>
+  <INITIATOR_OU_ID>ISU_PSF0057</INITIATOR_OU_ID>
+  <ATTACH_FILE_INFO></ATTACH_FILE_INFO>
+  <INITIATOR_INFO>이진호;LEEJIN-HO;이진호;李眞鎬</INITIATOR_INFO>
+  <APPLIED></APPLIED>
+  <ISPUBLIC></ISPUBLIC>
+  <APPLIED_TERM></APPLIED_TERM>
+  <RECEIVE_NO></RECEIVE_NO>
+  <RECEIVE_NAMES>@@</RECEIVE_NAMES>
+  <RECEIPT_LIST>@@</RECEIPT_LIST>
+  <DOC_LEVEL>10</DOC_LEVEL>
+  <DOC_CLASS_ID>164</DOC_CLASS_ID>
+  <DOC_CLASS_NAME>12.기타/대장(문서 수발대장, 목록표, 분류표 등)/</DOC_CLASS_NAME>
+  <SAVE_TERM>1</SAVE_TERM>
+  <SUBJECT>기안취소 test</SUBJECT>
+  <DOC_NO></DOC_NO>
+  <DOC_OU_NAME>연구개발팀 공정기술파트</DOC_OU_NAME>
+  <ENT_CODE>ISU_PS</ENT_CODE>
+  <ENT_NAME>(주)이수페타시스</ENT_NAME>
+  <DOC_SUMMARY></DOC_SUMMARY>
+  <DOCLINKS></DOCLINKS>
+</formdata>"
+
+"<formdata>
+  <INITIATOR_NAME>이진호;LEEJIN-HO;이진호;李眞鎬</INITIATOR_NAME>
+  <INITIATOR_ID>ISU_PS00199</INITIATOR_ID>
+  <INITIATOR_OU_NAME>연구개발팀 공정기술파트;연구개발팀 공정기술파트;연구개발팀 공정기술파트;연구개발팀 공정기술파트</INITIATOR_OU_NAME>
+  <INITIATOR_OU_ID>ISU_PSF0057</INITIATOR_OU_ID>
+  <ATTACH_FILE_INFO></ATTACH_FILE_INFO>
+  <INITIATOR_INFO>이진호;LEEJIN-HO;이진호;李眞鎬</INITIATOR_INFO>
+  <APPLIED></APPLIED>
+  <ISPUBLIC></ISPUBLIC>
+  <APPLIED_TERM></APPLIED_TERM>
+  <RECEIVE_NO></RECEIVE_NO>
+  <RECEIVE_NAMES>@@</RECEIVE_NAMES>
+  <RECEIPT_LIST>@@</RECEIPT_LIST>
+  <DOC_LEVEL>10</DOC_LEVEL>
+  <DOC_CLASS_ID>164</DOC_CLASS_ID>
+  <DOC_CLASS_NAME>12.기타/대장(문서 수발대장, 목록표, 분류표 등)/</DOC_CLASS_NAME>
+  <SAVE_TERM>1</SAVE_TERM>
+  <SUBJECT>기안취소 test</SUBJECT>
+  <DOC_NO></DOC_NO>
+  <DOC_OU_NAME>연구개발팀 공정기술파트</DOC_OU_NAME>
+  <ENT_CODE>ISU_PS</ENT_CODE>
+  <ENT_NAME>(주)이수페타시스</ENT_NAME>
+  <DOC_SUMMARY></DOC_SUMMARY>
+  <DOCLINKS></DOCLINKS>
+  <BODY_CONTEXT>&lt;BODY_CONTEXT&gt;&lt;tbContentElement&gt;&lt;![CDATA[&lt;HTML&gt;&lt;HEAD&gt;\r\n&lt;META content=\"text/html; charset=utf-8\" http-equiv=Content-Type&gt;\r\n&lt;META name=GENERATOR content=\"TAGFREE Active Designer\"&gt;&lt;LINK rel=stylesheet href=\"http://gw.isu.co.kr/GWImages/common/TagFree/tagfree.css\"&gt;&lt;/HEAD&gt;\r\n&lt;BODY style=\"FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt\" DrawingMode=\"split\" X1=\"801\" Y1=\"81\" X2=\"801\" Y2=\"81\"&gt;\r\n&lt;P style=\"FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt\"&gt;\r\n&lt;TABLE style=\"BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; BORDER-COLLAPSE: collapse; FONT-FAMILY: 맑은 고딕; COLOR: #000000; FONT-SIZE: 9pt; BORDER-TOP: medium none; BORDER-RIGHT: medium none\" border=1 cellSpacing=0 borderColorLight=#6e6e6e borderColorDark=#ffffff cellPadding=0 width=\"100%\" bgColor=white&gt;\r\n&lt;TBODY&gt;\r\n&lt;TR&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; BORDER-RIGHT: #000000 1px solid\" height=100 width=\"100%\" colSpan=7&gt;\r\n&lt;P style=\"FONT-FAMILY: 맑은 고딕; FONT-SIZE: 18pt\"&gt;&lt;STRONG&gt;기 안 품 의&lt;/STRONG&gt;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;\r\n&lt;TR&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; BACKGROUND-COLOR: #d3d3d3; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bolder; BORDER-RIGHT: #000000 1px solid; TEXT-DECORATION: \" bgColor=#d3d3d3 height=35 width=\"15%\"&gt;\r\n&lt;P style=\"FONT-FAMILY: \"&gt;&lt;STRONG&gt;&lt;SPAN style=\"FONT-FAMILY: 맑은 고딕\"&gt;문서번호&lt;/SPAN&gt;&lt;/STRONG&gt;&lt;/P&gt;&lt;/TD&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; BORDER-RIGHT: #000000 1px solid\" width=\"19%\"&gt;&lt;/TD&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; BACKGROUND-COLOR: #d3d3d3; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bolder; BORDER-RIGHT: #000000 1px solid; TEXT-DECORATION: \" bgColor=#d3d3d3 width=\"15%\"&gt;\r\n&lt;P style=\"FONT-FAMILY: \"&gt;&lt;STRONG&gt;&lt;SPAN style=\"FONT-FAMILY: 맑은 고딕\"&gt;결재사항&lt;/SPAN&gt;&lt;/STRONG&gt;&lt;/P&gt;&lt;/TD&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; BORDER-RIGHT: #000000 1px solid\" width=\"19%\"&gt;\r\n&lt;P style=\"FONT-FAMILY: \"&gt;사장결재&lt;/P&gt;&lt;/TD&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; BACKGROUND-COLOR: #d3d3d3; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bolder; BORDER-RIGHT: #000000 1px solid; TEXT-DECORATION: \" bgColor=#d3d3d3 width=\"19%\" colSpan=2&gt;\r\n&lt;P style=\"FONT-FAMILY: \"&gt;&lt;STRONG&gt;&lt;SPAN style=\"FONT-FAMILY: 맑은 고딕\"&gt;보존년한&lt;/SPAN&gt;&lt;/STRONG&gt;&lt;/P&gt;&lt;/TD&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; BORDER-RIGHT: #000000 1px solid\" id=tdSaveTerm width=\"13%\"&gt;\r\n&lt;CENTER&gt;1년&lt;/CENTER&gt;&lt;/TD&gt;&lt;/TR&gt;\r\n&lt;TR&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; BACKGROUND-COLOR: #d3d3d3; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bolder; BORDER-RIGHT: #000000 1px solid; TEXT-DECORATION: \" bgColor=#d3d3d3 height=35 width=\"15%\"&gt;\r\n&lt;P style=\"FONT-FAMILY: \"&gt;&lt;STRONG&gt;&lt;SPAN style=\"FONT-FAMILY: 맑은 고딕\"&gt;기안일자&lt;/SPAN&gt;&lt;/STRONG&gt;&lt;/P&gt;&lt;/TD&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; BORDER-RIGHT: #000000 1px solid\" width=\"19%\"&gt;&lt;/TD&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; BACKGROUND-COLOR: #d3d3d3; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bolder; BORDER-RIGHT: #000000 1px solid; TEXT-DECORATION: \" bgColor=#d3d3d3 width=\"15%\"&gt;\r\n&lt;P style=\"FONT-FAMILY: \"&gt;&lt;STRONG&gt;&lt;SPAN style=\"FONT-FAMILY: 맑은 고딕\"&gt;시행일자&lt;/SPAN&gt;&lt;/STRONG&gt;&lt;/P&gt;&lt;/TD&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; BORDER-RIGHT: #000000 1px solid\" width=\"19%\"&gt;&lt;/TD&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; LINE-HEIGHT: 10pt; BACKGROUND-COLOR: #d3d3d3; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bolder; BORDER-RIGHT: #000000 1px solid; TEXT-DECORATION: none\" bgColor=#d3d3d3 width=\"6%\"&gt;&lt;STRONG&gt;\r\n&lt;P style=\"FONT-FAMILY: 맑은 고딕\"&gt;자본&lt;BR&gt;예산&lt;/P&gt;&lt;/STRONG&gt;&lt;/TD&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; LINE-HEIGHT: 10pt; BACKGROUND-COLOR: #d3d3d3; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bolder; BORDER-RIGHT: #000000 1px solid; TEXT-DECORATION: none\" bgColor=#d3d3d3 width=\"13%\"&gt;\r\n&lt;P&gt;유/무/&lt;BR&gt;해당사항없음&lt;/P&gt;&lt;/TD&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; BORDER-RIGHT: #000000 1px solid\" width=\"13%\"&gt;&lt;/TD&gt;&lt;/TR&gt;\r\n&lt;TR&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; BACKGROUND-COLOR: #d3d3d3; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bolder; BORDER-RIGHT: #000000 1px solid; TEXT-DECORATION: \" bgColor=#d3d3d3 height=35 width=\"15%\"&gt;\r\n&lt;P style=\"TEXT-ALIGN: center; FONT-FAMILY: 맑은 고딕\"&gt;&lt;STRONG&gt;제&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 목&lt;/STRONG&gt;&lt;/P&gt;&lt;/TD&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: left; BORDER-LEFT: #000000 1px solid; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; BORDER-RIGHT: #000000 1px solid\" id=tdSubject width=474 colSpan=3&gt;\r\n&lt;P align=left&gt;&amp;nbsp;기안취소 test&lt;/P&gt;&lt;/TD&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; LINE-HEIGHT: 10pt; BACKGROUND-COLOR: #d3d3d3; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; BORDER-RIGHT: #000000 1px solid; TEXT-DECORATION: none\" bgColor=#d3d3d3 width=\"6%\"&gt;\r\n&lt;P&gt;&lt;SPAN style=\"FONT-FAMILY: 맑은 고딕\"&gt;&lt;STRONG&gt;확보&lt;BR&gt;(안)&lt;/STRONG&gt;&lt;/SPAN&gt;&lt;/P&gt;&lt;/TD&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; LINE-HEIGHT: 10pt; BACKGROUND-COLOR: #d3d3d3; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; BORDER-RIGHT: #000000 1px solid; TEXT-DECORATION: none\" bgColor=#d3d3d3 width=\"13%\"&gt;\r\n&lt;P&gt;&lt;STRONG&gt;전용/증액/&lt;BR&gt;해당사항없음&lt;/STRONG&gt;&lt;/P&gt;&lt;/TD&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: center; BORDER-LEFT: #000000 1px solid; FONT-FAMILY: 맑은 고딕; FONT-SIZE: 9pt; BORDER-TOP: #000000 1px solid; BORDER-RIGHT: #000000 1px solid\" width=\"13%\"&gt;&lt;/TD&gt;&lt;/TR&gt;\r\n&lt;TR&gt;\r\n&lt;TD style=\"BORDER-BOTTOM: #000000 1px solid; TEXT-ALIGN: left; BORDER-LEFT: #000000 1px solid; VERTICAL-ALIGN: top; BORDER-TOP: #000000 1px solid; BORDER-RIGHT: #000000 1px solid\" height=600 width=\"100%\" colSpan=7&gt;\r\n&lt;P&gt;&amp;nbsp;&lt;/P&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;/TBODY&gt;&lt;/TABLE&gt;&lt;/P&gt;&lt;/BODY&gt;&lt;/HTML&gt;]]&gt;&lt;/tbContentElement&gt;&lt;DOC_LEVEL_NAME&gt;&lt;/DOC_LEVEL_NAME&gt;&lt;REJECTDOCLINKS&gt;&lt;/REJECTDOCLINKS&gt;&lt;PMLINKS&gt;&lt;/PMLINKS&gt;&lt;/BODY_CONTEXT&gt;</BODY_CONTEXT>
+</formdata>"

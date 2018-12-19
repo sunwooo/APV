@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	sql:xsl="pJobDuty_XSLTFile.xsl">
+  <sql:header>
+    <sql:param name='PARENT_DUTY_CODE'>A11</sql:param>
+    <sql:param name='ENT_CODE'>A1</sql:param>
+  </sql:header>
+  <sql:query>
+    SELECT 	[ORG_JOBDUTY].*,
+    isNull(( SELECT	TOP 1 len(A.DUTY_CODE)
+    FROM 	[ORG_JOBDUTY] A WITH (NOLOCK)
+    WHERE	A.PARENT_DUTY_CODE = [ORG_JOBDUTY].DUTY_CODE AND A.ENT_CODE = @ENT_CODE
+    ), 0) as CHILD_LEN,
+    substring([ORG_JOBDUTY].DUTY_CODE, 3, 7) as JOBDUTY
+    FROM 	[ORG_JOBDUTY] WITH (NOLOCK)
+    WHERE	[ORG_JOBDUTY].ENT_CODE = @ENT_CODE	AND
+    [ORG_JOBDUTY].USAGE_STATE = 'A' AND
+    [ORG_JOBDUTY].PARENT_DUTY_CODE = @PARENT_DUTY_CODE AND
+    [ORG_JOBDUTY].DUTY_CODE != [ORG_JOBDUTY].PARENT_DUTY_CODE
+    FOR XML AUTO
+  </sql:query>
+</ROOT>

@@ -1,0 +1,57 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE> 인쇄 </TITLE>
+<link rel="stylesheet" href="/GWImages/common/css/approval_form.css" type="text/css" />
+<link rel="stylesheet" href="/GWImages/common/TagFree/tagfree.css" type="text/css" />
+<script src="/CoviWeb/SiteReference/js/Config.js" type="text/javascript"></script>
+<script src="/CoviWeb/SiteReference/js/EmbedObject.js" type="text/javascript"></script>
+<script src="/CoviWeb/SiteReference/js/Utility.js" type="text/javascript"></script>	
+<script language="javascript">
+	var printDiv;
+    function window.onload()
+    {
+        printCommand();
+    }
+    function printCommand(){
+        if(window.document.readyState == "complete"){
+	        try{
+	            printDiv = opener.printDiv;
+        	     		    
+	            printShow.innerHTML = printDiv;
+        		
+                printGo();
+        	    
+            }catch(e){
+	            alert(e.description);
+            }
+        }else{
+              setTimeout("printCommand()",500);
+        }
+    }    
+    
+    function event_noop(){return(false);} 
+
+
+	function printGo() {
+	    factory.printing.header = "";
+	    factory.printing.footer = "";
+	    factory.printing.portrait = true;
+	    factory.printing.leftMargin = 5.0;
+	    factory.printing.topMargin = 15.0;
+	    factory.printing.rightMargin = 5.0;
+	    factory.printing.bottomMargin = 15.0;
+	    factory.printing.Preview();
+	    //factory.printing.Print(false, window);
+    	
+	    window.close();
+    }
+
+
+</script>
+</HEAD>
+<BODY topmargin="0" leftmargin="0" scroll="auto">
+    <script type="text/javascript" language="javascript" src="../../common/script/printForm.js"></script>
+	<div id='printShow'></div>
+</BODY>
+</HTML>

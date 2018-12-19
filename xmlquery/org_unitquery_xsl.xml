@@ -1,0 +1,19 @@
+<?xml version="1.0"  encoding="utf-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	sql:xsl="org_unitquery_xsl.xsl">
+	<sql:header>
+		<sql:param name='PARENT_UNIT_CODE'></sql:param>
+	</sql:header>
+	<sql:query>
+		SELECT [ORG_UNIT].*,
+		(SELECT COUNT(A.UNIT_CODE)
+		FROM [ORG_UNIT] A WITH (NOLOCK)
+		WHERE A.PARENT_UNIT_CODE = [ORG_UNIT].UNIT_CODE) AS CHILD_CNT
+		FROM  [ORG_UNIT] WITH (NOLOCK)
+		WHERE [ORG_UNIT].PARENT_UNIT_CODE = @PARENT_UNIT_CODE
+		AND   [ORG_UNIT].UNIT_CODE != [ORG_UNIT].PARENT_UNIT_CODE
+		AND   [ORG_UNIT].USAGE_STATE = 'A'
+		ORDER BY SORT_KEY
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

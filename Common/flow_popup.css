@@ -1,0 +1,36 @@
+body{margin: 0px;	padding: 0px;}
+/*팝업창의 제목-이미지 들어갈때*/
+.pop_title  
+	{height:27;vertical-align:bottom;background-image: url(/COVINet/images/background_pop_title.gif)}
+/*팝업창의 제목-이미지 들어갈때*/
+.pop_title_text  
+	{font-family: "굴림체";	font-size: 15px;font-weight:bold;color:#333333;padding:10px 0px 0px 10px;height:27;background-image: url(/COVINet/images/background_pop_title.gif)}
+/*한글파일 메뉴와 같은 생상과 형식*/
+.editing
+	{
+    BACKGROUND-COLOR: #EDEDED;
+    FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+    FONT-SIZE: 9pt;
+	COLOR: gray;
+    MARGIN-TOP: 0px;
+	/*font-family: "굴림체";	font-size: 12px;padding-left:10px; height:26px;background-image: url(/COVINet/images/background_draft.gif);*/
+	}
+/*팝업창 버튼 들어가는 부분의 그라데이션*/
+.back_grad
+   {background-image: url(/COVINet/images/background_grad_yell.gif);height: 30px;}
+/*첨부파일 테이블의 제목부분*/
+.attach_title
+	{font-family: "굴림체";	font-size: 12px;	font-weight:bold;color: #4f4f4f;background-color:#f6f6f6;
+	  text-align:center;vertical-align: text-bottom;height:17px;}
+/*첨부파일의 리스트 부분*/
+.attach_list1
+	{font-family: "굴림체";	font-size: 12px;color: #4f4f4f;padding-left:15px;
+    background-color:#ffffff;vertical-align: text-bottom;	height:17px;}
+/* 리스트부분 링크의 색상정의*/	
+A.attach_list1:link , A.attach_list1:visited   
+{font-family:"굴림";font-size:12px;	text-decoration: none;color: #333333;}
+A.attach_list1:active,A.attach_list1:hover   
+{font-family:"굴림";font-size:12px;text-decoration: underline;color: #333333;}
+/* 입력 */	
+.field
+	{font-family: "굴림체";	font-size: 12px;padding-left:2px; height:30px;}

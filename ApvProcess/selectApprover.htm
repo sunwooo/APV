@@ -1,0 +1,139 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+	<HEAD>
+		<TITLE>결재자 선택</TITLE>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link href="/GWImages/groupware/CoviWeb/app_css_style.css" rel="stylesheet" type="text/css">
+		<script language="javascript" src="/CoviWeb/common/script/COVIFlowNet/openWindow.js"></script>
+		<SCRIPT LANGUAGE="JavaScript">
+		<!--
+		var sWIID="";
+		var sName="";
+		function window.onload(){
+			var oStep, oPerson, oTaskInfo;
+			var oApprovedSteps;
+			var szTemp="";
+			//var oApprovedSteps = opener.parent.processlist.m_oApvList.documentElement.selectNodes("step[@routetype='approve' and .//taskinfo/@kind!='charge' and .//taskinfo/@kind!='review' and .//taskinfo/@kind!='bypass'  and .//taskinfo/@kind!='skip' and (.//taskinfo/@status='completed')]");
+			if ( opener.m_oFormMenu.getInfo("mode") == "RECAPPROVAL"){
+				oApprovedSteps = opener.parent.processlist.m_oApvList.documentElement.selectNodes("step[@routetype='receive' ]/ou[taskinfo/@status='pending']/person[(taskinfo/@kind='normal' or taskinfo/@kind='charge') and taskinfo/@status='completed']");
+				for(var i=0;i < oApprovedSteps.length ; i++){
+					oPerson = oApprovedSteps.nextNode();
+					oTaskInfo = oPerson.selectSingleNode("taskinfo");
+					if ( oTaskInfo.getAttribute("rejectee") != 'y'){
+						szTemp += '<input type="radio" value="' +oTaskInfo.getAttribute("wiid")+"@"+oPerson.getAttribute("name") + '"  name="radAction" id="radAction" style="WIDTH: 30;" onClick="chkAction(this);">' + oPerson.getAttribute("name") + '<br>';
+					}
+				}
+			}else if ( opener.m_oFormMenu.getInfo("mode") == "SUBAPPROVAL"){
+				oApprovedSteps = opener.parent.processlist.m_oApvList.documentElement.selectNodes("step[@routetype='consult' ]/ou[taskinfo/@status='pending' and taskinfo/@piid='" +opener.m_oFormMenu.getInfo("piid") + "']/person[taskinfo/@kind!='review' and taskinfo/@kind!='bypass'  and taskinfo/@kind!='skip' and taskinfo/@kind!='conveyance' and (taskinfo/@status='completed')]");
+				for(var i=0;i < oApprovedSteps.length ; i++){
+					oPerson = oApprovedSteps.nextNode();
+					oTaskInfo = oPerson.selectSingleNode("taskinfo");
+					if ( oTaskInfo.getAttribute("rejectee") != 'y'){
+						szTemp += '<input type="radio" value="' +oTaskInfo.getAttribute("wiid")+"@"+oPerson.getAttribute("name") + '"  name="radAction" id="radAction" style="WIDTH: 30;" onClick="chkAction(this);">' + oPerson.getAttribute("name") + '<br>';
+					}
+				}
+			}else{
+					oApprovedSteps = opener.parent.processlist.m_oApvList.documentElement.selectNodes("step[@routetype='approve' and .//taskinfo/@kind!='charge' and .//taskinfo/@kind!='review' and .//taskinfo/@kind!='bypass'  and .//taskinfo/@kind!='skip' and (.//taskinfo/@status='completed')]");			
+					for(var i=0;i < oApprovedSteps.length ; i++){
+						oStep = oApprovedSteps.nextNode();
+						if (oStep.getAttribute("allottype") != "parallel"){
+
+						oPerson = oStep.selectSingleNode("ou/person[taskinfo/@kind!='conveyance']");
+						oTaskInfo = oPerson.selectSingleNode("taskinfo");
+						if ( oTaskInfo.getAttribute("rejectee") != 'y'){
+							szTemp += '<input type="radio" value="' +oTaskInfo.getAttribute("wiid")+"@"+oPerson.getAttribute("name") + '"  name="radAction" id="radAction" style="WIDTH: 30;" onClick="chkAction(this);">' + oPerson.getAttribute("name") + '<br>';
+						}
+						}
+					}
+					
+			}
+
+			applist.innerHTML = szTemp;
+		}
+		function OK(){
+
+			if ( radAction.length == null)
+			{
+				if (radAction.checked == true)
+				{
+					opener.inputApprover(sWIID,sName);
+					window.close();
+					return;
+				}else{
+					return;
+				}
+
+				
+			}
+			else
+			{
+				for (i = 0; i < radAction.length ; i++)
+					{
+						if (radAction[i].checked == true)
+						{
+							opener.inputApprover(sWIID,sName);
+							window.close();
+							return;
+						}
+					}
+				alert("반려자를 선택하십시오");
+				return;
+			}
+		}
+		function  chkAction(oRdo){
+			var aApprove = oRdo.value.split("@");
+			sWIID = aApprove[0];
+			sName = aApprove[1];
+		}
+		//-->
+		</SCRIPT>
+		<SCRIPT FOR="cbBTN" EVENT="onmousedown()">this.className = 'Over';</SCRIPT>
+		<SCRIPT FOR="cbBTN" EVENT="onmouseover()">this.className = 'Over';</SCRIPT>
+		<SCRIPT FOR="cbBTN" EVENT="onmouseout()">this.className = 'Out';</SCRIPT>
+	</HEAD>
+	<BODY leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+		<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" ID="Table1">
+			<tr>
+				<td height="3" colspan="2" align="center" valign="middle" class="table_topline"></td>
+			</tr>
+			<tr class="table_green">
+				<td width="50%" height="40" align="left" valign="middle">
+					&nbsp;&nbsp;&nbsp;<img src="/CoviWeb/common/Images/icon/icon_pop.gif" width="27" height="18" align="absMiddle">
+					<span class="text-blue2">반송자 지정</span></td>
+				<td align="right" valign="middle" class="right10px">&nbsp; </td>
+			</tr>
+			<tr>
+				<td height="1" colspan="2" align="center" valign="middle" class="pop_line"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center" valign="top" class="pop_bg">
+					<!--내용들어갈 테이블 시작  -->
+					<table width="100%" height="70%" border="0" cellspacing="0" cellpadding="0" align="center" ID="Table2">
+						<tr>
+							<td bgcolor="#FFFFFF"  width="100%" height="100%" valign="top" align="center" id="applist">
+							</td>
+						</tr>
+			  			<tr> 
+			    				<td style="background-color:#598ACF;height:1px"></td>
+			  			</tr>
+			  			<tr> 
+			    				<td style="background-color:#DFECFD;height:4px"></td>
+			  			</tr>
+					</table>
+					<!--내용들어갈 테이블 끝  -->
+					<br>
+					<img src="/CoviWeb/common/Images/button/btn_popconfirm.gif" width="52" height="21" align="absMiddle"
+						id="btOK" name="cbBTN" style="CURSOR:hand" onclick="OK()" > <img src="/CoviWeb/common/Images/button/btn_popcancel.gif" width="52" height="21" align="absMiddle"
+						id="btExit" name="cbBTN" style="CURSOR:hand"  OnClick="window.close()">
+					<br>
+					<br>
+				</td>
+			</tr>
+			<tr>
+				<td height="3" colspan="2" align="center" valign="middle" class="table_topline"></td>
+			</tr>
+		</table>
+	</BODY>
+</HTML>

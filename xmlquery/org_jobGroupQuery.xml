@@ -1,0 +1,17 @@
+﻿<?xml version="1.0"  encoding="UTF-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql" >
+
+	<sql:header>
+		<sql:param name='PART_CODE'>H</sql:param>
+		<sql:param name='UNIT_CODE'>HHIC000</sql:param>
+	</sql:header>
+	<sql:query>
+		SELECT [ORG_JOBTITLE].[TITLE_CODE], [ORG_JOBTITLE].[NAME], [ORG_JOBTITLE].[ENT_CODE], 
+			[ORG_JOBTITLE].[PARENT_TITLE_CODE], [ORG_JOBTITLE].[DEPTH]
+		FROM ORG_JOBTITLE
+		WHERE 	[ORG_JOBTITLE].[USAGE_STATE] = 'A'
+		AND	[ORG_JOBTITLE].[PARENT_TITLE_CODE] = 'D'
+			
+		FOR XML AUTO
+	</sql:query>	
+</ROOT>

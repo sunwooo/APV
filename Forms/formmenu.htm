@@ -1,0 +1,139 @@
+﻿
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>양식메뉴</title>
+		<link href="/COVINet/css/covi.css" rel="stylesheet" type="text/css">
+			<script language="javascript" src="/CoviWeb/common/script/COVIFlowNet/openWindow.js"></script>
+			<script language="javascript" src="formmenu.js"></script>
+			<SCRIPT FOR="cbBTN" EVENT="onclick()">doButtonAction();</SCRIPT>
+			<script language ="javascript">
+			/*function setAttachInfo(AttFileInfo, AttFiles){	
+	            if ( m_oFormEditor.cField["attach"].value == "" ){
+		            m_oFormEditor.AttFileInfo.innerHTML = AttFileInfo;
+		            m_oFormEditor.AttFileInfo.innerHTML = AttFileInfo;
+		            m_oFormEditor.cField["attach"].value = AttFiles; //attach에서 변경
+		            m_oFormEditor.dField["ATTACH_FILE_INFO"].value = AttFiles; //attach에서 변경
+	            }else{
+		            var aAttFileInfo = m_oFormEditor.AttFileInfo.innerHTML.split("|");
+		            var aAttach = m_oFormEditor.attach.value.split("^^^");
+		            var aAttFile = m_oFormEditor.ATTACH_FILE_INFO.value.split("^^^");
+
+		            aAttFileInfo[m_ibIdx] = AttFileInfo;
+		            aAttach[m_ibIdx] = AttFiles;
+		            aAttFile[m_ibIdx] = AttFiles;
+
+		            var sAttFileInfo = "";
+		            var sAttach = "";
+		            var sAttFile = "";
+            		
+		            for(var i=0; i < aAttach.length; i++){
+			            sAttFileInfo += "|" + aAttFileInfo[i];
+			            sAttach += "^^^" + aAttach[i];
+			            sAttFile += "^^^" + aAttFile[i];
+		            }
+		            if (sAttFileInfo.length > 1) sAttFileInfo = sAttFileInfo.substring(1);
+		            if (sAttach.length > 1) sAttach = sAttach.substring(3);
+		            if (sAttFile.length > 1) sAttFile = sAttFile.substring(3);
+
+		            m_oFormEditor.AttFileInfo.innerHTML = sAttFileInfo;
+		            m_oFormEditor.cField["attach"].value = sAttach; //attach에서 변경
+		            m_oFormEditor.dField["ATTACH_FILE_INFO"].value = sAttFile; //attach에서 변경
+	            }	
+            }*/
+			</script>
+			
+	</head>
+	<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+		<textarea style="display:none" id="field" name="APVLIST"></textarea> <input type="hidden" id="field" name="PASSWORD" value="">
+		<input type="hidden" id="field" name="ACTIONINDEX" value=""> <input type="hidden" id="field" name="ACTIONCOMMENT" value="">
+		<input type="hidden" id="field" name="SIGNIMAGETYPE" value=""> <textarea style="display:none" id="RecDeptList"></textarea>
+		<input type="hidden" id="field" name="bLASTAPPROVER" value="false"> <input type="hidden" id="field" name="CHARGEID" value="false">
+		<input type="hidden" id="field" name="CHARGENAME" value="false"><textarea id="BodyString" style="display:none;width:100; height:20"></textarea>
+		<div id="dellink"></div>
+		<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td height="3" colspan="2" align="center" valign="middle" class="table_topline"></td>
+			</tr>
+			<tr class="table_green">
+				<td colspan="2" height="35">
+					<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" style="padding-top:3px;font-size:12px;color:#333333">
+						<tr>
+							<td>
+								&nbsp; <img src="/COVINet/images/button/btn_modify.gif" BORDER="0" ALT="수 정" id="btchangeSave"
+									name="cbBTN" class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_draft.gif" BORDER="0" ALT="기 안" id="btDraft" name="cbBTN"
+									class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_docinfo.gif" BORDER="0" ALT="문서정보" id="btDoc" name="cbBTN"
+									class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_reuse.gif" BORDER="0" ALT="재사용" id="btReUse" name="cbBTN"
+									class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_approveline.gif" BORDER="0" ALT="결재선" id="btLine"
+									name="cbBTN" class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_receipt.gif" BORDER="0" ALT="수신처" id="btRecDept"
+									name="cbBTN" class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_approve.gif" BORDER="0" ALT="결 재" id="btAction"
+									name="cbBTN" class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_notify.gif" BORDER="0" ALT="전 달" id="btForward"
+									name="cbBTN" class="button_bwrite" style="display:none; cursor:hand"><img src="/COVINet/images/button/btn_withdrawal.gif" BORDER="0" ALT="회 수" id="btWithdraw"
+									name="cbBTN" class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_cancel.gif" BORDER="0" ALT="취 소" id="btAbort" name="cbBTN"
+									class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_notice.gif" BORDER="0" ALT="게 시" id="btPost" name="cbBTN"
+									class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_change.gif" BORDER="0" ALT="변 환" id="btTrans" name="cbBTN"
+									class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_enforce.gif" BORDER="0" ALT="시 행" id="btITrans"
+									name="cbBTN" class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_officialdoc.gif" BORDER="0" ALT="대외공문" id="btOTrans"
+									name="cbBTN" class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_num.gif" BORDER="0" ALT="번호발행" id="btDocNo" name="cbBTN"
+									class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_stamp.gif" BORDER="0" ALT="직 인" id="btSign" name="cbBTN"
+									class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_receive.gif" BORDER="0" ALT="접 수" id="btRec" name="cbBTN"
+									class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_draft.gif" BORDER="0" ALT="재기안" id="btDeptDraft"
+									name="cbBTN" class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_charge.gif" BORDER="0" ALT="담당자" id="btCharge" name="cbBTN"
+									class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_approveline.gif" BORDER="0" ALT="결재선" id="btDeptLine"
+									name="cbBTN" class="button_bwrite" style="display:none; cursor:hand"> 
+									<img src="/COVINet/images/button/btn_imsisave.gif" BORDER="0" ALT="임시저장" id="btSave"
+									name="cbBTN" class="button_bwrite" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_add.gif" BORDER="0" ALT="첨 부" id="btAttach" name="cbBTN"
+									class="button_bwrite" style="display:none; cursor:hand"> 
+									<img src="/COVINet/images/button/btn_preview.gif" BORDER="0" ALT="미리보기" id="btPreView" name="cbBTN" class="button_bwrite" style="display:none; cursor:hand">
+									<img src="/COVINet/images/button/btn_addkmdoc.gif" BORDER="0" ALT="지식첨부" id="btEDMSAttach" name="cbBTN" class="button_bwrite" style="display:none; cursor:hand" alt="지식첨부">									
+									<img src="/COVINet/images/button/btn_errodocmade.gif" BORDER="0" ALT="문서이관" id="bt_adminedms" name="cbBTN" class="button_bwrite" style="display:none; cursor:hand">
+							</td>
+							<td align="left">
+							</td>
+							<td align="right">
+								<div id="urgent" name="urgent">
+									<input type="checkbox" name="chk_urgent" id="chk_urgent" onclick="chk_urgent_onclick()" value="0">긴급결재
+								<div>
+							</td>
+							<td align="right">
+								<div id="edmschk" name="edmschk" style="display:none;">
+									<input type="checkbox" name="chk_edmschk" id="chk_edmschk" onclick="chk_edmschk_onclick()" value="0">문서이관
+								<div>
+							</td>
+							<td align="right">								
+								<div id="secrecy" name="secrecy" style="display:none;">
+									<input type="checkbox" name="chk_secrecy" id="chk_secrecy" onclick="chk_secrecy_onclick()" value="0">기밀문서
+								<div>
+							</td>
+							<td align="right" class="right10px">
+								<img src="/COVINet/images/button/btn_jobindication.gif" BORDER="0" ALT="업무지시" id="btOrder"
+									name="cbBTN" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_print.gif" BORDER="0" ALT="인 쇄" id="btPrint" name="cbBTN"
+									style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_mailsend2.gif" BORDER="0" ALT="메일보내기" id="btMail"
+									name="cbBTN" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_circular.gif" BORDER="0" ALT="회 람" id="btCirculate"
+									name="cbBTN" style="display:none; cursor:hand"> <img src="/COVINet/images/button/btn_close.gif" BORDER="0" ALT="닫 기" id="btExit" name="cbBTN"
+									style="cursor:hand"><img src="/COVINet/images/button/btn_close.gif" BORDER="0" ALT="닫 기" id="btExitPreView" name="btExitPreView" onclick="javascript:top.close();"
+									 style="cursor:hand;display:none">
+							</td>
+						</tr>
+					</table>
+				</td>
+				<!--<td width="54%" height="35" align="left" valign="middle" > &nbsp;&nbsp;&nbsp;<img src="/COVINet/images/button/btn_approve.gif" align="absmiddle"> <img src="/COVINet/images/button/btn_print.gif" align="absmiddle"> </td>
+			<td width="46%" height="35" align="right" class="right10px" ><img src="/COVINet/images/button/btn_close.gif" align="absmiddle"> </td>-->
+			</tr>
+			<tr>
+				<td height="1" colspan="2" align="center" valign="middle" class="pop_line"></td>
+			</tr>
+		</table>
+	</body>
+	<SCRIPT LANGUAGE="javascript">
+	
+	//formname.innerHTML = "<img src='/COVINet/Images/icon_title_pop.gif' align='absmiddle'>&nbsp;" + parent.g_dicFormInfo.item("fmnm");
+
+	function Test(){
+		//var szHTML = m_oFormEditor.headtable.outerHTML;
+		//BodyString.value = szHTML 
+		alert("TEST");
+		saveApvDocument('9999');
+	}	
+	</SCRIPT>
+</html>

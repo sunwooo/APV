@@ -1,0 +1,39 @@
+BODY
+{
+    BACKGROUND-COLOR: #FAFAFA;
+    FONT-FAMILY: '굴림';
+    OVERFLOW: hidden;
+    MARGIN: 0px;
+    PADDING-BOTTOM: 10px;
+    PADDING-LEFT: 10px;
+    PADDING-RIGHT: 10px;
+    PADDING-TOP: 10px
+}
+TD
+{
+	FONT-FAMILY: '굴림';
+    FONT-SIZE: 9pt;
+	HEIGHT: 20px;
+	TEXT-ALIGN: RIGHT
+}
+INPUT
+{
+    FONT-SIZE: 100%;
+    MARGIN-TOP: 0px;
+    FONT-FAMILY: '굴림';
+	HEIGHT: 20px;
+	WIDTH: 100%;
+}
+BUTTON
+{
+    /*BACKGROUND-COLOR: threedface;*/
+    CURSOR: hand;
+    FONT-FAMILY: '굴림';
+    FONT-SIZE: 9pt;
+    BORDER-BOTTOM: 1px solid;
+    BORDER-LEFT: 1px solid;
+    BORDER-RIGHT: 1px solid;
+    BORDER-TOP: 1px solid;
+	HEIGHT: 20px;
+	WIDTH: 75px;
+}

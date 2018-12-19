@@ -1,0 +1,1192 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ApvLineMgr.master.cs" Inherits="COVIFlowNet_ApvlineMgr_ApvLineMgr" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+   <title>Approve Line Management</title>
+   <script type="text/javascript" language="javascript" src="/CoviWeb/common/script/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/CoviWeb/common/script/COVIFlowNet/openWindow.js"></script>
+    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/utility.js"></script>
+    <script type="text/javascript" language="javascript" src="ApvlineMgr.js"></script>
+</head>
+<body>
+	<input type="hidden" id="chk" name="chk" />
+    <asp:contentplaceholder id="ContentHeader" runat="server">
+    </asp:contentplaceholder>
+
+ <table cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <td valign="top">
+            <!-- 왼쪽 div 시작 -->
+            <div class="popup_left" id="divleft" name="divleft">
+              <!-- 탭 div 시작 -->
+              <div class="tab01 small" id="divTabExt" style="display:none;">
+                <ul>
+                  <!--공용수신처--><li id="divtDeployList" style="display:;"><a href="#" onclick="javascript:changeTab(this.name);" id="tDeployList" name="tDeployList"><span><%= Resources.Approval.lbl_DistributeList1 %></span></a></li>     
+                  <!--개인수신처--><li id="divtPersonDeployList" style="display:;"><a href="#" onclick="javascript:changeTab(this.name);" id="tPersonDeployList" name="tPersonDeployList"><span><%= Resources.Approval.lbl_persongroup %></span></a></li>     
+                </ul>
+              </div>
+              <div class="tab01 small">
+                <ul>
+                  <!--검색--><li id="divtSearch" style="display:;" class="current"><a href="#" onclick="javascript:changeTab(this.name);" id="tSearch" name="tSearch"><span><%= Resources.Approval.lbl_search %></span></a></li>      
+                  <!--조직도--><li id="divtGroup" style="display:;"><a href="#" onclick="javascript:changeTab(this.name);" id="tGroup" name="tGroup"><span><%= Resources.Approval.lbl_org %></span></a></li>      
+                  <!--개인결재선--><li id="divtApvLine" style="display:none;"><a href="#" onclick="javascript:changeTab(this.name);" id="tApvLine" name="tApvLine"><span><%= Resources.Approval.lbl_doc_privateapv %></span></a></li>
+                  <!--인장권자(HIW)--><li id="divtStampRights" style="display:none;"><a href="#" onclick="javascript:changeTab(this.name);" id="tStampRights" name="tStampRights"><span><%= Resources.Approval.lbl_StampRightsPerson%></span></a></li>
+                </ul>
+              </div>
+              <!-- 탭 div 끝 -->
+              <!-- 컬러 라인 시작 -->  
+              <div class="popup_line BTable_bg01"></div>
+              <!-- 컬러 라인 끝 -->
+              <div class="iframe_border" id="spantSearch" name="tSearch">
+                <iframe id="iSearch" name="iSearch" width="100%" height="183px" frameborder="0" src="../address/search.aspx?Ent=<%=Session["user_ent_code"].ToString()%>" datasrc="../address/search.aspx?Ent=<%=Session["user_ent_code"].ToString()%>" style='scroll:auto'></iframe>
+              </div>
+              <div class="iframe_border" id="spantGroup" name="tGroup" style='display:none;'>
+                <iframe id="iGroup" name="iGroup" width="100%" height="183px" frameborder="0" src="OrgTree.aspx?Ent=<%=Session["user_ent_code"].ToString()%>" datasrc="OrgTree.aspx" style="scroll:auto"></iframe>
+              </div>
+              <div class="iframe_border" id="spantApvLine" name="tApvLine" style='display:none;'>
+              <iframe id="iApvLine" name="iApvLine" width="100%" height="183px" frameborder="0" src="about:blank" datasrc="../Apvlinelist/PrivateLineList.aspx" style="scroll:auto"></iframe>
+              </div>
+              <div class="iframe_border" id="spantDeployList" name="tDeployList" style='display:none;'>
+                <iframe id="iDeployList" name="iDeployList" width="100%" height="183px" frameborder="0" src="about:blank" datasrc="DeployList.aspx" style="scroll:auto"></iframe>
+              </div>
+              <div class="iframe_border" id="spantPersonDeployList" name="tPersonDeployList" style='display:none;'>
+                <iframe id="iPersonDeployList" name="iPersonDeployList" width="100%" height="183px" frameborder="0" src="about:blank" datasrc="../DeployList/DPrivateLineList.aspx" style='scroll:auto'></iframe>
+              </div>
+              <div class="iframe_border" id="spantStampRights" name="tStampRights" style='display:none;'> <!-- 인장권자 (2012-12-17 HIW) -->
+              <iframe id="iStampRights" name="iStamp" width="100%" height="0px" frameborder="0" src="about:blank" datasrc="../Apvlinelist/StampRightsList.aspx" style="scroll:auto"></iframe>
+              </div>
+              <!-- 컬러 라인 시작 -->  
+              <div class="popup_line BTable_bg01"></div>
+              <!-- 컬러 라인 끝 -->
+              <div class="iframe_border">
+                <iframe id="ListItems" name="ListItems" width="100%" height="225px" frameborder="0" src="../address/listitems.aspx" style='overflow:hidden;'></iframe>
+              </div>
+            </div>
+            <!-- 왼쪽 div 끝 -->
+            </td>
+            <td>
+                <!-- 가운데 div 시작  -->
+                <div class="popup_center" style="display:table; height:448px; *position:relative;">
+                  <div class="Btn" style="display:table-cell; vertical-align:middle; text-align:center; *display:inline-block; *position:absolute; *top:50%; *left:50%;">
+                    <ul>
+                        <!-- 일반결재버튼 영역 시작-->
+                        <div id="dvCommon" style="display:none;">  
+                          <!-- 결재적용 --><li id="tblApplyLine" style="display:none"><a href="#" class="Btn06" id="btApplyLine" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.btn_apply %><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 결재자 --><li id="tblPerson" style="display:none"><a href="#" class="Btn06" id="btPerson" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.lbl_PApprv %><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 동시결재 --><li id="tblPlPerson" style="display:none"><a href="#" class="Btn06" id="btPlPerson" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.lbl_approv_sametime %><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 결재자(확인자) --><li id="tblPersonConfirm" style="display:none;"><a href="#" class="Btn06" id="btPersonConfirm" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.lbl_PApprConfirm %><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 결재자(참조자) --><li id="tblPersonShare" style="display:none;"><a href="#" class="Btn06" id="btPersonShare" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.lbl_Referencer%><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 순차협조자 --><li id="tblPAssist" style="display:none"><a href="#" class="Btn06" id="btPAssist" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.lbl_PersonalCon%><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 병렬협조자 --><li id="tblPAssistPL" style="display:none"><a href="#" class="Btn06" id="btPAssistPL" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.lbl_NecConsultPar2%><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 순차협조처 --><li id="tblDAssist" style="display:none"><a href="#" class="Btn06" id="btDAssist" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.lbl_DeptConsent%><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 병렬협조처 --><li id="tblDAssistPL" style="display:none"><a href="#" class="Btn06" id="btDAssistPL" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.lbl_NecConsultParDept%><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 담당자 --><li id="tblCharge" style="display:none"><a href="#" class="Btn06" id="btCharge" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.btn_charge %><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 수신처 --><li id="tblReceipt" style="display:none;"><a href="#" class="Btn06" id="btReceipt" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.lbl_Acceptdept%><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 수신처 --><li id="tblGroup" style="display:none"><a href="#" class="Btn06" id="btGroup" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.lbl_Acceptdept%><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 병렬합의자 --><li id="tblPConsult" style="display:none"><a href="#" class="Btn06" id="btPConsult" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.btn_consultors %><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 순차합의자 --><li id="tblPConsult2" style="display:none"><a href="#" class="Btn06" id="btPConsult2" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.lbl_ConsultorSeq%><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 병렬합의처 --><li id="tblDConsult" style="display:none;"><a href="#" class="Btn06" id="btDConsult" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.btn_consultdept %><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 순차합의처 --><li id="tblDConsult2" style="display:none;"><a href="#" class="Btn06" id="btDConsult2" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.btn_consultdept %><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <div id="divDConsult" style="display:none;">
+                              <!-- 순차 --><input type="radio" value="serial" name="radioDConsult" id="radioDConsult" /><%= Resources.Approval.lbl_serial %>
+                              <!-- 병렬 --><input type="radio" value="parallel" name="radioDConsult" id="radioDConsult" checked /><%= Resources.Approval.lbl_parallel %>
+                          </div>
+                          <!-- 개인감사 --><li id="tblPAudit" style="display:none;"><a href="#" class="Btn06" id="btPAudit" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.btn_person_audit %><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 부서감사 --><li id="tblDAudit" style="display:none;"><a href="#" class="Btn06" id="btDAudit" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.btn_dept_audit %><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 개인준법 --><li id="tblPAudit1" style="display:none;"><a href="#" class="Btn06" id="btPAudit1" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.btn_person_audit1 %><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 부서준법 --><li id="tblDAudit1" style="display:none;"><a href="#" class="Btn06" id="btDAudit1" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.btn_dept_audit1 %><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 감시처 --><li id="tblDAuditETC" style="display:none"><a href="#" class="Btn06" id="btDAuditETC" style="display:none"><span><%= Resources.Approval.lbl_DAsist %><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 공람자 --><li id="tblPReview" style="display:none;"><a href="#" class="Btn06" id="btPReview" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.btn_confirmor %><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <!-- 특이결재 --><li id="tblExtType" style="display:none;"><a href="#" class="Btn06" id="btExtType" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.btn_ExtType %><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                          <div id="dvAudit" style="display:none">
+				                <!-- 감사 --><input type="checkbox" name="chEtc" onclick="setAudit()"><%= Resources.Approval.lbl_audit %> 
+				                <!-- 일상감사 --><input disabled type="radio" onclick="switchAudit()" value="audit" name="radioAudit"><%= Resources.Approval.lbl_audit_daily %>
+				                <!-- 상근감사 --><input disabled type="radio" onclick="switchAudit()" value="inspect" name="radioAudit"><%= Resources.Approval.lbl_audit_fulltime %>
+		                   </div>
+		                </div> 
+		                <!-- 일반결재버튼 영역 끝-->
+                        <!-- 참조버튼 영역 시작-->
+		                <div id="dvCC" name="dvCC" style="display:none;">				  
+                        <!-- 참조목록(발신참조) --><li id="tblDraftRef"><a href="#" class="Btn06" id="btSendCC" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.lbl_sendcc %><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>
+                         <!-- 참조목록(수신참조) --><li id="tblReceiptRef" style="display:none"><a href="#" class="Btn06" id="btRecCC" name="cbBTN" onclick="doButtonAction(this);"><span><%= Resources.Approval.lbl_reccc %><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li>          
+                        </div> 
+                        <!-- 참조버튼 영역 끝-->
+        
+                        <!-- 배포처 버튼 영역 시작 -->
+		                <div id="dvRec" name="dvRec" style="display:none;">
+			                <!-- 배포처 --><li id="tblRecDept" style="display:none;"><a href="#" class="Btn06" id="btRecDept" name="cbBTN"  onclick="doButtonAction(this);"><span><%= Resources.Approval.lbl_Acceptdept%><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon06_blt.gif" align="absmiddle" /></span></a></li><!--배포목록을 수신부서로 변경(2013-02-06 HIW)-->       
+		                </div>
+	                    <!-- 배포처 버튼 영역 끝 -->  
+                    </ul>
+                  </div>
+                </div>
+                <!-- 가운데 div 끝 -->
+            </td>
+            <td>
+                <!-- 오른쪽 div 시작 -->
+                <div class="popup_right">
+                  <!-- 타이틀 & 버튼 div 시작 -->
+                  <div class="title">
+                    <div class="text">
+                      <h3><%= Resources.Approval.lbl_apprvlist %></h3>
+                    </div>
+                    <div class="Btn">
+                      <ul>
+                        <!-- 결재선초기화 --><li id="tblResetLine" style="display:none;"><a href="#" class="Btn05" id="btResetLine" name="cbBTN"  onclick="doButtonAction(this);"><span><%= Resources.Approval.btn_apprvline_reset %></span></a></li>
+                        <!-- 개인결재선등록 --><li id="tblSaveApvLine" style="display:none;"><a href="#" class="Btn05" id="btSaveApvLine" name="cbBTN"  onclick="doButtonAction(this);"><span><%= Resources.Approval.btn_privateapv_add %></span></a></li>
+                        <!-- 위로 --><li><a href="#" id="btUp" name="cbBTN"  onclick="doButtonAction(this);"><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_up01.gif" /></a></li>
+                        <!-- 아래로 --><li><a href="#" id="btDown" name="cbBTN"  onclick="doButtonAction(this);"><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_down01.gif" /></a></li>
+                        <!-- 삭제 --><li><a href="#" class="Btn05" id="btDelete" name="cbBTN"  onclick="doButtonAction(this);"><span><%= Resources.Approval.btn_delete  %></span></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- 타이틀 & 버튼 div 끝 -->
+                  <!-- 컬러 라인 시작 -->
+                  <div class="popup_line BTable_bg01"></div>
+                  <!-- 컬러 라인 끝 -->
+                  <div class="iframe_border" id="tblapvinfo" name="tblapvinfo">
+ 		                <div id="Apvlist" style="width:528px;overflow-x:scroll;overflow-y:scroll;"></div>            
+                  </div>
+                   <!--<iframe id="Apvlist" width="100%" height="100%" frameborder="0" src="Apvlist.aspx" ></iframe>-->
+                    <!-- 참조 정보 시작 -->
+                    <div id="divccinfomain" name="divccinfomain" style="display:none;">
+                        <!-- 타이틀 & 버튼 div 시작 -->  
+                        <div class="title">
+                            <div class="text">
+                              <h3><%= Resources.Approval.lbl_cclisttitle %></h3>
+                            </div>
+                            <div class="text" style="display:none;">
+                            <input type="radio" value="person" name="radioCC" checked id="radioCC" /><%= Resources.Approval.lbl_person %><input type="radio" value="ou" name="radioCC" id="radioCC"><%= Resources.Approval.lbl_dept %>
+		                      <span id="spancc" style="display:none;"><input type="radio" value="group" name="radioCC" id="radioCC"><%= Resources.Approval.lbl_group %></span>
+                            </div>
+                            <div class="Btn">
+                              <ul>
+                                <li><a href="#" class="Btn05" id="btDeleteCC" name="cbBTN" onClick="doButtonAction(this);"><span><%= Resources.Approval.btn_delete  %></span></a></li>
+                              </ul>
+                            </div>
+                         </div>
+                        <!-- 타이틀 & 버튼 div 끝 -->
+                        <!-- 컬러 라인 시작 -->
+                        <div class="popup_line BTable_bg01"></div>
+                        <!-- 컬러 라인 끝 -->
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+	                        <tr>
+		                        <td id="tdccinfo" name="tdccinfo" height="180" valign="top">
+			                        <div id="divccinfo" name="divccinfo" class="iframe_border" style="OVERFLOW:auto;HEIGHT:100%">					    
+				                        <table width="100%" id="tblccinfo" name="tblccinfo" border="0" cellspacing="0" cellpadding="0" class="BTable">
+					                        <tr class="BTable_bg02" style="height:25px">
+						                        <th style=" padding-left:10px"><%= Resources.Approval.lbl_username %></th>
+						                        <th><%= Resources.Approval.lbl_jobposition %></th>
+						                        <th><%= Resources.Approval.lbl_jobtitle %></th>
+						                        <th><%= Resources.Approval.lbl_kind %></th>
+						                        <th><%= Resources.Approval.lbl_dept %></th>
+					                        </tr>
+                                            <tr>
+	                                            <td height="1" colspan="6" class="BTable_bg03"></td>
+                                            </tr>
+                                            <tr>
+	                                            <td height="2" colspan="6" class="BTable_bg04"></td>
+                                            </tr>
+				                        </table>
+			                        </div>
+		                        </td>
+	                        </tr>
+                        </table>
+                    </div>
+	                <!-- 참조 정보 끝 -->
+	
+	                <!-- 배포처(협조전) 정보 시작 -->
+	                <div id="divrecinfo" name="divrecinfo" style="display:none;">
+                        <!-- 타이틀 & 버튼 div 시작 -->  
+                        <div class="title" >
+                        <div class="text">
+                          <h3><%= Resources.Approval.lbl_RecDeptList%></h3>
+                        </div>
+                        <div class="text">
+                          <div style="display:none;"><input type="radio" value="dept" checked name="radAction" id="radAction" style="WIDTH: 30;" onClick="chkAction(0);" ><%= Resources.Approval.lbl_dept %>
+	                      <input type="radio" value="person" name="radAction" id="radAction" style="WIDTH: 30;" onClick="chkAction(1);" /><%= Resources.Approval.lbl_person %>
+	                      <input type="radio" value="group" name="radAction" id="radAction" style="WIDTH: 30;" onClick="chkAction(2);" /><%= Resources.Approval.btn_circulation_group %></div>
+                        </div>
+                        <div class="Btn">
+                          <ul>
+                            <li><a href="#" class="Btn05" id="btDeleteRec" name="cbBTN" onClick="doButtonAction(this);"><span><%= Resources.Approval.btn_delete  %></span></a></li>
+                          </ul>
+                        </div>
+                        </div>
+                        <!-- 타이틀 & 버튼 div 끝 -->
+                        <!-- 컬러 라인 시작 -->
+                        <div class="popup_line BTable_bg01"></div>
+                        <!-- 컬러 라인 끝 -->
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+	                        <tr>
+		                        <td id="tdrecinfo" name="tdrecinfo" height="220" valign="top">
+			                        <div id="divrecinfo2" name="divrecinfo2"  class="iframe_border" style="overflow-y:scroll;HEIGHT:100%">					    
+				                        <table width="100%" id="tblrecinfo" name="tblrecinfo" border="0" cellspacing="0" cellpadding="0" class="BTable">
+					                        <tr class="BTable_bg02" style="height:25px">
+						                        <th style=" padding-left:10px"><%= Resources.Approval.lbl_recinfo_td1 %></th>
+						                        <th><%= Resources.Approval.lbl_recinfo_td2 %></th>						        
+					                        </tr>
+					                        <tr>
+					                            <td height="1" colspan="2" class="BTable_bg03"></td>
+                                          </tr>
+                                          <tr>
+                                            <td colspan="2" style="" >
+                                                  <div style="overflow-y:scroll;WIDTH:99%;HEIGHT:340px"> <!--style="overflow-y:scroll;"-->
+                                                    <!-- 배포리스트 -->
+                                                    <table id="tblrefinfo" name="tblrefinfo"  width="100%" border="0" cellspacing="0" cellpadding="0" class="BTable">
+                                                    </table>
+                                                  </div>
+                                            </td>
+			                            </tr>
+                                          <tr>
+				                            <td height="1px" colspan="2" class="BTable_bg03"></td>
+                                          </tr>
+                                          <tr>
+				                            <td height="2px" colspan="2" class="BTable_bg04"></td>
+                                          </tr>
+			                                    </table>
+		                                    </div>
+	                                    </td>
+                                    </tr>
+                                </table>
+                            </div>
+                    <!-- 배포처(협조전) 정보 끝 -->  
+                </div>
+                <!-- 오른쪽 div 끝 -->
+            </td>
+        </tr>
+    </table>
+ <asp:contentplaceholder id="ContentBottom" runat="server">
+ </asp:contentplaceholder>
+ 
+ <span id="tooltip" class="tooltip"></span>
+<script type="text/javascript"  language="javascript">
+
+	var selTab = "tSearch";
+    var gStampRightsYN = "N";  //인장권자탭 선택상태인지 여부 (2012-12-17 HIW)
+    var gPrivateAppLine = "N";  //개인결재선탭 선택상태인지 여부 (2013-03-18 HIW)
+
+	//결재선선택
+	var m_oParent, m_oUserList;
+	var m_selectedCCRow=null;
+	var m_selectedCCRowId=null;
+	
+	var admintype = '<%=Request.QueryString["admintype"] %>';//관리자결재선변경으로추가
+	
+	/** ApvlineMgr.js 용 리소스 파일 변수 Start  **/
+	var strlable_send = "<%=Resources.Approval.lbl_send %>";
+	var strlable_global = "<%=Resources.Approval.lbl_global %>";
+	var strlable_receive = "<%=Resources.Approval.lbl_receive %>";	
+	var strlable_apv = "<%= Resources.Approval.lbl_app %>";
+	var strlable_recieve_apv = "<%= Resources.Approval.lbl_recieve_apv %>";
+	var strlable_authorize = "<%= Resources.Approval.lbl_authorize %>";
+	var strlable_substitue = "<%= Resources.Approval.lbl_substitue %>";
+	var strlable_audit_fulltime = "<%= Resources.Approval.lbl_audit_fulltime %>";
+	var strlable_audit_daily = "<%= Resources.Approval.lbl_audit_daily %>";
+	var strlable_assist = "<%= Resources.Approval.lbl_assist %>";
+	var strlable_after = "<%= Resources.Approval.lbl_after %>";	
+	var strlable_inactive = "<%= Resources.Approval.lbl_inactive %>";
+	var strlable_NoApprvl = "<%= Resources.Approval.lbl_NoApprvl %>";
+	var strlable_normalapprove = "<%= Resources.Approval.lbl_normalapprove %>";
+	var strlable_review = "<%= Resources.Approval.lbl_review %>";
+	var strlable_reject = "<%= Resources.Approval.lbl_reject %>";
+	var strlable_hold = "<%= Resources.Approval.lbl_hold %>";
+	var strlable_Par = "<%= Resources.Approval.lbl_Par %>";
+	var strlable_PersonalCon = "<%= Resources.Approval.lbl_PersonalCon %>";
+	var strlable_PublicInspect = "<%= Resources.Approval.lbl_PublicInspect %>";
+	var strlable_SendInfo = "<%= Resources.Approval.lbl_SendInfo %>";
+	var strlable_Seq = "<%= Resources.Approval.lbl_Seq %>";
+	var strlable_writer = "<%= Resources.Approval.lbl_writer %>";
+	var strlable_charge_approve = "<%= Resources.Approval.lbl_charge_approve %>";
+	var strlable_ChargeDept_Rec = "<%= Resources.Approval.lbl_ChargeDept_Rec %>";
+	var strlable_DistributeList_Rec = "<%= Resources.Approval.lbl_DistributeList_Rec %>";
+	var strlable_DeptConsent = "<%= Resources.Approval.lbl_DeptConsent %>";
+	var strlable_DAsist = "<%= Resources.Approval.lbl_DAsist %>";
+	var strlable_person_audit = "<%= Resources.Approval.lbl_person_audit %>";	
+	var strlable_person_audit3 = "<%= Resources.Approval.lbl_person_audit3 %>";	
+	var strlable_dept_audit = "<%= Resources.Approval.lbl_dept_audit %>";
+	var strlable_dept_audit3 = "<%= Resources.Approval.lbl_dept_audit3 %>";
+	var strlable_watch = "<%= Resources.Approval.lbl_watch %>";
+	var strlable_ref = "<%= Resources.Approval.lbl_ref %>";
+	var strlable_Dept_Distribut = "<%= Resources.Approval.lbl_Dept_Distribut %>";
+	var strlable_circulation_sent = "<%= Resources.Approval.lbl_circulation_sent %>";	
+	var strlable_comment	= "<%=Resources.Approval.lbl_comment %>";
+    var strlable_StampRightsOnlyOne	= "<%=Resources.Approval.lbl_StampRightsOnlyOne %>";
+    var strlable_StampRightsLastPosit	= "<%=Resources.Approval.lbl_StampRightsLastPosit %>";
+    var strlable_StampRightsNoDupli	= "<%=Resources.Approval.lbl_StampRightsNoDupli %>";
+    //2014-03-25 hyh 추가
+    var strlable_StampRightsNo	= "<%=Resources.Approval.lbl_StampRightsNo %>";
+    //2014-03-25 hyh 추가 끝
+	/** ApvlineMgr.js 용 리소스 파일 변수 End **/
+	
+    var strMsg_029 = "<%= Resources.Approval.msg_029 %>";
+    var strMsg_030 = "<%= Resources.Approval.msg_030 %>";
+    var strMsg_033 = "<%= Resources.Approval.msg_033 %>";
+    var strMsg_034 = "<%= Resources.Approval.msg_034 %>";
+    var strMsg_035 = "<%= Resources.Approval.msg_035 %>";
+    var strMsg_036 = "<%= Resources.Approval.msg_036 %>";
+    var strMsg_038 = "<%= Resources.Approval.msg_038 %>";
+    var strMsg_039 = "<%= Resources.Approval.msg_039 %>";
+    var strMsg_040 = "<%= Resources.Approval.msg_040 %>";
+    var strMsg_042 = "<%= Resources.Approval.msg_042 %>";
+    var strMsg_044 = "<%= Resources.Approval.msg_044 %>";
+    var strMsg_046 = "<%= Resources.Approval.msg_046 %>";
+    var strMsg_047 = "<%= Resources.Approval.msg_047 %>";
+    var strMsg_048 = "<%= Resources.Approval.msg_048 %>";
+    var strMsg_049 = "<%= Resources.Approval.msg_049 %>";
+    var strMsg_050 = "<%= Resources.Approval.msg_050 %>";
+    var strMsg_051 = "<%= Resources.Approval.msg_051 %>";
+    var strMsg_052 = "<%= Resources.Approval.msg_052 %>";
+    var strMsg_053 = "<%= Resources.Approval.msg_053 %>";
+    var strMsg_054 = "<%= Resources.Approval.msg_054 %>";
+    var strMsg_055 = "<%= Resources.Approval.msg_055 %>";
+    var strMsg_056 = "<%= Resources.Approval.msg_056 %>";
+    var strMsg_057 = "<%= Resources.Approval.msg_057 %>";
+    var strMsg_058 = "<%= Resources.Approval.msg_058 %>";
+    var strMsg_061 = "<%= Resources.Approval.msg_061 %>";
+    var strMsg_121 = "<%= Resources.Approval.msg_121 %>";
+    var strMsg_122 = "<%= Resources.Approval.msg_122 %>";
+    var strMsg_123 = "<%= Resources.Approval.msg_123 %>";
+    var strMsg_124 = "<%= Resources.Approval.msg_124 %>";
+    var strMsg_125 = "<%= Resources.Approval.msg_125 %>";
+    var strMsg_149 = "<%= Resources.Approval.msg_149 %>";
+    var strMsg_173 = "<%= Resources.Approval.msg_173 %>";
+    var strMsg_176 = "<%= Resources.Approval.msg_176 %>";
+    var strMsg_177 = "<%= Resources.Approval.msg_177 %>";
+    var strMsg_178 = "<%= Resources.Approval.msg_178 %>";
+    var strMsg_179 = "<%= Resources.Approval.msg_179 %>";
+    var strMsg_180 = "<%= Resources.Approval.msg_180 %>";
+    var strMsg_181 = "<%= Resources.Approval.msg_181 %>";
+    var strMsg_182 = "<%= Resources.Approval.msg_182 %>";
+    var strMsg_183 = "<%= Resources.Approval.msg_183 %>";
+    var strMsg_184 = "<%= Resources.Approval.msg_184 %>";
+    var strMsg_185 = "<%= Resources.Approval.msg_185 %>";
+    var strMsg_186 = "<%= Resources.Approval.msg_186 %>";
+    var strMsg_187 = "<%= Resources.Approval.msg_187 %>";
+    var strMsg_188 = "<%= Resources.Approval.msg_188 %>";
+    var strMsg_188 = "<%= Resources.Approval.msg_188 %>";
+    var strMsg_253 = "<%= Resources.Approval.msg_253 %>";
+    var strMsg_254 = "<%= Resources.Approval.msg_254 %>";
+    var strMsg_255 = "<%= Resources.Approval.msg_255 %>";
+    var strMsg_259 = "<%= Resources.Approval.msg_259 %>";
+    var strMsg_303 = "<%= Resources.Approval.msg_303 %>";
+    var strMsg_304 = "<%= Resources.Approval.msg_304 %>";
+    var strMsg_305 = "<%= Resources.Approval.msg_305 %>";
+    var strMsg_306 = "<%= Resources.Approval.msg_306 %>";
+    var strMsg_328 = "<%= Resources.Approval.msg_328 %>";
+    var strMsg_334 = '<%= Resources.Approval.msg_334 %>';
+    var strMsg_335 = '<%= Resources.Approval.msg_335 %>';
+    var lbl_ExtType = "<%= Resources.Approval.lbl_ExtType %>";//특이결재용
+    var strMsg_336 = '<%= Resources.Approval.msg_336 %>';//2013-03-21 yu2mi : 이수 다중후결 수정
+
+    var gAuditOU = "43000:정보지원팀"; //감사부서System.Web.Configuration.WebConfigurationManager.AppSettings["WF_AuditOU"]
+    var gAssistOU = "43000:정보지원팀"; //감시부서System.Web.Configuration.WebConfigurationManager.AppSettings["WF_AssistOU"]
+
+    var gHasPrivateLines = false;
+    var gOUNameType = "<%=ConfigurationManager.AppSettings["Default_OUNameType"] %>";
+    var gDeputyType = "<%=strDeputyType %>";
+    var gLngIdx = <%=strLangIndex %>;
+
+
+    window.onload= initOnload;
+    function initOnload(){
+	    initialize();
+        try{GetEnt();}catch(e){}
+	    try{if (top.opener.g_dicFormInfo!=null){parent.document.getElementById("ApvlineViewer").contentWindow.frameElement.height = document.getElementById("divleft").offsetHeight;}}catch(e){}
+        //var iFrame = null;
+        //iframe별 브라우져별 생성에 대한 제약사항이 다름
+	    //자식 창의 페이지가 로딩 상태를 확인
+//	    if(window.addEventListener){
+//	        iFrame= document.createElement("IFRAME");
+//	        iFrame.addEventListener('load',initialize, false);
+//	        iFrame.style.height = "100px";
+//	        iFrame.style.width = "100%";
+//	        iFrame.style.border = "0";
+//	    }else{
+//	        iFrame = document.createElement('<iframe  name="Apvlist"  width="100%" height="100%" frameborder="0" style="PADDING-RIGHT:0px; PADDING-LEFT:0px; PADDING-BOTTOM:0px; MARGIN:0px; PADDING-TOP:0px;" />');
+//	        iFrame.onreadystatechange = initialize;
+//	    }
+//	    iFrame.id = "Apvlist";
+//	    iFrame.src = "Apvlist.aspx";
+//	    
+//	    //최소 생성시와 재 호출시에 대한 상황별 iframe 실제 로딩
+//	    if(document.getElementById("divApvlist").hasChildNodes() == true){
+//	        if(window.addEventListener){
+//	            document.getElementById("Apvlist").src = "Apvlist.aspx";
+//	        }else{
+//	            window.frames["Apvlist"].location.reload();
+//	        }			        
+//	    }else{
+//	        document.getElementById("divApvlist").appendChild(iFrame);
+//	    }  
+
+        //공문일경우에만 인장권자탭 보이게 (HIW)
+        //if(getInfo("fmpf") == "WF_FORM_ISU_ALL_COM010" || getInfo("fmpf") == "WF_FORM_ISU_ALL_COM020" || getInfo("fmpf") == "WF_FORM_ISU_ALL_COM030") 
+		  if(getInfo("fmpf") == "WF_FORM_ISU_ALL_COM010" || getInfo("fmpf") == "WF_FORM_ISU_ALL_COM020" || getInfo("fmpf") == "WF_FORM_ISU_ALL_COM030"  || getInfo("fmpf") == "WF_FORM_ISU_CNE_COM0000")
+        		
+		  document.getElementById("divtStampRights").style.display = "";
+
+	}
+
+	function changeTab(selObject) {//debugger;
+		if (selObject != selTab) {
+            document.getElementById("div"+selTab.replace("_","")).className = "" ;
+            document.getElementById("div"+selObject.replace("_","")).className = "current" ;           
+            document.getElementById("span"+selTab).style.display = "none" ;			
+            document.getElementById("span"+selObject).style.display ="" ;
+			selTab = selObject;
+			//검색결과 창 지우기
+			ListItems.clearContents();
+			
+            gStampRightsYN = "N";  //2012-12-27 HIW
+            gPrivateAppLine = "N";  //2013-03-18 HIW
+            $('#ListItems').contents().find('#chkall').attr('disabled',false);  //2013-03-18 HIW
+
+			if (selObject != "tApvLine"){
+			    document.getElementById("tblApplyLine").style.display="none"; //개인결재선적용
+			    document.getElementById("btSaveApvLine").style.display = "none";
+			    if(selObject == "tPersonDeployList" && iPersonDeployList.location.href == "about:blank") 
+                    iPersonDeployList.location.href = "../DeployList/DPrivateLineList.aspx";
+                //else if(selObject == "tStampRights" && iStampRights.location.href == "about:blank") {  //인장권자 (2012-12-27 HIW)
+                else if(selObject == "tStampRights") {  //인장권자 (2012-12-27 HIW)
+                    //2014-10-21 hyh수정
+                    //iStampRights.location.href = "../ApvlineList/StampRightsList.aspx";
+                    if(_Browser == "CHROME"){
+                        iStampRights.src = "../ApvlineList/StampRightsList.aspx";
+                    }else{
+                        iStampRights.location.href = "../ApvlineList/StampRightsList.aspx";
+                    }
+                    //2014-10-21 hyh수정 끝
+                    gStampRightsYN = "Y";  
+                }
+			}else{
+			    if(iApvLine.location.href == "about:blank" ) {
+                    iApvLine.location.href = "../Apvlinelist/PrivateLineList.aspx";
+                }
+			    document.getElementById("tblApplyLine").style.display=""; //개인결재선적용
+			    //if (gHasPrivateLines) document.getElementById("btSaveApvLine").style.display = "";
+			    //document.getElementById("tblPlPerson").style.display="none";  //동시결재
+
+                gPrivateAppLine = "Y";  //2013-03-18 HIW
+                $('#ListItems').contents().find('#chkall').attr('disabled',true);  //2013-03-18 HIW
+			}
+				//배포목록 선택 시 배포목록리스트 자동 배포처로 선택
+		    if (selObject == "tDeployList" && mType != "2"){
+		        document.getElementsByName("radAction")[2].checked=true;chkAction("2");		        
+		    }else{
+		        document.getElementsByName("radAction")[0].checked=true;chkAction("0");		        
+		    }
+		}
+	}
+
+	function getDetailInfo(strAlias){	
+		try{
+//			strAlias = strAlias.replace(/&/g,String.fromCharCode(8)).replace(/=/g,String.fromCharCode(11));				
+//			m_Alias = strAlias;
+////			var szURL = "/xmlorg/query/org_memberquery02.xml?PERSON_CODE=" + strAlias;
+////			m_xmlHTTP.open("GET",szURL,true); 
+////			m_xmlHTTP.setRequestHeader( "Content-type:", "text/xml");  
+////			m_xmlHTTP.onreadystatechange = event_retrieve_completed;
+////			m_xmlHTTP.send();
+//			var pXML = " EXEC dbo.usp_GetMember02 '"  + strAlias + "' ";
+//			//var sXML = "<Items><connectionname>ORG_ConnectionString</connectionname><xslpath>http://" + window.document.location.host + "/COVINet/COVIPortalNet/Address/detailmember.xsl</xslpath><sql><![CDATA[" + pXML + "]]></sql></Items>" ;
+//			var sXML = "<Items><connectionname>ORG_ConnectionString</connectionname><xslpath></xslpath><sql><![CDATA[" + pXML + "]]></sql></Items>" ;
+//            var szURL = "/covinet/coviportalnet/address/getXMLQuery.aspx?Type=searchMember";
+//            requestHTTP("POST",szURL,true,"text/xml",event_retrieve_completed, sXML);
+			
+		}catch(e){
+			alert("getDetailInfo() error: "+e.description + "\r\nError number: " + e.number);
+		}
+	}
+	function event_retrieve_completed(){	
+		if(m_xmlHTTP.readyState == 4){
+			m_xmlHTTP.onreadystatechange = event_noop;//re-entrant gate
+			if(m_xmlHTTP.responseText.charAt(0)=='\r'){
+				alert("error in event_retrieve_completed(): no responseText returned");
+			}else{
+				var oAllNodes;
+				try{	
+				    //transfer by xsl file 
+                    var m_objXML= CreateXmlDocument();
+				    var m_oMemberXSLProcessor = makeProcessor("../Address/detailmember.xsl");
+				    m_oMemberXSLProcessor.input = m_xmlHTTP.responseXML;
+				    m_oMemberXSLProcessor.transform();
+				    m_objXML.loadXML(m_oMemberXSLProcessor.output);
+            				    				
+					//oAllNodes = m_xmlHTTP.responseXML.selectSingleNode("response/item").childNodes;
+					oAllNodes = m_objXML.selectSingleNode("response/item").childNodes;
+					var oNode,el;
+					for(var x=0;x<oAllNodes.length;x++){
+						oNode = oAllNodes[x];
+						try{
+							switch (oNode.nodeName){
+								//case "DEPUTY_USAGE": var temp =(oNode.text=="1")?"Y":"N"; eval(oNode.nodeName).innerHTML= temp;	break;
+								default:eval(oNode.nodeName).innerHTML =  oNode.text.replace(/\x08/g,"&");
+							}
+						}catch(e){
+						}
+					}
+				}catch(e){
+					//alert("error in event_retrieve_completed(): "+ e.message);
+				}
+			}    
+		}	
+	}
+	//결재자 선택 관련 시작
+	function switchParentNode(iType){
+		var m_XMLDOM = CreateXmlDocument();
+		m_XMLDOM.loadXML("<selected><to></to><cc></cc><bcc></bcc><user></user><group></group><role></role></selected>");
+		if(!m_XMLDOM.parsed){
+		}
+		var sElm = "selected/user";
+		switch(iType){
+			case 0: m_oParent = m_XMLDOM.selectSingleNode("selected/to");	sElm = 	"selected/to";	break;
+			case 1: m_oParent = m_XMLDOM.selectSingleNode("selected/cc");	sElm = 	"selected/cc";	break;
+			case 2: m_oParent = m_XMLDOM.selectSingleNode("selected/bcc");	sElm = 	"selected/bcc";	break;
+			case 3: m_oParent = m_XMLDOM.selectSingleNode("selected/user");	sElm = 	"selected/user";	break;
+			case 4:	m_oParent = m_XMLDOM.selectSingleNode("selected/group");sElm = 	"selected/group";	break;
+			case 5:	m_oParent = m_XMLDOM.selectSingleNode("selected/group");sElm = 	"selected/group";	break;
+		}
+        
+		switch(selTab){
+			case "tSearch":
+				m_oUserList = (window.addEventListener)?document.getElementById("ListItems"):window.frames["ListItems"] ;
+				if (iType==3 || iType == 4){
+					selectListItmes(iType);
+				}
+				break;
+			case "tGroup":
+				if(iType == 4 ){
+					m_oUserList = (window.addEventListener)?document.getElementById("iGroup"):window.frames["iGroup"];
+					addClicked()
+				}else if (iType== 3){
+					m_oUserList = (window.addEventListener)?document.getElementById("ListItems"):window.frames["ListItems"];
+					selectListItmes(iType);
+				}
+				break;
+			case "tApvLine":
+				break;
+			case "tDeployList":
+				if(iType == 4 ){
+					m_oUserList = (window.addEventListener)?document.getElementById("iDeployList"):window.frames["iDeployList"]
+					selectListItmes(iType);
+				}
+			    break;
+			case "tPersonDeployList":
+				if(iType == 4 ){
+					getPersonDeploy();
+				}
+				break;
+            case "tStampRights":  //인장권자 (2012-12-17 HIW)
+                m_oUserList = (window.addEventListener)?document.getElementById("ListItems"):window.frames["ListItems"] ;
+				if(iType == 3 ){
+					selectListItmes(iType);
+				}
+				break;
+		}
+		return m_XMLDOM.selectSingleNode(sElm);
+	}
+	function addClicked(){
+		var oSelNode = ((window.addEventListener)?m_oUserList.contentWindow:m_oUserList).getCurrentNode();
+		if(oSelNode != null){
+			if(m_oParent.selectSingleNode("item[AN = '" + oSelNode.selectSingleNode("AN").text + "']") == null){
+			    //부서장결재 참조 추가 방지201108
+			    if(( m_sSelectedRouteType == "ccinfo" || m_sSelectedRouteType == "dist") && oSelNode.selectSingleNode("ROLE")!=null && oSelNode.selectSingleNode("ROLE").text == "manager"){
+			    }else{ 
+
+				    addListItem(oSelNode.cloneNode(true));
+				}
+			}
+		}
+	}
+
+	function addListItem(oNode){
+		try{
+			m_oParent.appendChild(oNode);
+            //m_oParent.appendChild(ReplaceChars(oNode.nodeTypedValue, "&amp;", " "));
+		}catch(e){
+			alert(e.description);
+		}
+	}
+	function selectListItmes(iType){
+		var sChk = document.getElementById("chk").value ;
+		var busechk = false;
+		if(window.addEventListener){
+		    busechk = iSearch.document.getElementById("buse").checked;
+		}else{
+		   busechk =  iSearch.buse.checked;
+		}
+		try{
+			if ((selTab == 'tSearch' && ((iType==3 && !busechk) || (iType==4 && busechk))) || selTab == 'tGroup' || selTab == 'tDeployList' || selTab == 'tStampRights') {  //"tStampRights" --> 인장권자 (2012-12-17 HIW)
+				if (sChk == "1"){
+                    var sel_row = (window.addEventListener)?m_oUserList.contentDocument.getElementsByName('chkRowSelect'):m_oUserList.document.getElementsByName('chkRowSelect');
+                    var chk_count = sel_row.length;
+                    if (chk_count > 0) {
+                        for (var i = (chk_count - 1); i >= 0; i--) {
+                            if (sel_row[i].checked) {
+                                var eTR = sel_row[i].parentNode;
+                                while (eTR.tagName != "TR") { eTR = eTR.parentNode; }
+
+					            ListItems.g_eCurrentRow = eTR;
+					            ListItems.processSelectedRow();  
+                                addClicked();
+                                //sel_row[i].checked = false;  //주석처리 (/ApvlineMgr.js에서 해제함. 2012-12-17 HIW로 검색)
+                            }
+                        }
+                    }            
+				}else {
+						addClicked();
+				}
+			}
+		}catch(e){
+		    alert(e.message);
+		}
+		document.getElementById("chk").value = 1 ;
+
+	}
+	//결재자 선택 관련 종료
+	function overM(e){
+        var evt=(window.event)?window.event: e;
+		var teTR = (evt.srcElement) ? evt.srcElement : evt.originalTarget;	
+		while(teTR.tagName != "TR") {
+			teTR = teTR.parentNode;
+		}
+		teTR.style.backgroundColor = "#EEF7F9";
+		return true;
+	}
+
+	function outM(e){
+        var evt=(window.event)?window.event: e;
+		var teTR = (evt.srcElement) ? evt.srcElement : evt.originalTarget;	
+		while(teTR.tagName != "TR") {
+			teTR = teTR.parentNode;
+		}
+		teTR.style.backgroundColor = "#FFFFFF";
+		return true;
+	}
+	function selectCCRow(e){
+        var evt=(window.event)?window.event: e;
+		var oRow;
+//		if(id==null){
+			oRow=(evt.srcElement) ? evt.srcElement : evt.target;		
+//		}else{
+//			oRow=document.getElementById(id);
+//		}
+		if(oRow!=null){
+			switchSelectedRow(oRow);
+		}else{
+			m_selectedCCRow=null;
+			m_selectedCCRowId=null;
+		}
+
+	}
+	function switchSelectedRow(oRow){
+		while(oRow!=null&&oRow.tagName!="TR"){
+			oRow=oRow.parentNode;
+		}
+		if(oRow!=null){
+			if(m_selectedCCRow!=null)m_selectedCCRow.style.backgroundColor="#FFFFFF";
+			oRow.style.backgroundColor="#EEF7F9";
+			m_selectedCCRow=oRow;
+			m_selectedCCRowId=oRow.id;
+		}
+	}
+	function getSelectedRow(){return m_selectedCCRow;}
+
+	var	m_selectedDistRow=null;
+	var	m_selectedDistRowId=null;
+	function selectDistRow( e){
+        var evt=(window.event)?window.event: e;
+		var oRow;
+//		if(id==null){
+			oRow=(evt.srcElement) ? evt.srcElement : evt.target;
+//		}else{
+//			oRow=document.getElementById(id);
+//		}
+		if(oRow!=null){
+			switchDistSelectedRow(oRow);
+		}else{
+			m_selectedDistRow=null;
+			m_selectedDistRowId=null;
+		}
+
+	}
+	function switchDistSelectedRow(oRow){
+		while(oRow!=null&&oRow.tagName!="TR"){
+			oRow=oRow.parentNode;
+		}
+		if(oRow!=null){
+            //2013.03 yu2mi : 수신부서 row 색 변한 오류 처리 s
+//	        if(m_selectedRowApvlist!=null){
+//	            if ( m_selectedRowApvlist.id.indexOf("step") == -1){
+//	                m_selectedRowApvlist.style.backgroundColor="#e8e8e8";
+//	            }else{
+//	                m_selectedRowApvlist.style.backgroundColor="#FFFFFF";
+//	            }
+//	        }
+            if(m_selectedDistRow!=null){
+	            m_selectedDistRow.style.backgroundColor="#FFFFFF";
+	        }
+            //2013.03 yu2mi : 수신부서 row 색 변한 오류 처리 e
+			oRow.style.backgroundColor="#EEF7F9";
+			m_selectedDistRow=oRow;
+			m_selectedDistRowId=oRow.id;
+		}
+	}
+	function getSelectedDistRow(){return m_selectedDistRow;}
+	</script>	
+	<!-- 결재선 관리 속도 개선 2010.06 -->
+	<script type="text/javascript" language="javascript">
+		var szLISTcreate="<tr class=\"BTable_bg02\" style=\"height:25px\">"
+						+"<th style=\" padding-left:10px\" nowrap=\"t\"><%= Resources.Approval.lbl_no %></th>"
+						+"<th nowrap=\"t\"><%= Resources.Approval.lbl_username %></th>"
+						+"<th nowrap=\"t\"><%= Resources.Approval.lbl_jobposition %></th>"
+						+"<th nowrap=\"t\"><%= Resources.Approval.lbl_jobtitle %></th>"
+						+"<th nowrap=\"t\"><%= Resources.Approval.lbl_state%></th>"
+						+"<th nowrap=\"t\"><%= Resources.Approval.lbl_kind %></th>"
+						+"<th nowrap=\"t\"><%= Resources.Approval.lbl_dept %></th>"
+						+"</tr>"
+						+"<tr>"
+						   +" <td height=\"1\" colspan=\"7\" class=\"BTable_bg03\"></td>"
+						+"</tr>";		
+		var szLISTread = "<tr class=\"BTable_bg02\" style=\"height:25px\">"
+						+"<th style=\" padding-left:10px\" nowrap=\"t\" width=\"50px\" ><%= Resources.Approval.lbl_no %></th>"
+						+"<th nowrap=\"t\" width=\"60px\" ><%= Resources.Approval.lbl_username %></th>"
+						+"<th nowrap=\"t\" width=\"60px\" ><%= Resources.Approval.lbl_jobposition %></th>"						
+						+"<th nowrap=\"t\" width=\"60px\" ><%= Resources.Approval.lbl_jobtitle %></th>"
+						+"<th nowrap=\"t\" width=\"60px\" ><%= Resources.Approval.lbl_state %></th>"
+						+"<th nowrap=\"t\" width=\"100px\" ><%= Resources.Approval.lbl_kind %></th>"
+						+"<th nowrap=\"t\" width=\"100px\" ><%= Resources.Approval.lbl_dept %></th>"
+						+"<th nowrap=\"t\" width=\"100px\" ><%= Resources.Approval.lbl_approvdate %></th>"
+						+"<th nowrap=\"t\" width=\"100px\" ><%= Resources.Approval.lbl_receivedate %></th>"
+						+"<th nowrap=\"t\" width=\"60px\" ><%= Resources.Approval.lbl_comment %></th>"
+						+"</tr>"
+						+"<tr>"
+							+"<td height=\"1\" colspan=\"10\" class=\"BTable_bg03\"></td>"
+						+"</tr>";            
+        var szLISTchange="<tr class=\"BTable_bg02\" style=\"height:25px\">"
+						+"<th style=\" padding-left:10px\" nowrap=\"t\" width=\"50px\" ><%= Resources.Approval.lbl_no %></th>"
+						+"<th nowrap=\"t\" width=\"60px\" ><%= Resources.Approval.lbl_username %></th>"
+						+"<th nowrap=\"t\" width=\"60px\" ><%= Resources.Approval.lbl_jobposition %></th>"						
+						+"<th nowrap=\"t\" width=\"60px\" ><%= Resources.Approval.lbl_jobtitle %></th>"
+						+"<th nowrap=\"t\" width=\"60px\" ><%= Resources.Approval.lbl_state %></th>"
+						+"<th nowrap=\"t\" width=\"100px\" ><%= Resources.Approval.lbl_kind %></th>"
+						+"<th nowrap=\"t\" width=\"100px\" ><%= Resources.Approval.lbl_dept %></th>"
+						+"<th nowrap=\"t\" width=\"100px\" ><%= Resources.Approval.lbl_approvdate %></th>"
+						+"<th nowrap=\"t\" width=\"100px\" ><%= Resources.Approval.lbl_receivedate %></th>"
+						+"<th nowrap=\"t\" width=\"60px\" ><%= Resources.Approval.lbl_comment %></th>"
+						+"</tr>"
+						+"<tr>"
+							+"<td height=\"1\" colspan=\"10\" class=\"BTable_bg03\"></td>"
+						+"</tr>";	
+		var m_log="LOG=";
+		var m_cntHiddenPerson=0;
+		var m_cntHiddenOu=0;
+		var m_cntHiddenGroup=0;
+		var m_cntHiddenStep=0;
+		var m_cntApvStep=0;
+
+		function log(v){m_log+=" #"+v;}
+		function getLog(){return m_log;}
+
+		function resetHiddenPersonCount(oNodeList){
+			m_cntHiddenPerson=oNodeList.length;return "";
+		}
+		function resetHiddenOuCount(oNodeList){
+			m_cntHiddenOu=oNodeList.length;return "";
+		}
+		function resetHiddenStepCount(oNodeList){
+			m_cntHiddenStep=oNodeList.length;return "";
+		}
+		function countHidden(oNodeList){
+			if(oNodeList.length==0) return 0;
+
+			var oNode = oNodeList.nextNode()
+			var sName = oNode.nodeName;
+			var oTI = oNode.selectSingleNode("taskinfo[@visible='n']");
+			switch(sName){
+				case "step":if(oTI!=null)m_cntHiddenStep--;return m_cntHiddenStep;break;
+				case "ou":if(oTI!=null)m_cntHiddenOu--;return m_cntHiddenOu;break;
+				case "role":
+				case "person":if(oTI!=null)m_cntHiddenPerson--;return m_cntHiddenPerson;break;
+				case "group":if(oTI!=null)m_cntHiddenGroup--;return m_cntHiddenGroup;break;
+			}
+		}
+		function formatDate(sDate){	
+			if(sDate=="" || sDate==null)
+				return "";
+			var szDate = sDate.replace(/-/g,"/").replace(/오후/,"pm").replace(/오전/,"am");
+			if(szDate.indexOf("pm") > -1){
+				szDate = szDate.replace("pm ","");
+				var atemp = szDate.split(" ");
+				var tmp = parseInt(atemp[1].split(":")[0])+12;
+				if(tmp > 23 && parseInt(atemp[1].split(":")[1]) > 0) tmp = tmp-12;
+				tmp = dblDigit(tmp);
+				var atemp2 = atemp[0].split("/");
+				szDate = atemp2[1]+"/"+atemp2[2]+"/"+atemp2[0] + " " + tmp + atemp[1].substring(atemp[1].indexOf(":"), 10);
+			}else{
+				szDate = szDate.replace("am ","");
+				var atemp = szDate.split(" ");
+				var atemp2 = atemp[0].split("/");
+				szDate = atemp2[1]+"/"+atemp2[2]+"/"+atemp2[0] + " " + atemp[1];
+			}
+			var dtDate = new Date(szDate);
+			return dtDate.getFullYear()+"-"+dblDigit(dtDate.getMonth()+1)+"-"+dblDigit(dtDate.getDate())+" "+dblDigit(dtDate.getHours())+":"+dblDigit(dtDate.getMinutes());//+":"+dblDigit(dtDate.getSeconds());
+				
+//			if(sDate=="")
+//				return " ";
+//			var dtDate = new Date(sDate.replace(/-/g,"/").replace(/오후/,"pm").replace(/오전/,"am"));
+//			return dtDate.getYear()+"-"+dblDigit(dtDate.getMonth()+1)+"-"+dblDigit(dtDate.getDate())+" "+dblDigit(dtDate.getHours())+":"+dblDigit(dtDate.getMinutes());//+":"+dblDigit(dtDate.getSeconds());
+		}
+		function dblDigit(iVal){return (iVal<10?"0"+iVal:iVal);}
+		function isLastApvStep(){
+			return (m_cntApvStep++==0?true:false);
+		}
+		function splitName(sValue, iLangIndex){
+			var ary = sValue.split(";");
+			if (ary.length > 2)
+			{
+				if (ary.length >= iLangIndex) { return ary[iLangIndex + 1]; } else { return ary[1]; }
+			}
+			else if (ary.length == 2) { return ary[1]; }
+			else
+			{
+				return " ";
+			}
+		}
+		function splitNameExt(sValue, iLangIndex){
+			var ary = sValue.split(";");
+			if (ary.length > iLangIndex) { return ary[iLangIndex]; } else { return ary[0]; }
+		}		
+		function convertKindToSignTypeByRTnUT(sKind,sParentUT,sRT,sUT,customattribute2){
+			//var sSignType="&nbsp;";//백종기(2006-11-09): CDATA이므로 이렇게 하면 [결재리스트] 목록에 &nbsp;가 그대로 나옴.
+			if (scustomattribute2 == undefined){
+			    scustomattribute2 = "";
+			}
+			var sSignType = " ";
+			var scustomattribute2 = (customattribute2==undefined)?"":customattribute2;
+			if(scustomattribute2 == "ExtType"){
+			    sSignType = "<%= Resources.Approval.lbl_ExtType %>";
+			}else if(scustomattribute2 == "개인준법"){
+			    sSignType = "<%= Resources.Approval.lbl_person_audit2 %>";
+			}else{
+			    switch(sRT){
+				case "receive":
+					switch(sUT){
+						case "ou":
+							switch(sParentUT){
+								case "ou":sSignType="<%= Resources.Approval.lbl_ChargeDept %>";break;
+								case "person":sSignType=convertKindToSignType(sKind,scustomattribute2) ;break;
+							}break;
+						case "role":
+						case "person":
+							sSignType="<%= Resources.Approval.lbl_receive %>";break;
+						case "group":
+							sSignType="<%= Resources.Approval.lbl_receive %>";break;
+					}break;
+				case "consult":
+					switch(sUT){
+						case "ou":
+							switch(sParentUT){
+								case "ou":sSignType="<%= Resources.Approval.lbl_DeptConsent %>";break;
+								case "role":
+								case "person":sSignType=convertKindToSignType(sKind,scustomattribute2) ;break;
+							}break;
+						case "role":
+						case "person":
+							sSignType="<%= Resources.Approval.lbl_PersonConsent %>";break;
+					}break;
+				case "assist":
+					switch(sUT){
+						case "ou":
+							switch(sParentUT){
+							    case "ou": sSignType = "<%= Resources.Approval.lbl_DeptConsent %>"; break;
+								case "role":
+								case "person":sSignType=convertKindToSignType(sKind,scustomattribute2) ;break;
+							}break;
+						case "role":
+						case "person":
+							//sSignType="<%= Resources.Approval.lbl_assist %>";break;
+							sSignType=(scustomattribute2==""?"<%= Resources.Approval.lbl_assist %>":scustomattribute2);break;//201108
+					}break;
+				case "audit":
+					switch(sUT){
+						case "ou":
+							switch(sParentUT){
+								case "ou":sSignType=(scustomattribute2==""?"<%= Resources.Approval.lbl_audit %>":scustomattribute2);break;
+								case "role":
+								case "person":sSignType=convertKindToSignType(sKind,scustomattribute2) ;break;
+							}break;
+						case "role":
+						case "person":
+							sSignType="<%= Resources.Approval.lbl_audit %>";break;
+					}break;
+				case "review":
+					sSignType="<%= Resources.Approval.lbl_PublicInspect %>";break;
+				case "notify":
+					sSignType="<%= Resources.Approval.lbl_SendInfo %>";break;
+				case "approve":
+					switch(sUT){
+						case "role":
+						case "person":
+							sSignType=convertKindToSignType(sKind,scustomattribute2) ;break;
+						case "ou":
+							sSignType="<%= Resources.Approval.lbl_DeptApprv %>";break;
+					}break;
+			    }
+			}
+			return sSignType;
+		}
+		function convertKindToSignType(sKind,customattribute2){
+			var sSignType;
+			var scustomattribute2 = (customattribute2==undefined)?"":customattribute2;
+			switch(sKind){
+				case "normal":
+					sSignType = "<%= Resources.Approval.lbl_normalapprove %>";break;
+				case "consent":
+					sSignType = "<%= Resources.Approval.lbl_investigation %>";break;
+				case "authorize":
+					sSignType = "<%= Resources.Approval.lbl_authorize %>";break;
+				case "substitute":
+					sSignType = "<%= Resources.Approval.lbl_substitue %>";break;
+				case "review":
+					sSignType = "<%= Resources.Approval.lbl_review %>";break;
+				case "bypass":
+					sSignType = "<%= Resources.Approval.lbl_bypass %>";break;
+				case "charge":
+					sSignType = "<%= Resources.Approval.lbl_charge %>";break;
+                case "confidential":
+                  sSignType = "<%= Resources.Approval.lbl_Confidential %>";break;
+                case "conveyance":
+                  sSignType = "<%= Resources.Approval.lbl_forward %>";break;
+				case "skip":
+					sSignType = "<%= Resources.Approval.lbl_NoApprvl %>"+" "+String(scustomattribute2);break;
+                case "confirm":
+                  sSignType = "<%= Resources.Approval.lbl_Confirm %>";break;
+                //20110318참조결재
+                case "reference":
+                  sSignType = "<%= Resources.Approval.lbl_share4list %>";break;
+				default:
+					//sSignType = "&nbsp;";break;
+					sSignType = " ";
+			}
+			return sSignType;
+		}
+		function convertSignResult(sResult,sKind,customattribute2){
+			var sSignResult;
+		
+		    switch(sResult){
+			    case "inactive":
+				    sSignResult = "<%= Resources.Approval.lbl_inactive %>";break;
+			    case "pending":
+				    sSignResult = "<%= Resources.Approval.lbl_inactive %>";break;
+			    case "reserved":
+				    sSignResult = "<%= Resources.Approval.lbl_hold %>";break;
+			    case "completed":
+			        if(customattribute2 == "ExtType"){
+			             sSignResult = "<%= Resources.Approval.lbl_ExtType_agree %>";
+			        }else{
+				    sSignResult =  (sKind=='charge')?"<%= Resources.Approval.btn_draft %>":"<%= Resources.Approval.lbl_app %>";
+				    }break;
+			    case "rejected":
+			        if(customattribute2 == "ExtType"){
+			         sSignResult = "<%= Resources.Approval.lbl_ExtType_disagree %>";
+			        }else{
+				    sSignResult = "<%= Resources.Approval.lbl_reject %>";
+				    } break;
+			    case "rejectedto":
+				    sSignResult = "<%= Resources.Approval.lbl_reject %>";break;
+			    case "authorized":
+				    sSignResult = "<%= Resources.Approval.lbl_authorize %>";break;
+			    case "reviewed":
+				    sSignResult = "<%= Resources.Approval.lbl_review %>";break;
+			    case "substituted":
+				    sSignResult = "<%= Resources.Approval.lbl_substitue %>";break;
+			    case "agreed":
+			        if(customattribute2 == "ExtType"){
+			            sSignResult = "<%= Resources.Approval.lbl_ExtType_agree %>";
+			        }else{
+				    sSignResult = "<%= Resources.Approval.lbl_consent %>";}break;
+			    case "disagreed":
+			        if(customattribute2 == "ExtType"){
+			             sSignResult = "<%= Resources.Approval.lbl_ExtType_disagree %>";
+			        }else{
+				    sSignResult = "<%= Resources.Approval.lbl_disagree %>";}break;
+			    case "bypassed":
+				    sSignResult = "<%= Resources.Approval.lbl_bypass %>";break;
+			    case "skipped":
+				    sSignResult = "<%= Resources.Approval.lbl_NoApprvl %>";break;
+			    case "confirmed":
+				    sSignResult = "<%= Resources.Approval.lbl_confirmed %>";break;
+			    default:
+				    //sSignResult = "&nbsp;";break;
+				    sSignResult = " ";
+				    break;
+		    }
+			return sSignResult;
+		}
+		function replaceCR(s){
+			return s.replace(/\n/g,"<br>");
+		}
+		function getDotCountSpace(sDotVar){
+			var aDotCount = sDotVar.split(".");
+			var sDotCount = "";
+			for(var i=0; i < aDotCount.length-1; i++){
+				if ( sDotCount == ""){
+					sDotCount += "<font color='white'>-</font>";
+				}else{
+					sDotCount += " ";
+				}
+			}
+			return sDotCount+sDotVar.substring(sDotVar.indexOf(".")+1) ;
+		}
+		function applytemplatesitemtaskinfo(itemtaskinfo, viewtype) {
+			//<xsl:param name="steproutetype"/><xsl:param name="stepunittype"/><xsl:param name="parentunittype"/>
+			var datereceived = itemtaskinfo.getAttribute("datereceived");
+			var datecompleted = itemtaskinfo.getAttribute("datecompleted");
+			var steproutetype = null;
+			var stepunittype = null;
+			var stepname = null;
+			var parentNodeName = itemtaskinfo.parentNode.nodeName;
+			var stepstatus = null;
+            var allottype = null; //2011.06
+			if(itemtaskinfo.parentNode.parentNode.parentNode.nodeName == "step" ){
+				steproutetype = itemtaskinfo.parentNode.parentNode.parentNode.getAttribute("routetype");
+				stepunittype = itemtaskinfo.parentNode.parentNode.parentNode.getAttribute("unittype");
+				stepname = itemtaskinfo.parentNode.parentNode.parentNode.getAttribute("name");
+				allottype = itemtaskinfo.parentNode.parentNode.parentNode.getAttribute("allottype");
+				if(itemtaskinfo.parentNode.parentNode.parentNode != null){
+					if(itemtaskinfo.parentNode.parentNode.parentNode.selectSingleNode("taskinfo") != null){
+						stepstatus = itemtaskinfo.parentNode.parentNode.parentNode.selectSingleNode("taskinfo").getAttribute("status");
+					}
+				}else{
+					if(itemtaskinfo.parentNode.parentNode.selectSingleNode("taskinfo") != null){
+						stepstatus = itemtaskinfo.parentNode.parentNode.selectSingleNode("taskinfo").getAttribute("status");
+					}				
+				}
+			}else{
+				steproutetype = itemtaskinfo.parentNode.parentNode.getAttribute("routetype")
+				stepunittype = itemtaskinfo.parentNode.parentNode.getAttribute("unittype");
+				stepname = itemtaskinfo.parentNode.parentNode.getAttribute("name");
+				allottype = itemtaskinfo.parentNode.parentNode.getAttribute("allottype");
+            }
+			var kind = itemtaskinfo.getAttribute("kind");
+			var status = itemtaskinfo.getAttribute("status");
+			var parentunittype = stepunittype;
+			var customattribute2 = itemtaskinfo.getAttribute("customattribute2");
+			if (datecompleted != null || viewtype == 'read' || viewtype == 'myread') {//alert(1);
+				if ((steproutetype == 'assist' || steproutetype == 'consult' || steproutetype == 'audit' ) && stepunittype == 'ou') {
+					if ((parentNodeName == 'person' || parentNodeName == 'role') ) {//&& (kind == 'normal' || kind == 'normal' || kind == 'authorize' || kind == 'substitute' || kind == 'review' || kind == 'skip')
+						return convertKindToSignTypeByRTnUT(kind, parentNodeName, steproutetype, stepunittype, customattribute2);
+					} else {
+						return convertKindToSignTypeByRTnUT(kind, parentunittype, steproutetype, stepunittype, stepname);
+					}
+				} else {
+					return convertKindToSignTypeByRTnUT(kind, parentunittype, steproutetype, stepunittype, stepname);
+				}
+			} else if(stepname == "ExtType"){
+                return convertKindToSignTypeByRTnUT(kind, parentunittype, steproutetype, stepunittype, stepname);
+            } else if(steproutetype == 'approve' && stepunittype == 'person' && allottype == "parallel"){
+				return convertKindToSignTypeByRTnUT(kind,parentunittype,steproutetype,stepunittype,"");
+			} else if(steproutetype == 'approve' && stepunittype == 'person'&& allottype != "parallel"){
+				return calltemplatestatusselector(kind, viewtype,parentunittype, steproutetype, stepunittype, "");
+			} else if(( steproutetype == 'audit' || steproutetype == 'assist' || steproutetype == 'consult' || steproutetype == "receive" )  && stepunittype == 'ou'){
+				if(itemtaskinfo.parentNode.parentNode != null){
+					if(itemtaskinfo.parentNode.parentNode.selectSingleNode("taskinfo") != null){
+						stepstatus = itemtaskinfo.parentNode.parentNode.selectSingleNode("taskinfo").getAttribute("status");
+					}
+                } else {
+                    stepstatus = itemtaskinfo.parentNode.selectSingleNode("taskinfo").getAttribute("status");
+				}
+				if ((parentNodeName == 'person' || parentNodeName == 'role') && (stepstatus == "pending") ) {//&& (kind == 'normal' || kind == 'authorize' || kind == 'substitute' || kind == 'review' || kind == 'skip')
+					return calltemplatestatusselector(kind, viewtype,parentNodeName, steproutetype, stepunittype, stepstatus);
+				} else {
+					return convertKindToSignTypeByRTnUT(kind, parentunittype, steproutetype, stepunittype, stepname);
+				}
+			} else {
+				return convertKindToSignTypeByRTnUT(kind,parentunittype,steproutetype,stepunittype,"");
+			}
+		}
+		function calltemplatestatusselector(kind, viewtype, parentunittype, steproutetype, stepunittype, stepstatus) {
+		    //debugger
+			if((kind=='review')|| (kind=='authorize') || (gDeputyType == "F" && (kind=='substitute') ) || (kind=='confidential')){
+				return  "<select style=\"font-size:9pt;width:80px;height:18px;\" onchange=\"statusChange(event)\">"
+					+"<option value=\""+kind+"\" selected=\"t\">"+convertKindToSignType(kind,'')+"</option>"
+					+"<option value=\"normal\">"+convertKindToSignType('normal','')+"</option>"
+				+"</select>";				
+			}else if(kind=="normal"){
+				if(stepstatus=="pending" && stepunittype == "ou"){
+                   return  "<select style=\"font-size:9pt;width:80px;height:18px;\" onchange=\"statusChange(event)\">"
+			                +"<option value=\"normal\" selected=\"t\">"+convertKindToSignType('normal','')+"</option>"
+			                +((gDeputyType=="F")?"<option value=\"substitute\">"+convertKindToSignType('substitute','')+"</option>":"")
+			                +"<option value=\"authorize\">"+convertKindToSignType('authorize','')+"</option>"
+		                +"</select>";
+				}else{
+                   return  "<select style=\"font-size:9pt;width:80px;height:18px;\" onchange=\"statusChange(event)\">"
+			                +"<option value=\"normal\" selected=\"t\">"+convertKindToSignType('normal','')+"</option>"
+			                +((gDeputyType=="F")?"<option value=\"substitute\">"+convertKindToSignType('substitute','')+"</option>":"")   //대결 주석해제(HIW)
+			                +"<option value=\"authorize\">"+convertKindToSignType('authorize','')+"</option>"  //전결 주석해제(HIW)
+                            +"<option value=\"review\">"+convertKindToSignType('review','')+"</option>"
+		                +"</select>";
+				}
+			}else{
+    			return	convertKindToSignTypeByRTnUT(kind,'person','approve','person','');
+			}
+
+        }
+        
+        function initTable(){
+	        if(m_selectedRowApvlistId!=null){
+		        selectRowApvlist(m_selectedRowApvlistId);
+	        }
+        }
+        var m_selectedRowApvlist=null;
+        var m_selectedRowApvlistId=null;
+        function setSelectedRowId(id){m_selectedRowApvlistId=id;}
+        function selectRowApvlist(id, e){
+           var evt=(window.event)?window.event: e;
+	        var oRow;
+	        if(id==null){
+		        oRow=(evt.srcElement) ? evt.srcElement : evt.target;
+	        }else{
+		        oRow=document.getElementById(id);
+	        }
+	        if(oRow!=null){
+		        switchSelectedRowApvlist(oRow);
+	        }else{
+		        m_selectedRowApvlist=null;
+		        m_selectedRowApvlistId=null;
+	        }
+        }
+        function switchSelectedRowApvlist(oRow){
+	        while(oRow!=null&&oRow.tagName!="TR"){
+		        oRow=oRow.parentNode;
+	        }
+	        if(oRow!=null){
+		        //if(m_selectedRowApvlist!=null)m_selectedRowApvlist.className="";
+		        //oRow.className="rowselected";
+		        if(m_selectedRowApvlist!=null)m_selectedRowApvlist.style.backgroundColor="#FFFFFF";
+		        oRow.style.backgroundColor="#EEF7F9";
+
+		        m_selectedRowApvlist=oRow;
+		        m_selectedRowApvlistId=oRow.id;
+	        }
+        }
+        function clearSelectionApvlist(){
+	        m_selectedRowApvlist=null;
+	        m_selectedRowApvlistId=null;
+        }
+        function getPatentRowApvlist(e){
+           var evt=(window.event)?window.event: e;
+	        switchSelectedRowApvlist((evt.srcElement) ? evt.srcElement : evt.target);
+	        return m_selectedRowApvlist;
+        }
+        function getSelectedRowApvlist(){return m_selectedRowApvlist;}
+        function getComment(id){return document.getElementById(id).innerHTML;}
+        				
+	</script>
+</body>
+</html>

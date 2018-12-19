@@ -1,0 +1,485 @@
+﻿<html>
+	<head>
+		<title>결재선 관리</title>
+		<meta http-equiv="Content-Language" content="ko">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="/GWImages/groupware/CoviWeb/app_org_css_style.css" rel="Stylesheet" type="text/css" />
+			<script language="javascript" src="ApvlineMgr.js"></script>
+			<SCRIPT FOR="cbBTN" EVENT="onclick()">doButtonAction();</SCRIPT>
+			<script language="JavaScript">
+	var selTab = "tSearch";
+	//결재선선택
+	var m_oParent, m_oUserList;
+	var m_selectedCCRow=null;
+	var m_selectedCCRowId=null;
+
+	function window.onload(){
+	}
+
+	function changeTab(selObject) {
+		if (selObject.name != selTab) {
+			eval(selTab).className = "tab_popoffbg_81" ;
+			eval('span'+selTab).style.display = "none" ;
+			eval(selObject).className = "tab_poponbg_81" ;
+			eval('span'+selObject).style.display ="" ;
+			selTab = selObject;
+			//검색결과 창 지우기
+			ListItems.clearContents();
+		}
+	}
+
+	function getDetailInfo(strAlias){	
+		try{
+			strAlias = strAlias.replace(/&/g,String.fromCharCode(8)).replace(/=/g,String.fromCharCode(11));				
+			m_Alias = strAlias;
+			var szURL = "/xmlorg/query/org_memberquery02.xml?PERSON_CODE=" + strAlias;
+			m_xmlHTTP.open("GET",szURL,true); 
+			m_xmlHTTP.setRequestHeader( "Content-type:", "text/xml");  
+			m_xmlHTTP.onreadystatechange = event_retrieve_completed;
+			m_xmlHTTP.send();
+		}catch(e){
+			alert("getDetailInfo() error: "+e.description + "\r\nError number: " + e.number);
+		}
+	}
+	function event_retrieve_completed(){	
+		if(m_xmlHTTP.readyState == 4){
+			m_xmlHTTP.onreadystatechange = event_noop;//re-entrant gate
+			if(m_xmlHTTP.responseText.charAt(0)=='\r'){
+				alert("error in event_retrieve_completed(): no responseText returned");
+			}else{
+				var oAllNodes;
+				try{					
+					oAllNodes = m_xmlHTTP.responseXML.selectSingleNode("response/item").childNodes;
+					var oNode,el;
+					for(var x=0;x<oAllNodes.length;x++){
+						oNode = oAllNodes[x];
+						try{
+							switch (oNode.nodeName){
+								case "AB": var temp =(oNode.text=="1")?"부재":""; eval(oNode.nodeName).innerHTML= temp;	break;
+								default:eval(oNode.nodeName).innerHTML =  oNode.text.replace(/\x08/g,"&");
+							}
+						}catch(e){
+						}
+					}
+				}catch(e){
+					//alert("error in event_retrieve_completed(): "+ m_oXMLDOM.selectSingleNode("response/error").text);
+				}
+			}    
+		}	
+	}
+	//결재자 선택 관련 시작
+	function switchParentNode(iType){
+		var m_XMLDOM = new ActiveXObject("MSXML2.DOMDocument");
+		m_XMLDOM.loadXML("<selected><to></to><cc></cc><bcc></bcc><user></user><group></group><role></role></selected>");
+		if(!m_XMLDOM.parsed){
+		}
+		var sElm = "selected/user";
+		switch(iType){
+			case 0: m_oParent = m_XMLDOM.selectSingleNode("selected/to");		sElm = 	"selected/to";	break;
+			case 1: m_oParent = m_XMLDOM.selectSingleNode("selected/cc");	sElm = 	"selected/cc";	break;
+			case 2: m_oParent = m_XMLDOM.selectSingleNode("selected/bcc");	sElm = 	"selected/bcc";	break;
+			case 3: m_oParent = m_XMLDOM.selectSingleNode("selected/user");	sElm = 	"selected/user";	break;
+			case 4:	m_oParent = m_XMLDOM.selectSingleNode("selected/group");sElm = 	"selected/group";	break;
+			case 5:	m_oParent = m_XMLDOM.selectSingleNode("selected/group");sElm = 	"selected/group";	break;
+		}
+
+		switch(selTab){
+			case "tSearch":
+				m_oUserList = ListItems;
+				if (iType==3 || iType == 4){
+					selectListItmes(iType);
+				}
+				break;
+			case "tGroup":
+				if(iType == 4 ){
+					m_oUserList = iGroup;
+					addClicked()
+				}else if (iType== 3){
+					m_oUserList = ListItems;
+					selectListItmes(iType);
+				}
+				break;
+			case "tApvLine":
+				break;
+		}
+
+		return m_XMLDOM.selectSingleNode(sElm);
+	}
+	function addClicked(){
+		var oSelNode = m_oUserList.getCurrentNode();
+		if(oSelNode != null){
+			if(m_oParent.selectSingleNode("item[AN = '" + oSelNode.selectSingleNode("AN").text + "']") == null){
+				addListItem(oSelNode.cloneNode(true));
+			}
+		}
+	}
+
+	function addListItem(oNode){
+		try{
+			m_oParent.appendChild(oNode);
+		}catch(e){
+			alert(e.description);
+		}
+	}
+	function selectListItmes(iType){
+		var sChk = chk.value ;
+		try{
+			if ((selTab == 'tSearch' && ((iType==3 && !iSearch.buse.checked) || (iType==4 && iSearch.buse.checked))) || selTab == 'tGroup'){
+				if (sChk == "1"){
+					var chk_count = m_oUserList.chkRowSelect.length;
+					if(typeof(chk_count) == "undefined"){
+						var eTR = m_oUserList.chkRowSelect.parentElement;
+						while(eTR.tagName != "TR") {	eTR = eTR.parentElement;}
+						ListItems.g_eCurrentRow = eTR;
+						ListItems.processSelectedRow();   
+						addClicked();
+					}else if(chk_count > 1){
+						for(i=0;i<chk_count ;i++) {
+							if ( m_oUserList.chkRowSelect[i].checked ){
+								var eTR = m_oUserList.chkRowSelect[i].parentElement;
+								while(eTR.tagName != "TR") {	eTR = eTR.parentElement;}
+								ListItems.g_eCurrentRow = eTR;
+								ListItems.processSelectedRow();   
+								addClicked();
+							}
+						}
+					}
+				}else {
+						addClicked();
+				}
+			}
+		}catch(e){
+		}
+		chk.value = 1 ;
+
+	}
+	//결재자 선택 관련 종료
+	function overM(){
+		var teTR = event.srcElement;
+		while(teTR.tagName != "TR") {
+			teTR = teTR.parentElement;
+		}
+		teTR.style.backgroundColor = "#EEF7F9";
+		return true;
+	}
+
+	function outM(){
+		var teTR = event.srcElement;
+		while(teTR.tagName != "TR") {
+			teTR = teTR.parentElement;
+		}
+		teTR.style.backgroundColor = "#FFFFFF";
+		return true;
+	}
+	function selectCCRow(id){
+		var oRow;
+		//if(id==null){
+			oRow=event.srcElement;
+		//}else{
+		//	oRow=document.all[id];
+		//}
+		if(oRow!=null){
+			switchSelectedRow(oRow);
+		}else{
+			m_selectedCCRow=null;
+			m_selectedCCRowId=null;
+		}
+
+	}
+	function switchSelectedRow(oRow){
+		while(oRow!=null&&oRow.tagName!="TR"){
+			oRow=oRow.parentNode;
+		}
+		if(oRow!=null){
+			if(m_selectedCCRow!=null)m_selectedCCRow.style.backgroundColor="#FFFFFF";
+			oRow.style.backgroundColor="#EEF7F9";
+			m_selectedCCRow=oRow;
+			m_selectedCCRowId=oRow.id;
+		}
+	}
+	function getSelectedRow(){return m_selectedCCRow;}
+			</script>
+	</head>
+	<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" style="MARGIN: 0px;    OVERFLOW: hidden">
+		<input type="hidden" id="chk" name="chk">
+		<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td colspan="2" align="center" valign="top" class="pop_bg">
+					<br>
+					<table width="98%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="35%" valign="top" class="pop_bg">
+								<!-- 1. 탭 시작 -->
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td width="81" height="23" align="center" class="tab_poponbg_81" onclick="javascript:changeTab(this.name)"
+											id="tSearch" name="tSearch">검색</td>
+										<td width="81" height="23" align="center" class="tab_popoffbg_81" onclick="javascript:changeTab(this.name)"
+											id="tGroup" name="tGroup">조직도</td>
+										<td height="23" align="center">&nbsp;</td>
+									</tr>
+									<tr>
+										<td height="3" colspan="4" align="center" valign="middle" class="tab_popline"></td>
+									</tr>
+								</table>
+								<table width="100%" height="163" border="0" cellpadding="0" cellspacing="0" class="pop_gray">
+									<tr>
+										<td width="100%" align="center" valign="top">
+											<SPAN id="spantSearch" name="tSearch">
+												<iframe id="iSearch" name="iSearch" width="100%" height="100%" frameborder="0" src="search.htm"
+													datasrc="search.htm" style='PADDING-RIGHT:0px; PADDING-LEFT:0px; PADDING-BOTTOM:0px; MARGIN:0px; PADDING-TOP:0px; scroll:auto'></iframe>
+											</SPAN>
+											<SPAN id="spantGroup" name="tGroup" style='DISPLAY:none'>
+												<iframe id="iGroup" name="iGroup" width="100%" height="100%" frameborder="0" src='OrgTree.aspx'
+													datasrc="OrgTree.aspx" style='PADDING-RIGHT:0px; PADDING-LEFT:0px; PADDING-BOTTOM:0px; MARGIN:0px; PADDING-TOP:0px; scroll:auto'></iframe>
+											</SPAN>
+										</td>
+									</tr>
+								</table>
+								<!-- 탭 종료 -->
+								<br>
+								<table width="100%" height="169" border="0" cellpadding="3" cellspacing="0" class="pop_gray">
+									<tr>
+										<td height="167" valign="top">
+											<!-- 2.검색 결과 영역 시작-->
+											<iframe id="ListItems" name="ListItems" width="100%" height="100%" frameborder="0" src='listitems.htm'
+												style='PADDING-RIGHT:0px; PADDING-LEFT:0px; PADDING-BOTTOM:0px; MARGIN:0px; PADDING-TOP:0px; scroll:auto'></iframe>
+											<!-- 검색 결과 영역 끝-->
+										</td>
+									</tr>
+								</table>
+								<br>
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td width="81" height="3" align="center" valign="middle" class="tab_popline"></td>
+									</tr>
+								</table>
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td width="6%" height="25" align="center" valign="middle" class="table_mgraybg">이름
+										</td>
+										<!-- 								<td width="15%" height="25" align="center" valign="middle" class="table_mgraybg">부서</td>
+								<td width="5%" height="25" align="center" valign="middle" class="table_mgraybg">직책</td>
+								<td width="7%" height="25" align="center" valign="middle" class="table_mgraybg">직급</td> -->
+										<td width="6%" height="25" align="center" valign="middle" class="table_mgraybg">대결자</td>
+										<td width="12%" height="25" align="center" valign="middle" class="table_mgraybg">부재여부
+										</td>
+										<td width="13%" align="center" valign="middle" class="table_mgraybg">부재이유</td>
+										<td width="15%" align="center" valign="middle" class="table_mgraybg">Tel</td>
+										<!-- 								<td width="21%" height="25" align="center" valign="middle" class="table_mgraybg">E-mail</td> -->
+									</tr>
+									<tr>
+										<td height="1" colspan="5" align="center" class="table_line"></td>
+									</tr>
+									<tr align="center" style='CURSOR:hand;BACKGROUND-COLOR:#ffffff' onMouseOver='this.style.backgroundColor = "#EEF7F9"'
+										onMouseOut='this.style.backgroundColor = "#FFFFFF"'>
+										<td height="20" valign="middle" id="DN"></td>
+										<!-- 								<td height="20" valign="middle" id="DP"></td>
+								<td height="20" valign="middle" id="TL" ></td>
+								<td height="20" valign="middle" id="JT"></td> -->
+										<td height="20" valign="middle" id="DEPUTY"></td>
+										<td height="20" valign="middle" id="AB"></td>
+										<td height="20" valign="middle" id="ABR"></td>
+										<td height="20" valign="middle" id="TP"></td>
+										<!-- 								<td height="20" valign="middle" id="EM" ></td> -->
+									</tr>
+									<tr align="center">
+										<td height="1" colspan="5" class="table_line"></td>
+									</tr>
+								</table>
+							</td>
+							<td width="9%" align="center" class="pop_bg">
+								<table width="70" border="0" cellspacing="0" cellpadding="0" id="tblApplyLine" style="DISPLAY:none">
+									<tr>
+										<td width="6"><img src="/GWImages/common/btn/btn_appr01_left.gif" width="6" height="21" style="CURSOR:hand"></td>
+										<td id="btApplyLine" name="cbBTN" class="btn_redbg" onClick="doButtonAction();">결재적용</td>
+										<td width="14"><img src="/GWImages/common/btn/btn_appr01_right.gif" width="14" height="21" style="CURSOR:hand"></td>
+									</tr>
+								</table>
+								<!-- 일반결재버튼 영역 시작-->
+								<div id="dvCommon" style="DISPLAY:none">
+									<table width="70" border="0" cellspacing="0" cellpadding="0" id="tblPerson" style="DISPLAY:none">
+										<tr>
+											<td colspan="3">&nbsp;</td>
+										</tr>
+										<tr>
+											<td width="6"><img src="/GWImages/common/btn/btn_appr01_left.gif" width="6" height="21" style="CURSOR:hand"></td>
+											<td id="btPerson" name="cbBTN" class="btn_redbg" onClick="doButtonAction();">
+												결 재 자
+											</td>
+											<td width="14"><img src="/GWImages/common/btn/btn_appr01_right.gif" width="14" height="21"></td>
+										</tr>
+									</table>
+									<table width="70" border="0" cellspacing="0" cellpadding="0" id="tblPAssist" style="DISPLAY:none">
+										<tr>
+											<td colspan="3">&nbsp;</td>
+										</tr>
+										<tr>
+											<td width="6"><img src="/GWImages/common/btn/btn_appr01_left.gif" width="6" height="21"></td>
+											<td id="btPAssist" name="cbBTN" class="btn_redbg" onClick="doButtonAction();">
+												협 조 자
+											</td>
+											<td width="14"><img src="/GWImages/common/btn/btn_appr01_right.gif" width="14" height="21" style="CURSOR:hand"></td>
+										</tr>
+									</table>
+									<table width="70" border="0" cellspacing="0" cellpadding="0" id="tblReceipt" style="DISPLAY:none">
+										<tr>
+											<td colspan="3">&nbsp;</td>
+										</tr>
+										<tr>
+											<td width="6"><img src="/GWImages/common/btn/btn_appr01_left.gif" width="6" height="21"></td>
+											<td id="btReceipt" name="cbBTN" class="btn_redbg" onClick="doButtonAction();">
+												수 신 처
+											</td>
+											<td width="14"><img src="/GWImages/common/btn/btn_appr01_right.gif" width="14" height="21" style="CURSOR:hand"></td>
+										</tr>
+									</table>
+									<table width="70" border="0" cellspacing="0" cellpadding="0" id="tblGroup" style="DISPLAY:none">
+										<tr>
+											<td colspan="3">&nbsp;</td>
+										</tr>
+										<tr>
+											<td width="6"><img src="/GWImages/common/btn/btn_appr01_left.gif" width="6" height="21"></td>
+											<td id="btGroup" name="cbBTN" class="btn_redbg" onClick="doButtonAction();">
+												수 신 처
+											</td>
+											<td width="14"><img src="/GWImages/common/btn/btn_appr01_right.gif" width="14" height="21"></td>
+										</tr>
+									</table>
+									<table width="70" border="0" cellspacing="0" cellpadding="0" id="tblDAssist" style="DISPLAY:none">
+										<tr>
+											<td width="6"><img src="/GWImages/common/btn/btn_appr01_left.gif" width="6" height="21"></td>
+											<td id="btDAssist" name="cbBTN" class="btn_redbg" onClick="doButtonAction();">
+												협 조 처
+											</td>
+											<td width="14"><img src="/GWImages/common/btn/btn_appr01_right.gif" width="14" height="21"></td>
+										</tr>
+									</table>
+									<table width="70" border="0" cellspacing="0" cellpadding="0" id="tblPConsult" style="DISPLAY:none">
+										<tr>
+											<td colspan="3">&nbsp;</td>
+										</tr>
+										<tr>
+											<td width="6"><img src="/GWImages/common/btn/btn_appr01_left.gif" width="6" height="21"></td>
+											<td id="btPConsult" name="cbBTN" class="btn_redbg" onClick="doButtonAction();">
+												합 의 자
+											</td>
+											<td width="14"><img src="/GWImages/common/btn/btn_appr01_right.gif" width="14" height="21"></td>
+										</tr>
+									</table>
+									<table width="70" border="0" cellspacing="0" cellpadding="0" id="tblDConsult" style="DISPLAY:none">
+										<tr>
+											<td colspan="3">&nbsp;</td>
+										</tr>
+										<tr>
+											<td width="6"><img src="/GWImages/common/btn/btn_appr01_left.gif" width="6" height="21"></td>
+											<td id="btDConsult" name="cbBTN" class="btn_redbg" onClick="doButtonAction();">
+												합 의 처
+											</td>
+											<td width="14"><img src="/GWImages/common/btn/btn_appr01_right.gif" width="14" height="21"></td>
+										</tr>
+									</table>
+								</div>
+								<div id="dvAudit" style="DISPLAY:none">
+									<input type="checkbox" name="chEtc" onclick="setAudit()">감사 <input disabled type="radio" onclick="switchAudit()" value="audit" name="radioAudit">일상 
+									감사 <input disabled type="radio" onclick="switchAudit()" value="inspect" name="radioAudit">상근 
+									감사
+								</div>
+								<!-- 일반결재버튼 영역 끝-->
+								<br>
+								<br>
+								<!-- 참조버튼 영역 시작-->
+								<div id="dvCC" name="dvCC">
+									<table width="70" border="0" cellspacing="0" cellpadding="0" id="tblDraftRef">
+										<tr>
+											<td width="6"><img src="/GWImages/common/btn/btn_appr01_left.gif" width="6" height="21"></td>
+											<td id="btSendCC" name="cbBTN" class="btn_redbg" onClick="doButtonAction();">
+												발신참조
+											</td>
+											<td width="14"><img src="/GWImages/common/btn/btn_appr01_right.gif" width="14" height="21"></td>
+										</tr>
+									</table>
+									<table width="70" border="0" cellspacing="0" cellpadding="0" id="tblReceiptRef" style="DISPLAY:none">
+										<tr>
+											<td colspan="3">&nbsp;</td>
+										</tr>
+										<tr>
+											<td width="6"><img src="/GWImages/common/btn/btn_appr01_left.gif" width="6" height="21"></td>
+											<td id="btRecCC" name="cbBTN" class="btn_redbg" onClick="doButtonAction();">
+												수신참조
+											</td>
+											<td width="14"><img src="/GWImages/common/btn/btn_appr01_right.gif" width="14" height="21"></td>
+										</tr>
+									</table>
+								</div>
+								<!-- 참조버튼 영역 끝-->
+							</td>
+							<td width="56%" valign="top" class="pop_bg">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr class="table_green2">
+										<td width="21%" height="23" align="left" class="left10px"><span class="text-green"><img src="/COVINet/images/icon/icon_list.gif" width="11" height="13" align="absMiddle"> 결재리스트</span></td>
+										<td width="40%"><img src="/COVINet/images/button/btn_initial.gif" width="100" height="21" align="absMiddle"
+												id="btResetLine" name="cbBTN" style="CURSOR:hand"> <img src="/COVINet/images/button/btn_approvesave.gif" width="87" height="21" align="absMiddle"
+												id="btSaveApvLine" name="cbBTN" style="CURSOR:hand">
+										</td>
+										<td width="39%" align="right"><img src="/COVINet/images/button/btn_top.gif" width="52" height="21" align="absMiddle"
+												id="btUp" name="cbBTN" style="CURSOR:hand"> <img src="/COVINet/images/button/btn_down.gif" width="65" height="21" align="absMiddle"
+												id="btDown" name="cbBTN" style="CURSOR:hand"> <img src="/COVINet/images/button/btn_delete.gif" width="52" height="21" align="absMiddle"
+												id="btDelete" name="cbBTN" style="CURSOR:hand">
+										</td>
+									</tr>
+								</table>
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td width="81" height="3" align="center" valign="middle" class="tab_popline"></td>
+									</tr>
+								</table>
+								<table width="100%" height="395" border="0" cellpadding="3" cellspacing="0" class="pop_gray">
+									<tr>
+										<td valign="top">
+											<IFRAME ID="Apvlist" style="WIDTH:100%;HEIGHT:100%" SRC="Apvlist.htm" FRAMEBORDER="0"></IFRAME>
+										</td>
+									</tr>
+								</table>
+								<br>
+								<div id="divDisplayCC" name="divDisplayCC" style="DISPLAY:none">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<tr class="table_green2">
+											<td width="86%" height="23" align="left" class="left10px"><span class="text-green"><img src="/COVINet/images/icon/icon_list.gif" width="11" height="13" align="absMiddle"
+														style="CURSOR:hand"> 참조리스트</span></td>
+											<td width="14%" align="right"><img src="/COVINet/images/button/btn_delete.gif" width="52" height="21" align="absMiddle"
+													id="btDeleteCC" name="cbBTN" style="CURSOR:hand"></td>
+										</tr>
+									</table>
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="81" height="3" align="center" valign="middle" class="tab_popline"></td>
+										</tr>
+									</table>
+									<table width="100%" border="0" cellpadding="3" cellspacing="0" class="pop_gray">
+										<tr>
+											<td height="203" valign="top">
+												<table id="tblccinfo" name="tblccinfo" width="100%" border="0" cellspacing="0" cellpadding="0">
+													<tr>
+														<td width="15%" height="20" align="center" valign="middle" class="table_mgraybg">이름</td>
+														<td width="14%" align="center" valign="middle" class="table_mgraybg">직책</td>
+														<td width="13%" align="center" valign="middle" class="table_mgraybg">직급</td>
+														<td width="28%" align="center" valign="middle" class="table_mgraybg">종류</td>
+														<td width="30%" align="center" valign="middle" class="table_mgraybg">부서</td>
+													</tr>
+													<tr>
+														<td height="1" colspan="5" align="center" class="table_line"></td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

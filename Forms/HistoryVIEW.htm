@@ -1,0 +1,90 @@
+<html>
+	<head>
+		<title>Preview</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" type="text/css" href="../../common/style/coviflownet/formedit.css">
+	</head>
+	<body scroll=no leftMargin="0" topMargin="0">
+	<iframe frameborder=0 id='iframefrm' name='ifamefrm' src='' style='WIDTH:100%;HEIGHT:100%'></iframe>
+		<!-- 양식전체본문 -->
+
+<SCRIPT LANGUAGE="JavaScript">
+var oApvList = new ActiveXObject("MSXML2.DOMDocument");
+var timerID ;
+
+function window.onload(){
+	var szURL = String(opener.parent.location.href);
+	iframefrm.location.href = szURL;
+
+	timerID = setInterval("setPreView()",1000);
+ }
+ function setPreView(){
+	if(iframefrm.document.readyState == "complete"){
+		try{
+			var sFormXml = opener.m_oFormEditor.getFormXML();
+			if(sFormXml.indexOf("<BODY_CONTEXT>") == -1){
+				sFormXml = sFormXml.replace("</formdata>","");
+				sFormXml += opener.makeNode("BODY_CONTEXT",opener.getInfo("BODY_CONTEXT"));
+				sFormXml += "</formdata>";
+			}
+			var xmlFormXML= new ActiveXObject("MSXML2.DOMDocument");
+			xmlFormXML.loadXML(sFormXml);
+			var FormNodes  = xmlFormXML.documentElement.childNodes; 
+			var FormNode;
+			for (var i=0; i < FormNodes.length ; i++){
+				FormNode = FormNodes.nextNode();
+				iframefrm.menu.setInfo(FormNode.nodeName, FormNode.text);
+			}
+			iframefrm.menu.setInfo("INITIATED_DATE",opener.getInfo("svdt"));
+			iframefrm.g_szEditable = false;
+			iframefrm.menu.setInfo("mode","COMPLETE");
+			iframefrm.menu.setInfo("loct","COMPLETE");
+			iframefrm.editor.location.href = opener.getInfo("fmpf")+'_V' + opener.getInfo("fmrv")+"_read.htm";
+			setTimeout("setHeader()",1000);
+
+			for(var i = 0; i < iframefrm.menu.document.all.length;i++){
+			    if (iframefrm.menu.document.all[i].name != null && iframefrm.menu.document.all[i].name.indexOf("cbBTN") > -1 ){
+				    iframefrm.menu.document.all[i].style.display = "none";
+				}
+			}
+			try{iframefrm.menu.btDocLink.style.display = "none";}catch(e){}
+			iframefrm.menu.btPrint.style.display = "";
+			iframefrm.menu.btExitPreView.style.display = "";
+		}catch(e){
+			alert(e.message);
+		}
+		clearInterval(timerID);
+	}
+}
+ function setHeader(){
+	//alert(opener.m_oFormEditor.AppLine.innerHTML);
+	try{iframefrm.editor.AppLine.innerHTML = opener.m_oFormEditor.AppLine.innerHTML;}catch(e){}	
+	try{iframefrm.editor.AssistLine.innerHTML = opener.m_oFormEditor.AssistLine.innerHTML;}catch(e){}						//  합의자		
+	try{
+	    iframefrm.editor.CCLine.innerHTML = opener.m_oFormEditor.CCLine.innerHTML;
+	    if (iframefrm.editor.CCLine.innerHTML != "") iframefrm.editor.CCLine.style.display = "";
+	}catch(e){}						//  합의자		
+    try{iframefrm.editor.G_displaySpnDocLinkInfo();}catch(e){}
+	//참조자 출력
+	/*
+	oApvList.loadXML("<?xml version='1.0' encoding='utf-8'?>" + opener.field["APVLIST"].value);	
+
+	var elmRoot;
+	elmRoot = oApvList.documentElement;	
+
+	var ccInfos = elmRoot.selectNodes("ccinfo");
+	var sSendccInfos = "";
+	var sRecccInfos = "";
+			
+	if(ccInfos.length > 0){				
+		iframefrm.editor.CCLine.innerHTML = opener.m_oFormEditor.CCLine.innerHTML;							//  참조자	
+		iframefrm.editor.CCLine.style.display  = "";		
+	}
+	else	{ iframefrm.editor.CCLine.style.display  = "none"; }	
+	*/
+	iframefrm.menu.secrecy.style.display  = "none";		
+																	// ' 기밀문서
+}
+</SCRIPT>

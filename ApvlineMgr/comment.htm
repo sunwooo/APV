@@ -1,0 +1,52 @@
+﻿<html>
+	<HEAD>
+		<title>의견보기</title>
+		<meta http-equiv="Content-Language" content="ko">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="/GWImages/groupware/CoviWeb/app_org_css_style.css" rel="Stylesheet" type="text/css" />
+	</HEAD>
+	<BODY leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" SCROLL="NO">
+		<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td height="3" colspan="2" align="center" valign="middle" class="table_topline"></td>
+			</tr>
+			<tr class="table_green">
+				<td width="50%" height="40" align="left" valign="middle">&nbsp;&nbsp;&nbsp;<img src="/COVINet/images/icon/icon_pop.gif" width="27" height="18" align="absmiddle">
+					<span class="text-blue2">의견 조회 </span></td>
+				<td align="right" valign="middle" class="right10px">&nbsp;<img src="/COVINet/images/button/btn_close.gif" width="52" height="21" align="absmiddle"
+						onclick="window.close();" style="cursor:hand">
+				</td>
+			</tr>
+			<tr>
+				<td height="1" colspan="2" align="center" valign="middle" class="pop_line"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#F5F5F5" colspan="2" align="left" valign="top">
+					<div id="CommentList" name="CommentList" style="overflow:auto;HEIGHT:100%;WIDTH:100%;word-break:break-all"></div>
+					<DIV ID="divComment" name="divComment" style="overflow:auto;HEIGHT:135;WIDTH:100%;word-break:break-all;display:none"></DIV>
+				</td>
+			</tr>
+			<tr>
+				<td height="3" colspan="2" align="center" valign="middle" class="table_topline"></td>
+			</tr>
+		</table>
+	</BODY>
+	<script language="javascript">
+	var sComment = dialogArguments["objMessage"];
+	var aComment = sComment.split("uri:\\\\");
+	if ( aComment.length == 1 ){
+		CommentList.innerHTML = '<br>'+dialogArguments["objMessage"].replace(/\n/gi,"<br>");	
+		CommentList.style.height = 270;
+		//alert(divComment.innerHTML);
+	}else{
+		CommentList.innerHTML = aComment[0];
+		var aURL = aComment[1].split("<br>");
+		//ifrDL.Src = "http://"+window.document.host+aURL[0];
+		var oXMLHttp = new ActiveXObject("MSXML2.XMLHttp");
+		oXMLHttp.open("GET",aURL[0],false);
+		oXMLHttp.send();
+		divComment.innerHTML = oXMLHttp.responseText.replace(/\n/g,"<br>");		
+		divComment.style.display="";
+	}
+	</script>
+</html>

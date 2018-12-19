@@ -1,0 +1,23 @@
+<?xml version="1.0"  encoding="euc-kr" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	sql:xsl="org_unitquery01.xsl" >
+	<sql:header>
+		<sql:param name='ENT_CODE'></sql:param>
+		<sql:param name='DP'></sql:param>
+	</sql:header>
+	<sql:query>
+		if @ENT_CODE != ''
+		SELECT [ORG_UNIT].*
+		FROM  [ORG_UNIT]
+		WHERE 	[ORG_UNIT].ENT_CODE = @ENT_CODE
+		AND	[ORG_UNIT].USAGE_STATE = 'A'
+		AND	( [ORG_UNIT].NAME LIKE @DP+'%' OR @DP is null)
+		FOR XML AUTO
+		else
+		SELECT [ORG_UNIT].*
+		FROM  [ORG_UNIT]
+		WHERE	[ORG_UNIT].USAGE_STATE = 'A'
+		AND	( [ORG_UNIT].NAME LIKE @DP+'%' OR @DP is null)
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

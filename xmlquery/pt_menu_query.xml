@@ -1,0 +1,12 @@
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	 sql:xsl="pt_menu_query.xsl">
+	<sql:header>
+		<sql:param name='USAGE_STATE'>A</sql:param>
+	</sql:header>
+	<sql:query>
+		SELECT [PT_SVC_GRP].UID, [PT_SVC_GRP].MENU_NAME, [PT_SVC_GRP].REGI_SQL, [PT_SVC_GRP].READ_SQL
+		FROM  [PT_SVC_GRP] 
+		WHERE 	[PT_SVC_GRP].USAGE_STATE = 'A'
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

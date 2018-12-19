@@ -1,0 +1,13 @@
+<?xml version="1.0"  encoding="euc-kr" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	sql:xsl="docs_doccodequery01.xsl">
+	<sql:header>
+		<sql:param name='DOC_CODE'>01100</sql:param>
+	</sql:header>
+	<sql:query>
+		SELECT * 
+		FROM V_DOC_CODE 
+		WHERE DOC_CODE = @DOC_CODE
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

@@ -1,0 +1,17 @@
+<?xml version="1.0"  encoding="euc-kr" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	sql:xsl="org_memberquery01.xsl" >
+	<sql:header>
+		<sql:param name='PERSON_CODE'></sql:param>
+		<sql:param name='APPROVAL_PWD'></sql:param>
+	</sql:header>
+	<sql:query>
+		UPDATE [ORG_PERSON]
+			SET APPROVAL_PWD = @APPROVAL_PWD
+		WHERE 	PERSON_CODE = @PERSON_CODE
+		AND 	USAGE_STATE='A'
+	</sql:query>
+	<sql:xpath-query mapping-schema="org_member.xml">
+        /ORG_PERSON[PERSON_CODE=$PERSON_CODE and USAGE_STATE="A"]
+	</sql:xpath-query>
+</ROOT>

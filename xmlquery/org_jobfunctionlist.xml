@@ -1,0 +1,9 @@
+﻿<?xml version="1.0"  encoding="utf-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql">
+	<sql:query>
+		SELECT JF_CODE, NAME, DSCR,UNIT_NAME 
+		FROM [ORG_JOBFUNCTION]
+		WHERE 	USAGE_STATE = 'A'
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

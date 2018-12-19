@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="/GWImages/css/css_style.css" type="text/css" />
+        <link rel="stylesheet" href="/GWImages/css/search.css" type="text/css" />
+		<TITLE></TITLE>
+	</head>
+	<body leftmargin="0" topmargin="0" onselectstart="return false;" marginheight="0" marginwidth="0" style="MARGIN: 0px;">
+	</body>
+	<script type="text/javascript" language="javascript">
+function window.onload(){
+	window.parent.document.onreadystatechange = initialize;
+	return;	
+}
+function initialize(){
+	if(window.parent.document.readyState == "complete"){
+		window.parent.document.onreadystatechange = noop;
+		window.parent.initialize();
+	}else
+		window.setTimeout(initialize,500);
+}
+function noop(){return;}
+function initTable(){
+	if(m_selectedRowId!=null){
+		selectRow(m_selectedRowId);
+	}
+}
+var m_selectedRow=null;
+var m_selectedRowId=null;
+function setSelectedRowId(id){m_selectedRowId=id;}
+function selectRow(id){
+	var oRow;
+	if(id==null){
+		oRow=event.srcElement;
+	}else{
+		oRow=document.all[id];
+	}
+	if(oRow!=null){
+		switchSelectedRow(oRow);
+	}else{
+		m_selectedRow=null;
+		m_selectedRowId=null;
+	}
+}
+function switchSelectedRow(oRow){
+	while(oRow!=null&&oRow.tagName!="TR"){
+		oRow=oRow.parentNode;
+	}
+	if(oRow!=null){
+		//if(m_selectedRow!=null)m_selectedRow.className="";
+		//oRow.className="rowselected";
+		if(m_selectedRow!=null)m_selectedRow.style.backgroundColor="#FFFFFF";
+		oRow.style.backgroundColor="#EEF7F9";
+
+		m_selectedRow=oRow;
+		m_selectedRowId=oRow.id;
+	}
+}
+function clearSelection(){
+	m_selectedRow=null;
+	m_selectedRowId=null;
+}
+function getPatentRow(){
+	switchSelectedRow(event.srcElement);
+	return m_selectedRow;
+}
+function getSelectedRow(){return m_selectedRow;}
+function getComment(id){return document.all[id].innerHTML;}
+var selftime;
+function event_GalTable_onmousemove(){
+    if(parent.tooltip != undefined){
+	    parent.tooltip.runtimeStyle.display = "none";
+	}else{
+	    tooltip.runtimeStyle.display = "none";
+	}
+    if(event == null)return;
+	var el = event.srcElement;
+	if(el==null)return;
+	if (el.tagName != "TH" && el.tagName != "TABLE" && el.tagName != "DIV" && el.tagName != "SPAN"){
+		while(el.tagName != "TR"){
+			el = el.parentElement;
+			if(el==null)return;
+		}
+		if(el.FLDP!=null && el.FLDP != ""){
+			//tooltip.innerText = el.jd;
+			//tooltip.innerText = "event.clientY " + event.clientY + "offsetY" + event.offsetY ;
+			if(parent.tooltip != undefined){
+			    parent.tooltip.innerText = el.FLDP;
+			    parent.tooltip.style.left = event.clientX + 10;
+			    parent.tooltip.style.top = event.clientY + 310;
+			    parent.tooltip.style.zIndex = 1;
+			    parent.tooltip.runtimeStyle.display = "block";
+			}else{
+			    tooltip.innerText = el.FLDP;
+			    tooltip.style.left = event.clientX + 10;
+			    tooltip.style.top = event.clientY + 10;
+			    tooltip.style.zIndex = 1;
+			    tooltip.runtimeStyle.display = "block";
+			}
+		}
+	}
+	//selftime = setTimeout("event_GalTable_onmousemove()",1000);
+}
+	</script>
+</html>

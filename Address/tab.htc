@@ -1,0 +1,33 @@
+<PUBLIC:COMPONENT>
+<PUBLIC:ATTACH EVENT="onclick" ONEVENT="switchTab()" />
+<script language=jscript>
+function switchTab(){
+	try{		
+		if(m_oSelTab.sourceIndex!=sourceIndex){	
+			alert('switchTab');
+			m_oSelTab.className="TabUnSel";
+			var oNode = self.document.all(m_oSelTab.contentID);
+			oNode.className="TabUnSel";
+			
+			className="TabSel";
+			m_oSelTab=this;
+			
+			oNode = self.document.all(contentID);
+			oNode.className="TabSel";
+			
+			oNode = oNode.firstChild;
+			alert(oNode.src);
+			if(oNode.src==""||oNode.src=="_blank"){				
+				oNode.src = oNode.dataSrc;				
+				oNode.onload="init();";
+			}else
+				oNode.contentWindow.init();				
+			
+		}
+	}catch(e){
+		alert(e.message);
+	}
+}
+</script>  
+</PUBLIC:COMPONENT>
+<PUBLIC:PROPERTY NAME="contentID" />

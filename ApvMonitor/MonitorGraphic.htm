@@ -1,0 +1,289 @@
+﻿<HTML>
+	<HEAD>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Pragma" content="no-cache">
+		<link rel="stylesheet" type="text/css" href="../../common/style/coviflownet/coviflowbody.css">
+
+<script type="text/javascript">
+
+    function drawGraphic(srcXML){
+        //alert(srcXML);
+        var src = new ActiveXObject("MSXML2.DOMDocument");
+        var target = new ActiveXObject("MSXML2.DOMDocument");
+        src.loadXML("<?xml version='1.0' encoding='utf-8'?>"+srcXML);
+        src.transformNodeToObject(GraphicMonitor,target);
+        document.body.innerHTML = target.documentElement.xml;
+    }
+</script>
+
+	</HEAD>
+	<xml id="GraphicMonitor">
+		<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:msxsl="urn:schemas-microsoft-com:xslt"
+			xmlns:cfxsl="http://www.covision.co.kr/xslt/coviflow" xmlns:cfutil="http://www.covision.co.kr/xslt/coviflow/util">
+			<msxsl:script language="JScript" implements-prefix="cfxsl">
+	    <![CDATA[
+	    	function formatDate(oNodeList){
+			if(oNodeList.length==0) return "";
+			return oNodeList.nextNode().nodeValue;
+		}
+		function convertResult(oNodeListKind, oNodeListStatus){
+			if(oNodeListKind.length==0) return "";
+			var sKind = oNodeListKind.nextNode().nodeValue;
+			var sResult = oNodeListStatus.nextNode().nodeValue;
+			var sSignStatus;
+			switch(sResult){
+				case "inactive":
+					sSignStatus = "";break;
+				case "pending":
+					sSignStatus = "대기";break;
+				case "reserved":
+					sSignStatus = "보류";break;
+				case "completed":
+					if ( sKind == 'charge'){
+					sSignStatus = "기안";
+					}else{
+					sSignStatus = "결재";
+					}
+					break;
+				case "rejected":
+					sSignStatus = "반려";break;
+				case "authorized":
+					sSignStatus = "전결";break;
+				case "reviewed":
+					sSignStatus = "후결";break;
+				case "substituted":
+					sSignStatus = "대결";break;
+				case "agreed":
+					sSignStatus = "합의";break;
+				case "disagreed":
+					sSignStatus = "이의";break;
+				case "bypassed":
+					sSignStatus = "후열";break;
+				case "confidential":
+                    sSignStatus = "친전";break;
+                case "conveyance":
+                    sSignStatus = "전달";break;
+				case "skipped":
+					sSignStatus = "결재안함";break;
+				default : sSignStatus = sResult;break;
+			}
+			return sSignStatus;
+		}
+	    ]]>
+		</msxsl:script>
+			<xsl:template match="/">
+				<table align="center" border="0">
+					<tr>
+						<xsl:apply-templates select="steps/step" /></tr>
+				</table>
+			</xsl:template>
+			<xsl:template match="step">
+				<td height="100%" valign="middle" align="center">
+					<xsl:choose>
+						<xsl:when test="@routetype='approve' and @allottype='parallel' and (@unittype='person' or @unittype='role')">
+							<table>
+								<tr>
+									<td valign="middle" align="center">
+										<xsl:for-each select="ou">
+											<xsl:apply-templates select="person|role" />
+										</xsl:for-each>
+									</td>
+								</tr>
+							</table>
+						</xsl:when>
+						<xsl:when test="@routetype='consult' and (@unittype='person' or @unittype='role')">
+							<table>
+								<tr>
+									<td valign="middle" align="center">
+										<xsl:for-each select="ou">
+											<xsl:apply-templates select="person|role" />
+										</xsl:for-each>
+									</td>
+								</tr>
+							</table>
+						</xsl:when>
+						<xsl:when test="@routetype='assist' and @unittype='person'">
+							<table>
+								<tr>
+									<td valign="middle" align="center">
+										<xsl:for-each select="ou">
+											<xsl:apply-templates select="person" />
+										</xsl:for-each>
+									</td>
+								</tr>
+							</table>
+						</xsl:when>
+						<xsl:when test="@unittype='role'">
+							<xsl:apply-templates select="ou/role" />
+						</xsl:when>
+						<xsl:when test="@unittype='ou'">
+							<table border="0">
+								<tr>
+									<td valign="middle" align="center">
+										<xsl:for-each select="ou">
+											<xsl:apply-templates select="taskinfo" />
+											<br />
+											<xsl:value-of select='@name' />
+											<br />
+											<xsl:value-of select='cfxsl:formatDate(taskinfo/@datecompleted)' />
+											<br />
+											<xsl:choose>
+												<xsl:when test="taskinfo/@kind='charge'">
+													기안
+												</xsl:when>
+												<xsl:otherwise>
+													<xsl:value-of select='cfxsl:convertResult(taskinfo/@kind,taskinfo/@result)' />
+												</xsl:otherwise>
+											</xsl:choose>
+											<br />
+										</xsl:for-each>
+									</td>
+								</tr>
+								<xsl:choose>
+									<xsl:when test="@routetype='receive'">
+										<tr>
+											<td>
+												<table>
+													<tr>
+														<xsl:for-each select="ou/*[taskinfo]">
+															<td valign="middle" align="center">
+																<xsl:choose>
+																	<xsl:when test="taskinfo/@status='pending'">
+																		<img src="/CoviWeb/common/Images/coviflownet/workitem.gif" />
+																	</xsl:when>
+																	<xsl:when test="taskinfo/@status='inactive'">
+																		<img src="/CoviWeb/common/Images/coviflownet/workitem_dim.gif" />
+																	</xsl:when>
+																	<xsl:when test="taskinfo/@status='completed' or taskinfo/@status=''">
+																		<img src="/CoviWeb/common/Images/coviflownet/workitem_pre.gif" />
+																	</xsl:when>
+																	<xsl:otherwise>
+																		<img src="/CoviWeb/common/Images/coviflownet/workitem_dim.gif" />
+																	</xsl:otherwise>
+																</xsl:choose>
+																<br />
+																<xsl:value-of select='@name' />
+																<br />
+																<xsl:value-of select='cfxsl:formatDate(taskinfo/@datecompleted)' />
+																<br />
+																<xsl:choose>
+																	<xsl:when test="taskinfo/@kind='charge'">
+															            기안
+														            </xsl:when>            
+																	<xsl:otherwise>
+																		<xsl:value-of select='cfxsl:convertResult(taskinfo/@kind,taskinfo/@result)' />
+																	</xsl:otherwise>
+																</xsl:choose>
+															</td>
+															<xsl:if test="not(position()=last())">
+																<td width="20" align="center"><img src="/CoviWeb/common/Images/coviflownet/icon_next.gif" /></td>
+															</xsl:if>
+														</xsl:for-each>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</xsl:when>
+								</xsl:choose>
+							</table>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:choose> 
+								<xsl:when test="ou/*/taskinfo/@status='pending'">
+									<img src="/CoviWeb/common/Images/coviflownet/workitem.gif" />
+								</xsl:when>
+								<xsl:when test="ou/*/taskinfo/@status='inactive'">
+									<img src="/CoviWeb/common/Images/coviflownet/workitem_dim.gif" />
+								</xsl:when>
+								<xsl:when test="ou/*/taskinfo/@status='completed'">
+									<img src="/CoviWeb/common/Images/coviflownet/workitem_pre.gif" />
+								</xsl:when>
+								<xsl:otherwise>
+									<img src="/CoviWeb/common/Images/coviflownet/workitem_dim.gif" />
+								</xsl:otherwise>								
+							</xsl:choose>
+							<br />
+							<xsl:value-of select='ou/@name' />
+							<br />
+							<xsl:value-of select='ou/*/@name' />
+							<br />
+							<xsl:value-of select='cfxsl:formatDate(ou/*/taskinfo/@datecompleted)' />
+							<br />
+							<xsl:choose>
+								<xsl:when test="ou/*/taskinfo/@kind='charge'">
+									기안
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select='cfxsl:convertResult(ou/*/taskinfo/@kind,ou/*/taskinfo/@result)' />
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:otherwise>
+					</xsl:choose>
+				</td>
+				<xsl:if test="not(position()=last())">
+					<td width="20" align="center"><img src="/CoviWeb/common/Images/coviflownet/icon_next.gif" /></td>
+				</xsl:if>
+			</xsl:template>
+			<xsl:template match="taskinfo">
+				<xsl:choose>
+					<xsl:when test="@status='pending'">
+						<img src="/CoviWeb/common/Images/coviflownet/workitem.gif" />
+					</xsl:when>
+					<xsl:when test="@status='inactive'">
+						<img src="/CoviWeb/common/Images/coviflownet/workitem_dim.gif" />
+					</xsl:when>
+					<xsl:otherwise>
+						<img src="/CoviWeb/common/Images/coviflownet/workitem_pre.gif" />
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:template>
+			<xsl:template match="person">
+				<xsl:choose>
+					<xsl:when test="taskinfo/@status='pending'">
+						<img src="/CoviWeb/common/Images/coviflownet/workitem.gif" />
+					</xsl:when>
+					<xsl:when test="taskinfo/@status='inactive'">
+						<img src="/CoviWeb/common/Images/coviflownet/workitem_dim.gif" />
+					</xsl:when>
+					<xsl:otherwise>
+						<img src="/CoviWeb/common/Images/coviflownet/workitem_pre.gif" />
+					</xsl:otherwise>
+				</xsl:choose>
+				<br />
+				<xsl:value-of select='@ouname' />
+				<br />
+				<xsl:value-of select='@name' />
+				<br />
+				<xsl:value-of select='cfxsl:formatDate(taskinfo/@datecompleted)' />
+				<br />
+				<xsl:value-of select='cfxsl:convertResult(taskinfo/@kind,taskinfo/@result)' />
+				<br />
+			</xsl:template>
+			<xsl:template match="role">
+				<xsl:choose>
+					<xsl:when test="taskinfo/@status='pending'">
+						<img src="/CoviWeb/common/Images/coviflownet/workitem.gif" />
+					</xsl:when>
+					<xsl:when test="taskinfo/@status='inactive'">
+						<img src="/CoviWeb/common/Images/coviflownet/workitem_dim.gif" />
+					</xsl:when>
+					<xsl:otherwise>
+						<img src="/CoviWeb/common/Images/coviflownet/workitem_pre.gif" />
+					</xsl:otherwise>
+				</xsl:choose>
+				<br />
+				<xsl:value-of select='@ouname' />
+				<br />
+				<xsl:value-of select='@name' />
+				<br />
+				<xsl:value-of select='cfxsl:formatDate(taskinfo/@datecompleted)' />
+				<br />
+				<xsl:value-of select='cfxsl:convertResult(taskinfo/@kind,taskinfo/@result)' />
+				<br />
+			</xsl:template>
+		</xsl:stylesheet>
+	</xml>
+	<BODY leftmargin="0" topmargin="0" onselectstart="return false;">
+	</BODY>
+</HTML>

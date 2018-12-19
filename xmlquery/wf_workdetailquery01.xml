@@ -1,0 +1,15 @@
+﻿<?xml version="1.0"  encoding="utf-8" ?>
+<ROOT xmlns:sql="urn:schemas-microsoft-com:xml-sql"
+	>
+	<sql:header>
+		<sql:param name='PI_ID'>{1FADEBC8E9F347B4A12E72A906FCA357}</sql:param>
+	</sql:header>
+	<sql:query>
+        	SELECT  DOMAIN_DATA_CONTEXT,
+        			DD_ID		
+                FROM    WF_DOMAIN_DATA (NOLOCK) 
+		WHERE 	PROCESS_ID = @PI_ID
+		AND	NAME = 'APPROVERCONTEXT'
+		FOR XML AUTO
+	</sql:query>
+</ROOT>

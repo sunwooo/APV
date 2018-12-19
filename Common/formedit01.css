@@ -1,0 +1,345 @@
+BODY
+{
+    FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+    FONT-SIZE: 11pt;
+    BACKGROUND-COLOR: #FFFFFF;  
+    BORDER-BOTTOM: 0px outset;
+    BORDER-LEFT: 0px outset;
+    BORDER-RIGHT: 0px outset;
+    BORDER-TOP: 0px outset;
+    scrollbar-face-color: #ffffff; 
+
+				   scrollbar-face-color: #D3D7D7; /*59AD40; */
+				   scrollbar-shadow-color: #C3C3C3; 
+				   scrollbar-highlight-color: #ffffff; 
+				   scrollbar-3dlight-color: #A9A9A9; 
+				   scrollbar-darkshadow-color: #2E352C; 
+				   scrollbar-track-color: #eeeeee; 
+				   scrollbar-arrow-color: #ffffff;
+}
+table {border-color:#000000;border-collapse: collapse;}
+TD
+{
+	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+    FONT-SIZE: 11pt;
+    MARGIN-TOP: 0px;
+	border-color: #000000;
+}
+TH
+{
+	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+    FONT-SIZE: 11pt;
+    MARGIN-TOP: 0px;	
+	border-color: #000000;
+}
+INPUT
+{
+	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+    FONT-SIZE: 11pt;
+    MARGIN-TOP: 0px;
+    TEXT-ALIGN: left
+}
+SELECT
+{
+    BACKGROUND-COLOR: #EDEDED;
+	WIDTH: 100%;
+	HEIGHT: 100%
+}
+TEXTAREA
+{
+	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+    FONT-SIZE: 11pt;
+	WIDTH: 100%;
+	HEIGHT: 100%
+}
+
+A:link 
+{
+	TEXT-DECORATION: none;
+	color:blue;
+}
+
+A:visited 
+{
+	TEXT-DECORATION: none;
+	color:blue;
+}
+
+A:active 
+{
+	TEXT-DECORATION: none;
+	color:red;
+}
+
+A:over 
+{
+	TEXT-DECORATION: none;
+	color:red;
+}
+
+A:hover 
+{
+	TEXT-DECORATION: none;
+	color:red;
+}
+.signtable
+{
+	WIDTH: 100%;
+    HEIGHT: 50%;
+    FONT-SIZE: 11pt;
+}
+.Field
+{
+    FONT-SIZE: 11pt;
+    MARGIN-TOP: 0px;
+    FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+
+	WIDTH: 100%;
+	HEIGHT: 100%;
+	ime-mode:active;
+}
+.Readonlyfield
+{
+    FONT-SIZE: 11pt;
+    FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	BORDER-WIDTH: 0;
+	TEXT-ALIGN: center;
+	WIDTH: 100%;
+	HEIGHT: 100%;
+}
+
+.Readonlyfield1
+{
+    FONT-SIZE: 11pt;
+    FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	BORDER-WIDTH: 1;
+	TEXT-ALIGN: center;
+	WIDTH: 100%;
+	HEIGHT: 100%;
+}
+
+.cashfield
+{
+    FONT-SIZE: 11pt;
+    FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	BORDER-WIDTH: 0;
+	TEXT-ALIGN: right;
+	WIDTH: 100%;
+	HEIGHT: 100%;
+}
+
+.cashfield1
+{
+    FONT-SIZE: 11pt;
+    FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	BORDER-WIDTH: 1;
+	TEXT-ALIGN: right;
+	WIDTH: 100%;
+	HEIGHT: 100%;
+}
+
+.Titlefield
+{
+	BACKGROUND-COLOR: white;
+	FONT-SIZE: 11pt;
+	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	color: gray;
+	TEXT-ALIGN: center;
+	HEIGHT: 25;
+}
+.headname
+{
+
+    font-family : batang,바탕,바탕체,궁서,굴림;
+    FONT-SIZE: 20pt;
+	font-weight: bold;
+}
+.datafield
+{
+    FONT-SIZE: 11pt;
+    FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	BORDER-WIDTH: 0;
+	WIDTH: 90%;
+	HEIGHT: 100%;
+	TEXT-ALIGN: center;
+}
+
+.lblField
+{
+    BACKGROUND-COLOR: #EDEDED;
+    FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+    FONT-SIZE: 11pt;
+	COLOR: gray;
+    MARGIN-TOP: 0px;
+    TEXT-ALIGN: center;
+}
+.nodisp
+{
+	DISPLAY: none;
+}
+.signlocation
+{
+	FONT-SIZE: 11pt;
+    	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	color: #000000;
+	TEXT-ALIGN: right;
+}
+.signfield
+{
+	FONT-SIZE: 11pt;
+    	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	color: #000000;
+    	HEIGHT: 60px;
+	WIDTH: 60px;
+	TEXT-ALIGN: center;
+}
+.deptsignfield
+{
+	FONT-SIZE: 11pt;
+    	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	color: #000000;
+    	HEIGHT: 20px;
+	WIDTH: 60px;
+	TEXT-ALIGN: center;
+}
+.approvenamefield
+{
+	FONT-SIZE: 10pt;
+    	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	color: #000000;
+    	HEIGHT: 9px;
+	WIDTH: 60px;
+	TEXT-ALIGN: center;
+}
+.datefield
+{
+	FONT-SIZE: 10pt;
+    	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	color: #000000;
+    	HEIGHT: 9px;
+	WIDTH: 60px;
+	TEXT-ALIGN: center;
+}
+.valuefield{border:1px solid #CCCCCC; width:95%;height:20;font-size:11pt;}
+/* .valuefield 
+{
+	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	FONT-SIZE: 11pt;
+	VALIGN: middle;
+	BORDER-WIDTH: 1;
+	WIDTH:95%;
+	HEIGHT: 20;
+}*/
+.textareafield
+{
+	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	FONT-SIZE: 11pt;
+	VALIGN: middle;
+	BORDER-WIDTH: 1;
+	WIDTH:95%;
+	HEIGHT: 95%;
+}
+.moneyfield
+{
+	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+    FONT-SIZE: 11pt;
+	TEXT-ALIGN:right;
+	BORDER-WIDTH: 1;
+	WIDTH: 100%;
+}
+.td_moneyfield
+{
+	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+    	FONT-SIZE: 11pt;
+	TEXT-ALIGN: right;
+	HEIGHT: 20;
+	VALIGN: middle;
+}
+.itemfield
+{
+	BACKGROUND-COLOR: #EDEDED;
+	FONT-SIZE: 11pt;
+	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	color: #2D2D2D;
+	VALIGN: middle;
+	HEIGHT: 20;
+	TEXT-ALIGN: center;
+}
+.combo
+{
+	FONT-SIZE: 11pt;
+	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+	COLOR: #2D2D2D;
+	VALIGN: middle;
+}
+.currency
+{
+	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+    FONT-SIZE: 11pt;
+	TEXT-ALIGN:center;
+	BORDER-WIDTH: 1;
+	WIDTH: 100%;
+}
+.readdate
+{
+	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+    FONT-SIZE: 11pt;
+	TEXT-ALIGN:center;
+	BORDER-WIDTH: 0;
+	COLOR: black;
+	WIDTH: 100%;
+}
+
+.aligncenter
+{
+	TEXT-ALIGN:center;
+}
+
+.alignright
+{
+	TEXT-ALIGN:right;
+}
+.alignleft
+{
+	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+    FONT-SIZE: 11pt;
+	TEXT-ALIGN:left;
+	BORDER-WIDTH: 0;
+	WIDTH: 99%;
+}
+.errormessage
+{
+    FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+    FONT-WEIGHT: bolder;
+    TEXT-ALIGN: center
+}
+.inputfield
+{
+	FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+    FONT-SIZE: 11pt;
+	TEXT-ALIGN:center;
+	BORDER-WIDTH: 1;
+	WIDTH: 100%;
+}
+.reqlabel
+{
+    FONT-FAMILY: gulim, Verdana, Arial, Helvetica;
+    FONT-SIZE: 11pt;
+	FONT-WEIGHT: bolder
+}
+.colheader
+{text-align:center;color:#4b4b4b;}
+
+.code { font-size:9pt; background-color:#F2F2F2;TEXT-ALIGN:center;}
+v\:* {
+	BEHAVIOR: url(#default#VML)
+}
+o\:* {
+	BEHAVIOR: url(#default#VML)
+}
+x\:* {
+	VISIBILITY: hidden; POSITION: relative
+}
+.shape {
+	BEHAVIOR: url(#default#VML)
+}

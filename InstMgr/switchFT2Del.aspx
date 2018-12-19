@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#"  Transaction="Required" AutoEventWireup="true" CodeFile="switchFT2Del.aspx.cs" Inherits="COVIFlowNet_Admin_InstMgr_switchFT2Del" %>

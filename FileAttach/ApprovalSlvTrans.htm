@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title></title>
+		<script type="text/javascript">
+		
+			window.onload = function()
+			{
+				document.body.style.height = parent.document.body.scrollHeight;
+			}
+		  
+			function fnSlvTransCover()
+			{
+				parent.frames[0].fnCOPMSlvWarn();
+			}
+
+function fnCloseUpload() 
+			{//이준희(2010-04-06): 페이지 탈출 시의 "Invalid Pointer" 오류 -Silverlight의 rendered script상의 버그임- 를 해결하기 위해 부분 수정함.
+				oContainer = null;
+				oContainer = document.getElementById('dvSilverlightTrans');
+				//CoviSlvTransBuf = style.width.toString() + '_' + style.height.toString();
+				oContainer.style.width = 0;
+				oContainer.style.height = 0;
+				oContainer.style.left = -2000;
+			
+				//document.getElementById('Xaml1').content.Page.ClearFilesList('SCREEN');
+				parent.document.getElementById("dvSilverlightTransWrap").style.display = 'none';
+				parent.document.getElementById("dvSilverlightTransWrapWrap").style.display = 'none';
+				parent.document.body.onclick = "";
+			}
+			
+		</script>
+	</head>
+	<body onclick = "fnSlvTransCover();" style = "margin: 0px; padding: 0px; width: 100%;">
+		<div>
+		</div>
+		<div id = "dvCOPMSlv" style = "position: absolute; left: 0px; top: 0px; width: 568px; height: 344px;" >
+		</div>
+	</body>
+</html>
+<!--
+ height: 740px;
+ parent.fnCOPMSlvWarn();
+-->
