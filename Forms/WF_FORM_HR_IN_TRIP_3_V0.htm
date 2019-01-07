@@ -841,55 +841,44 @@
     }
 
 //han
-    //2017-09-05 PSW 수정 - 시내/시외 콤보박스 변경시
+    //2017-09-05 PSW 수정 - 달력이벤트 발생시
 	function ChangeEvent(index) {//debugger;
+		var rowIdx = index.substr(index.length-1,1);
+		var pKind = $("input:radio[name='OPT_Guboon_" + rowIdx + "']:checked").val();
 		
-		$("#tblDataRowCost tr").each(function (i) {
+		if (pKind == "시내") {
+			GetTotDays(rowIdx);
+			var daysCnt = $("input[name=txtTotDay_" + rowIdx + "]").val();
+
+			if(daysCnt ==0){
+				$("input[name=txtDayAmt_" + rowIdx + "]").val(CommaSplit(9000));
+			}else{
+				$("input[name=txtDayAmt_" + rowIdx + "]").val(CommaSplit(9000*daysCnt));
+			}
+			SumRowCalcu(rowIdx);
 			
-			if($("input[name=hdn_dpApprFormDTEnd" + (i+1) + "]").val() || i==0){
-				//alert($("input[name=hdn_dpApprFormDTStart" + (i+1) + "]").val()); 
-				//alert($("input[name=hdn_dpApprFormDTEnd" + (i+1) + "]").val());
-				//alert($("input:radio[name='OPT_Guboon_" + gRowCnt + "']:checked").val());
-				//alert($("input[name=txtTotDay_" + gRowCnt + "]").val());
-				var pKind = $("input:radio[name='OPT_Guboon_" + gRowCnt + "']:checked").val()
-				
-				if (pKind == "시내") {
-					GetTotDays((i+1));
-					var daysCnt = $("input[name=txtTotDay_" + (i+1) + "]").val();
 
-					if(daysCnt ==0){
-						$("input[name=txtDayAmt_" + (i+1) + "]").val(CommaSplit(9000));
-					}else{
-						$("input[name=txtDayAmt_" + (i+1) + "]").val(CommaSplit(9000*daysCnt));
-					}
+		} else if (pKind == "시외") {
+			GetTotDays(rowIdx);
+			var daysCnt = $("input[name=txtTotDay_" + rowIdx + "]").val();
 
-				} else if (pKind == "시외") {
-					GetTotDays((i+1));
-					var daysCnt = $("input[name=txtTotDay_" + (i+1) + "]").val();
-
-					if(daysCnt ==0){
-						$("input[name=txtDayAmt_" + (i+1) + "]").val(CommaSplit(25000));
-					}else{
-
-						$("input[name=txtDayAmt_" + (i+1) + "]").val(CommaSplit(25000*daysCnt));
-					}
-
-				}
+			if(daysCnt ==0){
+				$("input[name=txtDayAmt_" + rowIdx + "]").val(CommaSplit(25000));
+			}else{
+				$("input[name=txtDayAmt_" + rowIdx + "]").val(CommaSplit(25000*daysCnt));
 			}
 			
-			//교통비, 숙박비 "0"원 추가
-			$("input[name=txtStayAmt_" + gRowCnt + "]").val(0);
-			$("input[name=txtTransAmt_" + gRowCnt + "]").val(0);
-			
-			
-			SumRowCalcu(gRowCnt);
+			SumRowCalcu(rowIdx);
+		}
 		
-        
-		});
-		
+
+			
+		//교통비, 숙박비 "0"원 추가
+		$("input[name=txtStayAmt_" + rowIdx + "]").val(0);
+		$("input[name=txtTransAmt_" + rowIdx + "]").val(0);
+			
 		TotSumCalcu();
-		
-		dupCheck(gRowCnt);
+		dupCheck(rowIdx);
 		
     }
 	
@@ -986,6 +975,7 @@
             }
         }
     }
+
 
     //편집모드시 데이터반복부 셋팅 (HIW)
     function SetRepeatData() {
@@ -1138,7 +1128,7 @@
         vRowStr += "  <b>(<input type='text' id='mField' name='txtNights_" + gRowCnt + "' style='height:25px;width:15px; font-weight:bold; text-align:right; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;' />박 <input type='text' id='mField' name='txtDays_" + gRowCnt + "' style='height:25px;width:15px; font-weight:bold; text-align:right; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;' />일)</b>";
                 
 		vRowStr += "<input type='hidden' style='width: 20px;' id='mField' readonly  name='txtTotDay_" + gRowCnt + "' />";
-		vRowStr += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type='radio' id='mField' name='OPT_Guboon_" + gRowCnt + "' value='시내' onclick='ChangeEvent();' style='border:0px;' checked/>시내 &nbsp;&nbsp;<input type='radio' id='mField' name='OPT_Guboon_" + gRowCnt + "' value='시외' onclick='ChangeEvent();' style='border:0px;'  />시외<input type='hidden' id='mField' name='hdnInOutVal_" + gRowCnt + "' /></b>";
+		vRowStr += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type='radio' id='mField' name='OPT_Guboon_" + gRowCnt + "' value='시내' onclick='ChangeInOutRdo(1, " + gRowCnt + ");' style='border:0px;' checked/>시내 &nbsp;&nbsp;<input type='radio' id='mField' name='OPT_Guboon_" + gRowCnt + "' value='시외' onclick='ChangeInOutRdo(2," + gRowCnt + ");' style='border:0px;'  />시외<input type='hidden' id='mField' name='hdnInOutVal_" + gRowCnt + "' /></b>";
         
         vRowStr += "</td>";
         vRowStr += "</tr>";
