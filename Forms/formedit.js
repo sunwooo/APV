@@ -143,7 +143,7 @@ function initApvList() {//debugger;
     //양식 설명 위해 추가
     if (getInfo("fmwkds") != "") { try { document.getElementById("tdforminfo").innerHTML = getInfo("fmwkds").replace("\n", "<br>"); document.getElementById("divforminfo").style.display = ""; } catch (e) { } }
     m_oApvList.loadXML("<?xml version='1.0' encoding='utf-8'?>" + m_oFormMenu.document.getElementsByName("APVLIST")[0].value);
-
+	
     //20130911 hyh 추가
     if (document.location.href.indexOf('read.htm') > -1 && getInfo("commentlist").indexOf("rejectedtodept") > -1) {
         var m_Comment = CreateXmlDocument();
@@ -194,8 +194,8 @@ function setInlineApvList(oApvList) {
             setInlineApvList(oApvList);
         }
         else {
-            m_oApvList.loadXML("<?xml version='1.0' encoding='utf-8'?>" + m_oFormMenu.document.getElementsByName("APVLIST")[0].value);
-            oApvList = m_oApvList;
+			m_oApvList.loadXML("<?xml version='1.0' encoding='utf-8'?>" + m_oFormMenu.document.getElementsByName("APVLIST")[0].value);
+			oApvList = m_oApvList;
         }
     }
     if ((getInfo("mode") == "DRAFT" || getInfo("mode") == "TEMPSAVE") && getInfo("scFRMAPVLINE") == "1") {
@@ -470,7 +470,9 @@ function G_displaySpnAttInfo(bRead) {//수정본
     var bEdit = false;
     if (String(window.location).indexOf("_read.htm") > -1) {
         bEdit = false;
+try{
 	document.getElementById("tbContentElement").setAttribute("align","");
+}catch(e){}
     } else {
         bEdit = true;
     }
@@ -898,12 +900,16 @@ function PopListSingle(SingleDownLoadString) {
     parent.download.location.href ='/CoviWeb/SiteReference/Common/covi_fileSingledown.aspx?filepath=' + toUTF8(SingleDownLoadString) ;//usercode='+parent.getInfo("usid")+"&
     }
     */
-    if (!("ActiveXObject" in window)) {
-        parent.download.location.href = '../fileattach/htmldown.aspx?filename=' + gFileNameArray[parseInt(SingleDownLoadString)] + "&location=" + gFileArray[parseInt(SingleDownLoadString)];
+
+    //if (!("ActiveXObject" in window)) {
+     if (isWindow()) {
+        //parent.download.location.href = '../fileattach/htmldown.aspx?filename=' + gFileNameArray[parseInt(SingleDownLoadString)] + "&location=" + gFileArray[parseInt(SingleDownLoadString)];
+        parent.download.location.href = '../fileattach/htmldown.aspx?filename=' + escape(gFileNameArray[parseInt(SingleDownLoadString)]) + "&location=" + escape(gFileArray[parseInt(SingleDownLoadString)]);
     } else {
         parent.download.location.href = '/CoviWeb/SiteReference/Common/covi_fileSingledown.aspx?filepath=' + toUTF8(gFileArray[parseInt(SingleDownLoadString)]); //usercode='+parent.getInfo("usid")+"&
     }
 }
+
 
 function deleteitemFile() {
     m_oFormMenu.deleteitem();
@@ -5489,6 +5495,10 @@ function SelectSingleNode(xmlDoc, elementPath) {
     }
 }
 
+
+
+
+
 //161103 다국어 처리
 function setCommonLb() {
 
@@ -5599,7 +5609,8 @@ function dext_editor_loaded_event(DEXT5Editor) {
 }
 function dext_editor_set_complete_event() {
     if (D5edit_load) {
-        var _css = "table { table-layout: fixed; }";
+       // var _css = "table { table-layout: fixed; }";
+	var _css = "";
         DEXT5.setUserCssText(_css, "dext5editor1");
     }
 }

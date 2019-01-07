@@ -5,16 +5,16 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Form Menu</title>
 		<!-- 공통 -->
-		<script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Config.js" ></script>
-		<script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/EmbedObject.js" ></script>
-		<script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Utility.js" ></script>
-		<script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Dictionary.js" ></script>
-		<script type="text/javascript" language="javascript" src="../../common/script/COVIFlowNet/openWindow.js"></script>
-        <script type="text/javascript" language="javascript" src="../../common/script/jquery-1.6.1.min.js"></script>
-        <script type="text/javascript" language="javascript" src="../../SiteReference/js/jquery-1.7.2.min.js"></script>
-        <script type="text/javascript" language="javascript" src="../../SiteReference/js/Silverlight.js"></script>
+		<script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Config.js?v=1" ></script>
+		<script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/EmbedObject.js?v=1" ></script>
+		<script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Utility.js?v=1" ></script>
+		<script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Dictionary.js?v=1" ></script>
+		<script type="text/javascript" language="javascript" src="../../common/script/COVIFlowNet/openWindow.js?v=1"></script>
+        <script type="text/javascript" language="javascript" src="../../common/script/jquery-1.6.1.min.js?v=1"></script>
+        <script type="text/javascript" language="javascript" src="../../SiteReference/js/jquery-1.7.2.min.js?v=1"></script>
+        <script type="text/javascript" language="javascript" src="../../SiteReference/js/Silverlight.js?v=1"></script>
         <%--<script type="text/javascript" language="javascript" src="formmenu_ink.js"></script>--%>
-		<script type="text/javascript" language="javascript" src="formmenu.js"></script>
+		<script type="text/javascript" language="javascript" src="formmenu.js?v=1"></script>
 	</head>
 	<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" ondragstart="return false" onselectstart="return false"> 
 <!--	디버깅용 요소임-->
@@ -304,7 +304,10 @@
 			if("<%=Session["user_ent_code"].ToString()%>" == "ISU_ST"){
                 btnGuide.style.display="";
                 
-           }else{
+           }else if("<%=Session["user_ent_code"].ToString()%>" == "ISU"){
+                btnGuide.style.display="";
+                
+			}else{
                 btnGuide.style.display="none";
            }
 
@@ -318,6 +321,12 @@
                     targetName = "guide"
 
                     window.open(url, targetName, "height=810,width=1200,status=yes,toolbar=no,menubar=no, scrollbars=yes, resizable=yes") ;
+                }else if("<%= Session["user_ent_code"].ToString() %>" == "ISU"){
+                    
+                    url = "http://gw.isu.co.kr/Coviweb/Approval/Forms/formGuideIsu.aspx";
+                    targetName = "guide"
+
+                    window.open(url, targetName, "height=730,width=1000,status=yes,toolbar=no,menubar=no, scrollbars=yes, resizable=yes") ;
                 }
                 
             }
@@ -385,7 +394,9 @@
 			var gMessage289 = "<%= Resources.Approval.msg_289 %>";
 			
 			var gMessage324 = "<%= Resources.Approval.msg_324 %>";
-            var gMessage333 = "<%= Resources.Approval.msg_333 %>";
+            		var gMessage333 = "<%= Resources.Approval.msg_333 %>";
+
+			var gMessage337 = "<%= Resources.Approval.msg_337 %>";
 
 			/** formeditor.js 용 리소스 파일 변수 Start **/
 			var g_imgBasePath = '<%="http://" + ConfigurationManager.AppSettings["LinKURL"].ToString() + Session["user_thema"] %>';
@@ -806,6 +817,7 @@
 			}
 		</script>
 	<script language="javascript" type="text/javascript">
+
 		document.getElementById("formname").innerHTML = parent.g_dicFormInfo.item("fmnm");
 
 		function Test(){

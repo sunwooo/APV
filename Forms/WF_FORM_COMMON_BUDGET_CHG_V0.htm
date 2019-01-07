@@ -113,7 +113,7 @@
 
         <table border="0" width="100%">
             <tr>
-                <td align="center" style="padding-top:15px;padding-bottom:15px;"><input type="text" id="mField" name="txtYear" onblur='getMonth();' style=" height:20px;width:5%;border: solid 1px #D8D8D8; text-align:center;"/>년 예산을 아래와 같이 변경 신청합니다.</td>
+                <td align="center" style="padding-top:15px;padding-bottom:15px;"><input type="text" id="mField" name="txtYear" onblur='getYMAccount(1);' style=" height:20px;width:5%;border: solid 1px #D8D8D8; text-align:center;"/>년 예산을 아래와 같이 변경 신청합니다.</td>
             </tr>
 
         </table>
@@ -311,15 +311,15 @@
 <!-- 양식 전체 end -->
 <script language="javascript" src="formedit_object.js" type="text/javascript"></script>
 
-<%=today.getYear()%>
-<%=today.getMonth()%>
 <script type="text/javascript" language="javascript">
 
     var gRowCnt = 1;  //HIW
    
     //현재 연도 가져오기 2015.11.17
     today = new Date();
-    var cYear = today.getYear();
+	//현재 연도 가져오기 2018.12.26 수정
+    var cYear = today.getFullYear() ;
+	//alert("cYear : " + cYear);
     var cMonth = today.getMonth();
 
 
@@ -349,7 +349,7 @@
         var Y = $("input[name=txtYear]").val();
         var M = $("input[name=txtMonth_" + i + "]").val();
 
-        // alert(Y + M);
+        //alert("aaa : "+ Y + M);
 
         if (M < 10) {
 
@@ -388,7 +388,8 @@
         SetUserBasicInfo();
         $("input[name=hdnDataRowCnt]").val(1);
         //2015-11-27 PSW 추가
-        $("input[name=txtYear]").val(cYear);
+        //$("input[name=txtYear]").val(cYear);
+		$("input[name=txtYear]").val(cYear);
         
         $("input[name=txtMonth_1]").val(cMonth + 1);
 
@@ -877,6 +878,8 @@
                 }
             }
             fn_OpenDialog2("/CoviWeb/Approval/Forms/Popup/UserSearchFromHR_ISUCT.aspx?kind=CallHrView&DataRowNo=" + gRowCnt + "&YMAccount=" + ymaccount + "&RequestDeptCD=" + requestDeptCD + "&GCODE=" + gcode, "", 500, 390, "scroll");   //fix/scroll
+			//alert("gRowCnt"+gRowCnt);
+			//alert("ymaccount"+ymaccount);
         }
     }
 

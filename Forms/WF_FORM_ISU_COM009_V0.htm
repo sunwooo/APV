@@ -294,7 +294,7 @@ function getBodyContext(){
     } else if (getInfo("editortype") == "0") {//0.TextArea
         document.getElementById("dhtml_body").value = document.getElementById("tbContentElement").value;
     } else if (getInfo("editortype") == "8") { //8 dext5
-        document.getElementById("dhtml_body").value = DEXT5.getBodyValue();
+       dextgetHtmlValueEx();
     }
     var sBodyContext = makeBodyContext();
     return makeNode("BODY_CONTEXT", sBodyContext, null, false);

@@ -583,7 +583,8 @@ function fn_checkrejectedto() {
 		if ( m_oFormMenu.getInfo("mode") == "RECAPPROVAL"){
 			oRJSteps= m_oApvList.documentElement.selectNodes("division[taskinfo/@status='pending']/step[@routetype='approve' and .//taskinfo/@rejectee='y']");
 		}else if ( m_oFormMenu.getInfo("mode") == "SUBAPPROVAL"){
-		    if(!window.ActiveXObject){
+		    //if(!window.ActiveXObject){
+                    if (!isWindow()) {
     			oRJSteps= m_oApvList.documentElement.selectNodes("division[taskinfo/@status='pending']/step[@routetype='consult']/ou[taskinfo/@status='pending'  and taskinfo/@piid='" +m_oFormMenu.getInfo("piid").toUpperCase() + "']/*[name()='person' or name()='role'][taskinfo/@rejectee='y']");
 		    }else{
     			oRJSteps= m_oApvList.documentElement.selectNodes("division[taskinfo/@status='pending']/step[@routetype='consult']/ou[taskinfo/@status='pending'  and taskinfo/@piid='" +m_oFormMenu.getInfo("piid").toUpperCase() + "']/(person|role)[taskinfo/@rejectee='y']");
@@ -613,7 +614,8 @@ function fn_checkrejectedto() {
 			var oTaskInfo;
 			if (oStep.getAttribute("allottype") != "parallel"){
 			if ( m_oFormMenu.getInfo("mode") == "RECAPPROVAL"){
-    		    if(!window.ActiveXObject){
+    		       //if(!window.ActiveXObject){
+                       if (!isWindow()) {
     				oTaskInfo= oStep.selectSingleNode("ou/*[name()='person' or name()='role']/taskinfo[@kind!='conveyance']");
     			}else{
     				oTaskInfo= oStep.selectSingleNode("ou/(person|role)/taskinfo[@kind!='conveyance']");
@@ -621,7 +623,8 @@ function fn_checkrejectedto() {
 			}else if ( m_oFormMenu.getInfo("mode") == "SUBAPPROVAL"){
 				oTaskInfo= oStep.selectSingleNode("taskinfo");
 			}else{
-    		    if(!window.ActiveXObject){
+    		        //if(!window.ActiveXObject){
+                        if (!isWindow()) {
     				oTaskInfo= oStep.selectSingleNode("ou/*[name()='person' or name()='role']/taskinfo[@kind!='conveyance']");
     			}else{
     				oTaskInfo= oStep.selectSingleNode("ou/(person|role)/taskinfo[@kind!='conveyance']");
@@ -700,7 +703,8 @@ function setRJTApvList(){
 		oSteps = m_oApvList.documentElement.selectNodes("division[taskinfo/@status='pending']/step[@routetype='approve'  and  .//taskinfo/@kind!='review' and .//taskinfo/@kind!='bypass'  and .//taskinfo/@kind!='skip' and ((.//taskinfo/@status='completed' or .//taskinfo/@status='pending') and not(.//taskinfo/@rejectee))]");
 	}else if ( m_oFormMenu.getInfo("mode") == "SUBAPPROVAL"){
 		oOU = m_oApvList.documentElement.selectSingleNode("division[taskinfo/@status='pending']/step[taskinfo/@status='pending']/ou[taskinfo/@status='pending' and taskinfo/@piid='" + m_oFormMenu.getInfo("piid").toUpperCase() + "']");
-	    if(!window.ActiveXObject){
+	        //if(!window.ActiveXObject){
+                if (!isWindow()) {
     		oLastStep = m_oApvList.documentElement.selectSingleNode("division[taskinfo/@status='pending']/step[taskinfo/@status='pending' ]/ou[taskinfo/@status='pending' and taskinfo/@piid='"+m_oFormMenu.getInfo("piid").toUpperCase()+"']/*[name()='person' or name()='role'][taskinfo/@status='inactive']"); //taskinfo/@kind='normal' and (친전이 올 수 있음)
     		oSteps = m_oApvList.documentElement.selectNodes("division[taskinfo/@status='pending']/step[taskinfo/@status='pending' ]/ou[taskinfo/@status='pending' and taskinfo/@piid='"+m_oFormMenu.getInfo("piid").toUpperCase()+"']/*[name()='person' or name()='role'][(taskinfo/@kind!='review' and taskinfo/@kind!='bypass'  and taskinfo/@kind!='skip' and taskinfo/@kind!='conveyance') and (( taskinfo/@status='completed' or taskinfo/@status='pending') and not(taskinfo/@rejectee))]");
 		}else{
@@ -720,7 +724,8 @@ function setRJTApvList(){
 			oPerson = oStep;
 		}else{
 			oStep = oSteps.nextNode();
-    	    if(!window.ActiveXObject){
+    	        //if(!window.ActiveXObject){
+                if (!isWindow()) {
 			    oPerson = oStep.selectSingleNode("ou/*[name()='person' or name()='role'][taskinfo/@kind!='conveyance']");
 	        }else{		
 			    oPerson = oStep.selectSingleNode("ou/(person|role)[taskinfo/@kind!='conveyance']");
@@ -735,14 +740,16 @@ function setRJTApvList(){
 				oCTaskInfo = oCStep.selectSingleNode("taskinfo");
 			}else{
 				var oCOU = oCStep.selectSingleNode("ou");
-    	        if(!window.ActiveXObject){
+    	            //if(!window.ActiveXObject){
+                    if (!isWindow()) {
     				oCTaskInfo = oCStep.selectSingleNode("ou/*[name()='person' or name()='role']/taskinfo[@kind!='conveyance']");
 	            }else{		
     				oCTaskInfo = oCStep.selectSingleNode("ou/(person|role)/taskinfo[@kind!='conveyance']");
 			    }				
 				//전달자들은 삭제 2006.03. by sunny
 				var oRmvPerson;
-    	        if(!window.ActiveXObject){
+    	                        //if(!window.ActiveXObject){
+                                if (!isWindow()) {
 				    oRmvPerson = oCOU.selectNodes("*[name()='person' or name()='role'][taskinfo/@kind='conveyance']");
 				}else{
 				    oRmvPerson = oCOU.selectNodes("(person|role)[taskinfo/@kind='conveyance']");
@@ -815,7 +822,8 @@ function selectApprover(){
 			oApprovedSteps = m_oApvList.documentElement.selectNodes("division/step[@routetype='approve' and not( @*='parallel') and .//taskinfo/@kind!='charge' and .//taskinfo/@kind!='review' and .//taskinfo/@kind!='bypass'  and .//taskinfo/@kind!='skip' and (.//taskinfo/@status='completed' and not(.//taskinfo/@rejectee))]");			
 			for(var i=0;i < oApprovedSteps.length ; i++){
 				oStep = oApprovedSteps.nextNode();
-				if(!window.ActiveXObject){
+				//if(!window.ActiveXObject){
+                                if (!isWindow()) {
 				    oPerson = oStep.selectSingleNode("ou/*[name()='person' or name()='role']");
 				}else{
 				    oPerson = oStep.selectSingleNode("ou/(person|role)");

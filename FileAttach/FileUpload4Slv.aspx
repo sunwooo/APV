@@ -40,6 +40,7 @@
 		var user_name = '<%=Session["user_name"].ToString()%>';
 		var dept_name = '<%=Session["user_dept_name"].ToString()%>';
 		
+		
 		function AttachFiles() 
 		{
 			try 
@@ -128,9 +129,10 @@
 			else 
 			{
 				alert("전송이 취소되었습니다.");
-			}
-
-            		bSubmit = false;
+            }
+              parent.document.getElementById("dvSilverlightTransWrap").style.display = 'none';
+			parent.document.getElementById("dvSilverlightTransWrapWrap").style.display = 'none';
+            bSubmit = false;
 		}
 		
 		function fnHxmFileExist() 
@@ -166,22 +168,29 @@
 			return bRet;
 		}
 		function funConfirm(sFiles)
-		{
+        {   
 			//2006.12.05 by wolf upload UI 변경
-			//새로 작성
-
-			var AttFileInfo = '', AttFiles = '';
+			//새로 작성            
+            var AttFileInfo = '', AttFiles = '';
+            
 			if(sFiles == '')
-			{//이민지(2010-04-15): CoviFileTrans를 사용해서 업로드한 직후일 경우
+            {//이민지(2010-04-15): CoviFileTrans를 사용해서 업로드한 직후일 경우                
 				AttFileInfo = getListXML();
 				AttFiles = getListVal("");
 				parent.setAttachInfo2(AttFileInfo, AttFiles);
 				return;
 			}//이민지(2010-04-15): 이하, CoviSilverlightTrans를 사용해서 업로드한 직후일 경우
-			{
-				AttFileInfo = getListXML(sFiles);
-				AttFiles = getListVal("");
-				top.frames[0].setAttachInfo2(AttFileInfo, AttFiles);
+            {                
+		if (INIfileList.indexOf(sFiles.split(";")[0]) > -1) {
+//                    alert('You have already added files.');		
+			alert('<%=Resources.Approval.msg_338%>');
+                }
+                else {
+			AttFileInfo = getListXML(sFiles);
+                
+			AttFiles = getListVal("");
+			top.frames[0].setAttachInfo2(AttFileInfo, AttFiles);
+		}
             }
             parent.document.getElementById("dvSilverlightTransWrap").style.display = 'none';
 			parent.document.getElementById("dvSilverlightTransWrapWrap").style.display = 'none';
@@ -204,7 +213,8 @@
 			return true;
 		}
 		function makeOldXml(FileList) 
-		{
+        {
+            //smkim file            
 			var oldINIFile = new Array();
 			var oldOriFile = new Array();
 
@@ -223,10 +233,11 @@
 
 
 				aryINI = oldINIFile[i].split(':');
-				aryOri = oldOriFile[i].split(':');
+                aryOri = oldOriFile[i].split(':');
+                
 				//xml 알맹이 채우기
 				if(makeDelstring(FileList,aryOri[0]) == true) 
-				{
+                {                    
 					if(CKFrontFile(aryOri[0]) == false)
 					 {
 						//ofileinfo += " <file name=\"" + aryOri[0] + "\"  ";
@@ -235,10 +246,9 @@
 						//ofileinfo += "  state=\"OLD\" ";
 						//ofileinfo += "  user_name=\"" + aryOri[2] + "\" ";
 						//ofileinfo += "  dept_name=\"" + aryOri[3] + "\" ";
-						//ofileinfo += "  />";
-
+						//ofileinfo += "  />";                        
 						var ofile = ofileinfo.createElement("file");
-						ofile.setAttribute("name",aryOri[0]);
+						ofile.setAttribute("name",aryINI[0].replace("<%=strUserCode%>" + "_", ""));
 						ofile.setAttribute("location","<%=strBFileLoc%>"+aryINI[0]);
 						ofile.setAttribute("size",aryOri[1]);
 						ofile.setAttribute("state","OLD");
@@ -313,9 +323,12 @@
 				tmp = sFiles;
 			}
 			if(INIfileList != "")
-			{
-				oldtext = makeOldXml(tmp);
-				oldtext += makeRloadXml(tmp);
+            {
+                //smkim file
+                oldtext = makeOldXml(tmp);                                
+                oldtext += makeRloadXml(tmp);
+                
+                
 				ofileinfo.loadXML("<fileinfo>" + oldtext + "</fileinfo>");
 			}
 			else 
@@ -401,18 +414,19 @@
 		}
 		function CKFrontFile(name)
 		{
-		
+		    //smkim file
 			var strFfile;
 			var aryTemp = new Array();
 			aryTemp = INIfileList.split(';');
-
+            
 			for(var i = 0; i < aryTemp.length - 1; i++) 
 			{
 				var aryKey = new Array();
 				aryKey = aryTemp[i].split(':');
 
 				strFfile = aryKey[0];
-				strFfile = strFfile.replace("<%=strUserCode%>" + "_" , "")
+                strFfile = strFfile.replace("<%=strUserCode%>" + "_", "")
+                
 				if(strFfile == name) 
 				{
 					return true;
@@ -427,7 +441,8 @@
 		//2006.12.05 by wolf upload UI변경
 		//창이 로딩되면서 파일선택창 나타나게
 		var bgCoviSlvInit = false
-		var igSlvTransTmr = 0;
+        var igSlvTransTmr = 0;
+        
 		window.onload = function() 
 		{
 			var bSlvTrans = false;//이민지(2010-04-14): 이하, CoviSilverlightTrans를 지원하기 위해 부분 수정함.
@@ -526,9 +541,10 @@
 			return sToday;
 		}
 		function fnSendKey(sMod) 
-		{
+        {
 			try 
-			{
+            {
+               
 				if (navigator.userAgent.indexOf('MSIE') > -1) 
 				{//이민지(2010-05-28): IE 인 경우에는 fnSendKey 실행
 				}
@@ -767,31 +783,6 @@ function FnTmpGet(){var sRet = '';var fso = null;try{fso = new ActiveXObject("Sc
 
 	<script type="text/javascript">
 		var upctrl = document.getElementById('Xaml1');
-		setTimeout(setFnCloseUpload,1000);
-
-
-function setFnCloseUpload(){
-fnCloseUpload = function() 
-{//이준희(2010-04-06): 페이지 탈출 시의 "Invalid Pointer" 오류 -Silverlight의 rendered script상의 버그임- 를 해결하기 위해 부분 수정함.
-	var oContainer = null;
-	oContainer = document.getElementById('dvSilverlightTrans');
-
-	//CoviSlvTransBuf = style.width.toString() + '_' + style.height.toString();
-	oContainer.style.width		= 0;
-	oContainer.style.height 	= 0;
-
-	upctrl.content.Page.ClearFilesList('SCREEN');
-	try
-	{//이민지(2010-04-16): 파일 전송이 끝난 뒤 iframe 설정을 해제 해 주기 위한 함수로 이동
-
-parent.document.getElementById("dvSilverlightTransWrap").style.display = 'none';
-				parent.document.getElementById("dvSilverlightTransWrapWrap").style.display = 'none';
-	}
-	catch(e)
-	{
-	}
-}
-}
 	</script>
 	</form>
 </body>

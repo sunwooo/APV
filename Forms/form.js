@@ -68,7 +68,7 @@ function initOnload()
 	//완료함 및 수신/참조에서 열 경우 입력
 	if(getInfo("loct") == "COMPLETE" && getInfo("mode") == "COMPLETE" && ( getInfo("gloct") == "TCINFO" || (getInfo("gloct") == "DEPART" && getInfo("pfsk")=="T006" ))){
 	    settingTCINFO();
-	}
+	}	
 }
 window.onunload= initOnUnload;
 

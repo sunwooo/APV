@@ -1,6 +1,8 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
+    
+	
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="Cache-Control" content="no-cache" />
 	<meta http-equiv="Pragma" content="no-cache" />
@@ -134,7 +136,7 @@
             <!-- 에디터 시작 -->
                 <tr height="100%">
                     <td width="100%" height="362px">
-                        <div id="DhtmlBody" name="DhtmlBody">
+                        <div id="tbContentElement" name="tbContentElement">
                             <script type="text/javascript" language="javascript" >
                                 document.write("<script type=\"text/javascript\" language=\"javascript\" src=\"editControl.js\"><" + "/" + "script>");
                             </script>
@@ -157,7 +159,7 @@
                 <td id="DocLinkInfo"></td>
             </tr>
             <tr style="display:none;">
-                <th><input type="text" name="lb_OrdinaryDoc" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>>
+                <th><input type="text" name="lb_OrdinaryDoc" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="RejectDocLinkInfo">-</td>
             </tr>
             <tr>
@@ -313,6 +315,8 @@
             document.getElementById("dhtml_body").value = document.tbContentElement.value;
         } else if (getInfo("editortype") == "0") {//0.TextArea
             document.getElementById("dhtml_body").value = document.getElementById("tbContentElement").value;
+        }else if (getInfo("editortype") == "8") {  //dext5 add
+        dextgetHtmlValueEx();
         }
         var sBodyContext = makeBodyContext();
         return makeNode("BODY_CONTEXT", sBodyContext, null, false);
@@ -464,6 +468,8 @@
                     var dom = document.tbContentElement.getDom(); dom.body.innerHTML = nodeVal.replace(/<br \/>/gi, "");
                 } else if (getInfo("editortype") == "5" || (getInfo("editortype") == "7" && window.ActiveXObject)) {// 5.Activesquare, 6.CrossEditor, 7.ActivesquareDefault/CrossEditor -
                     document.tbContentElement.value = nodeVal;
+                } else if (getInfo("editortype") == "8") {  //dext5 add
+                    dextSetHtmlContentsEw(nodeVal);
                 }
             } else if (nodeNm.indexOf("OPT") != -1) {
                 setRadio(nodeNm, nodeVal);

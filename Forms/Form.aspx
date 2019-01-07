@@ -9,8 +9,8 @@
     <script type="text/javascript" language="javascript">
 		window.focus();/*个*/
     </script>
-    <script type="text/javascript" language="javascript" src="../../SiteReference/js/Utility.js"></script>
-    <script type="text/javascript" language="javascript" src="../../SiteReference/js/Dictionary.js"></script>
+    <script type="text/javascript" language="javascript" src="../../SiteReference/js/Utility.js?v=1"></script>
+    <script type="text/javascript" language="javascript" src="../../SiteReference/js/Dictionary.js?v=1"></script>
 	<script type="text/javascript" language="javascript">
 	    var admintype = "<%=Request.QueryString["admintype"]%>";
 		var rel_activityid = "<%=Request["TaskID"] %>";

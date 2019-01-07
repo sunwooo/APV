@@ -8,14 +8,14 @@
 	<link rel="stylesheet" href="/GWImages/common/css/approval_form.css" type="text/css" />
 	<link rel="stylesheet" href="/GWImages/common/TagFree/tagfree.css" type="text/css" />
     <!--필수 양식파일에 쓰이는 js 파일-->
-	<script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Config.js" ></script>
-    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/EmbedObject.js" ></script>
-    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Utility.js" ></script>
-    <script type="text/javascript" language="javascript" src="../../Common/script/COVIFlowNet/openWindow.js" ></script>		
-	<script type="text/javascript" language="javascript" src="../../Common/script/progress.js" ></script>
-	<script type="text/javascript" language="javascript" src="../../common/script/NameControl.js"></script>
-	<script type="text/javascript" language="javascript" src="../../common/script/jquery-1.6.1.min.js"></script>
-	<script type="text/javascript" language="javascript" src="formedit.js" ></script>
+	<script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Config.js?v=1" ></script>
+    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/EmbedObject.js?v=1" ></script>
+    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Utility.js?v=1" ></script>
+    <script type="text/javascript" language="javascript" src="../../Common/script/COVIFlowNet/openWindow.js?v=1" ></script>		
+	<script type="text/javascript" language="javascript" src="../../Common/script/progress.js?v=1" ></script>
+	<script type="text/javascript" language="javascript" src="../../common/script/NameControl.js?v=1"></script>
+	<script type="text/javascript" language="javascript" src="../../common/script/jquery-1.6.1.min.js?v=1"></script>
+	<script type="text/javascript" language="javascript" src="formedit.js?v=1" ></script>
 </head>
 
 <body topmargin="0" leftmargin="0" scroll="auto" >
@@ -349,7 +349,7 @@
         var elmListLan;
         try {
             m_objXML.loadXML("<?xml version='1.0' encoding='utf-8'?>" + sBodyContext);
-            elmList = m_objXML.documentElement.childNodes;
+			elmList = m_objXML.documentElement.childNodes;
             if (elmList.length == 0) {
                 tbContentElement.innerHTML = sBodyContext; //기존 기안 양식일 경우
             } else {

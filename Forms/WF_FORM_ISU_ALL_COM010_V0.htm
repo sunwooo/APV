@@ -22,8 +22,8 @@
 	    }
 	    if (getInfo("editortype") == "6" || (getInfo("editortype") == "7" && (navigator.appName != 'Microsoft Internet Explorer'))) {
 	        document.write("<script src=\"/CoviWeb/common/Editor/NamoCrossEditor/js/namo_scripteditor.js\" type=\"text/javascript\"language=\"javascript\"><" + "/" + "script>");
-        }
-        if (getInfo("editortype") == "8") {
+	    }
+if (getInfo("editortype") == "8") {
             document.write("<script src=\"/CoviWeb/common/Editor/dext5editor/js/dext5editor.js\" type=\"text/javascript\"language=\"javascript\"><" + "/" + "script>");
         }
 	</script>
@@ -229,7 +229,9 @@
         try { SetSaveTermTbxSync(); } catch (e) { }  //HIW
 
         //회사별로 직인이미지 변경 (HIW)
-        SetEntLogoImage();
+        //SetEntLogoImage();
+        window.setTimeout(SetEntLogoImage, 500);
+
     }
 
     function initialize() {
@@ -296,7 +298,7 @@
             document.getElementById("dhtml_body").value = document.tbContentElement.value;
         } else if (getInfo("editortype") == "0") {//0.TextArea
             document.getElementById("dhtml_body").value = document.getElementById("tbContentElement").value;
-        } else if (getInfo("editortype") == "8") {//8 dext5
+        }  else if (getInfo("editortype") == "8") {//8 dext5
             dextgetHtmlValueEx();
         }
         var sBodyContext = makeBodyContext();
@@ -480,7 +482,10 @@
 
         var vEntCode = getInfo("etid");
         
-        TagfreeScriptEditor.document.getElementById("spnEntLogo").innerHTML = "<img src='/GWStorage/e-sign/ApprovalSign/ENT_SEAL/"+vEntCode+".jpg' >";
+        //TagfreeScriptEditor.document.getElementById("spnEntLogo").innerHTML = "<img src='/GWStorage/e-sign/ApprovalSign/ENT_SEAL/"+vEntCode+".jpg' >";
+        var d5Dom = DEXT5.getD5Dom("dext5editor1");
+        d5Dom.document.getElementById("spnEntLogo").innerHTML = "<img src='/GWStorage/e-sign/ApprovalSign/ENT_SEAL/"+vEntCode+".jpg' >";
+
     }
 
 </script>

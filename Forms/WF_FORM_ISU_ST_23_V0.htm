@@ -292,6 +292,8 @@ function getBodyContext(){
         UpdateImageData(); //이미지 업로드
         document.getElementById("dhtml_body").value = document.tbContentElement.value;
     } else if (getInfo("editortype") == "0") {//0.TextArea
+        document.getElementById("dhtml_body").value = document.getElementById("tbContentElement").value;
+    } else if (getInfo("editortype") == "8") {  //dext5 add
         dextgetHtmlValueEx();
     }
     var sBodyContext = makeBodyContext();

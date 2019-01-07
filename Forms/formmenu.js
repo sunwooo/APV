@@ -1777,7 +1777,7 @@ function receiveHTTP(){
   					parent.refreshList();
 					
 					//2018.09.12 psw
-					tongPush("REDRAFT");
+					//tongPush("RECREATE");
 					break;
 					
 					case "APPROVE"://debugger;//try{saveApvDocument(xmlReturn.selectSingleNode("response/docno").text); }catch(e){}
@@ -2712,7 +2712,7 @@ function doButtonAction(obj) {//debugger;
 	        case "btRec": //접수
 
 	            //[2014-02-28] PSW 결재완료시 알림창 추가
-	            if (!confirm("본인결재로 완료 처리하시겠습니까?")) {
+	            if (!confirm(gMessage337)) {
 	                return;
 	                /*
 	                //신청양식 주관부서작성란 Validation체크 (2013-01-18 HIW)
@@ -3359,7 +3359,11 @@ function fnCoviSlvTransTmp(strINIListFiles)
 		var oDv = null, oDoc = null, oTmp = null, sINIListFiles = '', iFrameWidth = '', sleft = '', iFrameHeight = '', stop = '', sSrc = '';
 		var sHtm0 = '';	
 		var oDv0 = null, oDoc0 = null, oTmp0 = null, iFrameWidth0 = '', iFrameHeight0 = '';
-		sSrc = '/COVIWeb/Approval/FileAttach/fileupload4Slv.aspx?mod=SlvTrans&INIListFiles=' + strINIListFiles + '&"';//alert(strINIListFiles);
+
+		//smkim
+		//sSrc = '/COVIWeb/Approval/FileAttach/fileupload4Slv.aspx?mod=SlvTrans&INIListFiles=' + strINIListFiles + '&"';//alert(strINIListFiles);
+		sSrc = '/COVIWeb/Approval/FileAttach/fileupload4Slv.aspx?mod=SlvTrans&INIListFiles=' + strINIListFiles + '&FileLoc=' + escape('http://gw.isu.co.kr/FrontStorage/Approval/');//alert(strINIListFiles);
+
 		sgINIListFiles = strINIListFiles;//이민지(2011.01.10) :기존 파일의 쿼리스트링 전송으로 인해 인코딩 문제가 발생 - 수정위해 추가
 		oDv = document.getElementById('dvSilverlightTransWrap');
 		if(oDv != null)
