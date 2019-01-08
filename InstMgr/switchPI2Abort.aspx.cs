@@ -251,7 +251,8 @@ public partial class COVIFlowNet_Admin_InstMgr_switchPI2Abort :PageBase // PageB
 				|| sFMPF == "WF_FORM_HR_IN_TRIP_3"
 				|| sFMPF == "WF_FORM_HR_OUT_TRIP_4"
 				|| sFMPF == "WF_FORM_COMMON_EDUCATION_3"
-				|| sFMPF == "WF_FORM_HR_OUT_TRIP_5")
+				|| sFMPF == "WF_FORM_HR_OUT_TRIP_5"
+				|| sFMPF == "WF_SLIP_ISU")
             {
                 FormWS ws = new FormWS();
                 ws.ExecuteLegacy(sFMPF, COVIFlowCom.Common.GetProp(elmRoot, "formdata/BODY_CONTEXT", false), "<FORM_INFO_EXT></FORM_INFO_EXT>", COVIFlowCom.Common.GetProp(elmRoot, "apvlist", false), false, sMode, "", sUSID, sFIID);

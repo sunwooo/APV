@@ -72,6 +72,16 @@ public partial class COVIFlowNet_ApvProcess_ApvProcessDraft : PageBase
                     FormWS ws = new FormWS();
                     ws.ExecuteLegacySLIP(FMPF, GBNNO, ENTCODE, RECIVECODE, FIID);
 
+                }if (FMPF == "WF_SLIP_ISU")
+                {
+                    string GBNNO = Request.QueryString["gbnno"].ToString();
+                    string ENTCODE = Request.QueryString["entcode"].ToString();
+                    string RECIVECODE = Request.QueryString["recivecode"].ToString();
+                    string FIID = Request.QueryString["FIID"].ToString();
+                    Title = Resources.Approval.btn_redraft;// "재기안";
+                    FormWS ws = new FormWS();
+                    ws.ExecuteLegacySLIP(FMPF, GBNNO, ENTCODE, RECIVECODE, FIID);
+
                 }
                 else
                 {

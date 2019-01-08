@@ -62,7 +62,7 @@ function initOnload() {
 
     }
 	
-	if (getInfo("fmpf") == "WF_SLIP") {
+	if (getInfo("fmpf") == "WF_SLIP" || getInfo("fmpf") == "WF_SLIP_ISU") {
         //2016.4.4 PSW 추가
         if (getInfo("mode") == "REDRAFT") {
             if (getInfo("etid") == "ISU_ST") {
