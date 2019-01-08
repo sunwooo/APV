@@ -53,6 +53,7 @@ public partial class COVIFlowNet_FileAttach_fileupload : PageBase
 		strStorage = System.Configuration.ConfigurationManager.AppSettings["FrontStorage"].ToString();
 		MaxFileSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["MaxFileSize"].ToString());
 		MaxUpload = int.Parse(System.Configuration.ConfigurationManager.AppSettings["MaxUpload"].ToString());
+
 		FileExtensionFilter = System.Configuration.ConfigurationManager.AppSettings["FileExtensionFilter"].ToString();
 		FileNameFilter = System.Configuration.ConfigurationManager.AppSettings["FileNameFilter"].ToString();
 		SlvColor = System.Configuration.ConfigurationManager.AppSettings["SlvColor"].ToString();
