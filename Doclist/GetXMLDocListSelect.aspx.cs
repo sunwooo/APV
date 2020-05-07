@@ -112,11 +112,12 @@ public partial class Approval_Doclist_GetXMLDocListSelect : System.Web.UI.Page
                 foreach (System.Xml.XmlNode oParam in oParams)
                 {
                     INPUT.add("@" + oParam.SelectSingleNode("name").InnerText, oParam.SelectSingleNode("value").InnerText);
-                    if (oParam.SelectSingleNode("name").InnerText == "PAGE") { pagenum = Convert.ToInt16(oParam.SelectSingleNode("value").InnerText); }
-                    if (oParam.SelectSingleNode("name").InnerText == "PAGECOUNT") { pagecnt = Convert.ToInt16(oParam.SelectSingleNode("value").InnerText); }
+                    /* 190925_김선재 : overflow 오류가 발생해 ToInt16 -> ToInt32 로 변경 */
+                    if (oParam.SelectSingleNode("name").InnerText == "PAGE") { pagenum = Convert.ToInt32(oParam.SelectSingleNode("value").InnerText); }
+                    if (oParam.SelectSingleNode("name").InnerText == "PAGECOUNT") { pagecnt = Convert.ToInt32(oParam.SelectSingleNode("value").InnerText); }
                     if (oParam.SelectSingleNode("name").InnerText == "DOC_LIST_TYPE") { mode = oParam.SelectSingleNode("value").InnerText; }
-                    if (oParam.SelectSingleNode("name").InnerText == "pagenum") { pagenum = Convert.ToInt16(oParam.SelectSingleNode("value").InnerText); }
-                    if (oParam.SelectSingleNode("name").InnerText == "page_size") { pagecnt = Convert.ToInt16(oParam.SelectSingleNode("value").InnerText); }
+                    if (oParam.SelectSingleNode("name").InnerText == "pagenum") { pagenum = Convert.ToInt32(oParam.SelectSingleNode("value").InnerText); }
+                    if (oParam.SelectSingleNode("name").InnerText == "page_size") { pagecnt = Convert.ToInt32(oParam.SelectSingleNode("value").InnerText); }
                     if (oParam.SelectSingleNode("name").InnerText == "MODE") { mode = oParam.SelectSingleNode("value").InnerText; }
                 }
                if( oXML.SelectSingleNode("Items/datetitle") != null)  strTitle = oXML.SelectSingleNode("Items/datetitle").InnerText;
@@ -349,7 +350,8 @@ public partial class Approval_Doclist_GetXMLDocListSelect : System.Web.UI.Page
             if (emlList != null)
             {
                 //count
-                totalcount = Convert.ToInt16(emlRoot.SelectSingleNode("totalcount").InnerText);
+                /* 190925_김선재 : overflow 오류가 발생해 ToInt16 -> ToInt32 로 변경 */
+                totalcount = Convert.ToInt32(emlRoot.SelectSingleNode("totalcount").InnerText);
                 totalpage = cfxsl.getPageValue(pagecnt, totalcount);
 
                 //list
@@ -672,7 +674,8 @@ public partial class Approval_Doclist_GetXMLDocListSelect : System.Web.UI.Page
     }
 	public string splitName(string sValue, string szLangIndex)
 	{
-		int iLangIndex = Convert.ToInt16(szLangIndex);
+        /* 190925_김선재 : overflow 오류가 발생해 ToInt16 -> ToInt32 로 변경 */
+		int iLangIndex = Convert.ToInt32(szLangIndex);
 		//string sName = sValue.Substring(sValue.LastIndexOf(";") + 1);
 		//return sName == "" ? " " : sName;
 		string[] ary = sValue.Split(';');
@@ -681,7 +684,8 @@ public partial class Approval_Doclist_GetXMLDocListSelect : System.Web.UI.Page
 	public string splitNameExt(string sValue, string szLangIndex)
 	{
 		//return sValue;
-		int iLangIndex = Convert.ToInt16(szLangIndex);
+        /* 190925_김선재 : overflow 오류가 발생해 ToInt16 -> ToInt32 로 변경 */
+		int iLangIndex = Convert.ToInt32(szLangIndex);
 		string[] ary = sValue.Split(';');
 		if (ary.Length > iLangIndex) { return ary[iLangIndex]; } else { return ary[0]; }
 	}

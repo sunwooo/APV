@@ -77,7 +77,7 @@
 	
 		document.getElementById("title").value = top.opener.document.getElementById("Apvline").contentWindow.m_title;
 		document.getElementById("description").value = top.opener.document.getElementById("Apvline").contentWindow.m_dscr;
-	}
+    }
 	function setchangeApvlineList(){				
 		var elmRoot = document.getElementById('ApvlineViewer').contentWindow.m_oApvList.documentElement;	
 		
@@ -98,11 +98,12 @@
 			return false;
 		}
 	}
-	function setApvlineList(){		
+	function setApvlineList(){
 		
 		var elmRoot = document.getElementById('ApvlineViewer').contentWindow.m_oApvList.documentElement;	
 		
 		if (chkConsultAppLine(elmRoot)){
+                        top.opener.document.getElementById("Apvline").contentWindow.m_id = "";//추가
 			var sText = '<request><type>add</type><id>'+top.opener.document.getElementById("Apvline").contentWindow.m_id
 			+'</id><userid>'+top.opener.UserID+'</userid><title><![CDATA['+document.getElementById('title').value+']]></title><dscr><![CDATA['
 			+document.getElementById('description').value+']]></dscr>'+elmRoot.xml+'</request>';
@@ -116,15 +117,50 @@
 		}else{
 			return false;
 		}
-		
-	}
+
+   }
+   //20190418 추가
+   function overlapApvCheck() {
+         /*
+        var elmRoot = document.getElementById('ApvlineViewer').contentWindow.m_oApvList.documentElement;
+         var sText = '<request><userid>' + top.opener.UserID + '</userid><title><![CDATA[' + document.getElementById('title').value + ']]></title><dscr><![CDATA['
+			    + document.getElementById('description').value + ']]></dscr>' + elmRoot.xml + '</request>';
+            evalXML(sText);
+
+            m_xmlHTTP.open("POST", "OverLapApvCheck.aspx", true);
+            //m_xmlHTTP.setRequestHeader("Accept-Language","ko");
+            m_xmlHTTP.setRequestHeader("Content-type", "text/xml");
+            m_xmlHTTP.onreadystatechange = receiveHTTP2;
+            m_xmlHTTP.send(sText);
+           */
+
+       
+         
+         //var szURL = "OverLapApvCheck.aspx?userid=" + top.opener.UserID + "title="+"<![CDATA['" + document.getElementById('title').value + "']]>";
+       //requestHTTP("GET", szURL, true, "text/xml", receiveHTTP2, null);
+       var pXML = "dbo.usp_wf_GetOverlapCheck";
+       var aXML = "<param><name>OWNER_ID</name><type>varchar</type><length>256</length><value><![CDATA[" + top.opener.UserID + "]]></value></param>";
+       aXML += "<param><name>TITLE</name><type>nvarchar</type><length>256</length><value><![CDATA[" + document.getElementById("title").value + "]]></value></param>";
+       aXML += "<param><name>APVID</name><type>nvarchar</type><length>256</length><value><![CDATA[" + top.opener.document.getElementById("Apvline").contentWindow.m_id + "]]></value></param>";
+       var sXML = "<Items><connectionname>INST_ConnectionString</connectionname><xslpath></xslpath><sql><![CDATA[" + pXML + "]]></sql><type>sp</type>" + aXML + "</Items>";
+       //var sXML = "<Items><connectionname>INST_ConnectionString</connectionname><xslpath></xslpath><sql><![CDATA[" + pXML + "]]></sql><type>sp</type><UserID><![CDATA[" + top.opener.UserID + "]]></UserID><TITLE><![CDATA[" + document.getElementById('title').value + "]]></TITLE></Items>";
+       var szURL = "./OverLapApvCheck.aspx";
+       requestHTTP("POST", szURL, false, "text/xml", receiveHTTP2, sXML);
+   }
+
+   function overlapYN(value) {
+
+       var OverLapValue = value;
+       return OverLapValue;
+
+   }
+	
 	
 </script>
 
 <script language="javascript" type="text/javascript">
 	function SetENT(m_EntCode)
 	{
-	  
 		document.getElementById("ApvlineViewer").contentWindow.document.getElementById("iSearch").contentWindow.frameElement.src="search.aspx?Ent="+m_EntCode;
 		document.getElementById("ApvlineViewer").contentWindow.document.getElementById("iGroup").contentWindow.frameElement.src="OrgTree.aspx?Ent="+m_EntCode;
 	}
@@ -249,9 +285,41 @@
 		}
 	}
 	
+	function receiveHTTPOvercheck()
+	{
+		if(m_xmlHTTP.readyState==4)
+		{
+			m_xmlHTTP.onreadystatechange=event_noop;
+			//var m_id = top.opener.document.getElementById("Apvline").contentWindow.m_id;
+			if(m_xmlHTTP.responseText.charAt(0)=='\r')
+			{
+				alert(m_xmlHTTP.responseText);
+			}
+			else
+			{
+				var errorNode=m_xmlHTTP.responseXML.selectSingleNode("response/error");
+				if(errorNode!=null)
+				{
+					alert("Desc: " + errorNode.text);
+				}
+				else
+				{//수정 2010.03.10					
+					//var w_id = m_xmlHTTP.responseXML.selectSingleNode("response/item[id='"+m_id+"']/signinform/steps");
+					//var w_id = m_xmlHTTP.responseXML.getElementsByTagName("response/item[id='"+m_id+"']/signinform/steps")[0];//$$
+					//var w_id_v;
+					//if(w_id != null)
+				//	{
+				//		w_id_v = w_id.xml;
+				//		top.opener.document.getElementById('menu').APVLIST.value = w_id_v;
+					//}
+					//GetEnt();
+				}
+			}
+		}
+	}
+	
 	function doButtonAction(obj){		
 		//switch(event.srcElement.id){
-		
 		switch(obj.id){
 			case "btOK":
 				if ( document.getElementById('title').value.length == 0 )
@@ -267,10 +335,12 @@
 					return false;
 				}
 				if (top.opener.bState=="change"){
-					setchangeApvlineList();
+                    overlapApvCheck();  //20190618 추가
+					//setchangeApvlineList(); //20190618 주석
 				}
 				else{
-					setApvlineList();
+                    overlapApvCheck(); //20190618 추가
+					//setApvlineList(); //20190618 주석
 				}
 				break;						
 			case "btExit":	
@@ -290,6 +360,53 @@
 				}else{
 					window.close();
 					top.opener.location.reload();				
+				}
+			}
+		}
+	}
+	function receiveHTTP2(){
+		if(m_xmlHTTP.readyState==4){
+			m_xmlHTTP.onreadystatechange=event_noop;
+			if(m_xmlHTTP.responseText.charAt(0)=="\r"){
+				alert(m_xmlHTTP.responseText);
+			}else{
+				var errorNode=m_xmlHTTP.responseXML.selectSingleNode("response/error");
+				if(errorNode!=null){
+					alert("Desc: " + errorNode.text);
+				}else{
+				    if(m_xmlHTTP.responseXML.selectSingleNode("response").text=="1")
+				    {
+				      /*
+				       if (top.opener.bState=="change"){
+					        //setchangeApvlineList(); 
+					        alert("*는 주결재선이 될 1개의 개인 결재선에만 지정할 수 있습니다.\n이미 등록된 주결재선 확인 후 사용하시기 바랍니다.");
+					        return false;
+					        //setchangeApvlineList();
+				       }
+			     	   else
+			     	   {
+					        //setApvlineList();	
+					        alert("*는 주결재선이 될 1개의 개인 결재선에만 지정할 수 있습니다.\n이미 등록된 주결재선 확인 후 사용하시기 바랍니다.");
+					        return false;
+				       }
+				       */
+				       alert("*는 주결재선이 될 1개의 개인 결재선에만 지정할 수 있습니다.\n이미 등록된 주결재선 확인 후 사용하시기 바랍니다.");
+					   return false;
+				    }
+				    else
+				    {
+				    
+				      if (top.opener.bState=="change"){
+					       setchangeApvlineList();
+					       
+				       }
+			     	   else
+			     	   {
+					        setApvlineList();	
+				       }
+				    
+				    }
+				    
 				}
 			}
 		}

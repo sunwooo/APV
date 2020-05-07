@@ -20,33 +20,16 @@
         }
         window.onload = initOnload;
         function initOnload() {
-
             var userid = '<%=userid %>';
             var key = '<%=key%>';
+			//alert("userid" + userid);
+			//alert("key" + key);
             var fromData = '<%=_fromData%>';
-
-
-            //alert("empNO : " + userid);
-            //alert("key : " + key);
-
-            //fmbd 만들기
-
-            //alert("userid:::" + userid);
             var fmbdxml = "";
-            //fmbdxml = makeNode("USERID", fromData);
-            //fmbdxml = makeNode("fromData", fromData);
-            //fmbdxml += makeNode("tbContentElement", fromData, null, true);
-            fmbdxml += makeNode("tbContentElement", fromData, null, true);
-            //fmbdxml += makeNode("WEBGHOSTKEY01", key);
-            //fmbdxml = makeNode("content", fromData);
-            fmbdxml = "<BODY_CONTEXT>" + fmbdxml + "</BODY_CONTEXT>";
-            form1.fmbd.value = fmbdxml;
-            
-            //2017.04.11 LHI
-            //if ("<%=fmpf%>" == "WF_MVACA") {
-                form1.action = "FormISU.aspx?fmid=<%=fmid %>&scid=<%=scid %>&fmpf=<%=fmpf %>&fmrv=<%=fmrv %>&mode=DRAFT&fmnm=<%=fmnm %>";
-            //}
-            //submit호출
+			
+			fmbdxml += makeNode("tbContentElement", fromData, null, true);
+			fmbdxml = "<BODY_CONTEXT>" + fmbdxml + "</BODY_CONTEXT>";
+			form1.fmbd.value = fmbdxml;
             form1.submit();
         }
         function makeNode(sName, vVal, sKey, bCData) {
@@ -82,7 +65,8 @@
     <form id="form1" action="Form.aspx?fmid=<%=fmid %>&scid=<%=scid %>&fmpf=<%=fmpf %>&fmrv=<%=fmrv %>&mode=DRAFT&fmnm=<%=fmnm %>" method="post">
        <textarea id="fmbd" name="fmbd" cols="10" rows="10" style="display:none"><%=_fromData %></textarea>
        <input type="hidden" id="gbnno" name="gbnno" value="<%=_gbnno%>" />
-       
+	   <input type="hidden" id="docType" name="docType" value="<%=_docType%>" />
+	   
        
     </form>
 </body>

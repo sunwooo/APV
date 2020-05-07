@@ -1,0 +1,1171 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title></title>
+    <link rel="stylesheet" href="/GWImages/common/css/approval_form.css" type="text/css" />
+    <style type="text/css">
+        a.a1 {
+            color: DarkOrange;
+            text-decoration: underline
+        }
+    </style>
+    <!--필수 양식파일에 쓰이는 js 파일-->
+    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Config.js"></script>
+    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/EmbedObject.js"></script>
+    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Utility.js"></script>
+    <script type="text/javascript" language="javascript" src="../../Common/script/COVIFlowNet/openWindow.js"></script>
+    <script type="text/javascript" language="javascript" src="../../Common/script/progress.js"></script>
+    <script type="text/javascript" language="javascript" src="../../common/script/NameControl.js"></script>
+    <script type="text/javascript" language="javascript" src="../../common/script/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript" language="javascript" src="formedit.js"></script>
+    <script type="text/javascript" language="javascript" src="formedit_apvlinemgr.js"></script>
+    <!-- 캘린더 관련 시작 -->
+    <link rel="stylesheet" href="/CoviWeb/SiteReference/Jcalendar/themes/base/jquery.ui.all.css" />
+    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/Jcalendar/jquery-1.8.2.js"></script>
+    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/Jcalendar/JqueryDatePicker.js"></script>
+    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/Jcalendar/ui/jquery.ui.core.js"></script>
+    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/Jcalendar/ui/jquery.ui.datepicker.js"></script>
+    <!-- 캘린더 관련 종료 -->
+</head>
+
+<body topmargin="0" leftmargin="0" style="OVERFLOW: auto; overflow-x: hidden;">
+    <!-- COMMON FIELDS -->
+    <input type="hidden" id="dField" name="INITIATOR_NAME" dataFld="usdn" />
+    <input type="hidden" id="dField" name="INITIATOR_ID" dataFld="usid" />
+    <input type="hidden" id="dField" name="INITIATOR_OU_NAME" dataFld="dpdn_apv" />
+    <input type="hidden" id="dField" name="INITIATOR_OU_ID" dataFld="dpid_apv" />
+    <input type="hidden" id="cField" name="LAST_MODIFIER_ID" />
+    <input type="hidden" id="cField" name="attach" />
+    <input type="hidden" id="cField" name="filelocation" dataFld="fmfl" />
+    <input type="hidden" id="cField" name="ATTACH_FILE" value="" />
+    <input type="hidden" id="dField" name="ATTACH_FILE_INFO" value="" dataFld="ATTACH_FILE_INFO" />
+    <input type="hidden" id="dField" name="INITIATOR_INFO" value="" dataFld="INITIATOR_INFO" />
+    <input type="hidden" id="dField" name="APPLIED" dataFld="APPLIED" />
+    <input type="hidden" id="dField" name="ISPUBLIC" dataFld="ISPUBLIC" />
+    <input type="hidden" id="dField" name="APPLIED_TERM" dataFld="APPLIED_TERM" />
+    <input type="hidden" id="dField" name="RECEIVE_NO" dataFld="RECEIVE_NO" />
+    <input type="hidden" id="dField" name="RECEIVE_NAMES" dataFld="RECEIVE_NAMES" />
+    <input type="hidden" id="dField" name="RECEIPT_LIST" dataFld="RECEIPT_LIST" />
+    <!--<input type="hidden" id="dField" name="DOC_LEVEL"  dataFld="DOC_LEVEL">
+    <input type="hidden" id="dField" name="SAVE_TERM"  dataFld="SAVE_TERM">-->
+    <input type="hidden" id="dField" name="DOC_CLASS_ID" dataFld="DOC_CLASS_ID" />
+    <!--<input type="hidden" id="dField" name="SUBJECT" dataFld="SUBJECT" />-->
+    <input type="hidden" id="dField" name="DOC_NO" dataFld="DOC_NO" />
+    <input type="hidden" id="dField" name="DOC_OU_NAME" dataFld="dpdsn" />
+    <input type="hidden" id="dField" name="ENT_CODE" dataFld="etid" />
+    <input type="hidden" id="dField" name="ENT_NAME" dataFld="etnm" />
+    <input type="hidden" id="mField" name="DOC_LEVEL_NAME" />
+    <input type="hidden" id="mField" name="entcode" />
+    <!--
+        상위업무코드, 상위업무명, 하위업무코드, 하위업무명, 기안자(요청자) email    
+    -->
+    <input type="hidden" id="mField" name="higher_cd" />
+    <input type="hidden" id="mField" name="higher_nm" />
+    <input type="hidden" id="mField" name="lower_cd" />
+    <input type="hidden" id="mField" name="lower_nm" />
+    <input type="hidden" id="mField" name="request_id" />
+
+<textarea id="dField" name="DOC_SUMMARY" dataFld="DOC_SUMMARY" style="display:none"></textarea>
+<textarea id="dhtml_body" style="display:none"></textarea>
+<textarea style="display:none" id="cField" name="xsl"></textarea>
+
+    <!-- 문서link 2006.01 -->
+<textarea id="dField" name="DOCLINKS" style="display:none" dataFld="DOCLINKS"></textarea>
+    <!-- 반송문서 추가 시작 2007.11-->
+<textarea id="mField" name="REJECTDOCLINKS" style="display:none"></textarea>
+    <!-- 반송문서 추가 끝 2007.11-->
+    <!-- 결재선 관리 UI 변경 2008.01 -->
+<textarea style="display:none;" id="cField" name="APVLIST"></textarea>
+    <!-- 결재선 관리 UI 변경 끝 2008.01 -->
+    <!-- process 메뉴얼 추가 2008.01 -->
+<textarea id="mField" name="PMLINKS" style="display:none"></textarea>
+    <!-- process 메뉴얼 추가 2008.01 -->
+    <!-- END -->
+    <!-- 양식전체본문 -->
+    <div id="bodytable">
+        <!-- header start -->
+        <div class="draft_tit"><h4><span id="headname"></span><a href="#"><span class="drop_menu"></span></a></h4></div>
+        <div class="draft_page">
+
+            <!--######## 양식상단부분 공통 시작 #################################-->
+            <table class="table_2" summary="문서분류" cellpadding="0" cellspacing="0">
+                <tr style="display:none;">
+                    <th>보안등급</th>
+                    <td><select id="dField" name="DOC_LEVEL" onchange="DOC_LEVEL_Change(this);"></select></td>
+                    <th>문서번호</th>
+                    <td width="100px"></td>
+                </tr>
+                <tr>
+                    <th>문서분류</th>
+                    <td>
+                        <input type="text" id="dField" name="DOC_CLASS_NAME" dataFld="DOC_CLASS_NAME" size="20" readonly="readonly" style="width:70%; width:70%; height:20px;" />&nbsp;
+                        <img src="/GWImages/Common/btn/btn_organization.gif" name="btn_Process" id="btn_Process" align="absMiddle" border="0" onClick="OpenDocClass();" style="cursor:hand" />
+                    </td>
+                    <th>보존년한</th>
+                    <td colspan="3"><select id="dField" name="SAVE_TERM"></select></td>
+                </tr>
+            </table>
+            <!-- header end -->
+            <!-- bodycontext start -->
+            <table class="table_3" summary="제목" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목<span class="txt_red">*</span></th>
+                    <td><input id="dField" name="SUBJECT" datafld="SUBJECT" onkeyup="SetSubjectTbxSync();" style="width:100%; height:20px;" /></td>
+                </tr>
+
+            </table>
+
+
+            <!--######## 양식상단부분 공통 종료 #################################-->
+            <!--######## 본문부분 시작 #########################################-->
+            <div id="divBodyContent">
+                <!--추가(인쇄용) HIW-->
+                <table border="0" style="width:720px;"> 
+                    <tr>
+                        <td align="center" style="padding-top:5px; padding-bottom:5px;"></td>
+                    </tr>
+                </table>
+                <table class="table_html" id="tblBodyContent" summary="내용" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td rowspan="4" align="center" style="height:25px;width:120px; background-color:#F6F6F6">관련업무</td>
+                        <td align="center" style="height:25px;width:100px; background-color:#F6F6F6">SD</td>
+                        <td align="center" style="height:25px;width:100px; background-color:#F6F6F6">MM</td>
+                        <td align="center" style="height:25px;width:100px; background-color:#F6F6F6">PP</td>
+                        <td align="center" style="height:25px;width:100px; background-color:#F6F6F6">FI</td>
+                        <td align="center" style="height:25px;width:100px; background-color:#F6F6F6">CO</td>
+                        <td align="center" style="height:25px;width:100px; background-color:#F6F6F6">PM</td>
+                    </tr>
+                    <tr>
+                        <td align="center"><input type="radio" id="mField" name="OPT_Guboon" value="SD" onclick="ChangeGuboonRdo(1);" style="border:0px;" /></td>
+                        <td align="center"><input type="radio" id="mField" name="OPT_Guboon" value="MM" onclick="ChangeGuboonRdo(2);" style="border:0px;" /></td>
+                        <td align="center"><input type="radio" id="mField" name="OPT_Guboon" value="PP" onclick="ChangeGuboonRdo(3);" style="border:0px;" /></td>
+                        <td align="center"><input type="radio" id="mField" name="OPT_Guboon" value="FI" onclick="ChangeGuboonRdo(4);" style="border:0px;" /></td>
+                        <td align="center"><input type="radio" id="mField" name="OPT_Guboon" value="CO" onclick="ChangeGuboonRdo(5);" style="border:0px;" /></td>
+                        <td align="center"><input type="radio" id="mField" name="OPT_Guboon" value="PM" onclick="ChangeGuboonRdo(6);" style="border:0px;" /></td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="height:25px;width:100px; background-color:#F6F6F6">OIS</td>
+                        <td align="center" style="height:25px;width:100px; background-color:#F6F6F6">전자전표</td>
+                        <td align="center" style="height:25px;width:100px; background-color:#F6F6F6">수출입</td>
+                        <td align="center" style="height:25px;width:100px; background-color:#F6F6F6">전자구매입찰</td>
+                        <td align="center" style="height:25px;width:100px; background-color:#F6F6F6">WMS</td>
+                        <td align="center" style="height:25px;width:100px; background-color:#F6F6F6">ABAP</td>
+                    </tr>
+                    <tr>
+                        <td align="center"><input type="radio" id="mField" name="OPT_Guboon" value="OIS" onclick="ChangeGuboonRdo(7);" style="border:0px;" /></td>
+                        <td align="center"><input type="radio" id="mField" name="OPT_Guboon" value="전자전표" onclick="ChangeGuboonRdo(8);" style="border:0px;" /></td>
+                        <td align="center"><input type="radio" id="mField" name="OPT_Guboon" value="수출입" onclick="ChangeGuboonRdo(9);" style="border:0px;" /></td>
+                        <td align="center"><input type="radio" id="mField" name="OPT_Guboon" value="전자구매입찰" onclick="ChangeGuboonRdo(10);" style="border:0px;" /></td>
+                        <td align="center"><input type="radio" id="mField" name="OPT_Guboon" value="WMS" onclick="ChangeGuboonRdo(11);" style="border:0px;" /></td>
+                        <td align="center"><input type="radio" id="mField" name="OPT_Guboon" value="ABAP" onclick="ChangeGuboonRdo(12);" style="border:0px;" /></td>
+                    </tr>
+                </table>
+                <table border="0" style="width:720px;">
+                    <tr>
+                        <td align="center" style="padding-top:5px; padding-bottom:5px;"></td>
+                    </tr>
+                </table>
+                <table class="table_html" id="tblBodyContent" summary="내용" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td align="center" style="height:25px;width:120px; background-color:#F6F6F6">의뢰일자</td>
+                        <td align="center" style="height:25px;width:230px;">
+                            <input type="text" id="mField" name="txtStartDate" style="height:25px;width:90%; text-align:center; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" />
+                        </td>
+                        <td align="center" style="height:25px;width:120px; background-color:#F6F6F6">완료요청일</td>
+                        <td align="center" style="height:25px;width:230px;">
+                            <input type="text" id="mField" name="txtCompleteDate" style="height:25px;width:90%; text-align:center; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="height:25px;width:120px; background-color:#F6F6F6">의뢰부서</td>
+                        <td align="center" style="height:25px;width:230px;">
+                            <input type="text" id="mField" name="txtStartDept" style="height:25px;width:90%; text-align:center; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" />
+                        </td>
+                        <td align="center" style="height:25px;width:120px; background-color:#F6F6F6">신&nbsp; 청&nbsp; 자</td>
+                        <td align="center" style="height:25px;width:230px;">
+                            <input type="text" id="mField" name="txtStarter" style="height:25px;width:90%; text-align:center; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" />
+                        </td>
+                    </tr>
+                    <!--
+                    <tr>
+                        <td align="center" style="height:25px;width:120px; background-color:#F6F6F6">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 목</td>
+                        <td colspan="3" align="center" style="height:25px;width:600px;"></td>
+                    </tr>
+                    -->
+                    <tr>
+                        <td align="center" style="height:25px;width:120px; background-color:#F6F6F6">요청내용</td>
+                        <td colspan="3" align="center" style="height:25px;width:600px;border-bottom-color:#ffffff"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" align="center" style="height:150px;width:720px;">
+                            <textarea id="mField" name="txtRequestContent" rows="4" cols="3" style="width:95%;height:80%"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="height:25px;width:120px; background-color:#F6F6F6;">처리결과</td>
+                        <td colspan="3" align="center" style="height:25px;width:600px;BORDER-BOTTOM: 0px"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" align="center" style="height:150px;width:720px;BORDER-TOP: 0px;BORDER-BOTTOM: 0px">
+                            <textarea id="mField" name="txtRequestResult" rows="4" cols="3" style="width:95%;height:80%;"></textarea>
+                        </td>
+                    </tr>
+				</table>
+				<table class="table_html" id="tblBodyContent" summary="내용" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td align="center" style="height:25px;width:120px; background-color:#F6F6F6;">CTS No.</td>
+                        <td align="center" style="height:25px;width:160px;">
+                            <input type="text" id="mField" name="txtCTSNo" style="height:25px;width:90%; text-align:center; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" />
+                        </td>
+                        <td align="center" style="height:25px;width:120px; background-color:#F6F6F6">Description</td>
+                        <td>
+                            <input type="text" id="mField" name="txtDescription" style="height:25px;width:90%; text-align:center; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" />
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <table class="table_html" id="tblBodyContent" summary="내용" cellpadding="0" cellspacing="0"></table>
+            </div>
+            <!--######## 본문부분 종료 ##########################################-->
+            <!--######## 양식하단부분 공통 시작 #################################-->
+
+            <div id="divApprovalLine">
+                <!--추가(인쇄용) HIW-->
+                <table class="table_5" summary="참조" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th>첨부파일</th>
+                        <td id="AttFileInfo" align="left"></td>
+                    </tr>
+                    <tr>
+                        <th>연결문서</th>
+                        <td id="DocLinkInfo" align="left"></td>
+                    </tr>
+                    <tr style="display:none;">
+                        <th>원 문 서</th>
+                        <td id="RejectDocLinkInfo" align="left">-</td>
+                    </tr>
+                    <tr>
+                        <th>참조</th>
+                        <td id="CCLine" align="left">
+                            <div id="SendCC"></div>
+                            <div id="RecCC"></div>&nbsp;
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- 결재선 정보 시작-->
+                <table width="100%" cellpadding="0" cellspacing="0">
+                    <!-- 일반결재/합의 -->
+                    <tr>
+                        <td style="height:7px;"></td>
+                    </tr>
+                    <tr>
+                        <td id="AppLine" width="100%">
+                            <table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" bordercolordark="white" bordercolorlight="gray">
+                                <tr>
+                                    <!-- 발신처 결재란 보이는 부분(왼쪽) -->
+                                    <td id="LApvLine" align="left" width="100%"></td>
+                                </tr>
+                                <tr>
+                                    <!-- 수신처 결재란 보이는부분 (오른쪽)-->
+                                    <td id="RApvLine" align="left" width="100%"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- 협조자 -->
+                    <tr>
+                        <td id="AssistLine" width="100%" style="display:none;"></td>
+                    </tr>
+                    <!--참조자 -- 첨부파일 영역으로 옮김 -->
+                    <!--수신자 -->
+                    <tr>
+                        <td id="RRLine" width="100%" style="display:none;"></td>
+                    </tr>
+                </table>
+                <!-- 결재선 정보 종료-->
+                <!--의견 시작-->
+                <table id="tbCommentView" border="0" cellpadding="0" cellspacing="0" align="center" width="100%">
+                    <tr>
+                        <td align="center" id="tdCommentView" width="100%" style="display:none;"></td>
+                    </tr>
+                </table>
+                <!--의견 종료-->
+            </div>
+
+            <!--문서설명 시작-->
+            <div id="divforminfo" style="display:none">
+                <table class="table_6" summary="원문서" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th>문서설명</th>
+                        <td id="tdforminfo"></td>
+                    </tr>
+                </table>
+            </div>
+            <!--문서설명 종료-->
+            <!--######## 양식하단부분 공통 종료 #################################-->
+
+        </div>
+        <!-- bodycontext end -->
+    </div>
+    <!-- 양식 전체 end -->
+    <script language="javascript" src="formedit_object.js" type="text/javascript"></script>
+
+    <script type="text/javascript" language="javascript">
+
+        //캘린더 JdatePicker 선언 (HIW)
+        $(function () {
+            jDatePicker("dpApprFormDTStart1", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTEnd1", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTStart2", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTEnd2", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTStart3", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTEnd3", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTStart4", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTEnd4", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTStart5", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTEnd5", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+
+
+            //20171208 대체근무일 달력 컨트롤 수정 PSW
+            jDatePicker("dpApprFormDTSingleStart1", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTSingleEnd1", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTSingleStart2", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTSingleEnd2", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTSingleStart3", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTSingleEnd3", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTSingleStart4", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTSingleEnd4", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTSingleStart5", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+            jDatePicker("dpApprFormDTSingleEnd5", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
+        });
+
+        window.onload = initOnload;
+        function initOnload() {
+            initialize();
+
+            ChangeGuboonRdo(1);
+
+            /*
+            if ($("input[name=txtSabun]").val() == "")   //기안시에만..(편집시에 로그인사용자정보로 엎어치지않게하기위함)
+            {
+                //사용자기본정보 셋팅
+                SetUserBasicInfo();
+            } else {
+                CallRemainDays();
+            }
+            */
+
+            //휴가구분 콤보박스 바인딩 (2012-12-07 HIW)
+            //GetVacatKind();
+
+            //편집모드시 날짜필드 셋팅 (HIW)
+            SetDateField();
+
+
+            //편집모드시 콤보박스 셋팅 (HIW)
+            SetComboBox();
+        }
+
+        function initialize() {
+            if (window.parent.document.readyState == "complete") {
+                window.parent.document.onreadystatechange = event_noop;
+
+                initForm();
+                initApvList();
+            } else {
+                window.setTimeout(initialize, 500);
+            }
+
+            document.getElementsByName("higher_cd")[0].value = "H010";
+            document.getElementsByName("higher_nm")[0].value = "SAP ERP";
+            document.getElementsByName("request_id")[0].value = getInfo("usem");
+
+            document.getElementsByName("lower_cd")[0].value = $("input[name=lower_cd]").val();
+            document.getElementsByName("lower_nm")[0].value = $("input[name=lower_nm]").val();
+        }
+
+        function initForm() {
+            initFields();
+            G_displaySpnAttInfo(false);
+
+            /*
+            //문서이관 여부에 따른 셋팅
+            if (getInfo("scEdmsLegacy")=="1"){
+            document.getElementById("trDocInfo01").style.display="";
+            // document.getElementById("trDocInfo02").style.display="";
+            }else{
+            document.getElementById("trDocInfo01").style.display="none";
+            // document.getElementById("trDocInfo02").style.display="none";
+            }
+            */
+        }
+
+        function initFields(szBody) {
+            setFields((!window.ActiveXObject) ? document.getElementById("dField") : dField); //editable field
+            setFields((!window.ActiveXObject) ? document.getElementById("cField") : cField); //readonly field
+            setFields((!window.ActiveXObject) ? document.getElementById("mField") : mField); //form editable field
+
+            document.getElementById("headname").innerHTML = initheadname(getInfo("fmnm"), true);
+            if (getInfo("mode") == "DRAFT" || getInfo("mode") == "TEMPSAVE") {
+                document.getElementsByName("INITIATOR_INFO")[0].value = getInfo("usdn"); //getInfo("dpdn_apv")+" "+getInfo("usdn") + " "+ getInfo("ustn") ;
+                document.getElementsByName("APPLIED").value = formatDate(getInfo("svdt"), "D");
+                //document.getElementsByName("entcode")[0].value = getInfo("ENT_CODE"); //휴가신청서 회사코드
+                //var a = document.getElementsByName("entcode")[0].value;
+
+                //alert(getInfo("etid"));
+
+            } else {
+                document.getElementsByName("SUBJECT")[0].disabled = true;
+            }
+
+            //기타 필드 채우기
+            setSaveTerm(); //보존년한 create
+            setDocLevel();  // 보안등급 create
+
+            //본문 내용
+            if (getInfo("BODY_CONTEXT") != undefined) {
+                setBodyContext(getInfo("BODY_CONTEXT"));
+            } else {
+                setBodyContext(getInfo("fmbd").replace("euc-kr", "utf-8"));
+            }
+        }
+
+
+        function getBodyContext() {
+            //UpdateImageData(); //이미지 업로드
+            var sBodyContext = makeBodyContext();
+            return makeNode("BODY_CONTEXT", sBodyContext, null, false);
+        }
+
+        function setFields(Fields) {
+            if (!window.ActiveXObject) {
+                var szId = Fields.id;
+                var unFiltered = document.getElementsByTagName('*');
+                for (i = 0; i < unFiltered.length; i++) {
+                    if (unFiltered[i].getAttribute('id') == szId) {
+                        var fld = unFiltered[i];
+                        if (fld.getAttribute("dataFld") != null) { (getInfo(fld.getAttribute("name")) != undefined) ? fld.value = getInfo(fld.getAttribute("name")) : (getInfo(fld.getAttribute("dataFld")) != undefined) ? fld.value = getInfo(fld.getAttribute("dataFld")) : fld.value = ''; }
+                        if (fld.getAttribute("name") != null) {
+                            if (fld.getAttribute("name") == 'POSITION' && getInfo(fld.getAttribute("name")) == "") {
+                                fld.value = getInfo(fld.getAttribute("dataFld"));
+                            }
+                        }
+                    }
+                }
+            } else {
+                for (var i = 0; i < Fields.length; i++) {
+                    var fld = Fields[i];
+                    if (fld.dataFld != "") { (getInfo(fld.name) != undefined) ? fld.value = getInfo(fld.name) : (getInfo(fld.dataFld) != undefined) ? fld.value = getInfo(fld.dataFld) : fld.value = ''; }
+                    if (fld.name == 'POSITION' && getInfo(fld.name) == "") {
+                        fld.value = getInfo(fld.dataFld);
+                    }
+                }
+            }
+
+        }
+        function checkForm(bTempSave) {
+            if (bTempSave) {
+                return true;
+            } else {//debugger;
+                if (document.getElementsByName("SUBJECT")[0].value == '') {
+                    alert('제목을 입력하세요.');
+                    //SUBJECT.focus();
+                    return false;
+                } else if (document.getElementsByName("DOC_CLASS_NAME")[0].value == '') {  //HIW
+                    alert('문서분류를 선택하세요.');
+                    return false;
+                } else if ($('input:radio[name=OPT_Guboon]:checked').val() == undefined) {  //HIW
+                    alert('관련업무를 선택하세요.');
+                    return false;
+                } else {
+
+                    return true;
+                }
+            }
+        }
+
+        function setBodyContext(sBodyContext) {
+            //본문 채우기
+            var m_objXML = CreateXmlDocument();
+            var elmList, elm;
+            var elmListLan;
+
+            m_objXML.loadXML("<?xml version='1.0' encoding='utf-8'?>" + getInfo("BODY_CONTEXT"));
+            try {
+                elmList = m_objXML.documentElement.childNodes;
+                for (var i = 0; i < elmList.length; i++) {
+                    var elm = elmList[i];
+                    innerHtmlData(elm.nodeName, elm.text);
+                }
+                //본문 채우기
+                //setdField();
+            }
+            catch (e) { }
+        }
+
+        //본문 XML로 구성
+        function makeBodyContext() {
+            var sBodyContext = "";
+            //xml 구성 예제 : <body><item><name></name></item><item><name></name></item></body>
+            //sBodyContext="<body><item><name>첫번째</name></item><item><name>두번째</name></item></body>";
+
+            sBodyContext = "<BODY_CONTEXT>" + getFields(document.getElementById("mField")) + "</BODY_CONTEXT>";
+            return sBodyContext;
+        }
+
+        /*** 폼데이터 XML문 만들기 ***/
+        function getFields(Fields) {
+            /*
+            var sText = "";
+            if(Fields!=null){
+            var szId = Fields.id;
+            sText+= makeCBFormXML("input", szId);
+            sText+= makeCBFormXML("select", szId);
+            sText+= makeCBFormXML("radio", szId);
+            sText+= makeCBFormXML("textarea", szId);
+            }
+            return sText;
+            */
+            var sText = "";
+            if (Fields != null) {
+                var szId = Fields.id;
+                var unFiltered = document.getElementsByTagName('*');
+                for (var i = 0; i < unFiltered.length; i++) {
+
+                    if (unFiltered[i].getAttribute('id') == szId) {
+                        if (unFiltered[i].getAttribute("name").indexOf("SEL_") > -1) {
+                            sText += getSelRadio(unFiltered[i]);
+                        } else if (unFiltered[i].getAttribute("name").indexOf("OPT_") > -1) {
+                            if (sText.indexOf("<" + unFiltered[i].name + ">") == -1) sText += getRadio(unFiltered[i].name);
+                        } else if (unFiltered[i].getAttribute("name").indexOf("CHK_") > -1) {
+                            sText += getChkRadio(unFiltered[i].name);
+                        } else {
+                            sText += makeNode(unFiltered[i].getAttribute("name"), unFiltered[i].value);
+                        }
+                    }
+                }
+            }
+            return sText;
+        }
+
+        /** 레디오버튼 XML노드 생성 **/
+        function getRadio(radioNm) {
+            var radioVal = "";
+            /*
+            //alert("이름:"+radioNm+"\n객체여부:"+eval(radioNm)+"\n길이:"+eval(radioNm).length+"\n체크여부:"+eval(radioNm).checked);
+            for(i=0;i<eval(radioNm).length;i++){
+            if(eval(radioNm)[i].checked){
+            radioVal = makeNode(radioNm, eval(radioNm)[i].value);
+            }
+            }
+            */
+            radioVal = makeNode(radioNm, $("input:radio[name=" + radioNm + "]:checked").val());
+
+            return radioVal;
+        }
+
+        /** 체크박스 XML노드 생성 **/
+        function getChkRadio(chkBoxNm) {
+            /*
+            if(eval(radioNm).checked){
+            radioVal = makeNode(radioNm, eval(radioNm).value);
+            return radioVal;
+            }
+            */
+            var chkVal = "";
+            if ($("input:checkbox[name=" + chkBoxNm + "]").is(":checked"))
+                chkVal = makeNode(chkBoxNm, $("input:checkbox[name=" + chkBoxNm + "]:checked").val());
+
+            return chkVal;
+        }
+
+        /** SELECT BOX VALUE 가져오기 **/
+        function getSelRadio(obj) { //selNm
+            var radioVal = "";
+            var selNm = obj.getAttribute("name");
+            if (obj.selectedIndex > -1) {
+                radioVal += makeNode(selNm, obj.options[obj.selectedIndex].value);
+                radioVal += makeNode(selNm + "_TEXT", obj.options[obj.selectedIndex].text);
+            } else {
+                radioVal += makeNode(selNm, "");
+                radioVal += makeNode(selNm + "_TEXT", "");
+            }
+            return radioVal;
+        }
+        /*** 데이터 뿌려주기 ***/
+        function innerHtmlData(nodeNm, nodeVal) {
+            if (document.getElementsByName(nodeNm) != undefined) {
+                if (nodeNm.indexOf("FORM_ATTACH") != -1) {
+                    setForm_Attach(nodeVal);
+                    document.getElementsByName(nodeNm)[0].value = nodeVal;
+                } else if (nodeNm.indexOf("tbContentElement") != -1) {
+                    var dom = tbContentElement.getDom(); dom.body.innerHTML = nodeVal.replace(/<BR>/gi, "");
+                } else if (nodeNm.indexOf("OPT") != -1) {
+                    setRadio(nodeNm, nodeVal);
+                } else if (nodeNm.indexOf("CHK") != -1) {
+                    setChk(nodeNm, nodeVal);
+                } else if (nodeNm.indexOf("JEONKEUL") != -1) {
+                    spnJEONKEUL.innerHTML = nodeVal;
+                } else {
+                    if (document.getElementsByName(nodeNm)[0] != null) document.getElementsByName(nodeNm)[0].value = nodeVal;
+                }
+            }
+        }
+
+        /*** 레디오버튼 체크선택 (수정모드시) ***/
+        function setRadio(szname, szvalue) {
+            /*
+            var objrdo = eval(szname);
+            for(i=0;i<objrdo.length;i++){
+            if(objrdo[i].value == szvalue) objrdo[i].checked = true;
+            }
+            */
+            var objrdo = $("[name=" + szname + "]");
+            for (i = 0; i < objrdo.length; i++) {
+                if (objrdo[i].value == szvalue)
+                    objrdo[i].checked = true;
+            }
+        }
+
+        /*** 체크박스 체크선택 (수정모드시) ***/
+        function setChk(szname, szvalue) {
+            /*
+            var objrdo = eval(szname);
+            if (objrdo.value == szvalue) objrdo.checked = true;
+            */
+            var objrdo = $("input:checkbox[name=" + szname + "]");
+            if (objrdo[0].value == szvalue)
+                objrdo[0].checked = true;
+        }
+
+        //편집모드시 날짜필드 셋팅 (HIW)
+        function SetDateField() {
+            for (var i = 1; i < 6; i++) {
+                $("#dpApprFormDTStart" + i).val($("input[name=hdn_dpApprFormDTStart" + i + "]").val());
+                $("#dpApprFormDTEnd" + i).val($("input[name=hdn_dpApprFormDTEnd" + i + "]").val());
+            }
+
+            //20171208 대체근무일 기간설정 추가 PSW
+            for (var i = 1; i < 6; i++) {
+                $("#dpApprFormDTSingleStart" + i).val($("input[name=hdn_dpApprFormDTSingleStart" + i + "]").val());
+                $("#dpApprFormDTSingleEnd" + i).val($("input[name=hdn_dpApprFormDTSingleEnd" + i + "]").val());
+                if ($("#dpApprFormDTSingleStart" + i).val() != "") {
+                    //대체근무일 행 보이게
+                    $("#trRepVacat" + i).css({ "display": "" });
+                    $("#tdNo" + i).attr("rowSpan", 3);  //RowSpan
+                }
+            }
+            //추가 끝
+        }
+
+
+
+        //편집모드시 콤보박스 셋팅 (HIW)
+        function SetComboBox() {
+            for (var i = 1; i < 6; i++) {
+                $("select[name=cmbGoobun" + i + "]").val($("input[name=hdnGoobunVal" + i + "]").val());
+            }
+        }
+
+        //행데이터 초기화 (2012-12-07 HIW)
+        function ResetRowData(pNo) {
+            $("#dpApprFormDTStart" + pNo).val("");
+            $("#dpApprFormDTEnd" + pNo).val("");
+            $("input[name=hdn_dpApprFormDTStart" + pNo + "]").val("");
+            $("input[name=hdn_dpApprFormDTEnd" + pNo + "]").val("");
+            $("input[name=txtTotDay" + pNo + "]").val("");
+            $("input[name=txtApplyDay" + pNo + "]").val("");
+        }
+
+        //20171207 PSW 추가 - 대체휴가 선택 시 대체근무일 기간 설정 초기화
+        function ResetRowData2(pNo) {
+            $("#dpApprFormDTSingleStart" + pNo).val("");
+            $("#dpApprFormDTSingleEnd" + pNo).val("");
+            $("input[name=hdn_dpApprFormDTSingleStart" + pNo + "]").val("");
+            $("input[name=hdn_dpApprFormDTSingleEnd" + pNo + "]").val("");
+        }
+
+        //사용자기본정보 셋팅
+        var vSabun = "";
+        function SetUserBasicInfo() {
+
+            var url = "/CoviWeb/Approval/CallBack.aspx";
+            var param = "CODE=60&PERSON_CODE=" + getInfo("usid") + "&LANGUAGE=" + getInfo("uslng");
+
+            var xml = DoCallback(url, param);
+            var result = xml.responseXML;
+
+            var elmRoot = result.documentElement;
+            //debugger;
+            if (SelectSingleNode(elmRoot, "result") != "SUCEESS") {
+                alert("[Error]\n\r\n\r" + SelectSingleNode(elmRoot, "result"));
+                return;
+            }
+            else {//debugger;
+
+                var vUserNm = "";
+                var vJobPosition = "";
+                var vUnitNm = "";
+
+                try {
+                    $(elmRoot).find("Table").each(function (i) {
+
+                        vSabun = $(this).find("SABUN").text();
+                        vUserNm = $(this).find("DISPLAY_NAME").text();
+                        vJobPosition = $(this).find("JBO_POSITION").text();
+                        vUnitNm = $(this).find("UNIT_NAME").text();
+                    });
+                    //alert(vUnitNm);
+                    $("input[name=txtSabun]").val(vSabun);
+                    $("input[name=txtUserName]").val(vUserNm);
+                    $("input[name=txtJobPosition]").val(vJobPosition);
+                    $("input[name=txtUnitName]").val(vUnitNm);
+
+                } catch (e) {
+                    alert(e.message);
+                }
+            }
+            CallRemainDays();
+
+        }
+        function CallRemainDays() {
+            //==== 휴가잔여일수 가져오기 ===
+            var url = "/CoviWeb/Approval/CallBack.aspx";
+            var param = "CODE=04&ENT_CODE=" + getInfo("etid") + "&USER_CODE=" + vSabun;
+
+            var xml = DoCallback(url, param);
+            var result = xml.responseXML;
+
+            //alert(result);
+
+            var elmRoot = result.documentElement;
+
+            //debugger;
+            if (SelectSingleNode(elmRoot, "result") != "SUCEESS") {
+
+                alert("[Error]\n\r\n\r" + SelectSingleNode(elmRoot, "result"));
+                return;
+            }
+            else {
+                var vRtnVal = "";
+                try {
+                    if ($(elmRoot).find("Table").length > 0) {
+                        $(elmRoot).find("Table").each(function (i) {
+
+                            vRtnVal = $(this).find("Column1").text();
+
+                        });
+                        //vRtnVal = ReplaceChars(vRtnVal, "<BR>", "\r\n\r\n");
+                        vRtnVal = ReplaceChars(vRtnVal, "<BR>", "\n");
+                        $("textarea[name=txtRemainVacat]").val(vRtnVal);
+
+                    }
+
+                } catch (e) {
+                    alert(e.message);
+                }
+                //alert(vRtnVal);
+            }
+            //================================
+        }
+        //휴가신청구분 레디오버튼 클릭시 (HIW)
+        function ChangeGuboonRdo(pKind) {
+            if (pKind == 1) {
+                $("input[name=lower_cd]").val("L051");
+                $("input[name=lower_nm]").val("SAP SD");
+               
+
+                //document.getElementsByName("lower_cd")[0].value = "L051";
+                //document.getElementsByName("lower_nm")[0].value = "SAP SD";
+            } else if (pKind == 2) {
+                $("input[name=lower_cd]").val("L050");
+                $("input[name=lower_nm]").val("SAP MM");
+                //document.getElementsByName("lower_cd")[0].value = "L050";
+                //document.getElementsByName("lower_nm")[0].value = "SAP MM";
+            } else if (pKind == 3) {
+                $("input[name=lower_cd]").val("L053");
+                $("input[name=lower_nm]").val("SAP PP");
+                //document.getElementsByName("lower_cd")[0].value = "L053";
+                //document.getElementsByName("lower_nm")[0].value = "SAP PP";
+            } else if (pKind == 4) {
+                $("input[name=lower_cd]").val("L052");
+                $("input[name=lower_nm]").val("SAP FI");
+                //document.getElementsByName("lower_cd")[0].value = "L052";
+                //document.getElementsByName("lower_nm")[0].value = "SAP FI";
+            } else if (pKind == 5) {
+                $("input[name=lower_cd]").val("L049");
+                $("input[name=lower_nm]").val("SAP CO");
+                //document.getElementsByName("lower_cd")[0].value = "L049";
+                //document.getElementsByName("lower_nm")[0].value = "SAP CO";
+            } else if (pKind == 6) {
+                $("input[name=lower_cd]").val("L044");
+                $("input[name=lower_nm]").val("SAP PM");
+                //document.getElementsByName("lower_cd")[0].value = "L044";
+                //document.getElementsByName("lower_nm")[0].value = "SAP PM";
+            } else if (pKind == 7) {
+                $("input[name=lower_cd]").val("L047");
+                $("input[name=lower_nm]").val("OIS(이수화학 사용)");
+                
+                //document.getElementsByName("lower_cd")[0].value = "L047";
+                //document.getElementsByName("lower_nm")[0].value = "OIS(이수화학 사용)";
+
+            } else if (pKind == 8) {
+                $("input[name=lower_cd]").val("L110");
+                $("input[name=lower_nm]").val("전자증빙시스템");
+                //document.getElementsByName("lower_cd")[0].value = "L110";
+                //document.getElementsByName("lower_nm")[0].value = "전자증빙시스템";
+            } else if (pKind == 9) {
+                $("input[name=lower_cd]").val("L109");
+                $("input[name=lower_nm]").val("수출입시스템");
+                //document.getElementsByName("lower_cd")[0].value = "L109";
+                //document.getElementsByName("lower_nm")[0].value = "수출입시스템";
+            } else if (pKind == 10) {
+                $("input[name=lower_cd]").val("L111");
+                $("input[name=lower_nm]").val("전자구매입찰시스템(이수화학)");
+                //document.getElementsByName("lower_cd")[0].value = "L111";
+                //document.getElementsByName("lower_nm")[0].value = "전자구매입찰시스템(이수화학)";
+            } else if (pKind == 11) {
+                $("input[name=lower_cd]").val("L143");
+                $("input[name=lower_nm]").val("WMS");
+                //document.getElementsByName("lower_cd")[0].value = "L143";
+                //document.getElementsByName("lower_nm")[0].value = "WMS";
+            } else if (pKind == 12) {
+                $("input[name=lower_cd]").val("L048");
+                $("input[name=lower_nm]").val("SAP ABAP");
+                //document.getElementsByName("lower_cd")[0].value = "L048";
+                //document.getElementsByName("lower_nm")[0].value = "SAP ABAP";
+            } else {
+
+            }
+        }
+
+        //휴가종류구분 가져오기 (2012-12-07 HIW)
+        function GetVacatKind() {
+
+            var url = "/CoviWeb/Approval/CallBack.aspx";
+            var param = "CODE=01&ENT_CODE=" + getInfo("etid");
+
+            var xml = DoCallback(url, param);
+            var result = xml.responseXML;
+
+            var elmRoot = result.documentElement;
+            //debugger;
+            if (SelectSingleNode(elmRoot, "result") != "SUCEESS") {
+                alert("[Error]\n\r\n\r" + SelectSingleNode(elmRoot, "result"));
+                return;
+            }
+            else {
+                var vCode = "";
+                var vName = "";
+                var vOptionStr = "";
+
+                try {
+                    $(elmRoot).find("Table").each(function (i) {
+
+
+                        vCode = $(this).find("PSTN_CODE").text();
+                        vName = $(this).find("PSTN_NAME_KOR").text();
+                        /*
+                        if (vName == "대체휴가") {
+                        if(getInfo("etid") == "ISU_PS")  //이수페타시스
+                        vOptionStr += "<option value='" + vCode + "'>" + vName + "</option>";
+                        }
+                        else
+                        */
+
+                        //2016.08.16 PSW 건설 요청
+
+                        if (getInfo("etid") == "ISU_CT") { //건설
+
+                            //2018.01.11 PSW 건설 휴가 기간 사용
+                            /*
+                            if (vCode == "101") { // 연차휴가
+                            } else {
+                            vOptionStr += "<option value='" + vCode + "'>" + vName + "</option>";
+                            }
+                            */
+                            vOptionStr += "<option value='" + vCode + "'>" + vName + "</option>";
+                        } else {
+
+
+                            //alert(vCode);
+                            //alert(vName);
+                            vOptionStr += "<option value='" + vCode + "'>" + vName + "</option>";
+                        }
+
+                    });
+
+                    for (var i = 1; i < 6; i++) {
+                        //$("<option value='121'>대체휴가</option>").appendTo("select[name=cmbGoobun" + i + "]");
+                        $("select[name=cmbGoobun" + i + "]").append(vOptionStr);
+
+                    }
+
+
+                } catch (e) {
+                    alert(e.message);
+                }
+            }
+        }
+
+        //구분(휴가종류)콤보박스 변경시
+        function ChangeGoobunCombo(pCombo) {
+            //debugger;
+            var vComboName = pCombo.name;
+            var vNo = vComboName.substr(vComboName.length - 1, 1);
+            var vSelVal = $("select[name=" + vComboName + "]").val();
+            var vSelText = $("select[name=" + vComboName + "] option:selected").text();
+
+            if (vSelText == "선택하세요") {
+                $("input[name=hdnGoobunVal" + vNo + "]").val("");
+                $("input[name=hdnGoobunText" + vNo + "]").val("");
+            }
+            else {
+                $("input[name=hdnGoobunVal" + vNo + "]").val(vSelVal);
+                $("input[name=hdnGoobunText" + vNo + "]").val(vSelText);
+            }
+            if ((getInfo("etid") == "ISU_PS" && vSelText == "대체휴가") || (getInfo("etid") == "ISU_ABX" && vSelText == "대체휴가")) {  //(이수페타시스 && 대체휴가) || (이수엡지스 && 대체휴가)
+
+                $("#trRepVacat" + vNo).css({ "display": "" });  //대체근무일 행 보이게
+                $("#tdNo" + vNo).attr("rowSpan", 3);  //RowSpan
+
+                //대체근무시간 콤보박스 바인딩
+                GetReplaceWorkTime(vNo);
+            }
+            //2013-07-09 hyh 추가
+            else if (vSelText.indexOf("반차") > -1) {
+
+                //2013-10-24 LHI 추가
+                $("#dpApprFormDTEnd" + vNo).val($("#dpApprFormDTStart" + vNo).val());
+                $("input[name=hdn_dpApprFormDTEnd" + vNo + "]").val($("input[name=hdn_dpApprFormDTStart" + vNo + "]").val());
+                GetVacaTotDays(vNo, ReplaceChars($("input[name=hdn_dpApprFormDTStart" + vNo + "]").val(), "-", ""), ReplaceChars($("input[name=hdn_dpApprFormDTEnd" + vNo + "]").val(), "-", ""));
+
+                //2013-10-24 LHI수정(파라미터 값 변경)
+                //GetVacaApplyDays(vNo, document.getElementById("dpApprFormDTStart" + vNo), document.getElementById("vEndSelDate" + vNo));
+                GetVacaApplyDays(vNo, ReplaceChars($("input[name=hdn_dpApprFormDTStart" + vNo + "]").val(), "-", ""), ReplaceChars($("input[name=hdn_dpApprFormDTEnd" + vNo + "]").val(), "-", ""));
+
+            }
+            //2013-07-09 hyh 추가끝
+            else {
+                $("#dpApprFormDTSingleStart" + vNo).val("");
+                $("input[name=hdn_dpApprFormDTSingleStart" + vNo + "]").val("");
+                $("input[name=txtRepWorkTime" + vNo + "]").val("");
+
+                $("#trRepVacat" + vNo).css({ "display": "none" });
+                $("#tdNo" + vNo).attr("rowSpan", 2);  //RowSpan
+                $("input[name=hdnReplaceWorkTimeVal" + vNo + "]").val("");
+                $("input[name=hdnReplaceWorkTimeText" + vNo + "]").val("");
+
+                //2013-10-24 LHI 수정
+                //if (vSelText.indexOf("반차") == -1){
+                //    var tDay = $("input[name=txtTotDay" + vNo + "]").val();
+                //    $("input[name=txtApplyDay" + vNo + "]").val(tDay);
+                //}
+                GetVacaTotDays(vNo, ReplaceChars($("input[name=hdn_dpApprFormDTStart" + vNo + "]").val(), "-", ""), ReplaceChars($("input[name=hdn_dpApprFormDTEnd" + vNo + "]").val(), "-", ""));
+                GetVacaApplyDays(vNo, ReplaceChars($("input[name=hdn_dpApprFormDTStart" + vNo + "]").val(), "-", ""), ReplaceChars($("input[name=hdn_dpApprFormDTEnd" + vNo + "]").val(), "-", ""));
+
+            }
+
+        }
+
+
+        //대체휴가의 대체근무시간 가져오기 (2012-12-07 HIW)
+        function GetReplaceWorkTime(pNo) {
+
+            var url = "/CoviWeb/Approval/CallBack.aspx";
+            var param = "CODE=06&ENT_CODE=" + getInfo("etid");
+
+            var xml = DoCallback(url, param);
+            var result = xml.responseXML;
+
+
+
+            var elmRoot = result.documentElement;
+            //debugger;
+            if (SelectSingleNode(elmRoot, "result") != "SUCEESS") {
+                alert("[Error]\n\r\n\r" + SelectSingleNode(elmRoot, "result"));
+                return;
+            }
+            else {
+                var vCode = "";
+                var vName = "";
+                var vOptionStr = "";
+
+                try {
+                    $(elmRoot).find("Table").each(function (i) {
+
+                        vCode = $(this).find("PSTN_CODE").text();
+                        vName = $(this).find("PSTN_NAME_KOR").text();
+
+                        vOptionStr += "<option value='" + vCode + "'>" + vName + "</option>";
+
+                    });
+
+                    $("select[name=cmbReplaceWorkTime" + pNo + "]").append(vOptionStr);
+
+                } catch (e) {
+                    alert(e.message);
+                }
+            }
+        }
+
+        //대체근무시간 콤보박스 변경시
+        function ChangeReplaceWorkTimeCombo(pCombo) {
+            //debugger;
+            var vComboName = pCombo.name;
+            var vNo = vComboName.substr(vComboName.length - 1, 1);
+            var vSelVal = $("select[name=" + vComboName + "]").val();
+            var vSelText = $("select[name=" + vComboName + "] option:selected").text();
+
+            $("input[name=hdnReplaceWorkTimeText" + vNo + "]").val(vSelText);
+
+        }
+
+
+        //HR에서 휴가기간에따른 휴가 총일수 가져오기 (2012-12-07 HIW) : SiteReference/Jcalendar/ui/jquery.ui.datepicker.js에서 호출됨
+        function GetVacaTotDays(pNo, S_YMD, E_YMD) {  //컨트롤번호, 시작일자, 종료일자
+
+            //휴가기간에따른 휴가 총일수 가져오기
+            var url = "/CoviWeb/Approval/CallBack.aspx";
+            var param = "CODE=02&ENT_CODE=" + getInfo("etid") + "&S_YMD=" + S_YMD + "&E_YMD=" + E_YMD;
+
+            var xml = DoCallback(url, param);
+            var result = xml.responseXML;
+
+            var elmRoot = result.documentElement;
+            //debugger;
+            if (SelectSingleNode(elmRoot, "result") != "SUCEESS") {
+                alert("[Error]\n\r\n\r" + SelectSingleNode(elmRoot, "result"));
+                return;
+            }
+            else {
+                var vRtnVal = "";
+
+                try {
+                    $(elmRoot).find("Table").each(function (i) {
+
+                        vRtnVal = $(this).find("Column1").text();
+                    });
+
+                    $("input[name=txtTotDay" + pNo + "]").val(vRtnVal);
+
+
+                } catch (e) {
+                    alert(e.message);
+                }
+            }
+        }
+
+
+        //HR에서 휴가기간에따른 휴가 적용일수(실사용일수) 가져오기 (2012-12-07 HIW) : SiteReference/Jcalendar/ui/jquery.ui.datepicker.js에서 호출됨
+        function GetVacaApplyDays(pNo, S_YMD, E_YMD) {  //컨트롤번호, 시작일자, 종료일자
+
+            //2013-10-24 LHI추가(날짜 미세팅 시 적용일수, 중복체크 의미없음)
+            if (S_YMD == "" || E_YMD == "") return;
+
+            var url = "/CoviWeb/Approval/CallBack.aspx";
+            var param = "CODE=03&ENT_CODE=" + getInfo("etid") + "&USER_CODE=" + $("input[name=txtSabun]").val() + "&GNT_CD=" + $("select[name=cmbGoobun" + pNo + "]").val() + "&S_YMD=" + S_YMD + "&E_YMD=" + E_YMD;
+
+            var xml = DoCallback(url, param);
+            var result = xml.responseXML;
+
+            var elmRoot = result.documentElement;
+            //debugger;
+            if (SelectSingleNode(elmRoot, "result") != "SUCEESS") {
+                alert("[Error]\n\r\n\r" + SelectSingleNode(elmRoot, "result"));
+                return;
+            }
+            else {
+                var vRtnVal = "";
+
+                try {
+                    $(elmRoot).find("Table").each(function (i) {
+
+                        vRtnVal = $(this).find("Column1").text();
+                    });
+
+                    //2013-07-09 hyh 수정
+                    //$("input[name=txtApplyDay" + pNo + "]").val(vRtnVal);
+                    if ($("#dpApprFormDTStart" + pNo).val() == "") {
+                        $("input[name=txtTotDay" + pNo + "]").val("");
+                    }
+                    else {
+                        $("input[name=txtApplyDay" + pNo + "]").val(vRtnVal);
+                    }
+                    //2013-07-09 hyh 수정 끝
+
+                } catch (e) {
+                    alert(e.message);
+                }
+            }
+
+            //휴가중복(근태중복) 체크
+            var vGubun = "";
+            if ($('input:radio[name=OPT_Guboon]:checked').val() == "휴가신청")
+                vGubun = "10";
+            else
+                vGubun = "20";
+
+            var url = "/CoviWeb/Approval/CallBack.aspx";
+            var param = "CODE=09&ENT_CODE=" + getInfo("etid") + "&USER_CODE=" + $("input[name=txtSabun]").val() + "&GUBUN=" + vGubun + "&GNT_CD=" + $("select[name=cmbGoobun" + pNo + "]").val() + "&S_YMD=" + S_YMD + "&E_YMD=" + E_YMD;
+
+            var xml = DoCallback(url, param);
+            var result = xml.responseXML;
+
+            var elmRoot = result.documentElement;
+            //debugger;
+            if (SelectSingleNode(elmRoot, "result") != "SUCEESS") {
+                alert("[Error]\n\r\n\r" + SelectSingleNode(elmRoot, "result"));
+                return;
+            }
+            else {
+                var vRtnVal = "";
+
+                try {
+                    $(elmRoot).find("Table").each(function (i) {
+
+                        vRtnVal = $(this).find("Column1").text();
+                    });
+
+                    //if (vRtnVal == "N")  //중복인경우
+                    if (vRtnVal == "0")  //중복인경우   (0:중복  1:신청가능)
+                    {
+                        $("select[name=cmbGoobun" + pNo + "]").val("선택하세요")
+                        $("input[name=hdnGoobunVal" + pNo + "]").val("");
+                        $("input[name=hdnGoobunText" + pNo + "]").val("");
+                        $("#dpApprFormDTStart" + pNo).val("");
+                        $("#dpApprFormDTEnd" + pNo).val("");
+                        $("input[name=hdn_dpApprFormDTStart" + pNo + "]").val("");
+                        $("input[name=hdn_dpApprFormDTEnd" + pNo + "]").val("");
+                        $("input[name=txtTotDay" + pNo + "]").val("");
+                        $("input[name=txtApplyDay" + pNo + "]").val("");
+
+                        alert("중첩된 기간의 근태신청내역이 존재합니다.");
+                        return;
+                    }
+
+                } catch (e) {
+                    alert(e.message);
+                }
+            }
+        }
+
+
+        //사용자검색 팝업창 띄우기
+        function SearchUserFromHR() {
+
+            //fnPopUpModal("/CoviWeb/Approval/Forms/Popup/UserSearchFromHR.aspx", 400, 380);
+            fn_OpenDialog2("/CoviWeb/Approval/Forms/Popup/UserSearchFromHR.aspx?kind=VacaSubmit", "", 500, 390, "scroll");   //fix/scroll
+        }
+
+
+
+
+
+    </script>
+</body>
+</html>

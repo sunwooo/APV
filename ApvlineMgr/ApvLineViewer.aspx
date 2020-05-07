@@ -17,7 +17,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="iframe_border" id="tblapvinfo" name="tblapvinfo" style="overflow:scroll;">
+	<div class="iframe_border" id="tblapvinfo" name="tblapvinfo" style="overflow:auto;">
         <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" >
             <tr>
                 <td id="Apvlist"  valign="top" height="100%">

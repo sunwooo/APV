@@ -67,7 +67,7 @@
         <div class="draft_page">
         
             <!--######## 양식상단부분 공통 시작 #################################-->
-            <table class="table_2" summary="문서분류" cellpadding="0" cellspacing="0">
+            <table class="table_3" summary="문서분류" cellpadding="0" cellspacing="0">
                 <tr style="display:none;">
                     <th>보안등급</th>
                     <td id="tField" name="DOC_LEVEL" ></td>	
@@ -90,12 +90,13 @@
                 </tr>
                 <tr>
                     <th>신청구분</th>
-                    <td id="OPT_Guboon"></td>
-                    <th>발&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신&nbsp;</th>
+                    <td style="width:70px;" id="OPT_Guboon" align="center"></td>
+                    <th style="width:55px;">발&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신&nbsp;</th>
                     <td id="txtSender"></td>	
-                    <th>수&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신</th>
+                    <th style="width:55px;">수&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신</th>
                     <td id="txtReceiver"></td>	
                 </tr>
+			
                             
             </table>
             <!--######## 양식상단부분 공통 종료 #################################-->
@@ -161,7 +162,7 @@
                     <td colspan="4" valign="top">
                         <table id="tblDataRowCost" cellpadding="0" cellspacing="0" border="0" width="100%">
                             <tr>
-                                <td align="center" style="height:30px; width:15%; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">구분</td>
+                                <td align="center" style="height:30px; width:13%; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">구분</td>
                                 <td align="center" style="width:19%;font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">일비<br />(식비포함)</td>
                                 <td align="center" style="width:19%;font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">숙박비</td>
                                 <td align="center" style="width:19%;font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">교통비</td>
@@ -171,7 +172,7 @@
                     </td>             
                 </tr>
                 <tr>                
-                    <td align="center" style="height:30px;width:109px;  font-weight:bold; background-color:#F6F6F6">비고</td>
+                    <td align="center" style="height:30px;width:97px;  font-weight:bold; background-color:#F6F6F6">비고</td>
                     <td colspan="4" style="height:70px;"><span id="txtBigo2"></span></td>
                 </tr>
 
@@ -528,7 +529,7 @@
                 vRowStr1 += "<td colspan='4' valign='top'>";
                 vRowStr1 += "<table id='tblDataRowPerson' cellpadding='0' cellspacing='0' border='0' width='100%'>";
                 vRowStr1 += "<tr>";
-                vRowStr1 += "<td align='center' style='height:30px;width:15%; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'>구분</td>";
+                vRowStr1 += "<td align='center' style='height:30px;width:13%; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'>구분</td>";
                 vRowStr1 += "<td align='center' style='height:30px;width:19%; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'>사번</td>";
                 vRowStr1 += "<td align='center' style='height:30px;width:19%; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'>성명</td>";
                 vRowStr1 += "<td align='center' style='height:30px;width:19%; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'>직위</td>";
@@ -545,10 +546,10 @@
                 vRowStr1 += "</td>";
                 vRowStr1 += "</tr>";
                 vRowStr1 += "<tr>";
-                vRowStr1 += "<td align='center' style='height:30px;width:15%;  font-weight:bold; background-color:#F6F6F6'>출장지</td>";
-                vRowStr1 += "<td align='center' style='width:38%;'><span id='txtPlace_" + i + "'></span></td>";
-                vRowStr1 += "<td align='center' style='height:30px; width:19%; font-weight:bold; background-color:#F6F6F6'>교통수단</td>";
-                vRowStr1 += "<td align='center' style='width:19%;'><span id='txtWay_" + i + "'></span></td>";
+                vRowStr1 += "<td align='center' style='height:30px;width:97px;  font-weight:bold; background-color:#F6F6F6'>출장지</td>";
+                vRowStr1 += "<td align='center' width='284px;'><span id='txtPlace_" + i + "'></span></td>";
+                vRowStr1 += "<td align='center' style='height:30px; width:142px; font-weight:bold; background-color:#F6F6F6'>교통수단</td>";
+                vRowStr1 += "<td align='center'><span id='txtWay_" + i + "'></span></td>";
                 vRowStr1 += "</tr>";
                 vRowStr1 += "<tr>";
                 vRowStr1 += "<td align='center' style='height:30px; font-weight:bold; background-color:#F6F6F6'>출장(예정)기간</td>";
@@ -611,6 +612,10 @@
         if ($('#OPT_Guboon').html() == "출장취소") {
             $('#headname').html("출장취소서")
             $('#spanSubmitDesc').html("출장취소")
+        }
+        else if ($('#OPT_Guboon').html() == "프로젝트") {
+            $('#headname').html("프로젝트 출장 신청서")
+            $('#spanSubmitDesc').html("프로젝트 출장")
         }
         else {
             $('#headname').html("출장신청서")

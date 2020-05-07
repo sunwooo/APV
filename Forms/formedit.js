@@ -28,16 +28,47 @@ try { if (m_oFormMenu == null) m_oFormMenu = parent.parent.menu; } catch (e) { }
 
 try {
     //작성페이지에서는 출력/출력미리보기/본문인쇄 모두 안보이게 (2013-03-21 HIW)
-    if (document.location.href.indexOf('read.htm') == -1) {
+	 //PSW 수정 2020-03-13
+	 //내부회계 결재문서 양식 미리보기 단 오류로 수정함
+	 
+    // 200327_김선재 : Request가 화면(htm)요청인지 확인하기 위해 String 체크
+    if (document.location.href.indexOf('_V') > -1 && document.location.href.indexOf('read.htm') == -1) {
         m_oFormMenu.document.getElementById("btPrint").style.display = "none";
         m_oFormMenu.document.getElementById("btPrintView").style.display = "none";
         m_oFormMenu.document.getElementById("btPrintOnlyBody").style.display = "none";
     }
+/*
+	if (parent.getInfo("readtype") != "preview") {
+        m_oFormMenu.document.getElementById("btPrint").style.display = "none";
+        m_oFormMenu.document.getElementById("btPrintView").style.display = "none";
+        m_oFormMenu.document.getElementById("btPrintOnlyBody").style.display = "none";
+    }
+*/
+
+
 }
 catch (e) { }
 
 
-function getInfo(sKey) { try { return parent.g_dicFormInfo.item(sKey); } catch (e) { alert(m_oFormMenu.gMessage254 + sKey + m_oFormMenu.gMessage255); } } //"양식정보에 없는 키값["+sKey+"]입니다."
+function getInfo(sKey) 
+{ 
+    try {
+        if (sKey == "SUBJECT") {
+            if (parent.g_dicFormInfo.item(sKey) !== undefined) {
+                return parent.g_dicFormInfo.item(sKey).replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;");
+            }
+            else {
+                return parent.g_dicFormInfo.item(sKey);
+            }
+        }
+        else {
+            return parent.g_dicFormInfo.item(sKey);
+        }
+    } catch (e) {
+        alert(m_oFormMenu.gMessage254 + sKey + m_oFormMenu.gMessage255);
+    } 
+} //"양식정보에 없는 키값["+sKey+"]입니다."
+
 function setInfo(sKey, sValue) {
     try {
         if (parent.g_dicFormInfo.Exists(sKey)) parent.g_dicFormInfo.Remove(sKey);
@@ -902,11 +933,11 @@ function PopListSingle(SingleDownLoadString) {
     */
 
     //if (!("ActiveXObject" in window)) {
-     if (isWindow()) {
-        //parent.download.location.href = '../fileattach/htmldown.aspx?filename=' + gFileNameArray[parseInt(SingleDownLoadString)] + "&location=" + gFileArray[parseInt(SingleDownLoadString)];
+    if (isWindow()) {
+        parent.download.location.href = '/CoviWeb/SiteReference/Common/covi_fileSingledown.aspx?filepath=' + toUTF8(gFileArray[parseInt(SingleDownLoadString)]); //usercode='+parent.getInfo("usid")+"&        
+    } else {        
+        //parent.download.location.href = '../fileattach/htmldown.aspx?filename=' + gFileNameArray[parseInt(SingleDownLoadString)] + "&location=" + gFileArray[parseInt(SingleDownLoadString)];  //smkim
         parent.download.location.href = '../fileattach/htmldown.aspx?filename=' + escape(gFileNameArray[parseInt(SingleDownLoadString)]) + "&location=" + escape(gFileArray[parseInt(SingleDownLoadString)]);
-    } else {
-        parent.download.location.href = '/CoviWeb/SiteReference/Common/covi_fileSingledown.aspx?filepath=' + toUTF8(gFileArray[parseInt(SingleDownLoadString)]); //usercode='+parent.getInfo("usid")+"&
     }
 }
 
@@ -1399,6 +1430,7 @@ function getSaveTerm(szCode) {
         case "5": szName = m_oFormMenu.gLabel_year_5; break; 		//"4년"
         case "7": szName = m_oFormMenu.gLabel_year_7; break; 		//"5년"
         case "10": szName = m_oFormMenu.gLabel_year_10; break; 	//"10년"
+		case "15": szName = m_oFormMenu.gLabel_year_15; break; 	//"10년"
         case "99": szName = m_oFormMenu.gLabel_permanence; break; //"영구"
     }
     return szName;
@@ -1455,19 +1487,29 @@ function setSaveTerm() {
     makeCBOobject("5", GetSaveTermLang("5"), document.getElementsByName("SAVE_TERM")[0]); 			//"5년"
     makeCBOobject("7", GetSaveTermLang("7"), document.getElementsByName("SAVE_TERM")[0]); 			//"7년"
     makeCBOobject("10", GetSaveTermLang("10"), document.getElementsByName("SAVE_TERM")[0]); 		//"10년"
+	makeCBOobject("15", GetSaveTermLang("15"), document.getElementsByName("SAVE_TERM")[0]); 		//"15년"
     makeCBOobject("99", GetSaveTermLang("99"), document.getElementsByName("SAVE_TERM")[0]);         //"영구"
 
     if (getInfo("fmpf") == "WF_SLIP") {
         setDefaultCBOobject(10, document.getElementsByName("SAVE_TERM")[0]);
-    }
-    else if (getInfo("fmpf") == "WF_FORM_ISU_PH_COM034") {
+    }else if (getInfo("fmpf") == "WF_FORM_ISU_PH_COM034") {
         setDefaultCBOobject(99, document.getElementsByName("SAVE_TERM")[0]);
-    }
+    }else if (getInfo("fmpf") == "WF_FORM_COMMON_VACATION" && getInfo("etid") == "ISU_CT") {
 	//건설 휴가신청서(기간) 보존년한 초기값 설정 요청 2018.01.10 PSW
-	else if (getInfo("fmpf") == "WF_FORM_COMMON_VACATION" && getInfo("etid") == "ISU_CT") {
-        setDefaultCBOobject(5, document.getElementsByName("SAVE_TERM")[0]);
-    }
-	else
+		setDefaultCBOobject(5, document.getElementsByName("SAVE_TERM")[0]);
+    }else if (getInfo("fmpf") == "WF_FORM_ISU_CH_DRF0005"){
+	//화학 구매결의서 보존년한 초기값 설정 요청 2019.03.05 PSW
+		setDefaultCBOobject(5, document.getElementsByName("SAVE_TERM")[0]);
+	//}else if (getInfo("fmpf") == "WF_FORM_ISU_ACCOUNTING_005" || getInfo("fmpf") == "WF_FORM_ISU_ACCOUNTING_005"){
+	}else if (getInfo("fmpf").indexOf("WF_FORM_ISU_ACCOUNTING_") > -1){
+		//화학 내부회계용 연동양식 보존년한 초기값 변경 요청 2020.01.03 PSW
+		//화학 [SAP 거래처 및 사용자 등록 신청서] 보존년한 5년으로 세팅 2020.02.05 PSW
+		if(getInfo("fmpf") == "WF_FORM_ISU_ACCOUNTING_017"){
+			setDefaultCBOobject(5, document.getElementsByName("SAVE_TERM")[0]);
+		}else{
+			setDefaultCBOobject(10, document.getElementsByName("SAVE_TERM")[0]);
+		}
+	}else
     {
         setDefaultCBOobject(getInfo("SAVE_TERM"), document.getElementsByName("SAVE_TERM")[0]);
     }
@@ -1744,6 +1786,7 @@ function displayApvList(oApvList) {//debugger; //1212
             if ((bgetCommentView && elmComment.length > 0 && String(window.location).indexOf("_read.htm") > -1) || (bgetCommentView && elmComment.length > 0 && m_oFormMenu.sMody == true)) {
                 if (m_print == false) {
                     getCommentView(elmComment);  //의견 Display
+		    // m_print = true;
                 }
             }
 
@@ -1871,14 +1914,28 @@ function displayApvList(oApvList) {//debugger; //1212
                         Apvlines += "</td></tr>";
                         break; //"후열"
                     default:
-                        Apvlines += "<tr><td width='150px' align='center'>" + m_oFormMenu.getLngLabel(elm.getAttribute("ouname"), false) + "</td>"; //이준희(2007-07-06): 문서창 상단에서 협조자의 의견이 잘리지 않도록 수정함.
-                        //Apvlines += "<td>" + sTitle + "</td>"; //이준희(2007-07-06): 문서창 상단에서 협조자의 의견이 잘리지 않도록 수정함.
-                        Apvlines += "<td width='90px' align='center'>" + sName + "</td>"; //이준희(2007-07-06): 문서창 상단에서 협조자의 의견이 잘리지 않도록 수정함.
-                        //Apvlines += "<td align='center'>" + ((strDate == "") ? "&nbsp;" : formatDate(strDate, "T") + " " + interpretResult(elmTaskInfo.getAttribute("result"))) + "</td>";
-                        Apvlines += "<td align='center'>" + ((strDate == "") ? "&nbsp;" : formatDate(strDate, "D") + " " + sActionState) + "</td>";  //HIW
-                        Apvlines += "<td width='250px'>";
-                        Apvlines += (assistcmt == null) ? "&nbsp;" : assistcmt.text.replace(/\n/g, "<br />");
-                        Apvlines += "</td></tr>";
+					
+					
+						if (getInfo("fmfn") == "WF_FORM_ISU_ALL_050") {
+                            Apvlines += "<tbody id='tb1'>";
+                            Apvlines += "<tr><td width='150px' align='center'>" + m_oFormMenu.getLngLabel(elm.getAttribute("ouname"), false) + "</td>"; //이준희(2007-07-06): 문서창 상단에서 협조자의 의견이 잘리지 않도록 수정함.
+                            Apvlines += "<td width='90px' align='center'>" + sName + "</td>"; //이준희(2007-07-06): 문서창 상단에서 협조자의 의견이 잘리지 않도록 수정함.
+                            Apvlines += "<td align='center'>" + ((strDate == "") ? "&nbsp;" : formatDate(strDate, "D") + " " + sActionState) + "</td>";  //HIW
+                            Apvlines += "<td width='250px'>";
+                            Apvlines += (assistcmt == null) ? "&nbsp;" : assistcmt.text.replace(/\n/g, "<br />");
+                            Apvlines += "</td></tr>";
+                            Apvlines += "</tbody>";
+
+                        }else{ 
+							Apvlines += "<tr><td width='150px' align='center'>" + m_oFormMenu.getLngLabel(elm.getAttribute("ouname"), false) + "</td>"; //이준희(2007-07-06): 문서창 상단에서 협조자의 의견이 잘리지 않도록 수정함.
+							//Apvlines += "<td>" + sTitle + "</td>"; //이준희(2007-07-06): 문서창 상단에서 협조자의 의견이 잘리지 않도록 수정함.
+							Apvlines += "<td width='90px' align='center'>" + sName + "</td>"; //이준희(2007-07-06): 문서창 상단에서 협조자의 의견이 잘리지 않도록 수정함.
+							//Apvlines += "<td align='center'>" + ((strDate == "") ? "&nbsp;" : formatDate(strDate, "T") + " " + interpretResult(elmTaskInfo.getAttribute("result"))) + "</td>";
+							Apvlines += "<td align='center'>" + ((strDate == "") ? "&nbsp;" : formatDate(strDate, "D") + " " + sActionState) + "</td>";  //HIW
+							Apvlines += "<td width='250px'>";
+							Apvlines += (assistcmt == null) ? "&nbsp;" : assistcmt.text.replace(/\n/g, "<br />");
+							Apvlines += "</td></tr>";
+						}
                         break;
                 }
             }
@@ -1993,9 +2050,22 @@ function displayApvList(oApvList) {//debugger; //1212
                 // }
             }
             
-            Apvlines = "<table class='table_7' summary='합의' cellpadding='0' cellspacing='0'>" + Apvlines + "</table>";
-            document.getElementById("AssistLine").innerHTML = Apvlines; document.getElementById("AssistLine").style.display = "";
+            Apvlines = "<table id='gcTable' class='table_7' summary='합의' cellpadding='0' cellspacing='0'>" + Apvlines + "</table>";
+            document.getElementById("AssistLine").innerHTML = Apvlines; 
+			document.getElementById("AssistLine").style.display = "";
             
+			
+            /*
+                병렬개인합의 조직도 정렬 2019-08-27 PSW
+                190925_김선재 : `회사표준신청서_병렬합의`에도 합의자 리스트 소팅이 적용되도록
+            */
+            if (getInfo("fmpf") == "WF_FORM_ISU_ALL_050" 
+             || getInfo("fmpf") == "WF_FORM_ISU_CH_COM0064"
+             || getInfo("fmpf") == "WF_FORM_ISU_CH_COM0064_TEST") {
+                sortList();
+			}
+			
+			
             //2014-09-15 hyh 수정 2016jkh 수정 추가
             //document.getElementById("AssistLine").style.display = "";
             if ($(elm).parent().parent().attr("divisiontype") == "send" && sRecDeptUserYN == "Y") {
@@ -2037,6 +2107,30 @@ function displayApvList(oApvList) {//debugger; //1212
 
     
 
+}
+
+//병렬개인합의 조직도 재정렬 함수
+function sortList() {
+   
+    var rows = $('#gcTable tbody  tr').get();
+    //alert(rows);
+    rows.sort(function (a, b) {
+        var A = $(a).children('td').eq(0).text().toUpperCase();
+        var B = $(b).children('td').eq(0).text().toUpperCase();
+        
+		if (A < B) {
+            return -1;
+        }
+        if (A > B) {
+            return 1;
+        }
+
+        return 0;
+    });
+    $.each(rows, function (index, row) {
+        //$('#gcTable').children('tbody').append(row);
+        $('#gcTable').append(row);
+    });
 }
 
 
@@ -2297,6 +2391,7 @@ function InputDocLinks(szValue) {
 function G_displaySpnDocLinkInfo() {//수정본
     var szdoclinksinfo = "";
     var szdoclinks = "";
+
     if (getInfo("mode") == "DRAFT" || getInfo("mode") == "TEMPSAVE" || (getInfo("loct") == "APPROVAL" && getInfo("mode") == "SUBAPPROVAL") || (getInfo("loct") == "APPROVAL" && getInfo("mode") == "SUBREDRAFT") || (getInfo("loct") == "APPROVAL" && getInfo("mode") == "PCONSULT") || parent.g_szEditable == true) {
         try { szdoclinks = document.getElementsByName("DOCLINKS")[0].value; } catch (e) { }
     } else {
@@ -2309,9 +2404,9 @@ function G_displaySpnDocLinkInfo() {//수정본
                 szdoclinks = m_objXML.documentElement.selectSingleNode("DOCLINKS").text;
             }
             try { document.getElementsByName("DOCLINKS")[0].value = szdoclinks; } catch (e) { }
-            //szdoclinks = m_objXML.documentElement.selectSingleNode("DOCLINKS").text;
         }
     }
+    
     //DOCLINKS 값에 undefined 가 들어 가서 오류남. 원인 찾기전 임시로 작성
     szdoclinks = szdoclinks.replace("undefined^", "");
     szdoclinks = szdoclinks.replace("undefined", "");
@@ -2374,8 +2469,9 @@ function G_displaySpnDocLinkInfo() {//수정본
             }
         }
     }
-    document.getElementById("DocLinkInfo").innerHTML = szdoclinksinfo;
+	document.getElementById("DocLinkInfo").innerHTML = szdoclinksinfo == "" ? "&nbsp;" : szdoclinksinfo;
 }
+
 //연결 문서 링크 파트
 //문서 관리로 연결 하기 위해 넣어 두었음
 function fnDocsView(productid, versionid, folderid) {
@@ -2410,6 +2506,7 @@ function deletedocitem() {
         for (var j = chkDoc.length - 1; j >= 0; j--) {
             if (chkDoc[j].checked) {
                 tmp = chkDoc[j].value;
+
                 for (var i = adoclinks.length - 1; i >= 0; i--) {
                     if (adoclinks[i] != null && adoclinks[i].indexOf(tmp) > -1) {
                         adoclinks[i] = null;
@@ -2428,7 +2525,7 @@ function deletedocitem() {
         }
     }
     document.getElementsByName("DOCLINKS")[0].value = szdoclinksinfo;
-    G_displaySpnDocLinkInfo();
+	G_displaySpnDocLinkInfo()
 }
 function adddocitem(szAddDocLinks) {
     var adoclinks = document.getElementsByName("DOCLINKS")[0].value.split("^");
@@ -4136,7 +4233,7 @@ function getCommentView(elmComment) {
                     //debugger;
                     gCommentCnt++;  //보여줄 코멘트 갯수 (2012-11-23 HIW)
 
-                    assistcmt = $(elm).text().replace(/\n/g, "<br>");
+                    assistcmt = $(elm).text().replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/\n/g, "<br>");
                     sCommentHtml += '<td align="left" style="font-size: 9pt;font-family: Arial, Dotum; padding-left: 10px;padding-top: 3px;padding-bottom: 3px;padding-right: 10px;"> ';
 
                     //20130911 hyh 수정
@@ -5594,7 +5691,7 @@ function setCommonLb() {
 
 function setvalue(key , val)
 {
-	$('input[name="' + key + '"]').attr('value' , val);
+	$('input[name="' + key + '"]').attr('value' , val).attr('readonly', 'readonly');
 }
 
 
@@ -5604,14 +5701,19 @@ var D5edit_load = false;
 function dext_editor_loaded_event(DEXT5Editor) {
     //alert("에디터생성완료 : 1");
     D5edit_load = true;
-   
+
    //SetSaveTermTbxSync();
 }
 function dext_editor_set_complete_event() {
     if (D5edit_load) {
-       // var _css = "table { table-layout: fixed; }";
-	var _css = "";
+		var _css = "body { margin: 0px; }";
         DEXT5.setUserCssText(_css, "dext5editor1");
+		
+		//전자전표시스템(ea3.pearbranch.com/slip/console/system)의 전표관리>결재요청(개별/그룹) 페이지에서 "결재요청" 진행시 크롬의 경우 에디터에 표시가 안되어 아래와 같이 처리
+		if(getInfo("fmpf") == "WF_SLIP" && navigator.userAgent.toLowerCase().indexOf("chrome") > 0 && DEXT5.getBodyTextValue() == '') {
+			var contents = getInfo("fmbd").replace("euc-kr", "utf-8");
+			DEXT5.setHtmlContentsEw(contents, "dext5editor1");
+		}
     }
 }
 

@@ -63,7 +63,8 @@ public partial class COVIFlowNet_FileAttach_fileupload : PageBase
 		strUserDeptName = Session["user_dept_name_lng"].ToString().Replace(";","^");
 
 
-        if (strINIListFiles != "")
+        //if (strINIListFiles != "")
+	if (!string.IsNullOrEmpty(strINIListFiles))
         {
             string[] strtemp;
             strtemp = strINIListFiles.Split(';');

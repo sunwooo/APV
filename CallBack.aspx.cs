@@ -42,6 +42,11 @@ public partial class Approval_CallBack : PageBase
 
                         INPUT.add("@ENT_CODE", Request["ENT_CODE"]);
                         INPUT.add("@SABUN", Request["SABUN"]);
+                        if(Request["GNT_GUBUN"] == null || Request["GNT_GUBUN"] == "") {
+                            INPUT.add("@GNT_GUBUN", "VACA");
+                        }else {
+                            INPUT.add("@GNT_GUBUN", Request["GNT_GUBUN"]);
+                        }
 
                         using (SqlDacBase SqlDbAgent = new SqlDacBase())
                         {

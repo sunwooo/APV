@@ -60,6 +60,13 @@ public partial class Approval_ListDeptItemsExcel : WebPartsPageBase
 
             strListType = Request.QueryString["ListType"];
             strListName = Request.QueryString["doclistname"];
+			
+			 //20190401 추가
+		     if(strListType=="RC" || strListType=="A" || strListType=="S")
+			 {
+			   strdept = Request.QueryString["DeptCode"];
+			 }
+			 //20190401 추가 끝
 
             //검색일
             start_date = Request.QueryString["start_date"];

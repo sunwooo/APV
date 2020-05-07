@@ -88,6 +88,19 @@ public partial class COVIFlowNet_Forms_Form : PageBase //PageBase
 			culturecode = Session["user_language"].ToString();	//"ko-KR"; "en-US"; "ja-JP";
 			strLangID = Session["user_language"].ToString();	//"ko-KR"; "en-US"; "ja-JP";
 		}
+
+                //2020-04-10 후난 중국어로 문서관리 이관을 위하여 추가함
+                if (Request.QueryString["edms"] != null)
+                {
+                    if (Request.QueryString["edms"].ToString() == "Y")
+                    {
+                        if (Session["user_ent_code"].ToString() == "ISU_PH")
+                        {
+                            culturecode = "zh-CN";  //"ko -KR"; "en-US"; "ja-JP";
+                            strLangID = "zh-CN";    //"ko -KR"; "en-US"; "ja-JP";
+                        }
+                    }
+                }
 		Page.UICulture = culturecode;
 		Page.Culture = culturecode;
 		strLangIndex = COVIFlowCom.Common.getLngIdx(culturecode);
@@ -594,6 +607,39 @@ public partial class COVIFlowNet_Forms_Form : PageBase //PageBase
 				pErrorMessage(sMessage);
 				Response.End();
 			}
+
+            try
+            {
+                //2020-04-10 후난 중국어로 문서관리 이관을 위하여 추가함
+                if (strApvSteps != "")
+                {
+                    if (Request.QueryString["edms"] != null)
+                    {
+                        if (Request.QueryString["edms"].ToString() == "Y")
+                        {
+                            XmlDocument xmlApvSteps = new XmlDocument();
+                            xmlApvSteps.LoadXml(strApvSteps);
+
+                            string initiatoroucode = xmlApvSteps.GetElementsByTagName("steps")[0].Attributes["initiatoroucode"].Value;
+
+                            if (initiatoroucode.IndexOf("ISU_PH") > -1)
+                            {
+                                sMenuURL += "?HUNAN=Y";
+                                culturecode = "zh-CN";  //"ko -KR"; "en-US"; "ja-JP";
+                                strLangID = "zh-CN";    //"ko -KR"; "en-US"; "ja-JP";
+
+                                Page.UICulture = culturecode;
+                                Page.Culture = culturecode;
+                                strLangIndex = COVIFlowCom.Common.getLngIdx(culturecode);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("문서관리 중국어로 변환 중 오류", ex);
+            }
 		}
         catch (System.Threading.ThreadAbortException exth) { }    //2009.4 jju
         catch (System.Exception ex)
@@ -1454,6 +1500,10 @@ public partial class COVIFlowNet_Forms_Form : PageBase //PageBase
 			sScript.Append("oDic.Add('fmfn','").Append(Request.QueryString["fmfn"]).Append("');\r\n");  //'Form File Name
 			sScript.Append("oDic.Add('piid2','").Append(Request.QueryString["piid"]).Append("');\r\n");
             sScript.Append("oDic.Add('gbnno','").Append(Request["gbnno"]).Append("');\r\n"); //20151230 전자증빙 id 추가 
+			sScript.Append("oDic.Add('docType','").Append(Request["docType"]).Append("');\r\n"); //20190125 전자증빙 docType추가 	
+			//2020-02-12 PSW 추가
+			sScript.Append("oDic.Add('objectID','").Append(Request["objectID"]).Append("');\r\n");     //objectID	
+			sScript.Append("oDic.Add('sysManager','").Append(Request["sysManager"]).Append("');\r\n"); //sysManager	
 
 
             #region DSCR 보관 값들에 대한 조회 처리 추가 2010.12

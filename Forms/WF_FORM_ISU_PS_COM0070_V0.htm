@@ -264,19 +264,16 @@
         //본문 내용
         if (getInfo("editortype") == "2" || (getInfo("editortype") == "4" && window.ActiveXObject)) {//2.TagFree, 3.XFree, 4.TagFree/XFree
         } else if (getInfo("editortype") == "6" || (getInfo("editortype") == "7" && !window.ActiveXObject)) {// 5.Activesquare, 6.CrossEditor, 7.ActivesquareDefault/CrossEditor -
+        } else if (getInfo("editortype") == "8") {  //dext5 add
+            dextgetContent();
         } else {
             if (getInfo("BODY_CONTEXT") != undefined) {
                 setBodyContext(getInfo("BODY_CONTEXT"));
-            }else if (getInfo("editortype") == "8") {  //dext5 add
-        dextgetContent();
-    } else {
-        if (getInfo("BODY_CONTEXT") != undefined) {
-            setBodyContext(getInfo("BODY_CONTEXT"));
-        } else {
-            setBodyContext(getInfo("fmbd").replace("euc-kr","utf-8"));
+            } else {
+                setBodyContext(getInfo("fmbd").replace("euc-kr", "utf-8"));
+            }
         }
     }
-}
     function getBodyContext() {
         if (getInfo("editortype") == "3" || (getInfo("editortype") == "4" && !window.ActiveXObject)) {//2.TagFree, 3.XFree, 4.TagFree/XFree
             document.getElementById("dhtml_body").value = tbContentElement.GetHtmlValue();

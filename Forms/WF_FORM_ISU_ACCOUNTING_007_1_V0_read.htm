@@ -1,0 +1,626 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<title></title>			
+	<link rel="stylesheet" href="/GWImages/common/css/approval_form.css" type="text/css" />
+	<link rel="stylesheet" href="/GWImages/common/TagFree/tagfree.css" type="text/css" />
+    <!--필수 양식파일에 쓰이는 js 파일-->
+	<script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Config.js" ></script>
+    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/EmbedObject.js" ></script>
+    <script type="text/javascript" language="javascript" src="/CoviWeb/SiteReference/js/Utility.js" ></script>
+    <script type="text/javascript" language="javascript" src="../../Common/script/COVIFlowNet/openWindow.js" ></script>		
+	<script type="text/javascript" language="javascript" src="../../Common/script/progress.js" ></script>
+	<script type="text/javascript" language="javascript" src="../../common/script/NameControl.js"></script>
+	<script type="text/javascript" language="javascript" src="../../common/script/jquery-1.6.1.min.js"></script>
+	<script type="text/javascript" language="javascript" src="formedit.js" ></script>
+</head>
+<body topmargin="0" leftmargin="0" style="OVERFLOW: auto; overflow-x: hidden;" >
+	<!-- COMMON FIELDS -->
+	<input type="hidden" id="dField" name="INITIATOR_NAME" datafld="INITIATOR_NAME">
+	<input type="hidden" id="dField" name="INITIATOR_ID" datafld="INITIATOR_ID">
+	<input type="hidden" id="dField" name="INITIATOR_OU_NAME" datafld="INITIATOR_OU_NAME">
+	<input type="hidden" id="dField" name="INITIATOR_OU_ID" datafld="INITIATOR_OU_ID">
+	<input type="hidden" id="cField" name="LAST_MODIFIER_ID">
+	<input type="hidden" id="cField" name="attach">
+	<input type="hidden" id="cField" name="filelocation" datafld="fmfl">
+	<input type="hidden" id="cField" name="ATTACH_FILE" value="">
+	<input type="hidden" id="dField" name="ATTACH_FILE_INFO" value="" datafld="ATTACH_FILE_INFO">
+	<input type="hidden" id="dField" name="INITIATOR_INFO" value="" datafld="INITIATOR_INFO">
+	<input type="hidden" id="dField" name="APPLIED" datafld="APPLIED">
+	<input type="hidden" id="dField" name="ISPUBLIC" datafld="ISPUBLIC">
+	<input type="hidden" id="dField" name="APPLIED_TERM" datafld="APPLIED_TERM">
+	<input type="hidden" id="dField" name="RECEIVE_NO" datafld="RECEIVE_NO">
+	<input type="hidden" id="dField" name="RECEIVE_NAMES" datafld="RECEIVE_NAMES">
+	<input type="hidden" id="dField" name="RECEIPT_LIST" datafld="RECEIPT_LIST">
+	<input type="hidden" id="dField" name="DOC_LEVEL" datafld="DOC_LEVEL">
+	<input type="hidden" id="dField" name="DOC_CLASS_ID" datafld="DOC_CLASS_ID">
+	<input type="hidden" id="dField" name="DOC_CLASS_NAME" datafld="DOC_CLASS_NAME">
+	<input type="hidden" id="dField" name="SAVE_TERM" datafld="SAVE_TERM">
+	<input type="hidden" id="dField" name="SUBJECT" datafld="SUBJECT">
+	<input type="hidden" id="dField" name="DOC_NO" dataFld="DOC_NO">
+	<input type="hidden" id="dField" name="DOC_OU_NAME" datafld="DOC_OU_NAME">
+	<input type="hidden" id="dField" name="ENT_CODE" datafld="ENT_CODE">
+	<input type="hidden" id="dField" name="ENT_NAME" datafld="ENT_NAME">
+
+	<textarea id="dField" name="DOC_SUMMARY" datafld="DOC_SUMMARY" style="display: none"></textarea>
+	<textarea id="dhtml_body" style="display: none"></textarea>
+	<textarea style="display: none" id="cField" name="xsl"></textarea>
+	<!-- 문서link -->
+    <textarea id="dField" name="DOCLINKS" style="display:none"  dataFld="DOCLINKS"></textarea>
+    <input type="hidden" id="mField" name="WORKREQUEST_ID" />
+    <!-- 반송문서 추가 시작 2007.11-->
+    <textarea id="mField" name="REJECTDOCLINKS" style="display:none"></textarea>
+    <!-- 반송문서 추가 끝 2007.11-->
+    <!-- process 메뉴얼 추가 2008.01 -->
+    <textarea id="mField" name="PMLINKS" style="display:none"></textarea>
+    <!-- process 메뉴얼 추가 2008.01 -->
+	<!-- 양식추가정보 -->
+	<!-- END -->
+
+	<div id="bodytable">
+		<!-- header start -->
+		<div class="approval_form">
+        <div class="draft_tit"><h4><span id="headname"></span><a href="#"><span class="drop_menu"></span></a></h4></div>
+        <div class="draft_page">
+        
+            <!--######## 양식상단부분 공통 시작 #################################-->
+            <table class="table_3" summary="문서분류" cellpadding="0" cellspacing="0">
+                <tr style="display:none;">
+                    <th>보안등급</th>
+                    <td id="tField" name="DOC_LEVEL" ></td>	
+                    <th>문서번호</th>
+                    <td id="tField" name="DOC_NO" dataFld="DOC_NO" width="100px" style="height:25px; width:35%;"></td>	
+                </tr>
+                <tr>
+                    <th>문서분류</th>
+                    <td id="tField" name="DOC_CLASS_NAME" dataFld="DOC_CLASS_NAME" style="height:25px; width:35%;"></td>	
+                    <th>보존년한</th>
+                    <td id="tField" name="SAVE_TERM"  colspan="3"></td>	
+                </tr>
+            </table>	
+            <!-- header end -->
+            <!-- bodycontext start -->		
+            <table class="table_3" summary="제목" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</th>
+                    <td colspan="5" id="tField" name="SUBJECT"  datafld="SUBJECT" align="left"></td>	
+                </tr>
+                <tr>
+                    <th>신청구분</th>
+                    <td style="width:70px;" id="OPT_Guboon" align="center"></td>
+                    <th style="width:55px;">발&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신&nbsp;</th>
+                    <td id="txtSender"></td>	
+                    <th style="width:55px;">수&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신</th>
+                    <td id="txtReceiver"></td>	
+                </tr>
+			
+                            
+            </table>
+            <!--######## 양식상단부분 공통 종료 #################################-->
+        
+            <!--######## 본문부분 시작 #########################################-->
+            <div id="divBodyContent">  <!--추가(인쇄용) HIW-->
+            <table border="0" width="100%">
+                <tr>
+                    <td align="center" style="padding-top:15px; padding-bottom:15px;">다음과 같이 출장 계획서를 제출하오니, 출장을 승인하여 주시기 바랍니다.</td>
+                </tr>
+            </table>
+            <table class="table_html" id="tblBodyContent" summary="내용" cellpadding="0" cellspacing="0">
+            <!--
+                <tr>
+                    <td rowspan="5" align="center" style="width:40px; font-weight:bold; background-color:#F6F6F6">출<br/>장<br/>부<br/>서<br/>작<br/>성<br/>란</td>
+                    <td colspan="4" valign="top">
+                        <table id="tblDataRowPerson" cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <tr>
+                                <td align="center" style="height:30px;width:60px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">구분</td>
+                            <td align="center" style="height:30px;width:120px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">사번</td>
+                            <td align="center" style="height:30px;width:93px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">성명</td>
+                            <td align="center" style="height:30px;width:80px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">직위</td>
+                            <td align="center" style="height:30px;width:120px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">소속</td>
+                            <td align="center" style="height:30px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">예산사용부서</td>              
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>                
+                    <td align="center" style="height:30px;width:100px; font-weight:bold; background-color:#F6F6F6">출장지</td>
+                    <td align="center" style="padding-left:5px;"><span id="txtPlace"></span></td>
+                    <td align="center" style="height:30px;width:100px; font-weight:bold; background-color:#F6F6F6">교통수단</td>
+                    <td align="center" style="padding-left:5px;"><span id="txtWay"></span></td>              
+                </tr>
+                <tr>                
+                    <td align="center" style="height:30px; font-weight:bold; background-color:#F6F6F6">출장(예정)기간</td>
+                    <td colspan="3" align="left" style="padding-left:10px;">
+                        <span id="hdn_dpApprFormDTStart1"></span> ~ <span id="hdn_dpApprFormDTEnd1"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <b>(<span id="txtNights"></span>박 <span id="txtDays"></span>일)</b>
+                    </td>                         
+                </tr>
+                <tr>                
+                    <td align="center" style="height:30px; font-weight:bold; background-color:#F6F6F6">출장목적</td>
+                    <td colspan="3" align="left" style="padding-left:10px;"><span id="txtPurpose"></span></td>                          
+                </tr>
+                <tr>                
+                    <td align="center" style="height:30px; font-weight:bold; background-color:#F6F6F6">비 고</td>
+                    <td colspan="3" align="left" style="padding-left:10px;"><span id="txtBigo1"></span></td>                          
+                </tr>    
+
+                <tr>
+                    <td colspan="5" style="height:10px; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;"></td>
+                </tr>
+                -->
+            </table>
+            <table class="table_html" id="mgmtDepart_main2" cellpadding="0" cellspacing="0">
+            </table> 
+
+
+            <table class="table_html" id="tblBodyContent2" summary="내용" cellpadding="0" cellspacing="0">   
+                <tr>
+                    <td rowspan="2" align="center" style="width:7%; font-weight:bold;">주<br/>관<br/>부<br/>서<br/>작<br/>성<br/>란</td>
+                    <td colspan="4" valign="top">
+                        <table id="tblDataRowCost" cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <tr>
+                                <td align="center" style="height:30px; width:13%; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">구분</td>
+                                <td align="center" style="width:19%;font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">일비<br />(식비포함)</td>
+                                <td align="center" style="width:19%;font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">숙박비</td>
+                                <td align="center" style="width:19%;font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">교통비</td>
+                                <td align="center" style="width:19%;font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 0px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">소계</td>       
+                            </tr>
+                        </table>
+                    </td>             
+                </tr>
+                <tr>                
+                    <td align="center" style="height:30px;width:97px;  font-weight:bold; background-color:#F6F6F6">비고</td>
+                    <td colspan="4" style="height:70px;"><span id="txtBigo2"></span></td>
+                </tr>
+
+            </table>
+
+
+            <input type="hidden" id="hdnDataRowCnt" name="hdnDataRowCnt" /> <!--데이터행갯수-->
+            </div>
+            <!--######## 본문부분 종료 ##########################################-->
+		
+		    <!--######## 양식하단부분 공통 시작 #################################-->
+
+            <div id="divApprovalLine"> <!--추가(인쇄용) HIW-->
+                <table class="table_5" summary="참조" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th>첨부파일</th>
+                        <td id="AttFileInfo" align="left"></td>
+                    </tr>
+                    <tr>
+                        <th>연결문서</th>
+                        <td id="DocLinkInfo" align="left"></td>
+                    </tr>
+                    <tr style="display:none;">
+                        <th>원 문 서</th>
+                        <td id="RejectDocLinkInfo" align="left">-</td>
+                    </tr>
+                    <tr>
+                        <th>참조</th>
+                        <td  id="CCLine" align="left">
+                            <div id="SendCC"></div>
+                            <div id="RecCC"></div>&nbsp;
+                        </td>
+                    </tr>
+                </table>
+        
+                <!-- 결재선 정보 시작-->
+                <table width="100%" cellpadding="0" cellspacing="0">
+                <!-- 일반결재/합의 -->
+                    <tr>
+                        <td style="height:7px;"></td>
+                    </tr>
+                    <tr>
+                        <td id="AppLine" width="100%">
+                            <table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" bordercolordark="white" bordercolorlight="gray">
+                                <tr>
+                                <!-- 발신처 결재란 보이는 부분(왼쪽) -->
+                                    <td id="LApvLine" align="left" width="100%"></td>
+                                </tr>
+                                <tr>
+                                <!-- 수신처 결재란 보이는부분 (오른쪽)-->
+                                    <td id="RApvLine" align="left" width="100%"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- 협조자 -->
+                    <tr>
+                        <td id="AssistLine" width="100%" style="display:none;"></td>
+                    </tr>
+                    <!--참조자 -- 첨부파일 영역으로 옮김 -->
+                    <!--수신자 -->
+                    <tr>
+                        <td id="RRLine" width="100%" style="display:none;"></td>
+                    </tr>		
+                </table>
+                <!-- 결재선 정보 종료-->
+
+                <!-- 의견 시작 -->
+                <table border="0" cellpadding="0" cellspacing="0" align="center" width="740"><tr><td height="2"></td></tr></table>
+                <table class="table_html2" id ="tbCommentView" border="0" cellpadding="0" cellspacing="0" align="center">
+                    <tr>
+	                    <td align="center" id="tdCommentView"  width="100%" style="display:none;">				
+	                    </td>
+                    </tr>
+                </table>
+                <!-- 의견 종료 -->
+            </div>
+        
+            <!--문서설명 시작-->
+            <div id="divforminfo" style="display:none">
+            <table class="table_6" summary="원문서" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th>문서설명</th>
+                    <td id="tdforminfo"></td>
+                </tr>
+            </table>
+            </div>
+            <!--문서설명 종료-->
+        
+            <!--######## 양식하단부분 공통 종료 #################################-->
+
+		</div>
+		
+        </div>
+    </div>
+
+
+<script language="JavaScript" type="text/javascript">
+
+    window.onload = initOnload;
+    function initOnload() {
+        initialize();
+
+        //데이터반복부 그리기 (HIW)
+        DrawDataRow();
+
+        //출장신청구분값에따른 문서타이틀 셋팅 //HIW
+        SetDocTitleSet();
+    }
+
+    function initialize() {
+        if (window.parent.document.readyState == "complete") {
+            window.parent.document.onreadystatechange = event_noop;
+            initForm();
+            initApvList();
+        } else {
+            window.setTimeout(initialize, 500);
+        }
+    }
+
+    function initForm() {
+        initFields();
+        G_displaySpnAttInfo(false);
+    }
+
+    function frmclose() {
+        window.close();
+    }
+    function initFields(szBody) {
+        setFields((!window.ActiveXObject) ? document.getElementById("dField") : dField); //editable field
+        setFields((!window.ActiveXObject) ? document.getElementById("cField") : cField); //readonly field
+        settFields((!window.ActiveXObject) ? document.getElementById("tField") : tField);
+        //checkSecure();		//보안문서체크
+
+        document.getElementsByName("SUBJECT")[0].value = getInfo("SUBJECT");
+        document.getElementById("headname").innerHTML = "<u>" + getInfo("fmnm") + "</u>";
+
+        if (getInfo("mode") == "DRAFT" || getInfo("mode") == "TEMPSAVE") {
+            document.getElementsByName("INITIATOR_INFO")[0].value = getInfo("usdn");
+            document.getElementsByName("APPLIED").value = formatDate(getInfo("svdt"), "D");
+        } else {
+        }
+
+        //본문 내용 
+        if (getInfo("BODY_CONTEXT") != undefined) {
+            //본문 입력 함수 호출		
+            //tbContentElement.innerHTML = getInfo("BODY_CONTEXT");
+            //tbContentElement.HtmlValue=getInfo("BODY_CONTEXT"); //Editor를 사용하는 양식
+            setBodyContext(getInfo("BODY_CONTEXT")); //Editor를 사용하지 않는 양식
+        } else {
+            if (getInfo("fmbd") != "undefined") {
+                //본문 입력 함수 호출
+                setBodyContext(getInfo("fmbd"));  //Editor를 사용하지 않는 양식
+            }
+        }
+
+        //	//연결양식 버튼 활성화
+        //	if(getInfo("mode") == "COMPLETE" && getInfo("loct") == "COMPLETE") {
+        //		parent.menu.form_attach.innerHTML = "<button class=\"btn_bg\" id=\"btOrder\" onclick=\"Open_Form('/COVINet/CoviFlowNet/forms/form.aspx?fmid={8340F2AE0162476C9F3CCB537A929913}&fmnm=%ea%b8%b0%ec%95%88&fmpf=WF_DRAFT&scid={BEBC436281C5463D96C33CA87E3D53A6}&mode=DRAFT&fmrv=0&fmfn=')\">내용 첨부 기안</button>&nbsp;" + 
+        //											"<button class=\"btn_bg\" id=\"btOrder\" onclick=\"Open_Form('/COVINet/CoviFlowNet/forms/form.aspx?fmid={F79F0F28C2664A00A63A8CE999D2BCD5}&fmnm=%ec%97%85%eb%ac%b4%ec%97%b0%eb%9d%bd&fmpf=WF_COORDINATION&scid={F3342C44E3B14DA0817B9474746034AA}&mode=DRAFT&fmrv=0&fmfn=')\">내용 첨부 업무연락</button>";
+        //	}
+
+    }
+
+    function getBodyContext() {
+        //return makeNode("BODY_CONTEXT",dhtml_body.value,null,false);
+        return "";
+    }
+
+
+    //  dField
+    function setFields(Fields) {
+        if (!window.ActiveXObject) {
+            var szId = Fields.id;
+            var unFiltered = document.getElementsByTagName('*');
+            for (i = 0; i < unFiltered.length; i++) {
+                if (unFiltered[i].getAttribute('id') == szId) {
+                    var fld = unFiltered[i];
+                    if (fld.getAttribute("dataFld") != null) { (getInfo(fld.getAttribute("name")) != undefined) ? fld.value = getInfo(fld.getAttribute("name")) : (getInfo(fld.getAttribute("dataFld")) != undefined) ? fld.value = getInfo(fld.getAttribute("dataFld")) : fld.value = ''; }
+                    if (fld.getAttribute("name") != null) {
+                        if (fld.getAttribute("name") == 'POSITION' && getInfo(fld.getAttribute("name")) == "") {
+                            fld.value = getInfo(fld.getAttribute("dataFld"));
+                        }
+                    }
+                }
+            }
+        } else {
+            for (var i = 0; i < Fields.length; i++) {
+                var fld = Fields[i];
+
+                if (fld.dataFld != "") { (getInfo(fld.name) != undefined) ? fld.value = getInfo(fld.name) : (getInfo(fld.dataFld) != undefined) ? fld.value = getInfo(fld.dataFld) : fld.value = ''; }
+                /*
+                if(fld.name == "SAVE_TERM"){fld.value = getSaveTerm(getInfo("SAVE_TERM"));}
+                if(fld.name == "DOC_LEVEL"){fld.value = getDocLevel(getInfo("DOC_LEVEL"));}
+                */
+            }
+        }
+    }
+
+    //  tField
+    function settFields(Fields) {
+        if (!window.ActiveXObject) {
+            var szId = Fields.id;
+            var unFiltered = document.getElementsByTagName('*');
+            for (i = 0; i < unFiltered.length; i++) {
+                if (unFiltered[i].getAttribute('id') == szId) {
+                    var fld = unFiltered[i];
+                    if (fld.getAttribute("name") == "SAVE_TERM") { fld.innerHTML = getSaveTerm(getInfo("SAVE_TERM")); }
+                    else if (fld.getAttribute("name") == "DOC_LEVEL") { fld.innerHTML = getDocLevel(getInfo("DOC_LEVEL")); }
+                    else {
+                        if (fld.getAttribute("dataFld") != null) { (getInfo(fld.getAttribute("name")) != undefined) ? fld.innerHTML = getInfo(fld.getAttribute("name")) : (getInfo(fld.getAttribute("dataFld")) != undefined) ? fld.innerHTML = getInfo(fld.getAttribute("dataFld")) : fld.innerHTML = ''; }
+                    }
+                }
+            }
+        } else {
+            for (var i = 0; i < Fields.length; i++) {
+                var fld = Fields[i];
+
+                if (fld.name == "SAVE_TERM") { fld.innerHTML = getSaveTerm(getInfo("SAVE_TERM")); }
+                else if (fld.name == "DOC_LEVEL") { fld.innerHTML = getDocLevel(getInfo("DOC_LEVEL")); }
+                else {
+                    if (fld.dataFld != "") { (getInfo(fld.name) != undefined) ? fld.innerHTML = getInfo(fld.name) : (getInfo(fld.dataFld) != undefined) ? fld.innerHTML = getInfo(fld.dataFld) : fld.innerHTML = ''; }
+                }
+            }
+        }
+    }
+
+    function checkForm(bTempSave) {
+        return true;
+    }
+
+    function setBodyContext(sBodyContext) {
+        //본문 채우기
+        var m_objXML = CreateXmlDocument();
+        var elmList, elm;
+        var elmListLan;
+        try {
+            m_objXML.loadXML("<?xml version='1.0' encoding='utf-8'?>" + sBodyContext);
+            elmList = m_objXML.documentElement.childNodes;
+            if (elmList.length == 0) {
+                tbContentElement.innerHTML = sBodyContext; //기존 기안 양식일 경우
+            } else {
+                for (var i = 0; i < elmList.length; i++) {
+                    var elm = elmList[i];
+                    innerHtmlData(elm.nodeName, elm.text);
+                    //if(elm.nodeName=="RECEDIT"&&elm.text=="Y"){ parent.menu.chk_recedit.checked = true; }
+                }
+            }
+        } catch (e) {
+            //tbContentElement.innerHTML = sBodyContext; //기존 기안 양식일 경우
+        }
+    }
+
+    //본문 XML로 구성
+    function makeBodyContext() {
+        var sBodyContext = "";
+        //xml 구성 예제 : <body><item><name></name></item><item><name></name></item></body>
+        //sBodyContext="<body><item><name>첫번째</name></item><item><name>두번째</name></item></body>";
+        return sBodyContext;
+    }
+
+    /*** 폼데이터 XML문 만들기 ***/
+    function getFields(Fields) {
+
+        var sText = "";
+        if (Fields != null) {
+            var szId = Fields.id;
+            var unFiltered = document.getElementsByTagName('*');
+            for (var i = 0; i < unFiltered.length; i++) {
+
+                if (unFiltered[i].getAttribute('id') == szId) {
+                    if (unFiltered[i].getAttribute("name").indexOf("SEL_") > -1) {
+                        sText += getSelRadio(unFiltered[i]);
+                    } else if (unFiltered[i].getAttribute("name").indexOf("OPT_") > -1) {
+                        if (sText.indexOf("<" + unFiltered[i].name + ">") == -1) sText += getRadio(unFiltered[i].name);
+                    } else if (unFiltered[i].getAttribute("name").indexOf("CHK_") > -1) {
+                        sText += getChkRadio(unFiltered[i].name);
+                    } else {
+                        sText += makeNode(unFiltered[i].getAttribute("name"), unFiltered[i].value);
+                    }
+                }
+            }
+        }
+        return sText;
+    }
+
+    /*** 라디오 버튼 value display ***/
+    function setRadio(szname, szvalue) {
+        var objrdo = document.getElementsByName(szname);
+        for (i = 0; i < objrdo.length; i++) {
+            if (objrdo[i].value == szvalue) objrdo[i].checked = true;
+        }
+    }
+
+    /*** 체크박스 display ***/
+    function setChk(szname, szvalue) { //debugger;
+        var objrdo = document.getElementsByName(szname)[0];
+        if (objrdo.value == szvalue) objrdo.checked = true;
+    }
+
+    /*** Single Radio Button Value 가져오기 ***/
+    function getChkRadio(radioNm) {
+        if (document.getElementsByName(nodeNm)[0].checked) {
+            radioVal = "<" + radioNm + ">" + document.getElementsByName(nodeNm)[0].value + "</" + radioNm + ">";
+            return radioVal;
+        }
+    }
+
+    /*** 데이터 뿌려주기 ***/
+    function innerHtmlData(nodeNm, nodeVal) {
+        if (document.getElementById(nodeNm) != undefined) {
+            if (nodeNm.indexOf("FORM_ATTACH") != -1) {
+                setForm_Attach(nodeVal);
+            } else if (nodeNm.indexOf("tbContentElement") != -1) {
+                tbContentElement.innerHTML = nodeVal;
+            } else if (nodeNm.indexOf("CHK") != -1) {
+                setChk(nodeNm, nodeVal);
+            }
+            //      else if (nodeNm.indexOf("OPT") != -1) {
+            //          setRadio(nodeNm, nodeVal);
+            //      } 
+            else {
+                try {
+                    if (nodeNm.indexOf("APPLICANT_UNIT_NAME") != -1 || nodeNm.indexOf("APPLICANT_POSITION_NAME") != -1 || nodeNm.indexOf("APPLICANT_PERSON_NAME") != -1) {
+                        document.getElementById(nodeNm).innerHTML = m_oFormMenu.getLngLabel(nodeVal, false);
+                    } else if (nodeNm.indexOf("txtRemainVacat") != -1) {  //잔여휴가 HIW
+                        document.getElementById(nodeNm).innerHTML = ReplaceChars(nodeVal, "\n", "<BR>");
+                    } else if (nodeNm == "hdnDataRowCnt") {  //데이터부 반복행갯수 HIW
+                        document.getElementById(nodeNm).value = nodeVal;
+                    } else {
+                        document.getElementById(nodeNm).innerHTML = nodeVal.replace(/\n/gi, "<BR>");
+                    }
+                } catch (e) {
+                    document.getElementById(nodeNm).value = nodeVal;
+                }
+            }
+        }
+    }
+
+
+    //데이터반복부 그리기 (HIW)
+    function DrawDataRow() {
+        //debugger;
+        var vRowStr1 = "";
+        var vRowStr2 = "";
+
+        var vDataRowCnt = parseInt($("#hdnDataRowCnt").val());
+
+        if (vDataRowCnt != "") {
+            for (var i = 1; i < vDataRowCnt + 1; i++) {
+
+                vRowStr1 += "<tr>";
+                vRowStr1 += "<td valign='middle' rowspan='5' align='center' style='width:7%; font-weight:bold; background-color:#F6F6F6'>출<br/>장<br/>부<br/>서<br/>작<br/>성<br/>란</td>";
+                vRowStr1 += "<td colspan='4' valign='top'>";
+                vRowStr1 += "<table id='tblDataRowPerson' cellpadding='0' cellspacing='0' border='0' width='100%'>";
+                vRowStr1 += "<tr>";
+                vRowStr1 += "<td align='center' style='height:30px;width:13%; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'>구분</td>";
+                vRowStr1 += "<td align='center' style='height:30px;width:19%; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'>사번</td>";
+                vRowStr1 += "<td align='center' style='height:30px;width:19%; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'>성명</td>";
+                vRowStr1 += "<td align='center' style='height:30px;width:19%; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'>직위</td>";
+                vRowStr1 += "<td align='center' style='height:30px;width:19%; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 0px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'>소속</td>";
+                vRowStr1 += "</tr>";
+                vRowStr1 += "<tr>";
+                vRowStr1 += "<td align='center' style='height:30px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: #D5D5D5 1px solid; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'>" + i + "</td>";
+                vRowStr1 += "<td align='center' style='BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: #D5D5D5 1px solid; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'><span id='txtSabun_" + i + "'></span></td>";
+                vRowStr1 += "<td align='center' style='BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: #D5D5D5 1px solid; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'><span id='txtUserName_" + i + "'></span></td>";
+                vRowStr1 += "<td align='center' style='BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: #D5D5D5 1px solid; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'><span id='txtJobPosition_" + i + "'></span></td>";
+                vRowStr1 += "<td align='center' style='BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: #D5D5D5 1px solid; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'><span id='txtUnitName_" + i + "'></span></td>";
+                vRowStr1 += "</tr>";
+                vRowStr1 += "</table>";
+                vRowStr1 += "</td>";
+                vRowStr1 += "</tr>";
+                vRowStr1 += "<tr>";
+                vRowStr1 += "<td align='center' style='height:30px;width:97px;  font-weight:bold; background-color:#F6F6F6'>출장지</td>";
+                vRowStr1 += "<td align='center' width='284px;'><span id='txtPlace_" + i + "'></span></td>";
+                vRowStr1 += "<td align='center' style='height:30px; width:142px; font-weight:bold; background-color:#F6F6F6'>교통수단</td>";
+                vRowStr1 += "<td align='center'><span id='txtWay_" + i + "'></span></td>";
+                vRowStr1 += "</tr>";
+                vRowStr1 += "<tr>";
+                vRowStr1 += "<td align='center' style='height:30px; font-weight:bold; background-color:#F6F6F6'>출장(예정)기간</td>";
+                vRowStr1 += "<td colspan='3' align='left' style='padding-left:5px;'>";
+
+                vRowStr1 += "&nbsp;<span id='hdn_dpApprFormDTStart" + i + "'></span> ~ <span id='hdn_dpApprFormDTEnd" + i + "'></span>&nbsp;&nbsp;&nbsp;&nbsp;";
+				vRowStr1 += "(<span id='txtNights_" + i + "'></span>박 <span id='txtDays_" + i + "'></span>일)";
+                vRowStr1 += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (<span id='OPT_Guboon_" + i + "'></span>)";
+                vRowStr1 += "</td>";
+                vRowStr1 += "</tr>";
+                vRowStr1 += "<tr>";
+                vRowStr1 += "<td align='center' style='height:30px; font-weight:bold; background-color:#F6F6F6'>출장목적</td>";
+                vRowStr1 += "<td colspan='3' align='left'>&nbsp;&nbsp;<span id='txtPurpose_" + i + "'></span></td>";
+                vRowStr1 += "</tr>";
+                vRowStr1 += "<tr>";
+                vRowStr1 += "<td align='center' style='height:30px;width:101px%; font-weight:bold; background-color:#F6F6F6'>비 고</td>";
+                vRowStr1 += "<td colspan='3' align='left'>&nbsp;&nbsp;<span id='txtBigo1_" + i + "'></span></td>";
+                vRowStr1 += "</tr>";
+                vRowStr1 += "<tr>";
+                vRowStr1 += "<td colspan='5' style='height:4px; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'></td>";
+                vRowStr1 += "</tr>";
+                vRowStr1 += "<tr>";
+                vRowStr1 += "<td colspan='5' style='height:4px; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'></td>";
+                vRowStr1 += "</tr>";
+                //vRowStr1 += "</table>";
+
+
+                //비용 반복부
+                vRowStr2 += "<tr>";
+                vRowStr2 += "<td align='center' style='height:30px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: #D5D5D5 1px solid; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'>" + i + "</td>";
+                vRowStr2 += "<td align='right' style='width:120px;BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: #D5D5D5 1px solid; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px; padding-right:20px;'><span id='txtDayAmt_" + i + "'></span></td>";
+                vRowStr2 += "<td align='right' style='width:120px;BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: #D5D5D5 1px solid; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px; padding-right:20px;'><span id='txtStayAmt_" + i + "'></span></td>";
+                vRowStr2 += "<td align='right' style='width:120px;BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: #D5D5D5 1px solid; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px; padding-right:20px;'><span id='txtTransAmt_" + i + "'></span></td>";
+                vRowStr2 += "<td align='right' style='width:145px;BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: #D5D5D5 1px solid; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px; padding-right:20px;'><span id='txtSubTot_" + i + "'></span></td>";
+                vRowStr2 += "</tr>";
+
+            }
+
+            //합계 
+            vRowStr2 += "<tr>";
+            vRowStr2 += "<td align='center' style='height:30px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: #D5D5D5 1px solid; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;'>합계</td>";
+            vRowStr2 += "<td align='right' style='BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: #D5D5D5 1px solid; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px; padding-right:20px;'><span id='txtDayTot' ></span></td>";
+            vRowStr2 += "<td align='right' style='BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: #D5D5D5 1px solid; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px; padding-right:20px;'><span id='txtStayTot' ></span></td>";
+            vRowStr2 += "<td align='right' style='BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: #D5D5D5 1px solid; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px; padding-right:20px;'><span id='txtTransTot' ></span></td>";
+            vRowStr2 += "<td align='right' style='BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: #D5D5D5 1px solid; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px; padding-right:20px;'><span id='txtTotal' ></span></td>";
+            vRowStr2 += "</tr>";
+
+            $("#mgmtDepart_main2").append(vRowStr1);
+            $("#tblDataRowCost").append(vRowStr2);
+
+            //데이터 바인딩
+            setBodyContext(getInfo("BODY_CONTEXT"));
+        }
+    }
+
+
+
+    //출장신청 구분값에따른 문서타이틀 셋팅 //HIW
+    function SetDocTitleSet() {
+        if ($('#OPT_Guboon').html() == "출장취소") {
+            $('#headname').html("출장취소서")
+            $('#spanSubmitDesc').html("출장취소")
+        }
+        else {
+            $('#headname').html("출장신청서")
+            $('#spanSubmitDesc').html("출장")
+        }
+
+    }
+
+
+</script>
+</body>
+</html>

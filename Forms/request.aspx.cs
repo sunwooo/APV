@@ -44,9 +44,13 @@ public partial class Approval_Forms_request : System.Web.UI.Page
     public System.String fmrv; //양식 revision
     public System.String fmnm; //양식명
     public System.String _fromData; //본문내용
-    public System.String _gbnno;// 전자증빙측 ID 
+    public System.String _gbnno;// 전자증빙측 ID
+    public System.String _docType;// 전자증빙측 ID 	
     public System.String _pwd; //메일용 비번
     public System.String wStrLanguage = "ko-KR";
+	
+	
+	//public System.String objectID; //objectID
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -59,14 +63,26 @@ public partial class Approval_Forms_request : System.Web.UI.Page
             //userid = Request.QueryString["empNo"];
             userid = Request["empNo"];
             key = Request["accessToken"];
+			
+			//objectID = Request["objectID"];
+			
             //userid = "ISU_STTMP1";
             //key = "828C88F34ECB4C1CA8D89E018C6FAD1A";
 
             fmpf = Request["fmpf"];
             _fromData = Request["content"];
             _gbnno = Request["gbnno"];
+			_docType = Request["docType"];
             _fromData = System.Web.HttpUtility.UrlDecode(_fromData);
             pReplaceSpecialCharacter(_fromData);
+			
+			
+			this.AddLog("=== wf_sip ===", "fmpf : " + fmpf);
+			this.AddLog("=== wf_sip ===", "_fromData : " + _fromData);
+			this.AddLog("=== wf_sip ===", "_gbnno : " + _gbnno);
+			this.AddLog("=== wf_sip ===", "_docType : " + _docType);
+			
+
 
             //양식정보 획득 
             INPUT = new DataPack();
@@ -235,4 +251,58 @@ public partial class Approval_Forms_request : System.Web.UI.Page
         }
         return _fromData;
     }
+	
+	#region write log file...
+
+    public void AddLog(string logFilePrefix, string logMsg)
+    {
+        string logRootFolder = @"D:\GWLogs\";
+        string logFolderPath = logRootFolder + @"\"
+            + System.DateTime.Now.ToString("yyyyMMdd") + @"\";
+
+        if (!System.IO.Directory.Exists(logFolderPath))
+        {
+            System.IO.Directory.CreateDirectory(logFolderPath);
+        }
+
+        string fileName = logFilePrefix + "_" + System.DateTime.Now.ToString("yyMMdd") + ".txt";
+
+        string logFilePath = logFolderPath + fileName;
+
+        if (logFilePath == null || logFilePath.Length == 0)
+            return;
+
+        System.IO.StreamWriter sWriter = null;
+
+        try
+        {
+            if (System.IO.File.Exists(logFilePath))
+            {
+                sWriter = System.IO.File.AppendText(logFilePath);
+            }
+            else
+            {
+                sWriter = System.IO.File.CreateText(logFilePath);
+            }
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(Environment.NewLine);
+            sb.Append("AccessTime : " + System.DateTime.Now.ToString() + Environment.NewLine);
+
+            sb.Append(logMsg + Environment.NewLine);
+
+            sb.Append("==================================================" + Environment.NewLine);
+
+            sWriter.WriteLine(sb.ToString());
+        }
+		catch(Exception ex)
+		{
+		}
+        finally
+        {
+            sWriter.Close();
+        }
+    }
+
+    #endregion
 }

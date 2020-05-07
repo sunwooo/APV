@@ -104,9 +104,9 @@
                     <td colspan="4" valign="top">
                         <table id="tblDataRowPerson" cellpadding="0" cellspacing="0" border="0" width="100%">
                             <tr>
-                                <td align="center" style="height:30px;width:60px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">구분</td>
-                            <td align="center" style="height:30px;width:120px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">사번</td>
-                            <td align="center" style="height:30px;width:93px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">성명</td>
+                                <td align="center" style="height:30px;width:100px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">구분</td>
+                            <td align="center" style="height:30px;width:100px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">사번</td>
+                            <td align="center" style="height:30px;width:100px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">성명</td>
                             <td align="center" style="height:30px;width:80px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">직위</td>
                             <td align="center" style="height:30px;width:120px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">소속</td>
                             <td align="center" style="height:30px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">예산사용부서</td>              
@@ -125,6 +125,8 @@
                     <td colspan="3" align="left" style="padding-left:10px;">
                         <span id="hdn_dpApprFormDTStart1"></span> ~ <span id="hdn_dpApprFormDTEnd1"></span>&nbsp;&nbsp;&nbsp;&nbsp;
                         <b>(<span id="txtNights"></span>박 <span id="txtDays"></span>일)</b>
+                        <!-- 190828_김선재 : 페타시스, "출장(예정)기간"필드에 문구추가 -->
+                        <br/><span name="applNotice"></span>
                     </td>                         
                 </tr>
                 <tr>                
@@ -145,10 +147,10 @@
                     <td colspan="4" valign="top">
                         <table id="tblDataRowCost" cellpadding="0" cellspacing="0" border="0" width="100%">
                             <tr>
-                                <td align="center" style="height:30px; width:60px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">구분</td>
+                                <td align="center" style="height:30px; width:100px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">구분</td>
                                 <td align="center" style="width:100px;font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">일비<br />(식비포함)</td>
                                 <td align="center" style="width:100px;font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">숙박비</td>
-                                <td align="center" style="font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">교통비</td>
+                                <td align="center" style="font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px; width:103px;">교통비</td>
                                 <td align="center" style="font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">소계</td>       
                                 <td align="center" style="font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">계정코드</td>    
                             </tr>
@@ -156,8 +158,8 @@
                     </td>             
                 </tr>
                 <tr>                
-                    <td align="center" style="height:30px;width:120px; font-weight:bold; background-color:#F6F6F6">비고</td>
-                    <td align="left" style="width:170px;padding-left:5px;"><span id="txtBigo2"></span></td>
+                    <td align="center" style="height:30px;width:100px; font-weight:bold; background-color:#F6F6F6">비고</td>
+                    <td align="left" style="width:277px;padding-left:5px;"><span id="txtBigo2"></span></td>
                     <td align="center" style="height:30px;width:120px; font-weight:bold; background-color:#F6F6F6">입금대상자</td>
                     <td align="center" style="padding-left:5px;"><span id="txtReceipterNm"></span></td>
                 </tr>
@@ -262,6 +264,11 @@ function initOnload(){
 
     //데이터반복부 그리기 (HIW)
     DrawDataRow();
+
+    // 190722_김선재 : 페타시스, "출장(예정)기간"필드에 문구추가
+    if(getInfo("etid") == "ISU_PS") {
+        $("span[name=applNotice]").text("※ 휴일/주휴/공휴일에 출장 시 아래 비고란에 필히 비근로일을 작성해주시기 바랍니다.");
+    }
 }
 
 function initialize(){

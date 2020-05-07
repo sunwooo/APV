@@ -192,7 +192,14 @@ function queryGetData(){//debugger;
 				  PF_SUB_KIND='D';pXML = "exec dbo.usp_wf_worklistdeptquery01D "; break;
 				case "AD": //감사할 문서함
 				  PF_SUB_KIND='AD';pXML = "exec dbo.usp_wf_worklistdeptquery01AD ";break;				  			
-			}			
+			}	
+
+			// 감사로 인하여 특정아이디는 2015년부터 2018년까지 문서를 볼수 있도록 하드 코딩 요청하여 추가함 
+			if (userid == "ISUTMP2" || userid == "ISU_CHTMP5" || userid == "ISU_PSTMP2" || userid == "ISU_CTTMP1") {
+			    d_QSDATE = "20150101";
+			    d_QEDATE = "20181231";
+			}
+		
 			if (GUBUN != '' || GROUP_KIND != '' || TITLE!= '' || ORDERFILED != '' || ORDERDESC !='' || d_QSDATE !=''){
 				pXML = "exec dbo.usp_wf_worklistdeptquery01 ";
 			}	   
@@ -2523,7 +2530,7 @@ function getPIDC(item){
 	}else{
 		currNode.setAttribute("isfile", item.getAttribute("isfile"));	
 	}
-	return (!window.ActiveXObject) ?(new XMLSerializer()).serializeToString(root) : root.xml;
+	return (!"ActiveXObject" in window) ?(new XMLSerializer()).serializeToString(root) : root.xml;
 }
 function chk_check() {//debugger;
     try{

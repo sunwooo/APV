@@ -77,18 +77,17 @@
 					<span id="spanBlocCharge" style="display:none;">
 						<a class="btnov" href="#" onclick="javascript:BlocCharge_onClick();" ><span><img alt="" src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon03_decide.gif" align="middle" />&nbsp;<%=Resources.Approval.btn_blocCharge%></span></a>
 					</span>
+				<%if (strPersonCode != "ISUTMP2" && strPersonCode != "ISU_CHTMP5" && strPersonCode != "ISU_PSTMP2" && strPersonCode != "ISU_CTTMP1"){%>
 					<span id="spanExcel" style="display:;">
 						<a id="approve_bt_excel" class="btnov" href="#" onclick="javascript:SavePC();" ><span><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon01_save.gif" align="middle" />&nbsp;<%= Resources.Approval.lbl_SaveToExcel %></span></a>
 					</span>
-                    
+                <%}%>    
 					<span id="btn_search" style="display:;">
 						<a class="btnov" href="#" onclick="javascript:search_OnClick();" ><span><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon01_search.gif" align="middle" />&nbsp;<%=Resources.Approval.btn_search%></span></a>
 					</span>
-                                         
 					<span id="divbtnRSS" style="display:none;">
 						<a id="aid01" class="btnov" href="#" onclick="javascript:parent.copyRSSUrl();" ><span><img src="<%=Session["user_thema"] %>/Covi/Common/btn_type2/btn_icon01_rss.gif" align="absmiddle" />&nbsp;<%=Resources.Approval.btn_RSS %></span></a>
-					</span>
-                    
+					</span> 
 					<span id="btn_userfoldermove" style="display:none;">
 						<a id="aid02" class="btnov" href="#" onclick="javascript:foldermove_OnClick('user');" ><span><img src="<%=Session["user_thema"] %>/Covi/Common/btn_type2/btn_icon01_move.gif" align="absmiddle" />&nbsp;<%=Resources.Approval.btn_userfoldercopy%></span></a>
 					</span>
@@ -96,11 +95,22 @@
 						<a id="aid03" class="btnov" href="#" onclick="javascript:foldermove_OnClick('unit');" ><span><img src="<%=Session["user_thema"] %>/Covi/Common/btn_type2/btn_icon01_move.gif" align="middle" />&nbsp;<%=span_unitfoldermove %></span></a>
 					</span>
 				</li>
+				
 				<li id="btn_option">
 				  <!-- 분류 select div 시작 -->
+				  
 				  <span id="spanoption">
-					<input type="checkbox" checked="checked" name="chktab" onclick="distab(this);" id="chktab" style="CURSOR:hand" />&nbsp;<asp:Label runat="server" ID="DisplayTab" />&nbsp;<!--탭보기--><select id="kind" name="kind" onchange="group()" style="display:none;"></select>&nbsp;<select id="cboDate" name="cboDate" onchange="return cboDate_onchange1()" style="display:none;"></select>&nbsp;<select id="cboDate1" name="cboDate1" onchange="return cboDate_onchange()" style="display:none;"></select></span>
+					<%if (strPersonCode != "ISUTMP2" && strPersonCode != "ISU_CHTMP5" && strPersonCode != "ISU_PSTMP2"){%>
+						<input type="checkbox" checked="checked" name="chktab" onclick="distab(this);" id="chktab" style="CURSOR:hand" />&nbsp;<asp:Label runat="server" ID="DisplayTab" />&nbsp;
+				    <%}%>  
+						<!--탭보기-->	
+						<select id="kind" name="kind" onchange="group()" style="display:none;"></select>&nbsp;
+						<select id="cboDate" name="cboDate" onchange="return cboDate_onchange1()" style="display:none;"></select>&nbsp;
+						<select id="cboDate1" name="cboDate1" onchange="return cboDate_onchange()" style="display:none;"></select> 
+				  </span>
+				
 				  <!-- 분류 select div 시작 -->
+
 				</li>
 			</ul>
 		</div>																					  
@@ -347,7 +357,7 @@
         //[2015-1-13] PSW 특정 계정 검색 버튼 숨김
         if(userid =="ISU_ST12002")
         {
-            document.getElementById("btn_search").style.display ="none";
+            //document.getElementById("btn_search").style.display ="none";
             //document.getElementById("divbtnRSS").style.display ="none";
         }
         //수정끝
@@ -769,7 +779,8 @@
 				oSel_Search.options[0].selected = true;
 			}else{
 				//[2015-1-13] PSW 특정계정 SELECT BOX 숨김 수정
-                if(userid !="ISU_ST12002")
+				//[2019-10-17] PSW 특정계정 SELECT BOX 숨김 수정
+                if(userid !="ISUTMP2" && userid !="ISU_CHTMP5" && userid !="ISU_PSTMP2")
                 {
 				    oKind.style.display = "";
 				    var k = 5 ;
@@ -821,11 +832,12 @@
 
 			//[2015-1-13] PSW 특정계정일때 문서 년도 SELECT 변경
             //strDate = "<%=strDate%>";
-            if(userid =="ISU_ST12002"){
-                strDate = "2010년#1월/2010년#2월/2010년#3월/2010년#4월/2010년#5월/2010년#6월/2010년#7월/2010년#8월/2010년#9월/2010년#10월/2010년#11월/2010년#12월/2011년#1월/2011년#2월/2011년#3월/2011년#4월/2011년#5월/2011년#6월/2011년#7월/2011년#8월/2011년#9월/2011년#10월/2011년#11월/2011년#12월/2012년#1월/2012년#2월/2012년#3월/2012년#4월/2012년#5월/2012년#6월/2012년#7월/2012년#8월/2012년#9월/2012년#10월/2012년#11월/2012년#12월/2013년#1월/2013년#2월/2013년#3월/2013년#4월/2013년#5월/2013년#6월/2013년#7월/2013년#8월/2013년#9월/2013년#10월/2013년#11월/2013년#12월/2014년#1월/2014년#2월/2014년#3월/2014년#4월/2014년#5월/2014년#6월/2014년#7월/2014년#8월/2014년#9월/2014년#10월/2014년#11월/2014년#12월";
-            }else{
+			//[2019-10-17] PSW 특정계정일때 문서 년도 SELECT 변경
+            //if(userid =="ISUTMP2"){
+                //strDate = "월/2016년#12월/2017년#1월/2017년#2월/2017년#3월/2017년#4월/2017년#5월/2017년#6월/2017년#7월/2017년#8월/2017년#9월/2017년#10월/2017년#11월/2017년#12월/2018년#1월/2018년#2월/2018년#3월/2018년#4월/2018년#5월/2018년#6월/2018년#7월/2018년#8월/2018년#9월/2018년#10월/2018년#11월/2018년#12월";
+            //}else{
                 strDate = "<%=strDate%>";
-            }
+            //}
             //수정끝
 
             //alert(strDate);					
@@ -842,6 +854,7 @@
 				}
 			}
 			setDate() ;
+
 		}
 		function makeNode1(str){
 			var oOption = document.createElement("OPTION");			
@@ -905,7 +918,9 @@
 		
 			if (document.getElementById('kind').value != "total") {alert("<%= Resources.Approval.msg_004 %>...!");return false;}
 			
-			var o_cboDate1 = self.document.getElementById('cboDate1');
+			var o_cboDate1 = self.document.getElementById(cboDate1);
+			
+			
 			var intCount = o_cboDate1.options.length;
 			
 			for (i=intCount;i!=0;i--){				
@@ -1589,7 +1604,23 @@
 					var start_date = arrSearchValue[2];
 					var end_date = arrSearchValue[3];
 					var str_ListType = ListType.replace("_", "");
-					var query = "ListType=" + str_ListType  + "&doclistname="+escape(sdoclistname) + "&SearchType="+escape(search_type) + "&SearchWord="+escape(search_value)+ "&start_date="+escape(start_date)+ "&end_date="+escape(end_date);
+					
+					//20190401 추가 시작 					
+					var ManageDeptCode= document.getElementById('ManageUnit').value;
+					if(ListType=="_RC" || ListType=="_A" || ListType=="_S")
+					{
+					  var query = "ListType=" + str_ListType  + "&doclistname="+escape(sdoclistname) + "&SearchType="+escape(search_type) + "&SearchWord="+escape(search_value)+ "&start_date="+escape(start_date)+ "&end_date="+escape(end_date)+ "&DeptCode="+ManageDeptCode;
+					}
+					else
+					{
+					   var query = "ListType=" + str_ListType  + "&doclistname="+escape(sdoclistname) + "&SearchType="+escape(search_type) + "&SearchWord="+escape(search_value)+ "&start_date="+escape(start_date)+ "&end_date="+escape(end_date);
+					}
+					
+					//20190401 주석
+					//var query = "ListType=" + str_ListType  + "&doclistname="+escape(sdoclistname) + "&SearchType="+escape(search_type) + "&SearchWord="+escape(search_value)+ "&start_date="+escape(start_date)+ "&end_date="+escape(end_date);
+					//20190401 주석 끝
+					//20190401 추가 끝
+					
 					//hichang 2011-02-08
                     //var url = "ListDeptItemsExcel.aspx?"+query+"&barchived="+bArchived;
                     var url = "ListDeptItemsExcel.aspx?"+query+"&barchived="+bArchived+"&bstored="+bstored;
@@ -1605,8 +1636,11 @@
 		
 		//관리부서 조회
 		function queryManageDept(){
-		
-			if(document.getElementById('ManageUnit').value != ""){
+			/* 2020-01-13 PSW 특정부서코드 문서함 조회 불가 처리 */
+			if (document.getElementById('ManageUnit').value == "ISU_STISU_ST041" || document.getElementById('ManageUnit').value == "ISU_STISU_ST042") {
+                return false;
+            }
+			else if(document.getElementById('ManageUnit').value != ""){
 				deptId= document.getElementById('ManageUnit').value;
 				uid = deptId +selMainTab;
 				setWorkList(selLocation, document.getElementById(selMainTab).getAttribute("colLabel"));

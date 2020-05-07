@@ -1028,7 +1028,7 @@
 
     //HR에서 휴가기간에따른 휴가 총일수 가져오기 (2012-12-07 HIW) : SiteReference/Jcalendar/ui/jquery.ui.datepicker.js에서 호출됨
     function GetVacaTotDays(pNo, S_YMD, E_YMD) {  //컨트롤번호, 시작일자, 종료일자
-
+console.log(1);
         //휴가기간에따른 휴가 총일수 가져오기
         var url = "/CoviWeb/Approval/CallBack.aspx";
         var param = "CODE=02&ENT_CODE=" + getInfo("etid") + "&S_YMD=" + S_YMD + "&E_YMD=" + E_YMD;
@@ -1063,7 +1063,7 @@
 
     //HR에서 휴가기간에따른 휴가 적용일수(실사용일수) 가져오기 (2012-12-07 HIW) : SiteReference/Jcalendar/ui/jquery.ui.datepicker.js에서 호출됨
     function GetVacaApplyDays(pNo, S_YMD, E_YMD) {  //컨트롤번호, 시작일자, 종료일자
-        
+console.log(2);
         var url = "/CoviWeb/Approval/CallBack.aspx";
         var param = "CODE=03&ENT_CODE=" + getInfo("etid") + "&USER_CODE=" + $("input[name=txtSabun]").val() + "&GNT_CD=" + $("select[name=cmbGoobun" + pNo + "]").val() + "&S_YMD=" + S_YMD + "&E_YMD=" + E_YMD;
 

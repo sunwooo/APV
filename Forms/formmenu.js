@@ -2499,7 +2499,7 @@ function doButtonAction(obj) {//debugger;
 		            attFile2();iWidth=480;iHeight=326;break;
 	            }
             case "btPreView": //미리보기
-	            sSize = "resize";iWidth=790;iHeight=window.screen.availHeight-100;sUrl="PREVIEW.htm";
+	            sSize = "fix";iWidth=800;iHeight=window.screen.availHeight-100;sUrl="PREVIEW.htm";
                 break;
             
 	        case "btPrint": //인쇄
@@ -2567,6 +2567,12 @@ function doButtonAction(obj) {//debugger;
 	                    //printDiv = m_oFormEditor.document.getElementById("bodytable").innerHTML + m_oFormEditor.document.getElementById("divBodyContent").innerHTML + m_oFormEditor.document.getElementById("divApprovalLine").innerHTML;
 	                    printDiv = m_oFormEditor.document.getElementById("bodytable").innerHTML;
 	                }
+
+			printDiv = printDiv.replace("overflow: hidden;" , '');
+//			var printObj = $(printDiv);
+//			printObj.find("table").css("overflow" , "");
+//			printDiv = printObj.html();
+
 	                iWidth = 800; iHeight = 700; //HIW
 	            }
 
@@ -3309,7 +3315,7 @@ function fnSlvTransIfIe(strURL, strINIListFiles)
 {
 	try
 	{
-        if (window.ActiveXObject)
+	if ("ActiveXObject" in window || window.ActiveXObject)
 		{//이민지(2010-05-28): IE 인 경우에는 CoviUpload 실행
 		    //frAttachFiles.location = strURL;
 		    document.attachfile_form.target = "frAttachFiles";
@@ -3453,17 +3459,20 @@ function getListVal(href){
     //phm
     aryTempLengh = (!("ActiveXObject" in window) ? aryTemp.length - 1 : aryTemp.length - 2);
 	for(i = 0;i <= aryTempLengh;i++) {
-		var temp = String(aryTemp[i]).split(";");
-		strItem = '<input type=\"checkbox\" id=\"chkFile\" name=\"_' + aryKey[i] + '\" value=\"' + aryKey[i] + '\">'; 		
-		if(temp.length < 2)
-		{		    
-		    strItem += "<a href=\""+temp[0].replace("+","%2B")+ "\" target = \"_blank\" >" + aryKey[i] + "</a>";
-		}
-		else
-		{		 
-		    strItem += "<a href=\""+temp[2].replace("+","%2B")+ "\" target = \"_blank\" >" + aryKey[i] + "</a>";
-		}
-		strListVal = strListVal + ", " + strItem;
+	try {
+            var temp = String(aryTemp[i]).split(";");
+            strItem = '<input type=\"checkbox\" id=\"chkFile\" name=\"_' + aryKey[i] + '\" value=\"' + aryKey[i] + '\">';
+            if (temp.length < 2) {
+                strItem += "<a href=\"" + temp[0].replace("+", "%2B") + "\" target = \"_blank\" >" + aryKey[i] + "</a>";
+            }
+            else {
+                strItem += "<a href=\"" + temp[2].replace("+", "%2B") + "\" target = \"_blank\" >" + aryKey[i] + "</a>";
+            }
+            strListVal = strListVal + ", " + strItem;
+        }
+        catch (e) {
+
+        }
 	}
 	
 	if(strListVal == null || strListVal == "")
@@ -4077,7 +4086,10 @@ function receiveApvHTTP(){//debugger;
 										        if (enodeItem != null) {
 
 										            var oApvList2 = CreateXmlDocument();
-                                                    enodeItem = nodesAllItems[x];
+                                                    if (agent.msie == true) 
+                                                        enodeItem = nodesAllItems[x];
+                                                    else
+                                                        enodeItem = nodesAllItems.item[x];
                                                     oApvList2.loadXML("<?xml version='1.0' encoding='utf-8'?>" + enodeItem.xml);
 
                                                     var assistline = oApvList2.selectNodes("step[@unittype='ou']/ou/taskinfo[@datereceived]");
@@ -4877,12 +4889,12 @@ function saveApvDocument(strDocNo){
 						            }
 					            }
 				            }catch(e){
-					            alert(e.description);
+					            alert("saveApvDocument1 :: " + e.description);
 				            }
 			            }
 		            }
 	            }catch(ex){
-		            alert(ex.description);
+		            alert("saveApvDocument2 :: " + ex.description);
 		            return false;
 	            }
 	        }
@@ -6474,10 +6486,18 @@ function fnCEPSXhp()
 //HR Push
 
 function tongPush(gubun) {
+	
+	if (document.getElementsByName("ACTIONINDEX")[0].value != "reject") {
+        var nextId = getNextApprover(getInfo("usid"));
+        var $iFrm = $('<IFRAME id="iFrm" src="/Coviweb/TongPush.aspx?approveId=' + getInfo("usid") + '&nextId=' + nextId + '&processId=' + getInfo("piid") + '&gubun=' + gubun + '" frameBorder="0" name="iFrm" scrolling="no"></IFRAME>');
+        $iFrm.appendTo('body');
+    }
+
+	/*
 	var nextId = getNextApprover();
     var $iFrm = $('<IFRAME id="iFrm" src="/Coviweb/TongPush.aspx?approveId=' + getInfo("usid") + '&nextId=' + nextId + '&processId=' + getInfo("piid") +'&gubun=' + gubun + '" frameBorder="0" name="iFrm" scrolling="no"></IFRAME>');
 	$iFrm.appendTo('body');
-	
+	*/
 	/*
     var reqParam = 'userId=' + getNextApprover() + '&subject='+ m_oFormEditor.document.getElementsByName("SUBJECT")[0].value;
     try{
@@ -6541,11 +6561,14 @@ function getNextApprover() {
                     }
 
                 } else if (list[i].attributes.getNamedItem("unittype").nodeValue == "person") { //대상자가 개인
-
                     if (list[i].attributes.getNamedItem("routetype").nodeValue == "approve") { //일반결재
-
-                        if (list[i].firstChild.firstChild.firstChild.attributes.getNamedItem("status").nodeValue == "inactive") { //결재하지 않은 처음대상자를 찾고 중단
+						//2019.06.07. PSW 중간에 참조자 제외하고 일반결재자 푸쉬알림 
+                        if (list[i].firstChild.firstChild.firstChild.attributes.getNamedItem("status").nodeValue == "inactive" &&  list[i].attributes.getNamedItem("name").nodeValue !="reference"
+							) { //결재하지 않은 처음대상자를 찾고 중단
                             //alert("다음 일반결재 : " + list[i].firstChild.firstChild.attributes.getNamedItem("code").nodeValue);
+							//alert("a" + list[i].attributes.getNamedItem("name").nodeValue);
+							//alert(list[i].firstChild.firstChild.attributes.getNamedItem("routetype").nodeValue);
+							//alert("t : " + list[i].attributes.getNamedItem("routetype").nodeValue);
                             strNextApprover = list[i].firstChild.firstChild.attributes.getNamedItem("code").nodeValue;
                             i = list.length;
                         }
@@ -6558,6 +6581,8 @@ function getNextApprover() {
                             i = list.length;
                         }
 
+                    } else{
+						//alert(list[i].attributes.getNamedItem("name").nodeValue);
                     }
 
                 }

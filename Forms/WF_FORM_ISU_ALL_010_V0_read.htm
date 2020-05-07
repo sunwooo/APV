@@ -96,9 +96,9 @@
                 <td id="SEL_ENTPART_TEXT" ></td>-->		
             </tr>
             <tr>
-                <th><input type="text" name="lb_DocClassification" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
+                <th><input type="text" name="lb_DocClassification" style="width:53px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="tField" name="DOC_CLASS_NAME" dataFld="DOC_CLASS_NAME" ></td>	
-                <th><input type="text" name="lb_ConservationY" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
+                <th><input type="text" name="lb_ConservationY" style="width:53px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="tField" name="SAVE_TERM"  colspan="3"></td>	
             </tr>
         </table>
@@ -125,7 +125,8 @@
 		<!-- bodycontext end -->
 
         <div id="divApprovalLine"> <!--추가(인쇄용) HIW-->
-		    <table id="tblDraftAttachInfo" class="table_5" summary="참조" cellpadding="0" cellspacing="0">
+
+	<table id="tblDraftAttachInfo" class="table_5" summary="참조" cellpadding="0" cellspacing="0">
                 <tr>
                     <th><input type="text" name="lb_Attachment" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                     <td id="AttFileInfo" align="left"></td>
@@ -403,7 +404,7 @@
                 }
             }
         } catch (e) {
-            alert(e.message);
+            alert("ALL_010_V0_read" + e.message);
             //tbContentElement.innerHTML = sBodyContext; //기존 기안 양식일 경우
         }
     }

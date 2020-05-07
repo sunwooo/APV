@@ -186,6 +186,7 @@
                             <td colspan="3" align="center"><textarea id="mField" name="txtMemo_1" style="text-align: left; font-size: 9pt; padding-top:3px;padding-bottom:3px; width: 97%;height:30px; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px"></textarea></td>
                         </tr>
                     </table>
+                    <span><font style="color:Gray;">&nbsp;※ 결재완료 시 HR 신청결재>제증명신청 메뉴에서 출력 가능</font></span>
                 </td>
             </tr>
 
@@ -307,6 +308,16 @@
             //증명서종류에따른 년도행, 주소행, 근무처행 Visible, Invisible 처리
             InvisibleRowSet();
         }
+
+        /*
+            200117_김선재 : 신청년도 Validation Check - 페타시스 윤규미 요청
+        */
+        $("input[name^=txtSubmitYear]").bind('blur', function() {
+            if($(this).val() != "" && /^[0-9][0-9][0-9][0-9]$/.exec($(this).val()) == null) {
+                alert("신청년도는 네자리 수로 입력해주시기 바랍니다.");
+                $(this).val("");
+            }
+        });
     }
 
     function initialize() {
@@ -810,6 +821,15 @@
 
             if (vSelVal == "16")  //원천징수영수증인 경우
             {
+/*
+    200220_김선재 : 페타시스 원천징수영수증인 경우 안내문구 팝업 추가 - 윤규미 요청
+    200302_김선재 : 3월이 되어 팝업 안뜨도록 수정
+
+                if(getInfo("etid") == "ISU_PS") {
+                    alert("2019년도 원천징수영수증은 3월부터 발급(신청)가능합니다.");
+                }
+*/
+
                 $("#trSubmitYear_" + vNo).css({ "display": "" });
                 $("#trAddress_" + vNo).css({ "display": "none" });
                 $("#trOfficeAddress_" + vNo).css({ "display": "none" });
@@ -1033,6 +1053,16 @@
 
         //근무처 콤보박스 바인딩
         BindComboWorkplace("cmbOfficeAddress_" + gRowCnt);
+        
+        /*
+            200117_김선재 : 신청년도 Validation Check - 페타시스 윤규미 요청
+        */
+        $("input[name^=txtSubmitYear]").bind('blur', function() {
+            if($(this).val() != "" && /^[0-9][0-9][0-9][0-9]$/.exec($(this).val()) == null) {
+                alert("신청년도는 네자리 수로 입력해주시기 바랍니다.");
+                $(this).val("");
+            }
+        });
     }
 
 
@@ -1061,7 +1091,8 @@
     function InvisibleRowSet() {
 
         for (var i = 0; i < gRowCnt; i++) {
-            if ($("#hdnApplyKindVal_" + (i + 1)).val() == "16") {  //원천징수영수증
+            //if ($("#hdnApplyKindVal_" + (i + 1)).val() == "16") {  //원천징수영수증
+			if($("input[name=hdnApplyKindVal_" + (i + 1) + "]").val()=="16"){
                 $("#trSubmitYear_" + (i + 1)).css({ "display": "" });
                 $("#trAddress_" + (i + 1)).css({ "display": "none" });
                 $("#trOfficeAddress_" + (i + 1)).css({ "display": "none" });

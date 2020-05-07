@@ -297,7 +297,19 @@
                     //else if (fld.getAttribute("name") == "DOC_NO"){fld.innerHTML = getInfo(fld.getAttribute("name")) }                
                     else {
                         if (fld.getAttribute("dataFld") != "") {
-                            (getInfo(fld.getAttribute("name")) != undefined) ? fld.innerText = getInfo(fld.getAttribute("name")) : (getInfo(fld.getAttribute("dataFld")) != undefined) ? fld.innerText = getInfo(fld.getAttribute("dataFld")) : fld.innerHTML = '';
+                            //(getInfo(fld.getAttribute("name")) != undefined) ? fld.innerText = getInfo(fld.getAttribute("name")) : (getInfo(fld.getAttribute("dataFld")) != undefined) ? fld.innerText = getInfo(fld.getAttribute("dataFld")) : fld.innerHTML = '';
+                            if (getInfo(fld.getAttribute("name")) != undefined) {
+                                //IE외 브라우져에 tField 컨트롤(제목,문서분류등) 값대입위해 추가 (2013-02-14 HIW)
+                                $("[name=" + fld.getAttribute("name") + "]").each(function (z) {
+                                    $(this).html(getInfo(fld.getAttribute("name")));
+                                });;
+                            }
+                            else {
+                                if (getInfo(fld.getAttribute("dataFld")) != undefined)
+                                    fld.innerText = getInfo(fld.getAttribute("dataFld"));
+                                else
+                                    fld.innerHTML = '';
+                            }
                         }
                     }
                 }

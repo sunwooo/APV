@@ -106,8 +106,13 @@
 			}
             if(String(m_oFormEditor.location).indexOf("_read.htm") == -1 &&  m_oFormMenu.getInfo("loct") == "APPROVAL" ) //편집 모드
             {
-                document.getElementById("tr_memo").style.display="";
-                 g_height = g_height+ 30;
+                //2020.01.03 PSW 특정양식일 때 변경사유 입력 제거 
+                if (opener.getInfo("fmpf").indexOf("WF_FORM_ISU_ACCOUNTING_") > -1) {
+                    document.getElementById("tr_memo").style.display = "none";
+                } else {
+                    document.getElementById("tr_memo").style.display = "";
+                    g_height = g_height+ 30;
+                }
             }
             window.resizeTo(600,g_height);
             var sy = window.screen.height / 2 - g_height;// /2 -  20;

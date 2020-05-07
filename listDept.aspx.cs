@@ -37,6 +37,7 @@ public partial class COVIFlowNet_listDept : PageBase
     //사용자 서명이미지 호출 by 2007.12 for loreal
     public string usit = string.Empty;
 	public string strLangIndex = "0";
+	public string strPersonCode = string.Empty;
 
 	protected void Page_Load(object sender, EventArgs e)
 	{
@@ -48,8 +49,9 @@ public partial class COVIFlowNet_listDept : PageBase
             stopwatch.Start();
         }
         #endregion
-
-
+		
+		//2019-10-14 사용자ID 추가 PSW
+		strPersonCode = Sessions.PERSON_CODE;
          
         string str_L_Year = "", str_L_Month = "";
 		//Language

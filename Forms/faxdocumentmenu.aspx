@@ -54,6 +54,7 @@
 	    var gLabel_year_5	= "<%=Resources.Approval.lbl_year_5 %>";
 	    var gLabel_year_7	= "<%=Resources.Approval.lbl_year_7 %>";
 	    var gLabel_year_10	= "<%=Resources.Approval.lbl_year_10 %>";
+		var gLabel_year_15	= "<%=Resources.Approval.lbl_year_15 %>";
 	    var gLabel_permanence	= "<%=Resources.Approval.lbl_permanence %>";
     	
 	    var gFileAttachType = "<%=System.Web.Configuration.WebConfigurationManager.AppSettings["FileAttachType"] %>"; //첨부파일 컴퍼넌트 타입 체크

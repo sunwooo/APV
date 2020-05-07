@@ -132,7 +132,7 @@ if (getInfo("editortype") == "3" || (getInfo("editortype") == "4" && !window.Act
         nameuserlang02 = getInfo("uslng");
     } catch (e) { }
     //PrintDEXT5Editor('dext5editor1', '100% ', '650px', 'edit', 'ko-kr');
-    PrintDEXT5Editor('dext5editor1', '100% ', '650px', 'edit', namouserlang);
+    PrintDEXT5Editor('dext5editor1', '100% ', '1000px', 'edit', namouserlang);
 }
 function OnInitCompleted() {
     if (getInfo("editortype") == "8") {
@@ -176,7 +176,8 @@ function dextgetContent() {
         
         setBodyContext(getInfo("BODY_CONTEXT"));
     } else {
-        DEXT5.setHtmlContentsEw(getInfo("fmbd").replace("euc-kr", "utf-8"), "dext5editor1");
+		var contents = getInfo("fmbd").replace("euc-kr", "utf-8");
+        DEXT5.setHtmlContentsEw(contents, "dext5editor1");
     }
 }
 //양식데이터 dhtml_body에 저장하기

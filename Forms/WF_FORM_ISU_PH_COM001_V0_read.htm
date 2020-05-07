@@ -74,10 +74,18 @@
                 <!--<th id="partdisplay" style="display:;">사업장 분류</th>
                 <td id="SEL_ENTPART_TEXT" ></td>-->		
             </tr>
+			<!--
             <tr>
-                <th>文件分类</th><!--문서분류-->
+                <th>文件分类</th>
                 <td id="tField" name="DOC_CLASS_NAME" dataFld="DOC_CLASS_NAME" ></td>	
-                <th>保存年限</th><!--보존년한-->
+                <th>保存年限</th>
+                <td id="tField" name="SAVE_TERM"  colspan="3"></td>	
+            </tr>
+			-->
+			<tr>
+                <th><input type="text" name="lb_DocClassification" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
+                <td id="tField" name="DOC_CLASS_NAME" dataFld="DOC_CLASS_NAME" ></td>	
+                <th><input type="text" name="lb_ConservationY" style="width:52px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="tField" name="SAVE_TERM"  colspan="3"></td>	
             </tr>
         </table>
@@ -85,7 +93,7 @@
 		<!-- bodycontext start -->		
         <table class="table_3" summary="제목" cellpadding="0" cellspacing="0">
             <tr>
-                <th>题&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目<span class="txt_red">*</span></th><!--제목-->
+                <th><input type="text" name="lb_Title" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="tField" name="SUBJECT"  datafld="SUBJECT" ></td>	
             </tr>
         </table>
@@ -105,19 +113,19 @@
 
 		<table class="table_5" summary="참조" cellpadding="0" cellspacing="0">
             <tr>
-                <th>附件</th><!--첨부파일-->
+                <th><input type="text" name="lb_Attachment" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="AttFileInfo"></td>
             </tr>
             <tr>
-                <th>关联文件</th><!--연결문서-->
+                <th><input type="text" name="lb_RelatedDoc" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="DocLinkInfo"></td>
             </tr>
             <tr style="display:none;">
-                <th>원 문 서</th>
+                <th><input type="text" name="lb_OrdinaryDoc" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="RejectDocLinkInfo">-</td>
             </tr>
             <tr>
-                <th>参照</th><!--참조-->
+                <th><input type="text" name="lb_Reference" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="CCLine">
                     <span id="SendCC"></span><span id="RecCC"></span>&nbsp;
                    <!-- <div id="SendCC"></div>
@@ -125,7 +133,7 @@
                 </td>
             </tr>
             <tr id="trRecDept" style="display:none;">
-                <th>수신부서</th>  <!--배포처-->
+                <th><input type="text" name="lb_ReceiveDepart" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>  <!--배포처--> 
                 <td id="RecLine" colspan="5" ></td>
             </tr>
         </table>
@@ -167,7 +175,7 @@
         <div id="divforminfo" style="display:none">
         <table class="table_6" summary="원문서" cellpadding="0" cellspacing="0">
             <tr>
-                <th>文件说明</th><!--문서설명-->
+                <th><input type="text" name="lb_DocExplanation" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="tdforminfo"></td>
             </tr>
         </table>
@@ -230,7 +238,10 @@
             document.getElementsByName("APPLIED").value = formatDate(getInfo("svdt"), "D");
         } else {
         }
-
+		
+		//기타 필드 채우기
+        setCommonLb(); //20-04-07 공통 라벨 부분 다국어처리
+		
         //본문 내용 
         if (getInfo("BODY_CONTEXT") != undefined) {
             setBodyContext(getInfo("BODY_CONTEXT"));

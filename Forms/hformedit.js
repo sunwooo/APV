@@ -1094,6 +1094,7 @@ function getSaveTerm(szCode){
 		case "5" : szName = parent.menu.gLabel_year_5;break;			//"4년"
 		case "7" : szName = parent.menu.gLabel_year_7;break;			//"5년"
 		case "10" : szName = parent.menu.gLabel_year_10;break;		//"10년"
+		case "15" : szName = parent.menu.gLabel_year_15;break;		//"15년"
 		case "99" : szName = parent.menu.gLabel_permanence;break;	//"영구"
 	}
 	return szName;
@@ -1124,6 +1125,7 @@ function setSaveTerm(){
 	makeCBOobject("5",parent.menu.gLabel_year_5,SAVE_TERM);				//"5년"
 	makeCBOobject("7",parent.menu.gLabel_year_7,SAVE_TERM);				//"7년"
 	makeCBOobject("10",parent.menu.gLabel_year_10,SAVE_TERM);			//"10년"
+	makeCBOobject("15",parent.menu.gLabel_year_15,SAVE_TERM);			//"15년"
 	makeCBOobject("99",parent.menu.gLabel_permanence,SAVE_TERM);	//"영구"
 	setDefaultCBOobject(getInfo("SAVE_TERM"),SAVE_TERM);
 }

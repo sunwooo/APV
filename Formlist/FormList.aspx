@@ -173,6 +173,9 @@
     var gAdminSysTotal = "<%= gAdminSysTotal %>";  //전체시스템관리자
     var user_etid = "<%= Session["user_ent_code"] %>";
     var user_dpcd = "<%= Session["user_dept_code"] %>";
+	/*2020-01-14 PSW 내부회계관리양식으로 인해 일시적 오픈 처리 (윤태진 차장님)*/
+	var user_code = "<%= Session["user_code"] %>";
+	
     var user_dppathid = "<%= user_dppathid %>";
     var language = "<%= Session["user_language"] %>" //20161102 다국어처리 - 다국어 값 가져오는 부분   
     var viewall = "<%=System.Web.Configuration.WebConfigurationManager.AppSettings["ViewFormAll"]%>";

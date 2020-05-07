@@ -264,7 +264,8 @@
         //본문 내용
         if (getInfo("editortype") == "2" || (getInfo("editortype") == "4" && window.ActiveXObject)) {//2.TagFree, 3.XFree, 4.TagFree/XFree
         } else if (getInfo("editortype") == "6" || (getInfo("editortype") == "7" && !window.ActiveXObject)) {// 5.Activesquare, 6.CrossEditor, 7.ActivesquareDefault/CrossEditor -
-        } else if (getInfo("editortype") == "8") {  //dext5 add
+        /* dext5 에디터 로딩 이슈 처리 2020-02-27 psw */
+		} else if (getInfo("editortype") == "8") {  //dext5 add
             dextgetContent();
         } else {
             if (getInfo("BODY_CONTEXT") != undefined) {
@@ -292,7 +293,8 @@
         } else if (getInfo("editortype") == "0") {//0.TextArea
             document.getElementById("dhtml_body").value = document.getElementById("tbContentElement").value;
         } else if (getInfo("editortype") == "8") {  //dext5 add
-            document.getElementById("dhtml_body").value = DEXT5.getBodyValue();
+            //document.getElementById("dhtml_body").value = DEXT5.getBodyValue();
+			dextgetHtmlValueEx();
         }
         var sBodyContext = makeBodyContext();
         return makeNode("BODY_CONTEXT", sBodyContext, null, false);
@@ -433,7 +435,8 @@
     }
     /*** 데이터 뿌려주기 ***/
     function innerHtmlData(nodeNm, nodeVal) {
-        if (document.getElementsByName(nodeNm)[0] != undefined) {
+		/* dext5 에디터 로딩 이슈 처리 2020-02-27 psw */
+        //if (document.getElementsByName(nodeNm)[0] != undefined) {
             if (nodeNm.indexOf("FORM_ATTACH") != -1) {
                 setForm_Attach(nodeVal);
                 document.getElementsByName(nodeNm)[0].value = nodeVal;
@@ -444,6 +447,9 @@
                     var dom = document.tbContentElement.getDom(); dom.body.innerHTML = nodeVal.replace(/<br \/>/gi, "");
                 } else if (getInfo("editortype") == "5" || (getInfo("editortype") == "7" && window.ActiveXObject)) {// 5.Activesquare, 6.CrossEditor, 7.ActivesquareDefault/CrossEditor -
                     document.tbContentElement.value = nodeVal;
+				/* dext5 에디터 로딩 이슈 처리 2020-02-27 psw */	
+                } else if (getInfo("editortype") == "8") { //dext5 add
+                    dextSetHtmlContentsEw(nodeVal);
                 }
             } else if (nodeNm.indexOf("OPT") != -1) {
                 setRadio(nodeNm, nodeVal);
@@ -452,7 +458,7 @@
             } else {
                 document.getElementsByName(nodeNm)[0].value = nodeVal;
             }
-        }
+        //}
     }
 
     /*** 라디오 버튼 value display ***/

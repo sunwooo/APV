@@ -192,6 +192,8 @@
     window.onload = initOnload;
     function initOnload() {
         initialize();
+		
+		//alert(getInfo("SAVE_TERM"));
         
         //협조프로세스인 경우 수신부서(배포처)란 보이게..(HIW)
         if (m_oFormMenu.gProcessKind == "Cooperate") {  //협조프로세스
@@ -360,7 +362,7 @@
                 }
             }
         } catch (e) {
-            alert(e.message);
+            alert("ALL_020 " + e.message);
             //tbContentElement.innerHTML = sBodyContext; //기존 기안 양식일 경우
         }
     }

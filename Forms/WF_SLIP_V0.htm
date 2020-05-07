@@ -57,6 +57,7 @@
 <input type="hidden" id="dField" name="ENT_NAME" dataFld="etnm" />
 <input type="hidden" id="mField" name="DOC_LEVEL_NAME" />
 <input type="hidden" id="mField" name="gbnno" />
+<input type="hidden" id="mField" name="docType" />
 <input type="hidden" id="mField" name="entcode" />
 
 
@@ -218,7 +219,6 @@
 <script language="javascript" src="formedit_object.js" type="text/javascript"></script>
 
 <script type="text/javascript" language="javascript" id="5">
-
     window.onload = initOnload;
     function initOnload() {
 	    //alert(getInfo("gbnno"));
@@ -233,7 +233,7 @@
     }
 
     function initialize() {
-        if (window.parent.document.readyState == "complete") {
+		if (window.parent.document.readyState == "complete") {
             window.parent.document.onreadystatechange = event_noop;
             //initENTPART(); //사업장 코드 조회		
             initForm();
@@ -249,6 +249,8 @@
     function initForm() {
         initFields();
         G_displaySpnAttInfo(false);
+		
+		//alert(getInfo("docType"));
     }
 
     function initFields(szBody) {
@@ -260,6 +262,7 @@
             document.getElementsByName("INITIATOR_INFO")[0].value = getInfo("usdn"); //getInfo("dpdn_apv")+" "+getInfo("usdn") + " "+ getInfo("ustn") ;
             document.getElementsByName("APPLIED").value = formatDate(getInfo("svdt"), "D");
             document.getElementsByName("gbnno")[0].value = getInfo("gbnno");  //전자증빙 측 ID
+			document.getElementsByName("docType")[0].value = getInfo("docType");  //전자증빙 측 docType
             document.getElementsByName("entcode")[0].value = getInfo("etid"); //전자증빙 측 entcode
             if (getInfo("etid") == "ISU_CH") {
                 document.getElementsByName("DOC_CLASS_NAME")[0].value = "(3)재무/(36)전표 및 장부관리/(361)전표/";
@@ -272,8 +275,25 @@
 				document.getElementsByName("DOC_CLASS_ID")[0].value = "7004";
 				//20180418 추가 끝
             } else if (getInfo("etid") == "ISU_ST") {
-                document.getElementsByName("DOC_CLASS_NAME")[0].value = "전자전표";
-				document.getElementsByName("DOC_CLASS_ID")[0].value = "7045";
+				if(getInfo("docType") == "01"){
+					//alert("01");
+					document.getElementsByName("DOC_CLASS_NAME")[0].value = "★전자전표(19.01~)/1.전자전표-법인카드/";
+					document.getElementsByName("DOC_CLASS_ID")[0].value = "7080";
+					//document.getElementsByName("DOC_CLASS_NAME")[0].value = "전자전표";
+				//document.getElementsByName("DOC_CLASS_ID")[0].value = "7045";
+				}else if(getInfo("docType") =="02"){
+					//alert("02");
+					document.getElementsByName("DOC_CLASS_NAME")[0].value = "★전자전표(19.01~)/2.전자전표-세금계산서/";
+				    document.getElementsByName("DOC_CLASS_ID")[0].value = "7081";
+				}else if(getInfo("docType") =="99"){
+					//alert("99");
+					document.getElementsByName("DOC_CLASS_NAME")[0].value = "★전자전표(19.01~)/3.전자전표-기타 외/";
+				    document.getElementsByName("DOC_CLASS_ID")[0].value = "7083";
+				}else{
+					//alert("else");
+				}
+                //document.getElementsByName("DOC_CLASS_NAME")[0].value = "전자전표";
+				//document.getElementsByName("DOC_CLASS_ID")[0].value = "7045";
 			//20180619 추가
             } else if (getInfo("etid") == "ISU_EXCH") {
                 document.getElementsByName("DOC_CLASS_NAME")[0].value = "전자전표/전자전표/";
@@ -293,8 +313,8 @@
         //본문 내용
         if (getInfo("editortype") == "2" || (getInfo("editortype") == "4" && window.ActiveXObject)) {//2.TagFree, 3.XFree, 4.TagFree/XFree
         } else if (getInfo("editortype") == "6" || (getInfo("editortype") == "7" && !window.ActiveXObject)) {// 5.Activesquare, 6.CrossEditor, 7.ActivesquareDefault/CrossEditor -
-        } else if (getInfo("editortype") == "8") {  //dext5 add
-            dextgetContent();
+        } else if (getInfo("editortype") == "8") {  //dext5 add 
+			dextgetContent();
         } else {
             if (getInfo("BODY_CONTEXT") != undefined) {
                 setBodyContext(getInfo("BODY_CONTEXT"));
@@ -303,8 +323,9 @@
             }
         }
     }
-
-
+	
+	var editInterval = null;
+	
     function getBodyContext() {
         if (getInfo("editortype") == "3" || (getInfo("editortype") == "4" && !window.ActiveXObject)) {//2.TagFree, 3.XFree, 4.TagFree/XFree
             document.getElementById("dhtml_body").value = tbContentElement.GetHtmlValue();

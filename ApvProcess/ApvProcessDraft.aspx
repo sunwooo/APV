@@ -70,8 +70,13 @@
 
             if(String(opener.parent.editor.location).indexOf("_read.htm") == -1 &&  opener.getInfo("loct") == "REDRAFT" ) //편집 모드
             {
-                document.getElementById("tr_memo").style.display="";
-                 g_height = g_height+ 50;
+                //2020.01.03 PSW 특정양식일 때 변경사유 입력 제거 
+                if (opener.getInfo("fmpf").indexOf("WF_FORM_ISU_ACCOUNTING_") > -1) {
+                    document.getElementById("tr_memo").style.display = "none";
+                } else {
+                    document.getElementById("tr_memo").style.display = "";
+                    g_height = g_height+ 50;
+                }
             }
             window.resizeTo(500,g_height+25);
 		}	

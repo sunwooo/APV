@@ -139,6 +139,8 @@
                     <input type="text" id="dpApprFormDTEnd1" name="dpApprFormDTEnd" readonly="readonly" style="font-size: 9pt; padding-left: 3px; width: 70px;"/>&nbsp;<a class="a1" href="javascript:ResetDateField(1);">초기화</a>
                     <input type="hidden" id="mField" name="hdn_dpApprFormDTStart1" /><input type="hidden" id="mField" name="hdn_dpApprFormDTEnd1" />&nbsp;&nbsp;&nbsp;&nbsp;
                     <b>(<input type="text" id="mField" name="txtNights" style="height:25px;width:15px; font-weight:bold; text-align:right; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;" />박 <input type="text" id="mField" name="txtDays" style="height:25px;width:15px; font-weight:bold; text-align:right; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;" />일)</b>
+                    <!-- 190828_김선재 : 페타시스, "출장(예정)기간"필드에 문구추가 -->
+                    <br/><span name="applNotice"></span>
                 </td>                         
             </tr>
             <tr>                
@@ -316,6 +318,7 @@
 
     window.onload = initOnload;
     function initOnload() {
+
         initialize();
 
         //예산사용부서 콤보박스항목 가져오기
@@ -336,6 +339,11 @@
         }
         else  //편집시
             SetRepeatData();
+
+        // 190722_김선재 : 페타시스, "출장(예정)기간"필드에 문구추가
+        if(getInfo("etid") == "ISU_PS") {
+            $("span[name=applNotice]").text("※ 휴일/주휴/공휴일에 출장 시 아래 비고란에 필히 비근로일을 작성해주시기 바랍니다.");
+        }
 
     }
 
@@ -817,7 +825,33 @@
         $("input[name=txtDays]").val("");
     }
 
-    //몇박몇일 구하기
+    /*
+        몇박몇일 구하기
+        191119_김선재 : 이수 페타시스 출장기간 한달로 제한
+    */
+    function ValidateDate(pId) {
+
+        var vArrSDate = $("#dpApprFormDTStart1").val().split("-");
+        var vArrEDate = $("#dpApprFormDTEnd1").val().split("-");
+        var vSDate = new Date(vArrSDate[0], vArrSDate[1] - 1, vArrSDate[2]).getTime();
+        var vEDate = new Date(vArrEDate[0], vArrEDate[1] - 1, vArrEDate[2]).getTime();
+
+        var vNights = (vEDate - vSDate) / (1000 * 60 * 60 * 24);
+        var vDays = vNights + 1;
+
+        //이수 페타시스 출장기간 한달로 제한
+        if(getInfo("etid") == "ISU_PS" && vNights > 30) {
+            alert("출장 기간은 한달을 초과할 수 없습니다.");
+            $("#"+pId+", input[name=txtNights], input[name=txtDays]").val("");
+            return;
+        }
+
+        //alert(vNights + "박 " + vDays+"일");
+        $("input[name=txtNights]").val(vNights);
+        $("input[name=txtDays]").val(vDays);
+    }
+
+    //몇박몇일 구하기 (Ex) ValidateDate로 대체
     function GetNightsNDays() {
 
         var vArrSDate = $("#dpApprFormDTStart1").val().split("-");

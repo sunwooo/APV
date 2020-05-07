@@ -238,7 +238,9 @@ public partial class COVIFlowNet_Admin_InstMgr_switchPI2Abort :PageBase // PageB
             /* 2016.04.21 jkh 수정 (이수시스템 전자증빙 회람) WF_SLIP */
 			/* 2018.08.16 PSW 수정 (이수시스템 국내/해외출장신청서) */
 			/* 2018.09.14 PSW 수정 (이수화학 해외출장신청서) */
+			/* 2019.01.08 PSW 수정 (주이수 전자증빙시스템) */
             if (sFMPF == "WF_FORM_COMMON_VACATION" 
+                || sFMPF == "WF_FORM_COMMON_VACATION_2" 
                 || sFMPF == "WF_FORM_COMMON_VACATION_ST" 
                 || sFMPF == "WF_FORM_COMMON_VACATION_CHG" 
                 || sFMPF == "WF_FORM_COMMON_EDUCATION" 
@@ -252,7 +254,10 @@ public partial class COVIFlowNet_Admin_InstMgr_switchPI2Abort :PageBase // PageB
 				|| sFMPF == "WF_FORM_HR_OUT_TRIP_4"
 				|| sFMPF == "WF_FORM_COMMON_EDUCATION_3"
 				|| sFMPF == "WF_FORM_HR_OUT_TRIP_5"
-				|| sFMPF == "WF_SLIP_ISU")
+				|| sFMPF == "WF_SLIP_ISU"
+				|| sFMPF == "WF_FORM_ISU_ACCOUNTING_003"
+				|| sFMPF == "WF_FORM_ISU_ACCOUNTING_007"
+				|| sFMPF == "WF_FORM_ISU_ACCOUNTING_011")
             {
                 FormWS ws = new FormWS();
                 ws.ExecuteLegacy(sFMPF, COVIFlowCom.Common.GetProp(elmRoot, "formdata/BODY_CONTEXT", false), "<FORM_INFO_EXT></FORM_INFO_EXT>", COVIFlowCom.Common.GetProp(elmRoot, "apvlist", false), false, sMode, "", sUSID, sFIID);

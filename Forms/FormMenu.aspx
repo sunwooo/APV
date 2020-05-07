@@ -301,10 +301,20 @@
  
 	<script type="text/javascript" language="javascript">
 			
-			if("<%=Session["user_ent_code"].ToString()%>" == "ISU_ST"){
+			/*
+					200110_김선재 : 내부회계 관련 문서 작성가이드 적용
+			*/
+			if(getInfo("fmpf").indexOf("WF_FORM_ISU_ACCOUNTING") != -1) {console.log($("#btnGuide").html().replace(/결재 가이드/g, '작성 가이드'));
+                btnGuide.style.display="";
+                // 버튼명칭 변경 : 결재 가이드 -> 작성 가이드
+                $("#btnGuide").html(
+                		$("#btnGuide").html().replace(/결재 가이드/g, '작성 가이드')
+                );
+
+			}else if("<%=Session["user_ent_code"].ToString()%>" == "ISU_ST"){
                 btnGuide.style.display="";
                 
-           }else if("<%=Session["user_ent_code"].ToString()%>" == "ISU"){
+      }else if("<%=Session["user_ent_code"].ToString()%>" == "ISU"){
                 btnGuide.style.display="";
                 
 			}else{
@@ -314,8 +324,16 @@
             function eventent(){
             
                 //alert("<%=Session["user_ent_code"].ToString()%>");
-                
-                if("<%= Session["user_ent_code"].ToString() %>" == "ISU_ST"){
+                /*
+										200110_김선재 : 내부회계 관련 문서 작성가이드 적용
+								*/
+                if(getInfo("fmpf").indexOf("WF_FORM_ISU_ACCOUNTING") != -1){
+                    
+                    url = "http://gw.isu.co.kr/Coviweb/Approval/Forms/formGuideInAcc.aspx";
+                    targetName = "guide"
+
+                    window.open(url, targetName, "height=710,width=860,status=yes,toolbar=no,menubar=no, scrollbars=yes, resizable=yes") ;
+                }else if("<%= Session["user_ent_code"].ToString() %>" == "ISU_ST"){
                     
                     url = "http://gw.isu.co.kr/Coviweb/Approval/Forms/formGuide.aspx";
                     targetName = "guide"
@@ -459,6 +477,7 @@
 			var gLabel_year_5	= "<%=Resources.Approval.lbl_year_5 %>";
 			var gLabel_year_7	= "<%=Resources.Approval.lbl_year_7 %>";
 			var gLabel_year_10	= "<%=Resources.Approval.lbl_year_10 %>";
+			var gLabel_year_15	= "<%=Resources.Approval.lbl_year_15 %>";
 			var gLabel_permanence	= "<%=Resources.Approval.lbl_permanence %>";
 			var gLabel_link_delete	= "<%=Resources.Approval.lbl_link_delete %>";
 			var gLabel_dept_audit	= "<%=Resources.Approval.lbl_dept_audit %>";

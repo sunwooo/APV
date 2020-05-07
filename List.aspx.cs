@@ -27,7 +27,9 @@ namespace COVINet.COVIFlowNet
         public string strRSSButtonValue = string.Empty; //2011.04.11 추가
         public string strYear, strMonth, strDate; //2011.04.07 추가
         public string gEntCode = String.Empty;  
-
+		public string strPersonCode = string.Empty;
+		
+		
 		protected void Page_Load(object sender, EventArgs e)
         {
             string str_L_Year = "", str_L_Month = ""; //2011.04.07 추가
@@ -41,7 +43,8 @@ namespace COVINet.COVIFlowNet
             }
             #endregion
 
-
+			//2019-10-14 사용자ID 추가 PSW
+			strPersonCode = Sessions.PERSON_CODE;
 
             if (!IsPostBack)
             {

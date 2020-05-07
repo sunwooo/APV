@@ -65,6 +65,7 @@
             <span ID="spanApprove" style="display:none;" >
             <a class="btnov" href="#" onclick="javascript:approve_onClick();" ><span><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon03_decide.gif" align="middle" />&nbsp;<%=Resources.Approval.btn_blocApprove %></span></a>
             </span>
+			
             <span id="spanExcel" style="display:;">
             <a ID="approve_bt_excel" class="btnov" href="#" onclick="javascript:SavePC();" ><span><img src="<%=Session["user_thema"] %>/Covi/Common/btn/btn_icon01_save.gif" align="middle" />&nbsp;<%= Resources.Approval.lbl_SaveToExcel %></span></a>
             </span>

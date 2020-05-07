@@ -340,7 +340,16 @@ function initButtons() {
                 document.getElementById("tblReceipt").style.display = "none";
                 document.getElementById("tblGroup").style.display = "none";
                 document.getElementById("tblPAssist").style.display = (getInfo("scPCoo") == 1 ? "" : "none"); document.getElementById("tblPAssistPL").style.display = (getInfo("scPCooPL") == 1 ? "" : "none");
-                document.getElementById("tblDAssist").style.display = "none"; document.getElementById("tblDAssistPL").style.display = "none";
+                /*
+                    191216_김선재 : 특정 결재문서 문서수신 시 "부서합의" 버튼 넣기
+                */
+                if(
+                    getInfo("fmpf").toUpperCase() == "WF_FORM_ERP_EVENT" /*경조금 신청서*/
+                ) {
+                    document.getElementById("tblDAssist").style.display = ""; document.getElementById("tblDAssistPL").style.display = "none";
+                }else {
+                    document.getElementById("tblDAssist").style.display = "none"; document.getElementById("tblDAssistPL").style.display = "none";
+                }
                 document.getElementById("divtApvLine").style.display = "";
                 //document.getElementById("tApvLine").style.display="";
                 //document.getElementById("tblApplyLine").style.display=""; //개인결재선적용
@@ -1280,7 +1289,8 @@ function addRecDept() {
             if (bSelect) {
                 mType = 1;
             } else {
-                mType = 0;
+				// 배포그룹을 0으로 보내면 배포그룹이 아니라 부서로 들어가서 그룹이 하나의 부서로 체크되도록 만들기에 주석처리함 2020-03-19 Covision HSB
+                //mType = 0;
             }
         }
     } else if (selTab == "tDeployList") {//수신처그룹
@@ -1328,6 +1338,26 @@ function addRecDept() {
 
 //oList --> 조직도 화면에서 리턴값으로 넘어온 xml 데이타
 function insertToList(oList) { //debugger;
+	/**
+     * (대표이사) 수신부서 지정 불가요청 처리 PSW 2020-04-09
+     * 업무연락, 인사발령통보서 제외
+     * */
+    var elmList, emlNode;
+    elmList = oList.selectNodes("item");
+    for (var i = 0; i < elmList.length; i++) {
+        emlNode = elmList.nextNode();
+        if (emlNode == null) emlNode = elmList[i];
+        if (emlNode.selectSingleNode("AN") != null) {
+            //alert(emlNode.selectSingleNode("AN").text);
+        }
+    }
+
+    if (emlNode.selectSingleNode("AN").text == "ISU_STISU_ST002" && getInfo("fmpf") != "WF_FROM_ISU_ALL_020" && getInfo("fmpf") != "WF_FORM_ISU_ST_20") {
+        alert("대표이사를 수신부서로 지정할 수 없습니다.");
+        return false;
+    }
+    /* 적용끝 */
+	
     m_modeless = null;
     var xpathNew = "";
     var oSrcDoc = CreateXmlDocument();
@@ -2423,8 +2453,11 @@ function setApvList() {
     //{
         //2014-03-25 hyh 수정
         //if (getInfo("fmpf") == "WF_FORM_ISU_ALL_COM010") {  //대내공문일경우
-        if (getInfo("fmpf") == "WF_FORM_ISU_ALL_COM010" || getInfo("fmnm").indexOf("대외공문") == 0) {  //대내공문, 대외공문일경우
-            //2014-03-25 hyh 수정 끝
+        //2020-01-28 psw 수정
+        //if (getInfo("fmpf") == "WF_FORM_ISU_ALL_COM010" || getInfo("fmnm").indexOf("대외공문") == 0) {  //대내공문, 대외공문일경우
+        if (getInfo("fmpf") == "WF_FORM_ISU_ALL_COM010" || (getInfo("fmnm").indexOf("대외공문") == 0 && getInfo("fmpf") != "WF_FORM_ISU_ALL_COM030")) {  //대내공문, 대외공문일경우 (대외공문_접수 양식은 제외)
+        //2020-01-28 psw 수정 끝
+		//2014-03-25 hyh 수정 끝
             var vStampRightsCnt = 0;
             var vStampRightsSeq = 0;
             var vSeq = 0;
@@ -3628,7 +3661,11 @@ function setDistDept(oList) {
 		    }
 		    //2016.06.21 PSW 끝
 			
-            if (mType == 0 && !bchkAbsent) {
+			
+			
+			// 배포그룹도 하위부서 추가하기위해 2도 체크박스 생성 2020-03-19 Covision HSB
+			// if (mType == 0 && !bchkAbsent) {
+            if ((mType == 0 || mType == 2) && !bchkAbsent) {
 
                 sRecDept += ":N"; //Y에서 N으로 변경, 하위부서포함 default에서 미포함으로 변경
                 sRecDeptList += "|N"; //Y에서 N으로 변경, 하위부서포함 default에서 미포함으로 변경
@@ -3755,8 +3792,11 @@ function make_selRec(sRecList) {
                 }
                 var strName = aRec[i].split(":")[1];
                 eTD = eTR.insertCell(eTR.cells.length); eTD.innerHTML = getLngLabel(strName, false, "^"); eTD.height = 20 + "px";
-                //if(mType==0)
-                if (ii == 0) {
+                
+				// 배포그룹도 하위부서 체크박스 생성 2020-03-19 Covision HSB
+				//if(mType==0)
+                //if (ii == 0) {
+				if (ii == 0 || ii == 2) {	
                     eTD = eTR.insertCell(eTR.cells.length);
                     if (aRec[i].split(":")[0] == "ALL") { //전부서 처리
                         eTD.innerHTML = "<INPUT id='' Type='Checkbox' disabled style=\"padding-right=15px\" >";

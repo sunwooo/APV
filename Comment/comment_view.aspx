@@ -114,7 +114,12 @@
 		var elmList;
 		if(window.addEventListener){
 			//elmList = elmRoot.selectNodes("division/step/ou/*[name()='person' or name()='role']/taskinfo/comment");
-            elmList = elmRoot.selectNodes("division/step/ou/(person|role)/taskinfo/comment");
+			var agent = navigator.userAgent.toLowerCase();
+			if ( (navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1) )
+	            		elmList = elmRoot.selectNodes("division/step/ou/(person|role)/taskinfo/comment");
+			else
+				elmList = elmRoot.selectNodes("division/step/ou/*[name()='person' or name()='role']/taskinfo/comment");
+//				elmList = elmRoot.selectNodes("division/step/ou/person|role/taskinfo/comment");
 		}else{
 			elmList = elmRoot.selectNodes("division/step/ou/(person|role)/taskinfo/comment");
 		}
@@ -149,7 +154,7 @@
 				    //alert(opener.parent.location);
 				    sComment += "<td class='BTable_bg08' valign='top' width='20%'>" + opener.parent.editor.formatDate(elm.parentNode.getAttribute("datecompleted")) + "</td>";
 			    }
-			    sComment +="<td class='BTable_bg08' width='40%' height='100%' style='padding-left:4; word-break:break-all'>"+elm.text.replace(/\n/g,"<br />")+"</td>";
+			    sComment +="<td class='BTable_bg08' width='40%' height='100%' style='padding-left:4; word-break:break-all'>"+elm.text.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/\n/g,"<br />")+"</td>";
 			    sComment +="</tr>";
             }
 		}
@@ -180,7 +185,7 @@ if(opener.getInfo("gloct")=="DEPART"){
                                           //sComment +="<tr> <td class='BTable_bg08' valign='top' width='20%'>"+getLngLabel(m_CommentList[m_CommentList.length-1].getAttribute("COMMENT").split("rejectedtodept&")[1].split("&")[0] ,false)+"</td>";
 	   		                              //sComment +="<td class='BTable_bg08' valign='top' width='20%'>"+getLngLabel(m_CommentList[m_CommentList.length-1].getAttribute("USER_NAME").split(";")[0],false)+"</td>";
  			                              //sComment += "<td class='BTable_bg08' valign='top' width='20%'>" + m_CommentList[m_CommentList.length-1].getAttribute("INSERT_DATE").split("T")[0] + "</td>";
-  			                              //sComment +="<td class='BTable_bg08' width='40%' height='100%' style='padding-left:4; word-break:break-all'>"+sStr.replace(/\n/g,"<br />")+"</td>";
+  			                              //sComment +="<td class='BTable_bg08' width='40%' height='100%' style='padding-left:4; word-break:break-all'>"+sStr.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/\n/g,"<br />")+"</td>";
    			                              //sComment +="</tr>";
                                         }
                                         else
@@ -188,7 +193,7 @@ if(opener.getInfo("gloct")=="DEPART"){
                                          sComment +="<tr> <td class='BTable_bg08' valign='top' width='20%'>"+getLngLabel(m_CommentList[m_CommentList.length-1].getAttribute("COMMENT").split("rejectedtodept&")[1].split("&")[0] ,false)+"</td>";
 	   		                             sComment +="<td class='BTable_bg08' valign='top' width='20%'>"+getLngLabel(m_CommentList[m_CommentList.length-1].getAttribute("USER_NAME").split(";")[0],false)+"</td>";
  			                             sComment += "<td class='BTable_bg08' valign='top' width='20%'>" + m_CommentList[m_CommentList.length-1].getAttribute("INSERT_DATE").split("T")[0] + "</td>";
-  			                             sComment +="<td class='BTable_bg08' width='40%' height='100%' style='padding-left:4; word-break:break-all'>"+sStr.replace(/\n/g,"<br />")+"</td>";
+  			                             sComment +="<td class='BTable_bg08' width='40%' height='100%' style='padding-left:4; word-break:break-all'>"+sStr.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/\n/g,"<br />")+"</td>";
    			                             sComment +="</tr>";
                                         }
                                     }
@@ -197,7 +202,7 @@ if(opener.getInfo("gloct")=="DEPART"){
                                          sComment +="<tr> <td class='BTable_bg08' valign='top' width='20%'>"+getLngLabel(m_CommentList[m_CommentList.length-1].getAttribute("COMMENT").split("rejectedtodept&")[1].split("&")[0] ,false)+"</td>";
 	   		                             sComment +="<td class='BTable_bg08' valign='top' width='20%'>"+getLngLabel(m_CommentList[m_CommentList.length-1].getAttribute("USER_NAME").split(";")[0],false)+"</td>";
  			                             sComment += "<td class='BTable_bg08' valign='top' width='20%'>" + m_CommentList[m_CommentList.length-1].getAttribute("INSERT_DATE").split("T")[0] + "</td>";
-  			                             sComment +="<td class='BTable_bg08' width='40%' height='100%' style='padding-left:4; word-break:break-all'>"+sStr.replace(/\n/g,"<br />")+"</td>";
+  			                             sComment +="<td class='BTable_bg08' width='40%' height='100%' style='padding-left:4; word-break:break-all'>"+sStr.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/\n/g,"<br />")+"</td>";
    			                             sComment +="</tr>";
                                        
 
@@ -223,7 +228,7 @@ if(opener.getInfo("gloct")=="DEPART"){
 				sComment +="<tr> <td class='BTable_bg08' width='25%' >"+(elm.selectSingleNode("USER_NAME").text.indexOf("@")>-1?getLngLabel(elm.selectSingleNode("USER_NAME").text.split("@")[1],false):"&nbsp;")+"</td>";
 				sComment +="<td class='BTable_bg08' width='15%'>"+(elm.selectSingleNode("USER_NAME").text.indexOf("@")>-1?getLngLabel(elm.selectSingleNode("USER_NAME").text.split("@")[0],false):getLngLabel(elm.selectSingleNode("USER_NAME").text,false))+"</td>";
 				sComment +="<td class='BTable_bg08' width='20%'>"+opener.parent.editor.formatDate(elm.selectSingleNode("INSERT_DATE").text) + "</td>";
-				sComment +="<td class='BTable_bg08' width='40%' height='100%' style='padding-left:4; word-break:break-all'>"+elm.selectSingleNode("COMMENT").text.replace(/\n/g,"<br />")+"</td>";
+				sComment +="<td class='BTable_bg08' width='40%' height='100%' style='padding-left:4; word-break:break-all'>"+elm.selectSingleNode("COMMENT").text.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/\n/g,"<br />")+"</td>";
 				sComment +="</tr>";
 			}
 		}
@@ -254,7 +259,7 @@ if(opener.getInfo("gloct")=="DEPART"){
 				sComment +="<tr> <td class='BTable_bg08' width='25%' >"+getLngLabel(elm.selectSingleNode("USER_NAME").text.split("@")[1],false)+"</td>";
 				sComment +="<td class='BTable_bg08' width='15%'>"+getLngLabel(elm.selectSingleNode("USER_NAME").text.split("@")[0],false)+"</td>";
 				sComment +="<td class='BTable_bg08' width='20%'>"+opener.parent.editor.formatDate(elm.selectSingleNode("INSERT_DATE").text) + "</td>";
-				sComment +="<td class='BTable_bg08' width='40%' height='100%' style='padding-left:4; word-break:break-all'>"+elm.selectSingleNode("COMMENT").text.replace(/\n/g,"<br />")+"</td>";
+				sComment +="<td class='BTable_bg08' width='40%' height='100%' style='padding-left:4; word-break:break-all'>"+elm.selectSingleNode("COMMENT").text.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/\n/g,"<br />")+"</td>";
 				sComment +="</tr>";
 			}
 		}else{
@@ -286,7 +291,7 @@ if(opener.getInfo("gloct")=="DEPART"){
 //				sComment +="<tr> <td class='BTable_bg08' width='25%' >"+getLngLabel(elm.selectSingleNode("USER_NAME").text.split("@").length>1?elm.selectSingleNode("USER_NAME").text.split("@")[1]:"",false)+"</td>";
 //				sComment +="<td class='BTable_bg08' width='15%'>"+getLngLabel(elm.selectSingleNode("USER_NAME").text.split("@")[0],false)+"</td>";
 //				sComment +="<td class='BTable_bg08' width='20%'>"+opener.parent.editor.formatDate(elm.selectSingleNode("INSERT_DATE").text) + "</td>";
-//				sComment +="<td class='BTable_bg08' width='40%' height='100%' style='padding-left:4; word-break:break-all'>"+elm.selectSingleNode("COMMENT").text.replace(/\n/g,"<br />")+"</td>";
+//				sComment +="<td class='BTable_bg08' width='40%' height='100%' style='padding-left:4; word-break:break-all'>"+elm.selectSingleNode("COMMENT").text.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/\n/g,"<br />")+"</td>";
 //				sComment +="</tr>";
 //			}
 //    	    sComment +="</table>";

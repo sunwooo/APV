@@ -121,10 +121,10 @@
                 <td colspan="4" valign="top">
                     <table id="tblDataRowPerson" cellpadding="0" cellspacing="0" border="0" width="100%">
                         <tr>
-                            <td align="center" style="height:30px;width:60px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">구분</td>
-                            <td align="center" style="height:30px;width:90px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">사번</td>
+                            <td align="center" style="height:30px;width:100px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">구분</td>
+                            <td align="center" style="height:30px;width:120px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">사번</td>
                             <td align="center" style="height:30px;width:120px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">성명</td>
-                            <td align="center" style="height:30px;width:80px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">직위</td>
+                            <td align="center" style="height:30px;width:100px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">직위</td>
                             <td align="center" style="height:30px;width:120px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">소속</td>
                             <td align="center" style="height:30px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">예산사용부서&nbsp;&nbsp;&nbsp;<a class="a2" href="javascript:AddRowDataPerson();"><b>[+]</b></a>&nbsp;<a class="a2" href="javascript:DelRowDataPerson();"><b>[-]</b></a></td>               
                         </tr>
@@ -133,7 +133,7 @@
             </tr>
             <tr>                
                 <td align="center" style="height:30px;width:100px;  font-weight:bold; background-color:#F6F6F6">출장지</td>
-                <td align="center" width="250px;"><input type="text" id="mField" name="txtPlace" style="height:20px;width:93%" /></td>
+                <td align="center" style="width:241px;"><input type="text" id="mField" name="txtPlace" style="height:20px;width:93%" /></td>
                 <td align="center" style="height:30px; width:100px; font-weight:bold; background-color:#F6F6F6">교통수단</td>
                 <td align="center"><input type="text" id="mField" name="txtWay" style="height:20px;width:90%;" /></td>              
             </tr>
@@ -145,6 +145,8 @@
                     <input type="text" id="dpApprFormDTEnd1" name="dpApprFormDTEnd" readonly="readonly" style="font-size: 9pt; padding-left: 3px; width: 70px;"/>&nbsp;<a class="a1" href="javascript:ResetDateField(1);">초기화</a>
                     <input type="hidden" id="mField" name="hdn_dpApprFormDTStart1" /><input type="hidden" id="mField" name="hdn_dpApprFormDTEnd1" />&nbsp;&nbsp;&nbsp;&nbsp;
                     <b>(<input type="text" id="mField" name="txtNights" style="height:25px;width:15px; font-weight:bold; text-align:right; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;" />박 <input type="text" id="mField" name="txtDays" style="height:25px;width:15px; font-weight:bold; text-align:right; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;" />일)</b>
+                    <!-- 190828_김선재 : 페타시스, "출장(예정)기간"필드에 문구추가 -->
+                    <br/><span name="applNotice"></span>
                 </td>                         
             </tr>
             <tr>                
@@ -165,7 +167,7 @@
                 <td colspan="4" valign="top">
                     <table id="tblDataRowCost" cellpadding="0" cellspacing="0" border="0" width="100%">
                         <tr>
-                            <td align="center" style="height:30px; width:60px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">구분</td>
+                            <td align="center" style="height:30px; width:100px; font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">구분</td>
                             <td align="center" style="width:100px;font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">일비<br />(식비포함)</td>
                             <td align="center" style="width:100px;font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">숙박비</td>
                             <td align="center" style="font-weight:bold; background-color:#F6F6F6; BORDER-RIGHT: #D5D5D5 1px solid; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;">교통비</td>
@@ -309,6 +311,12 @@
 
         //편집모드시 콤보박스 셋팅 (HIW)
         SetComboBox();
+
+        // 190722_김선재 : 페타시스, "출장(예정)기간"필드에 문구추가
+        if(getInfo("etid") == "ISU_PS") {
+            $("span[name=applNotice]").text("※ 휴일/주휴/공휴일에 출장 시 아래 비고란에 필히 비근로일을 작성해주시기 바랍니다.");
+            
+        }
 
     }
 
@@ -492,7 +500,9 @@
         $("#tblDataRowCost tr").each(function (i) {
             //debugger;
             if (i > 0 && (i < vRowCnt-1)) {
-                if ($("input[name=txtSubTot_" + i + "]").val() == "" || $("input[name=txtSubTot_" + i + "]").val() == "0") {
+                /* 190916_김선재 : 페타시스 윤규미씨, 출장비용에 0원도 입력할 수 있도록 수정 요청
+                if ($("input[name=txtSubTot_" + i + "]").val() == "" || $("input[name=txtSubTot_" + i + "]").val() == "0") {*/
+                if ($("input[name=txtSubTot_" + i + "]").val() == "") {
                     alert("비용을 입력하세요");
                     bResult = false;
                     return false;
@@ -746,6 +756,48 @@
     function SearchUserFromHR(pNo) {
 
         fn_OpenDialog2("/CoviWeb/Approval/Forms/Popup/UserSearchFromHR.aspx?kind=FromTrip&DataRowNo=" + pNo, "", 500, 390, "scroll");   //fix/scroll
+    }
+
+    /*
+        몇박몇일 구하기
+        191119_김선재 : 이수 페타시스 출장기간 한달로 제한
+    */
+    function ValidateDate(pId) {
+
+        var vArrSDate = $("#dpApprFormDTStart1").val().split("-");
+        var vArrEDate = $("#dpApprFormDTEnd1").val().split("-");
+        var vSDate = new Date(vArrSDate[0], vArrSDate[1] - 1, vArrSDate[2]).getTime();
+        var vEDate = new Date(vArrEDate[0], vArrEDate[1] - 1, vArrEDate[2]).getTime();
+
+        var vNights = (vEDate - vSDate) / (1000 * 60 * 60 * 24);
+        var vDays = vNights + 1;
+
+        //이수 페타시스 출장기간 한달로 제한
+        if(getInfo("etid") == "ISU_PS" && vNights > 30) {
+            alert("출장 기간은 한달을 초과할 수 없습니다.");
+            $("#"+pId+", input[name=txtNights], input[name=txtDays]").val("");
+            return;
+        }
+
+        //alert(vNights + "박 " + vDays+"일");
+        $("input[name=txtNights]").val(vNights);
+        $("input[name=txtDays]").val(vDays);
+    }
+
+    //몇박몇일 구하기 (Ex) ValidateDate로 대체
+    function GetNightsNDays() {
+
+        var vArrSDate = $("#dpApprFormDTStart1").val().split("-");
+        var vArrEDate = $("#dpApprFormDTEnd1").val().split("-");
+        var vSDate = new Date(vArrSDate[0], vArrSDate[1] - 1, vArrSDate[2]).getTime();
+        var vEDate = new Date(vArrEDate[0], vArrEDate[1] - 1, vArrEDate[2]).getTime();
+
+        var vNights = (vEDate - vSDate) / (1000 * 60 * 60 * 24);
+        var vDays = vNights + 1;
+
+        //alert(vNights + "박 " + vDays+"일");
+        $("input[name=txtNights]").val(vNights);
+        $("input[name=txtDays]").val(vDays);
     }
 
 

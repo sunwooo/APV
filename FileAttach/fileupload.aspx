@@ -31,20 +31,21 @@ function AttachFiles()
 	//debugger;
     try
     {
-        while(document.CoviUpload == null)
-        {
-        }
+        document.CoviUpload.AttachFiles();
+	    //2006.12.05 by wolf upload UI 변경
+	    //파일 추가 후 바로 파일 front로 올리기
+	    sendit();
+	    //2006.12.05 by wolf upload UI 변경 End
     }
     catch(e)
     {
-        alert(e);
+        intervalAttachFiles();
     }
-    
-	document.CoviUpload.AttachFiles();
-	//2006.12.05 by wolf upload UI 변경
-	//파일 추가 후 바로 파일 front로 올리기
-	sendit();
-	//2006.12.05 by wolf upload UI 변경 End
+}
+//smkim 20190117 첨부파일
+function intervalAttachFiles()
+{
+    setTimeout('AttachFiles()', 100);
 }
 
 function DeleteFiles()
@@ -594,15 +595,16 @@ function fileHref(name)
 }
 //2006.12.05 by wolf upload UI변경
 //창이 로딩되면서 파일선택창 나타나게
-function window.onload(){
+window.onload =  function () {
             if (window.document.readyState == "complete") {
                 document.CoviUpload.INIListFiles = '<%=strINIList %>';
                 document.CoviUpload.SetLangMode("<%=Session["user_language"].ToString()%>");
                 window.document.onreadystatechange = event_noop;
-                AttachFiles();
+                //smkim 20190117 첨부파일
+                intervalAttachFiles();
             }
-     
-}
+
+        };
 function event_noop(){return(false);}
 //2006.12.05 by wolf upload UI변경 End
 //-->

@@ -40,7 +40,25 @@ public partial class COVIFlowNet_Forms_FormMenu : PageBase
         }
         Page.UICulture = culturecode;
         Page.Culture = culturecode;
+            try
+            {
+                //2020-04-10 후난 중국어로 문서관리 이관을 위하여 추가함
+                    if (Request.QueryString["HUNAN"] != null)
+                    {
+                        if (Request.QueryString["HUNAN"].ToString() == "Y")
+                        {
+                                culturecode = "zh-CN";  //"ko -KR"; "en-US"; "ja-JP";
+                                strLangID = "zh-CN";    //"ko -KR"; "en-US"; "ja-JP";
 
+                                Page.UICulture = culturecode;
+                                Page.Culture = culturecode;
+                        }
+                    }
+            }
+            catch (Exception ex)
+            {
+                //throw new Exception("문서관리 중국어로 변환 중 오류", ex);
+            }
 
         //대결설정 표시
         if (System.Configuration.ConfigurationSettings.AppSettings[Session["user_ent_code"].ToString() + "_DeputyType"] != null)

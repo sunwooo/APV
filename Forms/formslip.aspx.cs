@@ -1454,6 +1454,7 @@ public partial class Approval_Forms_fromslip : PageBase
             sScript.Append("oDic.Add('fmfn','").Append(Request.QueryString["fmfn"]).Append("');\r\n");  //'Form File Name
             sScript.Append("oDic.Add('piid2','").Append(Request.QueryString["piid"]).Append("');\r\n");
             sScript.Append("oDic.Add('gbnno','").Append(Request.QueryString["gbnno"]).Append("');\r\n"); //20151230 전자증빙 id 추가 
+			sScript.Append("oDic.Add('docType','").Append(Request["docType"]).Append("');\r\n"); //20190125 전자증빙 docType추가 
 
 
             #region DSCR 보관 값들에 대한 조회 처리 추가 2010.12

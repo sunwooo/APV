@@ -39,7 +39,11 @@ var m_xmlHTTP=CreateXmlHttpRequest();
 window.onload= initOnload;
 function initOnload()
 {
-    GetEnt();
+    //GetEnt();
+	if (Form_name == "기안용지") {
+        document.getElementById("SelEnt").style.display = "";
+        GetEnt();
+    } 
 
     circulationinfo_ccrec = document.getElementById("circulationinfotxt_ccrec").value;
     circulationinfo_ref = document.getElementById("circulationinfotxt_ref").value;

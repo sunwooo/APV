@@ -54,6 +54,7 @@
 								</li>
 								<!--개인문서함 시작
 								//이준희(2010-10-15): Added an ID to the below <LI> to support SharePoint environment.	alert(this);-->
+								
 								<li id="liCEPSLIST" class="line_bg"><a href="javascript: void(0);" onclick="gotoFolder('list.aspx?uid=' + uid + '&amp;location=APPROVAL','미결함', this); switchSubMenu('target_1'); ChangType('menu_1_2')"; class="mmenu"><b><asp:Label ID="lbl_doc_person2" runat="server"></asp:Label></b>&nbsp;</a>
 										<!-- 서브 메뉴 시작 -->
 										<div id="submenu" name="target_1" style="display:block;">
@@ -386,6 +387,10 @@ function initOnload()
         //document.getElementById("liCEPSLISTDEPT").style.display = "none";  //부서문서함
         //document.getElementById("spnStoredDeptBox").style.display = "none";  //이관문서함 > 부서문서함
     }
+	
+	if(gPersonCode == "ISUTMP2" || gPersonCode == "ISU_CHTMP5" || gPersonCode == "ISU_PSTMP2" || gPersonCode == "ISU_CTTMP1"){
+		document.getElementById("liCEPSLISTMIGRATION").style.display = "none";  //이관문서보관함
+	}
 
 	return true;
 }

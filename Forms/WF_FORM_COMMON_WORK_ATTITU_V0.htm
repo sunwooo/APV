@@ -455,6 +455,18 @@
 
         //편집모드시 콤보박스 셋팅 (HIW)
         SetComboBox();
+
+        /*
+            191119_김선재 : 휴가신청서,근태신청서에서 특정근태 선택 시 안내문구 표기 요청
+        */
+        $("select[name^=cmbGoobun]").bind("change", function() {
+            if(
+                (getInfo("etid") == "ISU_PS") 
+             && $(this).find("option:selected").text() == "훈련(오후)"
+            ) {
+                alert("[ 훈련(오후) ] 사용 시 계획퇴근시간보다 일찍 퇴근하는 경우\n퇴근체크를 하였더라도 반드시 계획퇴근시간 이후로\n근태확인서 신청 必 (미신청 시 무단조퇴)");
+            }
+        });
     }
 
     function initialize() {

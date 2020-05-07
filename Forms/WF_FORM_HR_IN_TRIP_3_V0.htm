@@ -82,7 +82,7 @@
     <div class="draft_page">
 
         <!--######## 양식상단부분 공통 시작 #################################-->
-        <table class="table_2" summary="문서분류" cellpadding="0" cellspacing="0">
+        <table class="table_3" summary="문서분류" cellpadding="0" cellspacing="0">
             <tr style="display:none;">
                 <th>보안등급</th>
                 <td><select id="dField" name="DOC_LEVEL" onchange="DOC_LEVEL_Change(this);"></select></td>	
@@ -115,10 +115,22 @@
             </tr>
             <tr>
                 <th>신청구분<span class="txt_red">*</span></th>
-                <td><input type="radio" id="mField" name="OPT_Guboon" value="출장신청" onclick="ChangeGuboonRdo(1);" style="border:0px;" checked />출장신청 <input type="radio" id="mField" name="OPT_Guboon" value="출장취소" onclick="ChangeGuboonRdo(2);" style="border:0px;" />출장취소</td>
-                <th>발&nbsp;신&nbsp;</th>
-                <td><input id="mField" name="txtSender" datafld="SUBJECT" style="width:95%; height:20px;" /></td>	
-                <th>수&nbsp;신</th>
+                <td style="width:70px;">
+<!--
+    200225_김선재 : 시스템 국내출장신청서 프로젝트 구분 추가
+
+                    <input type="radio" id="mField" name="OPT_Guboon" value="출장신청" onclick="ChangeGuboonRdo(1);" style="border:0px;" checked />출장신청<br/>
+                    <input type="radio" id="mField" name="OPT_Guboon" value="출장취소" onclick="ChangeGuboonRdo(2);" style="border:0px;" />출장취소
+-->
+                    <select id="mField" name="OPT_Guboon" onchange="ChangeGuboonRdo()">
+                        <option value="출장신청">출장신청</option>
+                        <option value="출장취소">출장취소</option>
+                        <option value="프로젝트">프로젝트</option>
+                    </select>
+                </td>
+                <th style="width:55px;">발&nbsp;신&nbsp;</th>
+                <td><input id="mField" name="txtSender" datafld="SUBJECT" style="width:99%; height:20px;" /></td>	
+                <th style="width:55px;">수&nbsp;신</th>
                 <td><input id="mField" name="txtReceiver" datafld="SUBJECT" style="width:99%; height:20px;" /></td>	
             </tr>
         </table>
@@ -214,7 +226,7 @@
                 </td>      
             </tr>      
             <tr>                
-                <td align="center" style="height:30px; width:101px; font-weight:bold; background-color:#F6F6F6">비고</td>
+                <td align="center" style="height:30px; width:102px; font-weight:bold; background-color:#F6F6F6">비고</td>
                 <td colspan="3"><textarea type="text" rows="4" id="mField" name="txtBigo2" style="height:80%;width:90%;  BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;"></textarea></td>
             </tr>
         </table>
@@ -511,10 +523,29 @@
     function dupCheck(pNo) {
 		
         var vGubun = "";
+        var gntCd = "";
+/*
+    200225_김선재 : 시스템 국내출장신청서 프로젝트 구분 추가
+
         if ($('input:radio[name=OPT_Guboon]:checked').val() == "출장신청")
             vGubun = "10";
         else
             vGubun = "20";
+*/
+        switch($("select[name=OPT_Guboon]").val()){
+            case "출장신청":
+                vGubun = "10";
+                gntCd = "203";
+                break;
+            case "출장취소":
+                vGubun = "20";
+                gntCd = "203";
+                break;
+            case "프로젝트":
+                vGubun = "10";
+                gntCd = "204";
+                break;
+        }
 
         var url = "/CoviWeb/Approval/CallBack.aspx";
         //국내출장 :203
@@ -628,6 +659,8 @@
 
         return bResult;
     }
+/*
+    200225_김선재 : 시스템 국내출장신청서 프로젝트 구분 추가
 
     //출장신청구분 레디오버튼 클릭시 (HIW)
     function ChangeGuboonRdo(pKind) {
@@ -635,6 +668,21 @@
             $('#spanSubmitDesc').html("출장");
         else
             $('#spanSubmitDesc').html("출장 취소");
+    }
+*/
+    function ChangeGuboonRdo() {
+        var selVal = $("select[name=OPT_Guboon]").val();
+        switch(selVal){
+            case "출장신청":
+                $('#spanSubmitDesc').html("출장");
+                break;
+            case "출장취소":
+                $('#spanSubmitDesc').html("출장 취소");
+                break;
+            case "프로젝트":
+                $('#spanSubmitDesc').html("프로젝트 출장");
+                break;
+        }
     }
 
     function setBodyContext(sBodyContext) {
@@ -769,6 +817,12 @@
                 document.getElementsByName(nodeNm)[0].value = nodeVal;
             } else if (nodeNm.indexOf("tbContentElement") != -1) {
                 var dom = tbContentElement.getDom(); dom.body.innerHTML = nodeVal.replace(/<BR>/gi, "");
+/*
+    200225_김선재 : 시스템 국내출장신청서 프로젝트 구분 추가
+*/
+            } else if (nodeNm.indexOf("SEL") != -1) {
+                setSelBox(nodeNm, nodeVal);
+
             } else if (nodeNm.indexOf("OPT") != -1) {
                 setRadio(nodeNm, nodeVal);
             } else if (nodeNm.indexOf("CHK") != -1) {
@@ -779,6 +833,13 @@
                 if (document.getElementsByName(nodeNm)[0] != null) document.getElementsByName(nodeNm)[0].value = nodeVal;
             }
         }
+    }
+
+/*
+    200225_김선재 : 시스템 국내출장신청서 프로젝트 구분 추가
+*/
+    function setSelBox(szname, szvalue) {
+        $("select[name="+ szname +"]").val(szvalue).attr("selected", "selected");
     }
 
     /*** 레디오버튼 체크선택 (수정모드시) ***/
@@ -989,6 +1050,7 @@
         //데이터 바인딩
         setBodyContext(getInfo("BODY_CONTEXT"));
     }
+	
 
     //편집모드시 콤보박스 셋팅 (HIW)
     function SetComboBox() {
@@ -1113,8 +1175,8 @@
         vRowStr += "</td>";
         vRowStr += "</tr>";
         vRowStr += "<tr>";
-        vRowStr += "<td align='center' style='height:30px;width:100px;  font-weight:bold; background-color:#F6F6F6'>출장지</td>";
-        vRowStr += "<td align='center' width='292px;'><input type='text' id='mField' name='txtPlace_" + gRowCnt + "' style='height:20px;width:93%' /></td>";
+        vRowStr += "<td align='center' style='height:30px;width:101px;  font-weight:bold; background-color:#F6F6F6'>출장지</td>";
+        vRowStr += "<td align='center' width='294px;'><input type='text' id='mField' name='txtPlace_" + gRowCnt + "' style='height:20px;width:93%' /></td>";
         vRowStr += "<td align='center' style='height:30px; width:112px; font-weight:bold; background-color:#F6F6F6'>교통수단</td>";
         vRowStr += "<td align='center'><input type='text' id='mField' name='txtWay_" + gRowCnt + "' style='height:20px;width:90%;' /></td>";
         vRowStr += "</tr>";

@@ -249,8 +249,8 @@ function initForm(){
 }
 
 function initFields(szBody){
-    setFields((!window.ActiveXObject) ? document.getElementById("dField") : dField); //editable field
-    setFields((!window.ActiveXObject) ? document.getElementById("cField") : cField); //readonly field
+    //setFields((!window.ActiveXObject) ? document.getElementById("dField") : dField); //editable field
+    //setFields((!window.ActiveXObject) ? document.getElementById("cField") : cField); //readonly field
 
     document.getElementById("headname").innerHTML = initheadname(getInfo("fmnm"), true);
     if (getInfo("mode") == "DRAFT" || getInfo("mode") == "TEMPSAVE") {
@@ -504,7 +504,7 @@ function setChk(szname, szvalue) {
         objrdo[0].checked = true;
 }
 
-
+}
 </script>
 
 

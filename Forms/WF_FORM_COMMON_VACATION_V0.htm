@@ -119,7 +119,7 @@
         <div id="divBodyContent">  <!--추가(인쇄용) HIW-->
         <table border="0" width="100%">
             <tr>
-                <td align="center" style="padding-top:15px; padding-bottom:15px;">다음과 같이 신청서를 제출하오니 <span id="spanSubmitDesc">휴가</span>를 승인하여 주시기 바랍니다.</td>
+                <td align="center" style="padding-top:15px; padding-bottom:15px;">다음과 같이 신청서를 제출하오니 <span id="spanSubmitDesc"></span>를 승인하여 주시기 바랍니다.</td>
             </tr>
         </table>
         <table class="table_html" id="tblBodyContent" summary="내용" cellpadding="0" cellspacing="0">
@@ -466,7 +466,8 @@
     function initOnload() {
         initialize();
 
-
+		$('#spanSubmitDesc').html("휴가");
+		
         if ($("input[name=txtSabun]").val() == "")   //기안시에만..(편집시에 로그인사용자정보로 엎어치지않게하기위함)
         {
             //사용자기본정보 셋팅
@@ -474,7 +475,12 @@
         } else {
             CallRemainDays();
         }
-
+		
+		if(getInfo("mode") == "TEMPSAVE"){
+			SetUserBasicInfo();
+			//CallRemainDays();
+		}
+		
         //휴가구분 콤보박스 바인딩 (2012-12-07 HIW)
         GetVacatKind();
 
@@ -484,6 +490,29 @@
 
         //편집모드시 콤보박스 셋팅 (HIW)
         SetComboBox();
+
+        /*
+            191119_김선재 : 휴가신청서,근태신청서에서 특정근태 선택 시 안내문구 표기 요청
+            200221_김선재 : 가족돌봄휴가, 생리휴가 에 안내문구 표기 요청
+                추가로 안내문구 문의사항 들어오면 다른 방안 찾아보기
+            200319_김선재 : 생리휴가 -> 보건(생리)휴가 명칭 변경으로 출력 조건을 "명칭"이 아닌 "코드"로 변경
+        */
+        $("select[name^=cmbGoobun]").bind("change", function() {
+            if(getInfo("etid") == "ISU_PS") {
+                switch($(this).find("option:selected").val()){
+                    case "901": /* 오후반차 */
+                    case "502": /* 특별휴가(오후) */
+                        alert("[ "+ $(this).find("option:selected").text() +" ] 사용 시 시업시작 후 4시간 근로 후 퇴근가능.\n퇴근미체크시 반드시 계획퇴근시간 이후 근태확인서 신청 必 \n(미신청 시 무단조퇴 처리)\n\n예시) 08:30 출근자 : 12:30 이후 퇴근체크 / 근태확인서 신청必\n※ 사내식당(중식) 이용 시 13:30 이후 퇴근체크\n09:00 출근자 : 13:00 이후 퇴근체크 / 근태확인서 신청必\n※ 사내식당(중식) 이용 시 14:00 이후 퇴근체크");
+                    break;
+                    case "126": /* 가족돌봄휴가 */
+                        alert("["+ $(this).find("option:selected").text() +"]는 무급휴가이며, 신청 시 휴가사유란에 \n\"돌봄대상 : 이름(나이) / 돌봄사유\"를 작성해주셔야 합니다. \n(※ 미작성 시 반송처리되며, 결재 진행 시 관련 추가 증빙서류를 요청할 수 있습니다.)");
+                    break;
+                    case "127": /* 보건(생리)휴가 */
+                        alert("["+ $(this).find("option:selected").text() +"]는 무급휴가이며, 월 1회 사용가능합니다. \n(※ 월 기준 : 매월 1일~말일)");
+                    break;
+                }
+            }
+        });
     }
 
     function initialize() {
@@ -906,10 +935,21 @@
     }
     //휴가신청구분 레디오버튼 클릭시 (HIW)
     function ChangeGuboonRdo(pKind) {
-        if (pKind == 1)
+        if (pKind == 1) {
+			ResetRowData(1);
+			ResetRowData(2);
+			ResetRowData(3);
+			ResetRowData(4);
+			ResetRowData(5);
             $('#spanSubmitDesc').html("휴가");
-        else
+        } else {
+			ResetRowData(1);
+			ResetRowData(2);
+			ResetRowData(3);
+			ResetRowData(4);
+			ResetRowData(5);
             $('#spanSubmitDesc').html("휴가취소");
+		}
     }
 
     //휴가종류구분 가져오기 (2012-12-07 HIW)

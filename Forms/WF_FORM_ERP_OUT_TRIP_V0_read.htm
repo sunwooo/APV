@@ -119,6 +119,8 @@
                     <td colspan="3" align="left" style="padding-left:5px;">
                         &nbsp;<span id="hdn_dpApprFormDTStart1"></span> <b>~</b> <span id="hdn_dpApprFormDTEnd1"></span>&nbsp;&nbsp;&nbsp;&nbsp;
                         <b>(<span id="txtNights"></span>박 <span id="txtDays"></span>일)</b>
+                        <!-- 190828_김선재 : 페타시스, "출장(예정)기간"필드에 문구추가 -->
+                        <br/><span name="applNotice"></span>
                     </td>                   
                 </tr>
                 <tr>                
@@ -290,6 +292,11 @@ function initOnload(){
 
     //출장일정 반복부 그리기 (HIW)
     DrawDataRowSchedule();
+
+    // 190722_김선재 : 페타시스, "출장(예정)기간"필드에 문구추가
+    if(getInfo("etid") == "ISU_PS") {
+        $("span[name=applNotice]").text("※ 휴일/주휴/공휴일에 출장 시 아래 비고란에 필히 비근로일을 작성해주시기 바랍니다.");
+    }
 }
 
 function initialize(){
