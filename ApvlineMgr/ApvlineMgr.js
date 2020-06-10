@@ -1356,6 +1356,12 @@ function insertToList(oList) { //debugger;
         alert("대표이사를 수신부서로 지정할 수 없습니다.");
         return false;
     }
+    //200610_김선재 : 수신부서 지정 불가 조직 설정
+    switch(emlNode.selectSingleNode("AN").text) {
+        case "ISU_CHDAFA1":/*화학 재무담당*/
+            alert("수신부서로 지정할 수 없는 부서입니다.");
+            return false;
+    }
     /* 적용끝 */
 	
     m_modeless = null;
