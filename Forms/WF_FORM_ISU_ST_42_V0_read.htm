@@ -95,12 +95,12 @@
             <div id="divBodyContent">  <!--추가(인쇄용) HIW-->
             <table border="0" width="100%">
                 <tr>
-                    <td align="center" style="padding-top:15px; padding-bottom:15px;">다음과 같이 출장 계획서를 제출하오니, 출장을 승인하여 주시기 바랍니다.</td>
+                    <td align="center" style="padding-top:15px; padding-bottom:15px;">다음과 같이 <span id="txtGntNm"></span> 신청서를 제출하오니, 승인하여 주시기 바랍니다.</td>
                 </tr>
             </table>
             <table class="table_html" id="tblBodyContent" summary="내용" cellpadding="0" cellspacing="0">
                 <tr>
-                    <td rowspan="5" align="center" style="width:40px; font-weight:bold; background-color:#F6F6F6">출<br/>장<br/>내<br/>용</td>
+                    <td rowspan="5" align="center" style="width:40px; font-weight:bold; background-color:#F6F6F6">방<br/>문<br/>내<br/>용</td>
                     <td colspan="4" valign="top">
                         <table id="tblDataRowPerson" cellpadding="0" cellspacing="0" border="0" width="100%">
                             <tr>
@@ -113,21 +113,25 @@
                         </table>
                     </td>
                 </tr>
-                <tr>                
-                    <td align="center" style="height:30px;width:125px; font-weight:bold; background-color:#F6F6F6">출장지</td>
-                    <td align="center" style="width:251px;"><span id="txtPlace" style="height:20px;width:92%"></span></td>
-                    <td align="center" style="height:30px;width:100px; font-weight:bold; background-color:#F6F6F6">교통수단</td>
-                    <td align="center" style="padding-left:5px;"><span id="txtWay" style="height:20px;width:90%;"></span></td>              
+                <tr>
+                    <td align="center" style="height:30px;width:125px; font-weight:bold; background-color:#F6F6F6">방문일자 </td>
+                    <td align="left" style="padding-left:10px;width:241px;">
+                        <span id="hdn_dpApprFormDTStart1"></span>
+                    </td>
+                    <td align="center" style="height:30px; font-weight:bold; background-color:#F6F6F6">방문구분 </td>
+                    <td align="left" style="padding-left:10px;">
+                        <input type="hidden" id="SEL_GNT"/>
+                        <span id="SEL_GNT_TEXT"></span>
+                    </td>
                 </tr>
                 <tr>                
-                    <td align="center" style="height:30px; font-weight:bold; background-color:#F6F6F6">출장(예정)기간</td>
-                    <td colspan="4" align="left" style="padding-left:5px;">
-                        <span id="hdn_dpApprFormDTStart1"></span> ~ <span id="hdn_dpApprFormDTEnd1"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <b>(<span id="txtNights"></span>박 <span id="txtDays"></span>일)</b>
-                    </td>                         
+                    <td align="center" style="height:30px; font-weight:bold; background-color:#F6F6F6">방문지</td>
+                    <td align="left" style="padding-left:10px;"><span id="txtPlace" style="height:20px;width:92%"></span></td>
+                    <td align="center" style="height:30px;width:100px; font-weight:bold; background-color:#F6F6F6">방문담당자</td>
+                    <td align="left" style="padding-left:10px;"><span id="txtTarget" style="height:20px;width:90%;"></span></td>              
                 </tr>
                 <tr>                
-                    <td align="center" style="height:30px; font-weight:bold; background-color:#F6F6F6">출장목적</td>
+                    <td align="center" style="height:30px; font-weight:bold; background-color:#F6F6F6">방문내용</td>
                     <td colspan="4" align="left" style="padding-left:10px;"><span id="txtPurpose" style="height:20px;width:96%"></span></td>                          
                 </tr>
                 <tr>                
@@ -235,6 +239,8 @@ function initOnload(){
 
     //데이터반복부 그리기 (HIW)
     DrawDataRow();
+
+    $("#txtGntNm").text($("#SEL_GNT_TEXT").text());
 }
 
 function initialize(){

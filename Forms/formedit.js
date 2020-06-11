@@ -233,13 +233,13 @@ function setInlineApvList(oApvList) {
         try { displayApvListFormApvLine(oApvList); } catch (e) { }
     } else {
         if (getInfo("scApvLineTypeV") == "2") {  //테이블형태로 표시
-            
-            if (getInfo("mobileyn") == "Y") {
-                displayApvListNXpath(oApvList);
-            } else {
+            //모바일에서 결재선 Syntax 에러로 인하여 수정 psw 
+            //if (getInfo("mobileyn") == "Y") {
+            //    displayApvListNXpath(oApvList);
+            //} else {
                 displayApvList(oApvList);
                 
-            }
+            //}
         } else {  //Section형태로 표시
            
             //안드로이드 프로요적용201103
@@ -1768,12 +1768,14 @@ function displayApvList(oApvList) {//debugger; //1212
         for (var i = 0; i < elmdiv.length; i++) {
             elm = elmdiv.nextNode();
             if (("ActiveXObject" in window)) {
+
                 elmList = elm.selectNodes("step[(@unittype='person' or @unittype='role') and (@routetype='approve' or @routetype='receive') and @name!='reference']/ou/(person|role)");
                 elmVisible = elm.selectNodes("step[(@unittype='person' or @unittype='role') and (@routetype='approve' or @routetype='receive') and @name!='reference']/ou/(person|role)[taskinfo/@visible='n']");
                 if (elm.selectNodes("step[(@unittype='person' or @unittype='role') and (@routetype='approve' or @routetype='receive') and @name!='reference']/ou/(role)").length > 0) {
                     bRoleChk = true;
                 }
             } else {
+
                 elmList = elm.selectNodes("step[(@unittype='person' or @unittype='role') and (@routetype='approve' or @routetype='receive') and @name!='reference' ]/ou/*[name()='person' or name()='role']"); //(person|role)
                 elmVisible = elm.selectNodes("step[(@unittype='person' or @unittype='role') and (@routetype='approve' or @routetype='receive') and @name!='reference']/ou/*[name()='person' or name()='role'][taskinfo/@visible='n']");
                 if (elm.selectNodes("step[(@unittype='person' or @unittype='role') and (@routetype='approve' or @routetype='receive') and @name!='reference' ]/ou/*[name()='role']").length > 0) {

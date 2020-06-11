@@ -60,6 +60,24 @@
 	<!-- 양식추가정보 -->
 	<!-- END -->
 	<!-- 양식전체본문 -->
+
+    <!--161104 다국어 처리
+
+            lb_Title (제목)
+            lb_DocClassification (문서분류)
+            lb_ConservationY (보존년한)
+            lb_Attachment (첨부파일)
+            lb_RelatedDoc (연결문서)
+            lb_Reference (참조)
+
+            lb_DocExplanation (문서설명)
+            lb_ReceiveDepart (수신부서)
+            lb_OrdinaryDoc (원문서)
+            lb_DocNum (문서번호)
+            lb_SecurityLvl (보안등급)
+
+    -->
+
 	<div id="bodytable">
 		<!-- header start -->
 		<div class="approval_form">
@@ -67,17 +85,17 @@
         <div class="draft_page">
         <table class="table_2" summary="문서분류" cellpadding="0" cellspacing="0">
             <tr style="display:none;">
-                <th>보안등급</th>
+                <th><input type="text" name="lb_SecurityLvl" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="tField" name="DOC_LEVEL" ></td>	
-                <th>문서번호</th>
+                <th><input type="text" name="lb_DocNum" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="tField" name="DOC_NO" dataFld="DOC_NO" width="100px" ></td>	
                 <!--<th id="partdisplay" style="display:;">사업장 분류</th>
                 <td id="SEL_ENTPART_TEXT" ></td>-->		
             </tr>
             <tr>
-                <th>문서분류</th>
+                <th><input type="text" name="lb_DocClassification" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="tField" name="DOC_CLASS_NAME" dataFld="DOC_CLASS_NAME" ></td>	
-                <th>보존년한</th>
+                <th><input type="text" name="lb_ConservationY" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="tField" name="SAVE_TERM"  colspan="3"></td>	
             </tr>
         </table>
@@ -85,7 +103,7 @@
 		<!-- bodycontext start -->		
         <table class="table_3" summary="제목" cellpadding="0" cellspacing="0">
             <tr>
-                <th>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</th>
+                <th><input type="text" name="lb_Title" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="tField" name="SUBJECT"  datafld="SUBJECT" ></td>	
             </tr>
         </table>
@@ -105,19 +123,19 @@
 
 		<table class="table_5" summary="참조" cellpadding="0" cellspacing="0">
             <tr>
-                <th>첨부파일</th>
+                <th><input type="text" name="lb_Attachment" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="AttFileInfo"></td>
             </tr>
             <tr>
-                <th>연결문서</th>
+                <th><input type="text" name="lb_RelatedDoc" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="DocLinkInfo"></td>
             </tr>
             <tr style="display:none;">
-                <th>원 문 서</th>
+                <th><input type="text" name="lb_OrdinaryDoc" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="RejectDocLinkInfo">-</td>
             </tr>
             <tr>
-                <th>참조</th>
+                <th><input type="text" name="lb_Reference" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="CCLine">
                     <span id="SendCC"></span><span id="RecCC"></span>&nbsp;
                    <!-- <div id="SendCC"></div>
@@ -125,7 +143,7 @@
                 </td>
             </tr>
             <tr id="trRecDept" style="display:none;">
-                <th>수신부서</th>  <!--배포처-->
+                <th><input type="text" name="lb_ReceiveDepart" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>  <!--배포처--> 
                 <td id="RecLine" colspan="5" ></td>
             </tr>
         </table>
@@ -167,7 +185,7 @@
         <div id="divforminfo" style="display:none">
         <table class="table_6" summary="원문서" cellpadding="0" cellspacing="0">
             <tr>
-                <th>문서설명</th>
+                <th><input type="text" name="lb_DocExplanation" style="width:50px; margin:auto; border:none; background-color:transparent; font-weight: bold; color:Black;" /></th>
                 <td id="tdforminfo"></td>
             </tr>
         </table>
@@ -230,6 +248,9 @@
             document.getElementsByName("APPLIED").value = formatDate(getInfo("svdt"), "D");
         } else {
         }
+
+        //기타 필드 채우기
+        setCommonLb(); //161103 공통 라벨 부분 다국어처리
 
         //본문 내용 
         if (getInfo("BODY_CONTEXT") != undefined) {

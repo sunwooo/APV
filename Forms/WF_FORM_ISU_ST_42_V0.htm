@@ -111,7 +111,7 @@
         <div id="divBodyContent">  <!--추가(인쇄용) HIW-->
         <table border="0" width="100%">
             <tr>
-                <td align="center" style="padding-top:15px; padding-bottom:15px;">다음과 같이 현지출근 신청서를 제출하오니, 승인하여 주시기 바랍니다.</td>
+                <td align="center" style="padding-top:15px; padding-bottom:15px;">다음과 같이 <span id="txtGntNm">현지출근</span> 신청서를 제출하오니, 승인하여 주시기 바랍니다.</td>
             </tr>
         </table>
 
@@ -133,20 +133,26 @@
                 </td>
             </tr>
             <tr>                
+                <td align="center" style="height:30px; font-weight:bold; background-color:#F6F6F6">방문일자</td>
+                <td align="left" style="padding-left:5px;">
+                    &nbsp;<input type="text" id="dpApprFormDTStart1" name="dpApprFormDTStart" readonly="readonly" style="font-size: 9pt; padding-left: 3px; width: 80px;"/>
+                    &nbsp;<a class="a1" href="javascript:ResetDateField(1);">초기화</a>
+                    <input type="hidden" id="mField" name="hdn_dpApprFormDTStart1" />
+                </td>               
+                <td align="center" style="height:30px; font-weight:bold; background-color:#F6F6F6">방문구분</td>
+                <td align="left" style="padding-left:0px;">
+                    &nbsp;
+                    <select id="mField" name="SEL_GNT">
+                        <option value="220">현지출근</option>
+                        <option value="221">현지퇴근</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>                
                 <td align="center" style="height:30px;width:125px;  font-weight:bold; background-color:#F6F6F6">방문지</td>
                 <td align="center" width="251px;"><input type="text" id="mField" name="txtPlace" style="height:20px;width:92%" /></td>
                 <td align="center" style="height:30px; width:100px; font-weight:bold; background-color:#F6F6F6">방문담당자</td>
                 <td align="center" width=""><input type="text" id="mField" name="txtTarget" style="height:20px;width:90%;" /></td>              
-            </tr>
-            <tr>                
-                <td align="center" style="height:30px; font-weight:bold; background-color:#F6F6F6">방문일자</td>
-                <td colspan="4" align="left" style="padding-left:5px;">
-                    &nbsp;<input type="text" id="dpApprFormDTStart1" name="dpApprFormDTStart" readonly="readonly" style="font-size: 9pt; padding-left: 3px; width: 70px;"/>
-                    <b>~</b>
-                    <input type="text" id="dpApprFormDTEnd1" name="dpApprFormDTEnd" readonly="readonly" style="font-size: 9pt; padding-left: 3px; width: 70px;"/>&nbsp;<a class="a1" href="javascript:ResetDateField(1);">초기화</a>
-                    <input type="hidden" id="mField" name="hdn_dpApprFormDTStart1" /><input type="hidden" id="mField" name="hdn_dpApprFormDTEnd1" />&nbsp;&nbsp;&nbsp;&nbsp;
-                    <b>(<input type="text" id="mField" name="txtNights" style="height:25px;width:15px; font-weight:bold; text-align:right; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;" />박 <input type="text" id="mField" name="txtDays" style="height:25px;width:15px; font-weight:bold; text-align:right; BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px;" />일)</b>
-                </td>                         
             </tr>
             <tr>                
                 <td align="center" style="height:30px; font-weight:bold; background-color:#F6F6F6">방문내용</td>
@@ -283,7 +289,12 @@
         else  //편집시
             SetRepeatData();
 
+        $("select[name=SEL_GNT]").bind("change", function(){
+            $("#txtGntNm").text((this.value==220)?"현지출근":"현지퇴근");
+        }).trigger("change");
 
+        //사원 기본정보 세팅
+        SetUserBasicInfo();
     }
 
     function initialize() {
@@ -940,6 +951,50 @@
     function SearchReceipter() {
 
         fn_OpenDialog2("/CoviWeb/Approval/Forms/Popup/UserSearchFromHR.aspx?kind=ReceipterFromTrip", "", 500, 390, "scroll");   //fix/scroll
+    }
+
+    //2017-09-05 PSW 추가
+    //사용자기본정보 셋팅
+    function SetUserBasicInfo() {
+
+        var url = "/CoviWeb/Approval/CallBack.aspx";
+        var param = "CODE=60&PERSON_CODE=" + getInfo("usid") + "&LANGUAGE=" + getInfo("uslng");
+
+        var xml = DoCallback(url, param);
+        var result = xml.responseXML;
+
+        var elmRoot = result.documentElement;
+        //debugger;
+        if (SelectSingleNode(elmRoot, "result") != "SUCEESS") {
+            alert("[Error]\n\r\n\r" + SelectSingleNode(elmRoot, "result"));
+            return;
+        }
+        else {//debugger;
+
+            var vSabun = "";
+            var vUserNm = "";
+            var vJobPosition = "";
+            var vUnitNm = "";
+
+            try {
+                $(elmRoot).find("Table").each(function (i) {
+
+                    vSabun = $(this).find("SABUN").text();
+                    vUserNm = $(this).find("DISPLAY_NAME").text();
+                    vJobPosition = $(this).find("JBO_POSITION").text();
+                    vUnitNm = $(this).find("UNIT_NAME").text();
+                });
+                //alert(vUnitNm);
+                $("input[name=txtSabun_1]").val(vSabun);
+                $("input[name=txtUserName_1]").val(vUserNm);
+                $("input[name=txtJobPosition_1]").val(vJobPosition);
+                $("input[name=txtUnitName_1]").val(vUnitNm);
+
+            } catch (e) {
+                alert(e.message);
+            }
+        }
+        //CallRemainDays();
     }
 
 

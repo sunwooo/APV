@@ -1803,6 +1803,10 @@ function receiveHTTP(){
 						}			    
 						alert(gMessage70);//debugger;//"결재문서작성이 완료되었습니다."
 						
+						//2020.05.19 psw 추가
+                        top.close();
+                        //추가 끝
+						
 						//2018.09.12 psw
 						tongPush("DRAFT");
 						
@@ -1825,7 +1829,12 @@ function receiveHTTP(){
 				   	if (getInfo("mode") == "TEMPSAVE" || getInfo("mode") == "DRAFT") { if (!m_bTabForm) { parent.gotoFolder('../list.aspx?uid=' + getInfo("usid") + '&location=TEMPSAVE', '임시함');} }
 				   	setInfo("mode", "TEMPSAVE"); setInfo("ftid", xmlReturn.selectSingleNode("response/ftid").text);
 				   	break;
-					case "WITHDRAW": requestTempSaveProcess("TEMPSAVE"); parent.refreshList();alert(xmlReturn.selectSingleNode("response").text);
+					case "WITHDRAW": requestTempSaveProcess("TEMPSAVE"); 
+						parent.refreshList();
+						//2020.06.04 psw 추가
+                        top.close();
+                        //추가 끝
+						alert(xmlReturn.selectSingleNode("response").text);
 						break;
 					case "CHARGE":
 					case "REDRAFT":
@@ -1855,14 +1864,21 @@ function receiveHTTP(){
             ///* [2013-11-14] PSW 수정 3*///
                 //if (getInfo("mode") != "TEMPSAVE") {
                     //2014-06-11 hyh 추가
- 	           try {
-        	        if (getInfo("mode") == "DRAFT") {
-                	    top.opener.parent.document.getElementById("leftFrame").contentWindow.getApprovalCountDraft();
-	                }
-        	    }
-	            catch (e) { }
-            //2014-06-11 hyh 추가 끝
-                    top.close();
+				   try {
+						if (getInfo("mode") == "DRAFT") {
+							top.opener.parent.document.getElementById("leftFrame").contentWindow.getApprovalCountDraft();
+						}
+					}
+					catch (e) { }
+					//2014-06-11 hyh 추가 끝
+					
+					
+					///* [2020-05-19] PSW 수정 4*///
+					if (getInfo("mode") != "TEMPSAVE") {
+						top.close();
+					}
+					//else{
+					//}
                 //}
 			}
 		}
@@ -4465,6 +4481,7 @@ function requestTempSaveProcess(sReqMode){
 						}
 						sAddage=makeNode("fmfn")+sFormXml;
 						m_bFrmExtDirty = true;
+						
 						break;
 				}
 				try{

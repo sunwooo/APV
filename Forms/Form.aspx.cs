@@ -522,10 +522,12 @@ public partial class COVIFlowNet_Forms_Form : PageBase //PageBase
 				}
 
 				//모바일 오픈을 위한 formmenu.aspx 변경
+				
 				if (sMobileYN == "Y")
 				{
 					sMenuURL = "formmenuExt.aspx";
 				}
+				
 
 				#region 다국어를 위한 데이터 처리
                 if (Session["user_name_lng"] == null || (Session["user_name_lng"] != null && Session["user_dept_name_lng"].ToString().IndexOf(Session["user_dept_name"].ToString()) == -1))

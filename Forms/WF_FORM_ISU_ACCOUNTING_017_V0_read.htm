@@ -286,59 +286,11 @@
 
         var gRowCnt = 0;
 
-        //캘린더 JdatePicker 선언 (HIW)
-        $(function () {
-            jDatePicker("dpApprFormDTStart1", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTEnd1", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTStart2", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTEnd2", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTStart3", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTEnd3", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTStart4", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTEnd4", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTStart5", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTEnd5", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-
-
-            //20171208 대체근무일 달력 컨트롤 수정 PSW
-            jDatePicker("dpApprFormDTSingleStart1", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTSingleEnd1", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTSingleStart2", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTSingleEnd2", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTSingleStart3", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTSingleEnd3", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTSingleStart4", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTSingleEnd4", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTSingleStart5", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-            jDatePicker("dpApprFormDTSingleEnd5", "ko-KR"); // id, 다국어 정보(한국어: ko-KR)
-        });
+        
 
         window.onload = initOnload;
         function initOnload() {
             initialize();
-			
-			//DrawDataRow();
-
-            //AddRowDataPerson();
-            /*
-            if ($("input[name=txtSabun]").val() == "")   //기안시에만..(편집시에 로그인사용자정보로 엎어치지않게하기위함)
-            {
-                //사용자기본정보 셋팅
-                SetUserBasicInfo();
-            } else {
-                CallRemainDays();
-            }
-            */
-
-            //휴가구분 콤보박스 바인딩 (2012-12-07 HIW)
-            //GetVacatKind();
-
-            //편집모드시 날짜필드 셋팅 (HIW)
-            SetDateField();
-
-
-            //편집모드시 콤보박스 셋팅 (HIW)
-            SetComboBox();
         }
 
         function initialize() {
